@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/hopeless-programmer-online/hopeless-programmer.online/issues"
   },
-  "homepage": "https://github.com/hopeless-programmer-online/hopeless-programmer.online#readme"
+  "homepage": "https://github.com/hopeless-programmer-online/hopeless-programmer.online#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
 }
