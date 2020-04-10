@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/hopeless-programmer-online/hopeless-programmer.online#readme",
   "devDependencies": {
-    "eslint": "^6.8.0"
+    "eslint": "^6.8.0",
+    "jest": "^25.3.0"
+  },
+  "scripts": {
+    "test": "jest"
   }
 }
