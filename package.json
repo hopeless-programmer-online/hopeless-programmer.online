@@ -1,0 +1,19 @@
+{
+  "name": "hopeless-programmer.online",
+  "version": "0.0.0",
+  "description": "Web site",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hopeless-programmer-online/hopeless-programmer.online.git"
+  },
+  "author": {
+    "name": "Hopeless Programmer",
+    "email": "me@hopeless-programmer.online",
+    "url": "https://hopeless-programmer.online"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hopeless-programmer-online/hopeless-programmer.online/issues"
+  },
+  "homepage": "https://github.com/hopeless-programmer-online/hopeless-programmer.online#readme"
+}
