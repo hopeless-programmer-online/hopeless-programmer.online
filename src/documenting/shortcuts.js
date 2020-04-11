@@ -2,9 +2,15 @@ const Document = require(`./document`);
 const Section = require(`./section`);
 const SectionPart = require(`./section-part`);
 const ParagraphSectionPart = require(`./paragraph-section-part`);
+const IllustrationsSectionPart = require(`./illustrations-section-part`);
+const CodeIllustration = require(`./code-illustration`);
 const Paragraph = require(`./paragraph`);
 const Sentence = require(`./sentence`);
 const TextPhrase = require(`./text-phrase`);
+const Code = require(`./code`);
+const CodeLine = require(`./code-line`);
+const Lexeme = require(`./lexeme`);
+const TextLexeme = require(`./text-lexeme`);
 
 
 function textPhrase(something) {
@@ -57,10 +63,62 @@ function toParagraph(something) {
 
     return paragraph(something);
 }
+function lexeme(something) {
+    if (typeof something === `string`) {
+        return new TextLexeme({
+            String : something,
+        });
+    }
+
+    throw new Error; // @todo
+}
+function toLexeme(something) {
+    if (something instanceof Lexeme) {
+        return something;
+    }
+
+    return lexeme(something);
+}
+function toLexemes(somethings) {
+    return somethings.map(toLexeme);
+}
+function codeLine(...something) {
+    const lexemes = toLexemes(something);
+
+    return new CodeLine({
+        Lexemes : lexemes,
+    });
+}
+function toCodeLine(something) {
+    if (something instanceof CodeLine) {
+        return something;
+    }
+
+    return codeLine(something);
+}
+function toCodeLines(somethings) {
+    return somethings.map(toCodeLine);
+}
+function code(...somethings) {
+    const lines = toCodeLines(somethings);
+
+    return new Code({
+        Lines : lines,
+    });
+}
 function sectionPart(something) {
     if (something instanceof Paragraph) {
         return new ParagraphSectionPart({
             Paragraph : something,
+        });
+    }
+    if (something instanceof Code) {
+        return new IllustrationsSectionPart({
+            Illustrations : [
+                new CodeIllustration({
+                    Code : something,
+                }),
+            ],
         });
     }
 
@@ -103,6 +161,11 @@ exports.toSentence = toSentence;
 exports.toSentences = toSentences;
 exports.paragraph = paragraph;
 exports.toParagraph = toParagraph;
+exports.toLexeme = toLexeme;
+exports.toLexemes = toLexemes;
+exports.codeLine = codeLine;
+exports.toCodeLines = toCodeLines;
+exports.code = code;
 exports.sectionPart = sectionPart;
 exports.toSectionPart = toSectionPart;
 exports.toSectionParts = toSectionParts;
