@@ -1,34 +1,39 @@
 // see https://eslint.org/docs/rules/
 module.exports = {
-    "env": {
-        "commonjs": true,
-        "es6": true,
-        "node": true
+    env: {
+        commonjs: true,
+        es6: true,
+        node: true,
+        jest: true,
     },
-    "extends": "eslint:recommended",
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+    extends: `eslint:recommended`,
+    globals: {
+        Atomics: `readonly`,
+        SharedArrayBuffer: `readonly`,
     },
-    "parserOptions": {
-        "ecmaVersion": 2018
+    parserOptions: {
+        ecmaVersion: 2018,
     },
-    "rules": {
-        "indent": [
-            "error",
-            4
+    rules: {
+        indent: [
+            `error`,
+            4,
         ],
         "linebreak-style": [
-            "error",
-            "windows"
+            `error`,
+            `windows`,
         ],
-        "quotes": [
-            "error",
-            "backtick"
+        quotes: [
+            `error`,
+            `backtick`,
         ],
-        "semi": [
-            "error",
-            "always"
-        ]
-    }
+        semi: [
+            `error`,
+            `always`,
+        ],
+        "comma-dangle": [
+            `error`,
+            `always-multiline`,
+        ],
+    },
 };
