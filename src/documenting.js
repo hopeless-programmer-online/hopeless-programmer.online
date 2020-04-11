@@ -11,6 +11,10 @@ const Paragraph = require(`./documenting/paragraph`);
 const Sentence = require(`./documenting/sentence`);
 const Phrase = require(`./documenting/phrase`);
 const TextPhrase = require(`./documenting/text-phrase`);
+const Code = require(`./documenting/code`);
+const CodeLine = require(`./documenting/code-line`);
+const Lexeme = require(`./documenting/lexeme`);
+const TextLexeme = require(`./documenting/text-lexeme`);
 
 
 exports.Document = Document;
@@ -23,3 +27,7 @@ exports.Paragraph = Paragraph;
 exports.Sentence = Sentence;
 exports.Phrase = Phrase;
 exports.TextPhrase = TextPhrase;
+exports.Code = Code;
+exports.CodeLine = CodeLine;
+exports.Lexeme = Lexeme;
+exports.TextLexeme = TextLexeme;
