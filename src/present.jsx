@@ -10,13 +10,17 @@ function template(title, content) {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <meta name="Keywords" content="Keyword" />
                 <meta name="Description" content="Description"></meta>
-                <title>{title}</title>
-                {/* <link rel="icon" href="/favicon.ico" type="image/x-icon" /> */}
+                <title>{title} | Безнадійний Програміст</title>
+                <link rel="icon" href="media/favicon.ico" type="image/x-icon" />
                 {/* <link rel="stylesheet" href="styles.css" /> */}
                 {/* <script src="script.js" /> */}
             </head>
             <body>
                 <div class="header">
+                    <div class="icon">
+                        <img class="logo" alt="But... I..." src="media/but_i.png" style="width: 365px; height: 304px"/>
+                        <em class="quote">...коли не можеш оголосити змінну case, тому що це службове слово...</em>
+                    </div>
                     <ul class="navigation">
                         <li class="button"><a href="#">Головна</a></li>
                         <li class="button"><a href="#">Статті</a></li>
