@@ -10,6 +10,7 @@ const StandardElement = require(`./html/standard-element`);
 const Attributes = require(`./html/attributes`);
 const Attribute = require(`./html/attribute`);
 const StringAttribute = require(`./html/string-attribute`);
+const createElement = require(`./html/create-element`);
 
 
 exports.Root = Root;
@@ -24,3 +25,4 @@ exports.StandardElement = StandardElement;
 exports.Attributes = Attributes;
 exports.Attribute = Attribute;
 exports.StringAttribute = StringAttribute;
+exports.createElement = createElement;
