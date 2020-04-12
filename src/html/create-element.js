@@ -56,6 +56,9 @@ function createElement(name, attributes, ...elements) {
                 Text : element,
             }));
         }
+        else if (element instanceof Array) {
+            element.forEach(x => elementElements.push(x));
+        }
         else {
             elementElements.push(element);
         }
