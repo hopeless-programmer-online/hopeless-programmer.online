@@ -1,6 +1,8 @@
+const Root = require(`./html/root`);
 const Elements = require(`./html/elements`);
 const Element = require(`./html/element`);
 const NamedElement = require(`./html/named-element`);
+const DeclarationElement = require(`./html/declaration-element`);
 const BasicElement = require(`./html/basic-element`);
 const VoidElement = require(`./html/void-element`);
 const StandardElement = require(`./html/standard-element`);
@@ -9,9 +11,11 @@ const Attribute = require(`./html/attribute`);
 const StringAttribute = require(`./html/string-attribute`);
 
 
+exports.Root = Root;
 exports.Elements = Elements;
 exports.Element = Element;
 exports.NamedElement = NamedElement;
+exports.DeclarationElement = DeclarationElement;
 exports.BasicElement = BasicElement;
 exports.VoidElement = VoidElement;
 exports.StandardElement = StandardElement;
