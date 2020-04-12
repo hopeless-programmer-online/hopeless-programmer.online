@@ -35,17 +35,18 @@ function template(title, content) {
                         <small>2020 - {(new Date).getFullYear().toString()}</small>
                     </div>
                     <div class="contacts">
-                        <small>me@hopeless-programmer.online</small>
+                        <small>Підтримка: <a href="mailto: me@hopeless-programmer.online">me@hopeless-programmer.online</a></small>
                     </div>
                     <div>
                         <small>Цей сайт не існував би без цих відкритих технологій</small>
                         <ul class="resources">
-                            <li class="resource"><a href="#">HTML5</a></li>
-                            <li class="resource"><a href="#">CSS3</a></li>
-                            <li class="resource"><a href="#">ES6</a></li>
-                            <li class="resource"><a href="#">JSX</a></li>
-                            <li class="resource"><a href="#">NodeJS</a></li>
-                            <li class="resource"><a href="#">Jest</a></li>
+                            <li class="resource" title="Hypertext Markup Language"><a href="https://en.wikipedia.org/wiki/HTML5">HTML5</a></li>
+                            <li class="resource" title="Cascading Style Sheets"><a href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS3</a></li>
+                            <li class="resource" title="ECMAScript 6"><a href="https://en.wikipedia.org/wiki/ECMAScript#ES2015">ES6</a></li>
+                            <li class="resource" title="JavaScript XML"><a href="https://en.wikipedia.org/wiki/React_(web_framework)#JSX">JSX</a></li>
+                            <li class="resource" title="Syntactically Awesome Style Sheets"><a href="https://en.wikipedia.org/wiki/Sass_(stylesheet_language)">SASS</a></li>
+                            <li class="resource"><a href="https://en.wikipedia.org/wiki/Node.js">NodeJS</a></li>
+                            <li class="resource"><a href="https://jestjs.io">Jest</a></li>
                         </ul>
                     </div>
                 </div>
