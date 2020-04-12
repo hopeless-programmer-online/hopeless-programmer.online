@@ -23,6 +23,7 @@
     "typescript": "^3.8.3"
   },
   "scripts": {
-    "test": "jest"
+    "build": "tsc",
+    "test": "npm run build && jest"
   }
 }

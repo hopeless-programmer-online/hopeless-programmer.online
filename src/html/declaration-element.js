@@ -11,6 +11,14 @@ class DeclarationElement extends NamedElement {
     get Content() {
         return this.__content;
     }
+
+    toString() {
+        const content = this.Content.length > 0
+            ? ` ${this.Content}`
+            : ``;
+
+        return `<${this.Name}${content}>`;
+    }
 }
 
 

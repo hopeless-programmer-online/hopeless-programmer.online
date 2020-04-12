@@ -11,6 +11,13 @@ class StringAttribute extends Attribute {
     get String() {
         return this.__string;
     }
+
+    toString() {
+        return JSON.stringify(this.String
+            .replace(/"/g, `&quot;`)
+            .replace(/'/g, `&#39;`),
+        );
+    }
 }
 
 

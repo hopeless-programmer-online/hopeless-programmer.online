@@ -11,6 +11,13 @@ class TextElement extends Element {
     get Text() {
         return this.__text;
     }
+
+    toString() {
+        return this.Text
+            .replace(/&/g, `&amp;`)
+            .replace(/</g, `&lt;`)
+            .replace(/>/g, `&gt;`);
+    }
 }
 
 
