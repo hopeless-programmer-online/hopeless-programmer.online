@@ -21,6 +21,9 @@ class Paragraph {
     get Sentences() {
         return this.__sentences;
     }
+    get Text() {
+        return this.Sentences.reduce((a,x) => a + x.Text, ``);
+    }
 }
 
 

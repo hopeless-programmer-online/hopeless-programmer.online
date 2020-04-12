@@ -76,6 +76,9 @@ exports = module.exports = s.document(`Про цей сайт`,
 );
 
 
-const x = p.document(exports);
+const x = p.template(
+    exports.Title.Text,
+    p.document(exports),
+);
 
 fs.createWriteStream(`index.html`).end(x.Html5.toString());

@@ -21,6 +21,11 @@ class Sentence {
     get Phrases() {
         return this.__phrases;
     }
+    get Text() {
+        return this.Phrases
+            .filter(phrase => phrase instanceof TextPhrase)
+            .reduce((a,x) => a + x.String, ``);
+    }
 }
 
 
@@ -28,3 +33,4 @@ exports = module.exports = Sentence;
 
 
 const Phrase = require(`./phrase`);
+const TextPhrase = require(`./text-phrase`);

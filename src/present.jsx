@@ -2,6 +2,57 @@ const documenting = require(`./documenting`);
 const html = require(`./html`);
 
 
+function template(title, content) {
+    return (
+        <html lang="en">
+            <head>
+                <meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <meta name="Keywords" content="Keyword" />
+                <meta name="Description" content="Description"></meta>
+                <title>{title}</title>
+                {/* <link rel="icon" href="/favicon.ico" type="image/x-icon" /> */}
+                {/* <link rel="stylesheet" href="styles.css" /> */}
+                {/* <script src="script.js" /> */}
+            </head>
+            <body>
+                <div class="header">
+                    <ul class="navigation">
+                        <li class="button"><a href="#">Головна</a></li>
+                        <li class="button"><a href="#">Статті</a></li>
+                        <li class="button"><a href="#">Проекти</a></li>
+                        <li class="button"><a href="#">Про цей сайт</a></li>
+                    </ul>
+                </div>
+                <div class="content">
+                    {content}
+                </div>
+                <div class="footer">
+                    <div class="name">
+                        <small>hopeless-programmer.online</small>
+                    </div>
+                    <div class="years">
+                        <small>2020 - {(new Date).getFullYear().toString()}</small>
+                    </div>
+                    <div class="contacts">
+                        <small>me@hopeless-programmer.online</small>
+                    </div>
+                    <div>
+                        <small>Цей сайт не існував би без цих відкритих технологій</small>
+                        <ul class="resources">
+                            <li class="resource"><a href="#">HTML5</a></li>
+                            <li class="resource"><a href="#">CSS3</a></li>
+                            <li class="resource"><a href="#">ES6</a></li>
+                            <li class="resource"><a href="#">JSX</a></li>
+                            <li class="resource"><a href="#">NodeJS</a></li>
+                            <li class="resource"><a href="#">Jest</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </body>
+        </html>
+    );
+}
 function document(document) {
     return (
         <div class="document">
@@ -64,4 +115,5 @@ function phrase(phrase) {
 }
 
 
+exports.template = template;
 exports.document = document;
