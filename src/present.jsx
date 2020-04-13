@@ -130,12 +130,12 @@ function illustration(illustration) {
 }
 function code(code) {
     return (
-        <code>
-            <table class="code">
+        <code class="code">
+            <table class="table">
                 {code.Lines.map((line, index) =>
-                    <tr>
-                        <td>{(index + 1).toString()}</td>
-                        <td>{lexemes(line.Lexemes)}</td>
+                    <tr class="line">
+                        <td class="index">{(index + 1).toString()}</td>
+                        <td class="content">{lexemes(line.Lexemes)}</td>
                     </tr>
                 )}
             </table>

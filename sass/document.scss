@@ -94,6 +94,80 @@ html {
 
                                 text-align: justify;
                             }
+                            > .illustrations {
+                                display: flex;
+                                flex-direction: row;
+                                flex-wrap: wrap;
+                                justify-content: center;
+                                align-items: flex-end;
+
+                                > .illustration {
+                                    border: 2px dashed rgb(30, 30, 30);
+                                    margin: 8pt;
+                                    padding: 8pt;
+                                    display: flex;
+                                    flex-direction: column;
+                                    flex-wrap: nowrap;
+                                    justify-content: flex-end;
+                                    align-items: stretch;
+
+                                    > .title {
+                                        @extend %text-strong;
+
+                                        margin: 0;
+                                        order: 2;
+                                    }
+                                    > .description {
+                                        @extend %text-default;
+
+                                        order: 3;
+                                    }
+                                    > .content {
+                                        order: 1;
+                                        display: flex;
+                                        flex-direction: column;
+                                        flex-wrap: nowrap;
+                                        justify-content: center;
+                                        align-items: center;
+
+                                        .code > .table {
+                                            border-collapse         : collapse;
+                                            background-color        : rgb(30, 30, 30);
+                                            border                  : 2pt solid rgb(30, 30, 30);
+                                            /* font */
+                                            font-family             : consolas;
+                                            font-size               : 11pt;
+                                            font-style              : normal;
+                                            font-weight             : normal;
+
+                                            * {
+                                                margin: 0;
+                                                padding: 0;
+                                            }
+                                            *::selection { // @todo: investigate
+                                                background-color: rgb(38, 79, 120);
+                                            }
+                                            > tbody > .line {
+                                                > .index {
+                                                    padding-left: 2pt;
+                                                    padding-right: 2pt;
+                                                    text-align: right;
+                                                    color: rgb(133, 133, 133);
+
+                                                    // disable text selection
+                                                    -webkit-user-select     : none; // Chrome all / Safari all
+                                                    -moz-user-select        : none; // Firefox all
+                                                    -ms-user-select         : none; // IE 10+
+                                                    user-select             : none; // Likely future
+                                                }
+                                                > .content {
+                                                    color: rgb(220, 220, 220);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
