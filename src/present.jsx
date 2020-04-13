@@ -15,13 +15,13 @@ function template(title, content) {
                 <meta name="Description" content="Description"></meta>
                 <title>{title} | Безнадійний Програміст</title>
                 <link rel="icon" href="media/favicon.ico" type="image/x-icon" />
-                {/* <link rel="stylesheet" href="styles.css" /> */}
+                <link rel="stylesheet" href="css/document.css" />
                 {/* <script src="script.js" /> */}
             </head>
             <body>
                 <div class="header">
                     <div class="icon">
-                        <img class="logo" alt="But... I..." src="media/but_i.png" style="width: 365px; height: 304px"/>
+                        <img class="logo" alt="But... I..." src="media/but_i.png"/>
                         <em class="quote">...коли не можеш оголосити змінну case, тому що це службове слово...</em>
                     </div>
                     <nav class="navigation">
