@@ -42,8 +42,8 @@ function template(title, content) {
                         <br />
                         <small class="contacts">Адміністрація: <a href="mailto: me@hopeless-programmer.online">me@hopeless-programmer.online</a></small>
                     </address>
-                    <div>
-                        <small>Цей сайт не існував би без цих відкритих технологій</small>
+                    <div class="references">
+                        <small class="caption">Цей сайт не існував би без цих відкритих технологій</small>
                         <nav class="resources">
                             <a class="resource" href="https://en.wikipedia.org/wiki/HTML5"><abbr title="Hypertext Markup Language">HTML5</abbr></a>
                             <a class="resource" href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets"><abbr title="Cascading Style Sheets">CSS3</abbr></a>
