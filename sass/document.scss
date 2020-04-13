@@ -111,12 +111,15 @@ html {
                     display: flex;
                     flex-direction: row;
                     justify-content: space-around;
-                    align-items: center;
+                    align-items: stretch;
 
                     > .resource {
                         @extend %text-strong;
 
                         flex-grow: 1;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
                         text-align: center;
                         border-bottom: 2mm solid #596268;
 
@@ -124,6 +127,11 @@ html {
                             border-color: #d74444;
                             background-color: #e4ebf0;
                             color: #db7373;
+                        }
+
+                        img {
+                            width: 1in;
+                            height: 1in;
                         }
                     }
                 }
