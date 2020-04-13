@@ -2,6 +2,9 @@ const documenting = require(`./documenting`);
 const html = require(`./html`);
 
 
+function error() {
+    throw new Error; // @todo
+}
 function template(title, content) {
     return (
         <html lang="en">
@@ -21,53 +24,53 @@ function template(title, content) {
                         <img class="logo" alt="But... I..." src="media/but_i.png" style="width: 365px; height: 304px"/>
                         <em class="quote">...коли не можеш оголосити змінну case, тому що це службове слово...</em>
                     </div>
-                    <ul class="navigation">
-                        <li class="button"><a href="#">Головна</a></li>
-                        <li class="button"><a href="#">Статті</a></li>
-                        <li class="button"><a href="#">Проекти</a></li>
-                        <li class="button"><a href="#">Про цей сайт</a></li>
-                    </ul>
+                    <nav class="navigation">
+                        <a class="button" href="#">Головна</a>
+                        <a class="button" href="#">Статті</a>
+                        <a class="button" href="#">Проекти</a>
+                        <a class="button" href="#">Про цей сайт</a>
+                    </nav>
                 </div>
                 <div class="content">
                     {content}
                 </div>
-                <div class="footer">
-                    <div class="name">
-                        <small>hopeless-programmer.online</small>
-                    </div>
-                    <div class="years">
-                        <small>2020 - {(new Date).getFullYear().toString()}</small>
-                    </div>
-                    <div class="contacts">
-                        <small>Підтримка: <a href="mailto: me@hopeless-programmer.online">me@hopeless-programmer.online</a></small>
-                    </div>
+                <footer class="footer">
+                    <address class="address">
+                        <small class="summary">hopeless-programmer.online</small>
+                        <br />
+                        <small class="years">2020 - {(new Date).getFullYear().toString()}</small>
+                        <br />
+                        <small class="contacts">Адміністрація: <a href="mailto: me@hopeless-programmer.online">me@hopeless-programmer.online</a></small>
+                    </address>
                     <div>
                         <small>Цей сайт не існував би без цих відкритих технологій</small>
-                        <ul class="resources">
-                            <li class="resource" title="Hypertext Markup Language"><a href="https://en.wikipedia.org/wiki/HTML5">HTML5</a></li>
-                            <li class="resource" title="Cascading Style Sheets"><a href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS3</a></li>
-                            <li class="resource" title="ECMAScript 6"><a href="https://en.wikipedia.org/wiki/ECMAScript#ES2015">ES6</a></li>
-                            <li class="resource" title="JavaScript XML"><a href="https://en.wikipedia.org/wiki/React_(web_framework)#JSX">JSX</a></li>
-                            <li class="resource" title="Syntactically Awesome Style Sheets"><a href="https://en.wikipedia.org/wiki/Sass_(stylesheet_language)">SASS</a></li>
-                            <li class="resource"><a href="https://en.wikipedia.org/wiki/Node.js">NodeJS</a></li>
-                            <li class="resource"><a href="https://jestjs.io">Jest</a></li>
-                        </ul>
+                        <nav class="resources">
+                            <a class="resource" href="https://en.wikipedia.org/wiki/HTML5"><abbr title="Hypertext Markup Language">HTML5</abbr></a>
+                            <a class="resource" href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets"><abbr title="Cascading Style Sheets">CSS3</abbr></a>
+                            <a class="resource" href="https://en.wikipedia.org/wiki/ECMAScript#ES2015"><abbr title="ECMAScript 6">ES6</abbr></a>
+                            <a class="resource" href="https://en.wikipedia.org/wiki/React_(web_framework)#JSX"><abbr title="JavaScript XML">JSX</abbr></a>
+                            <a class="resource" href="https://en.wikipedia.org/wiki/Sass_(stylesheet_language)"><abbr title="Syntactically Awesome Style Sheets">SASS</abbr></a>
+                            <a class="resource" href="https://en.wikipedia.org/wiki/Node.js">NodeJS</a>
+                            <a class="resource" href="https://jestjs.io">Jest</a>
+                        </nav>
                     </div>
-                </div>
+                </footer>
             </body>
         </html>
     );
 }
 function document(document) {
     return (
-        <div class="document">
-            <h1 class="title">
-                {sentences(document.Title.Sentences)}
-            </h1>
+        <article class="document">
+            <header class="header">
+                <h1 class="title">
+                    {sentences(document.Title.Sentences)}
+                </h1>
+            </header>
             <div class="sections">
                 {sections(document.Sections)}
             </div>
-        </div>
+        </article>
     );
 }
 function sections(sections) {
@@ -89,7 +92,65 @@ function parts(parts) {
     return parts.map(part);
 }
 function part(part) {
-    return paragraph(part.Paragraph);
+    if (part instanceof documenting.ParagraphSectionPart) {
+        return paragraph(part.Paragraph);
+    }
+    else if (part instanceof documenting.IllustrationsSectionPart) {
+        return (
+            <div class="illustrations">
+                {illustrations(part.Illustrations)}
+            </div>
+        );
+    }
+    else {
+        throw new Error; // @todo
+    }
+}
+function illustrations(illustrations) {
+    return illustrations.map(illustration);
+}
+function illustration(illustration) {
+    const content =
+        illustration instanceof documenting.CodeIllustration ? code(illustration.Code) :
+        error();
+
+    return (
+        <div id="" class="illustration">
+            <h3 class="title">
+                {`Ілюстрація #x`}
+            </h3>
+            <div class="description">
+                {/* todo */}
+            </div>
+            <div class="content">
+                {content}
+            </div>
+        </div>
+    );
+}
+function code(code) {
+    return (
+        <code>
+            <table class="code">
+                {code.Lines.map((line, index) =>
+                    <tr>
+                        <td>{(index + 1).toString()}</td>
+                        <td>{lexemes(line.Lexemes)}</td>
+                    </tr>
+                )}
+            </table>
+        </code>
+    );
+}
+function lexemes(lexemes) {
+    return lexemes.map(lexeme);
+}
+function lexeme(lexeme) {
+    if (lexeme instanceof documenting.TextLexeme) {
+        return <pre>{lexeme.String}</pre>;
+    }
+
+    throw new Error; // @todo
 }
 function paragraph(paragraph) {
     return (
