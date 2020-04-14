@@ -13,6 +13,9 @@ module.exports = {
     },
     parserOptions: {
         ecmaVersion: 2018,
+        ecmaFeatures: {
+            jsx: true,
+        },
     },
     rules: {
         indent: [
