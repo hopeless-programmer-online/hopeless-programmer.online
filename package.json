@@ -1,6 +1,6 @@
 {
   "name": "hopeless-programmer.online",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Web site",
   "repository": {
     "type": "git",
@@ -33,7 +33,8 @@
     "build-only": "npm run build-typescript && npm run build-sass && npm run build-views",
     "build": "npm run clean && npm run build-only",
     "test-only": "jest",
-    "test": "npm run build && npm run test-only"
+    "test": "npm run build && npm run test-only",
+    "start": "npm run build && node server.js"
   },
   "dependencies": {
     "express": "^4.17.1"
