@@ -26,8 +26,11 @@
   },
   "scripts": {
     "clean": "rimraf lib",
-    "sass": "sass sass:css",
-    "build": "npm run clean && tsc",
-    "test": "npm run build && jest"
+    "build-sass": "sass sass:css",
+    "build-typescript": "tsc",
+    "build-only": "npm run build-typescript && npm run build-sass",
+    "build": "npm run clean && npm run build-only",
+    "test-only": "jest",
+    "test": "npm run build && npm run test-only"
   }
 }
