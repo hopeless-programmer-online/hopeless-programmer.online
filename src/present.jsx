@@ -7,7 +7,7 @@ function error() {
 }
 function template(title, content) {
     return (
-        <html lang="en">
+        <html lang="uk">
             <head>
                 <meta charset="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,10 +25,8 @@ function template(title, content) {
                         <em class="quote">...коли не можеш оголосити змінну case, тому що це службове слово...</em>
                     </div>
                     <nav class="navigation">
-                        <a class="button" href="#">Головна</a>
-                        <a class="button" href="#">Статті</a>
-                        <a class="button" href="#">Проекти</a>
-                        <a class="button" href="#">Про цей сайт</a>
+                        <a class="button" href="/home">Головна</a>
+                        <a class="button" href="/about">Про цей сайт</a>
                     </nav>
                 </div>
                 <div class="content">

@@ -29,7 +29,8 @@
     "clean": "rimraf lib",
     "build-sass": "sass sass:css",
     "build-typescript": "tsc",
-    "build-only": "npm run build-typescript && npm run build-sass",
+    "build-views": "node ./lib/build-views.js",
+    "build-only": "npm run build-typescript && npm run build-sass && npm run build-views",
     "build": "npm run clean && npm run build-only",
     "test-only": "jest",
     "test": "npm run build && npm run test-only"

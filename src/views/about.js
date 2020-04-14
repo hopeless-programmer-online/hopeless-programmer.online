@@ -1,17 +1,10 @@
-const s = require(`./documenting`).shortcuts;
-const p = require(`./present`);
-const fs = require(`fs`);
+const s = require(`../documenting`).shortcuts;
 
 
 exports = module.exports = s.document(`Про цей сайт`,
     s.section(`Навіщо потрібен цей сайт?`,
         s.paragraph(
             `Цей маленький сайт є місцем, де я зберігаю свої ідеї, проекти, а також матеріали якими я хочу поділитись зі світом. `,
-        ),
-        s.code(
-            `if (x) {`,
-            `    f();`,
-            `}`,
         ),
     ),
     s.section(`Чому "безнадійний програміст"?`,
@@ -79,11 +72,3 @@ exports = module.exports = s.document(`Про цей сайт`,
         ),
     ),
 );
-
-
-const x = p.template(
-    exports.Title.Text,
-    p.document(exports),
-);
-
-fs.createWriteStream(`index.html`).end(x.Html5.toString());
