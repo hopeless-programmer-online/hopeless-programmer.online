@@ -2,8 +2,8 @@ const Illustration = require(`./illustration`);
 
 
 class CodeIllustration extends Illustration {
-    constructor({ Code }) {
-        super();
+    constructor({ Title, Description, Code }) {
+        super({ Title, Description });
 
         this.__code = Code;
     }

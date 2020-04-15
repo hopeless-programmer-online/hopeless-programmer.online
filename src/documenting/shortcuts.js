@@ -3,6 +3,7 @@ const Section = require(`./section`);
 const SectionPart = require(`./section-part`);
 const ParagraphSectionPart = require(`./paragraph-section-part`);
 const IllustrationsSectionPart = require(`./illustrations-section-part`);
+const Illustration = require(`./illustration`);
 const CodeIllustration = require(`./code-illustration`);
 const Paragraph = require(`./paragraph`);
 const Sentence = require(`./sentence`);
@@ -60,6 +61,9 @@ function toParagraph(something) {
     if (something instanceof Paragraph) {
         return something;
     }
+    if (something instanceof Array) {
+        return paragraph(...something);
+    }
 
     return paragraph(something);
 }
@@ -106,19 +110,36 @@ function code(...somethings) {
         Lines : lines,
     });
 }
+function illustration(title, description, content) {
+    title = toParagraph(title);
+    description = toParagraph(description);
+
+    if (content instanceof Code) {
+        return new CodeIllustration({
+            Title : title,
+            Description : description,
+            Code : content,
+        });
+    }
+
+    throw new Error(); // @todo
+}
 function sectionPart(something) {
     if (something instanceof Paragraph) {
         return new ParagraphSectionPart({
             Paragraph : something,
         });
     }
-    if (something instanceof Code) {
+    if (something instanceof Illustration) {
         return new IllustrationsSectionPart({
             Illustrations : [
-                new CodeIllustration({
-                    Code : something,
-                }),
+                something,
             ],
+        });
+    }
+    if (something instanceof Array && something.every(x => x instanceof Illustration)) {
+        return new IllustrationsSectionPart({
+            Illustrations : something,
         });
     }
 
@@ -166,6 +187,7 @@ exports.toLexemes = toLexemes;
 exports.codeLine = codeLine;
 exports.toCodeLines = toCodeLines;
 exports.code = code;
+exports.illustration = illustration;
 exports.sectionPart = sectionPart;
 exports.toSectionPart = toSectionPart;
 exports.toSectionParts = toSectionParts;

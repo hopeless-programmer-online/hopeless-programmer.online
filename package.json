@@ -34,7 +34,8 @@
     "build": "npm run clean && npm run build-only",
     "test-only": "jest",
     "test": "npm run build && npm run test-only",
-    "start": "npm run build && node server.js"
+    "start-only": "node server.js",
+    "start": "npm run build && npm run start-only"
   },
   "dependencies": {
     "express": "^4.17.1"

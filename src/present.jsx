@@ -76,9 +76,10 @@ function sections(sections) {
 }
 function section(section) {
     return (
-        <div class="section">
+        <div id="" class="section">
             <h2 class="title">
                 {sentences(section.Title.Sentences)}
+                <a class="link" href="#">#</a>
             </h2>
             <div class="parts">
                 {parts(section.Parts)}
@@ -115,10 +116,11 @@ function illustration(illustration) {
     return (
         <div id="" class="illustration">
             <h3 class="title">
-                {`Ілюстрація #x`}
+                {illustration.Title.Sentences.map(sentence)}
+                <a class="link" href="#">#</a>
             </h3>
             <div class="description">
-                {/* todo */}
+                {illustration.Description.Sentences.map(sentence)}
             </div>
             <div class="content">
                 {content}

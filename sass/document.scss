@@ -18,6 +18,18 @@
     color                 : #373d49;
     text-decoration-line  : none;
 }
+%text-link {
+    @extend %text-default;
+
+    color: #73a4db;
+
+    &:hover {
+        color: #db7373;
+    }
+    &:visited {
+        color: #7375db;
+    }
+}
 
 
 html, body {
@@ -88,12 +100,20 @@ html {
                         @extend %text-strong;
 
                         text-align: center;
+
+                        > .sentence {
+                            display: block;
+                        }
                     }
                 }
                 > .sections {
                     > .section {
                         > .title {
                             @extend %text-strong;
+
+                            > .link {
+                                @extend %text-link;
+                            }
                         }
                         > .parts {
                             > .paragraph {
@@ -107,8 +127,10 @@ html {
                                 flex-wrap: wrap;
                                 justify-content: center;
                                 align-items: flex-end;
+                                align-content: flex-end;
 
                                 > .illustration {
+                                    width: min-content; // :C
                                     border: 2px dashed rgb(30, 30, 30);
                                     margin: 8pt;
                                     padding: 8pt;
@@ -116,18 +138,30 @@ html {
                                     flex-direction: column;
                                     flex-wrap: nowrap;
                                     justify-content: flex-end;
-                                    align-items: stretch;
+                                    align-items: center;
+                                    flex-shrink: 1;
+                                    flex-grow: 0;
 
                                     > .title {
                                         @extend %text-strong;
 
+                                        text-align: center;
                                         margin: 0;
                                         order: 2;
+
+                                        > .link {
+                                            @extend %text-link;
+                                        }
                                     }
                                     > .description {
                                         @extend %text-default;
 
+                                        text-align: center;
+                                        // word-break: break-all;
+                                        // word-wrap: break-word;
+                                        // flex-grow: 1;
                                         order: 3;
+                                        font-size: smaller;
                                     }
                                     > .content {
                                         order: 1;
@@ -137,38 +171,42 @@ html {
                                         justify-content: center;
                                         align-items: center;
 
-                                        .code > .table {
-                                            border-collapse         : collapse;
-                                            background-color        : rgb(30, 30, 30);
-                                            border                  : 2pt solid rgb(30, 30, 30);
-                                            /* font */
-                                            font-family             : consolas;
-                                            font-size               : 11pt;
-                                            font-style              : normal;
-                                            font-weight             : normal;
+                                        .code {
+                                            box-shadow: 0 0 10pt rgba(0,0,0,0.5);
 
-                                            * {
-                                                margin: 0;
-                                                padding: 0;
-                                            }
-                                            *::selection { // @todo: investigate
-                                                background-color: rgb(38, 79, 120);
-                                            }
-                                            > tbody > .line {
-                                                > .index {
-                                                    padding-left: 2pt;
-                                                    padding-right: 2pt;
-                                                    text-align: right;
-                                                    color: rgb(133, 133, 133);
+                                            > .table {
+                                                border-collapse         : collapse;
+                                                background-color        : rgb(30, 30, 30);
+                                                border                  : 2pt solid rgb(30, 30, 30);
+                                                /* font */
+                                                font-family             : consolas;
+                                                font-size               : 11pt;
+                                                font-style              : normal;
+                                                font-weight             : normal;
 
-                                                    // disable text selection
-                                                    -webkit-user-select     : none; // Chrome all / Safari all
-                                                    -moz-user-select        : none; // Firefox all
-                                                    -ms-user-select         : none; // IE 10+
-                                                    user-select             : none; // Likely future
+                                                * {
+                                                    margin: 0;
+                                                    padding: 0;
                                                 }
-                                                > .content {
-                                                    color: rgb(220, 220, 220);
+                                                *::selection { // @todo: investigate
+                                                    background-color: rgb(38, 79, 120);
+                                                }
+                                                > tbody > .line {
+                                                    > .index {
+                                                        padding-left: 2pt;
+                                                        padding-right: 2pt;
+                                                        text-align: right;
+                                                        color: rgb(133, 133, 133);
+
+                                                        // disable text selection
+                                                        -webkit-user-select     : none; // Chrome all / Safari all
+                                                        -moz-user-select        : none; // Firefox all
+                                                        -ms-user-select         : none; // IE 10+
+                                                        user-select             : none; // Likely future
+                                                    }
+                                                    > .content {
+                                                        color: rgb(220, 220, 220);
+                                                    }
                                                 }
                                             }
                                         }
