@@ -28,7 +28,7 @@
   "scripts": {
     "clean": "rimraf lib",
     "build-sass": "sass sass:css",
-    "build-typescript": "tsc",
+    "build-typescript": "node build.js",
     "build-views": "node ./lib/build-views.js",
     "build-only": "npm run build-typescript && npm run build-sass && npm run build-views",
     "build": "npm run clean && npm run build-only",
