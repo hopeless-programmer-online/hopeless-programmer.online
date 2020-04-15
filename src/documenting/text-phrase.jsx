@@ -27,7 +27,14 @@ class TextPhrase extends Phrase {
     get String() {
         return this.__string;
     }
+
+    toHtml() {
+        return <span class="text-phrase">{this.String}</span>;
+    }
 }
 
 
 exports = module.exports = TextPhrase;
+
+
+const html = require(`../html`);
