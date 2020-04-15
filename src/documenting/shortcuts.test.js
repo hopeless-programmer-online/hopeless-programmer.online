@@ -46,10 +46,14 @@ it(`Should create Document on calling document`, () => {
                 `second sentence`,
                 `third sentence`,
             ),
-            shortcuts.code(
-                `line #1`,
-                `line #2`,
-                `line #3`,
+            shortcuts.illustration(
+                `title`,
+                `description`,
+                shortcuts.code(
+                    `line #1`,
+                    `line #2`,
+                    `line #3`,
+                ),
             ),
         ),
     );

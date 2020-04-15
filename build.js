@@ -29,7 +29,7 @@ function transpile(root) {
             return;
         }
 
-        console.log(`transpiling : ${root}`);
+        // console.log(`transpiling : ${root}`);
 
         const source = fs.readFileSync(root, `utf-8`);
         const output = ts.transpileModule(source, {
