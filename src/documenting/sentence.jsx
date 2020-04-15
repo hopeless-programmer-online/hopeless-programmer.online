@@ -26,11 +26,16 @@ class Sentence {
             .filter(phrase => phrase instanceof TextPhrase)
             .reduce((a,x) => a + x.String, ``);
     }
+
+    toHtml() {
+        return <span class="sentence">{this.Phrases.map(phrase => phrase.toHtml())}</span>;
+    }
 }
 
 
 exports = module.exports = Sentence;
 
 
+const html = require(`../html`);
 const Phrase = require(`./phrase`);
 const TextPhrase = require(`./text-phrase`);

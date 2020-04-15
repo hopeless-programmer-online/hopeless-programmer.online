@@ -11,7 +11,14 @@ class ParagraphSectionPart extends SectionPart {
     get Paragraph() {
         return this.__paragraph;
     }
+
+    toHtml() {
+        return this.Paragraph.toHtml();
+    }
 }
 
 
 exports = module.exports = ParagraphSectionPart;
+
+
+const html = require(`../html`);

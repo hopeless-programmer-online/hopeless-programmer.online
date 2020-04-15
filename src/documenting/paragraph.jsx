@@ -24,10 +24,15 @@ class Paragraph {
     get Text() {
         return this.Sentences.reduce((a,x) => a + x.Text, ``);
     }
+
+    toHtml() {
+        return <p class="paragraph">{this.Sentences.map(sentence => sentence.toHtml())}</p>;
+    }
 }
 
 
 exports = module.exports = Paragraph;
 
 
+const html = require(`../html`);
 const Sentence = require(`./sentence`);
