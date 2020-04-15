@@ -8,6 +8,7 @@ const CodeIllustration = require(`./code-illustration`);
 const Paragraph = require(`./paragraph`);
 const Sentence = require(`./sentence`);
 const TextPhrase = require(`./text-phrase`);
+const CodePhrase = require(`./code-phrase`);
 const Code = require(`./code`);
 const CodeLine = require(`./code-line`);
 const Lexeme = require(`./lexeme`);
@@ -19,6 +20,11 @@ function textPhrase(something) {
     if (typeof something === `string`) {
         return new TextPhrase({
             String : something,
+        });
+    }
+    if (something instanceof Code) {
+        return new CodePhrase({
+            Code : something,
         });
     }
 
