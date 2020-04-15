@@ -16,6 +16,7 @@ const Code = require(`./documenting/code`);
 const CodeLine = require(`./documenting/code-line`);
 const Lexeme = require(`./documenting/lexeme`);
 const TextLexeme = require(`./documenting/text-lexeme`);
+const CommentLexeme = require(`./documenting/comment-lexeme`);
 const shortcuts = require(`./documenting/shortcuts`);
 
 
@@ -34,4 +35,5 @@ exports.Code = Code;
 exports.CodeLine = CodeLine;
 exports.Lexeme = Lexeme;
 exports.TextLexeme = TextLexeme;
+exports.CommentLexeme = CommentLexeme;
 exports.shortcuts = shortcuts;

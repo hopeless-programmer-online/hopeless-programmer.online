@@ -17,6 +17,9 @@ app.get(`/home`, (req, res) => {
 app.get(`/about`, (req, res) => {
     res.sendFile( path.join(__dirname, `views`, `about.html`) );
 });
+app.get(`/article_2`, (req, res) => {
+    res.sendFile( path.join(__dirname, `views`, `article_2.html`) );
+});
 app.use((req, res) => {
     res.status(404);
     res.sendFile( path.join(__dirname, `views`, `404.html`) );

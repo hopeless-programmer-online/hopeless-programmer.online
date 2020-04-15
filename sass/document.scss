@@ -22,12 +22,13 @@
     @extend %text-default;
 
     color: #73a4db;
+    font-weight: bold; // ?
 
+    &:visited {
+        color: #73badb;
+    }
     &:hover {
         color: #db7373;
-    }
-    &:visited {
-        color: #7375db;
     }
 }
 
@@ -172,8 +173,6 @@ html {
                                         align-items: center;
 
                                         .code {
-                                            box-shadow: 0 0 10pt rgba(0,0,0,0.5);
-
                                             > .table {
                                                 border-collapse         : collapse;
                                                 background-color        : rgb(30, 30, 30);
@@ -206,6 +205,14 @@ html {
                                                     }
                                                     > .content {
                                                         color: rgb(220, 220, 220);
+                                                        display: flex; // collapse spaces
+
+                                                        > * {
+                                                            display: inline;
+                                                        }
+                                                        > .comment {
+                                                            color: rgb(106, 153, 85);
+                                                        }
                                                     }
                                                 }
                                             }

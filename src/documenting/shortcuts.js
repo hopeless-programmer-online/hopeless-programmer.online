@@ -12,6 +12,7 @@ const Code = require(`./code`);
 const CodeLine = require(`./code-line`);
 const Lexeme = require(`./lexeme`);
 const TextLexeme = require(`./text-lexeme`);
+const CommentLexeme = require(`./comment-lexeme`);
 
 
 function textPhrase(something) {
@@ -172,6 +173,12 @@ function document(titleLike, ...sections) {
         Sections : sections,
     });
 }
+// comment
+function cm(string) {
+    return new CommentLexeme({
+        String : string,
+    });
+}
 
 
 exports.textPhrase = textPhrase;
@@ -193,3 +200,6 @@ exports.toSectionPart = toSectionPart;
 exports.toSectionParts = toSectionParts;
 exports.section = section;
 exports.document = document;
+
+exports.l = codeLine;
+exports.cm = cm;

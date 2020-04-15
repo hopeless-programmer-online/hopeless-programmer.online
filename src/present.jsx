@@ -146,8 +146,11 @@ function lexemes(lexemes) {
     return lexemes.map(lexeme);
 }
 function lexeme(lexeme) {
+    if (lexeme instanceof documenting.CommentLexeme) {
+        return <pre class="comment">{lexeme.String}</pre>;
+    }
     if (lexeme instanceof documenting.TextLexeme) {
-        return <pre>{lexeme.String}</pre>;
+        return <pre class="text">{lexeme.String}</pre>;
     }
 
     throw new Error; // @todo
