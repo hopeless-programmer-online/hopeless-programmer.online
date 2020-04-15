@@ -37,7 +37,5 @@
     "start-only": "node server.js",
     "start": "npm run build && npm run start-only"
   },
-  "dependencies": {
-    "express": "^4.17.1"
-  }
+  "dependencies": {}
 }
