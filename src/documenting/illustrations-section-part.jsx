@@ -11,7 +11,18 @@ class IllustrationsSectionPart extends SectionPart {
     get Illustrations() {
         return this.__illustrations;
     }
+
+    toHtml() {
+        return (
+            <div class="illustrations">
+                {this.Illustrations.map(illustration => illustration.toHtml())}
+            </div>
+        );
+    }
 }
 
 
 exports = module.exports = IllustrationsSectionPart;
+
+
+const html = require(`../html`);

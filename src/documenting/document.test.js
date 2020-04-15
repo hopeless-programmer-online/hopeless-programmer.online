@@ -14,6 +14,12 @@ it(`Should converts ho html`, () => {
                 `First sentence. `,
                 `Second sentence. `,
             ),
+            shortcuts.illustration(
+                `Illustration title`,
+                `Illustration description`,
+                shortcuts.code(
+                ),
+            ),
         ),
     );
 
@@ -41,6 +47,24 @@ it(`Should converts ho html`, () => {
         `                <span class="text-phrase">Second sentence. </span>\r\n` +
         `            </span>\r\n` +
         `        </p>\r\n` +
+        `        <div class="illustrations">\r\n` +
+        `            <div id="" class="illustration">\r\n` +
+        `                <h3 class="title">\r\n` +
+        `                    <span class="sentence">\r\n` +
+        `                        <span class="text-phrase">Illustration title</span>\r\n` +
+        `                    </span>\r\n` +
+        `                    <a class="link-button" href="#">#</a>\r\n` +
+        `                </h3>\r\n` +
+        `                <div class="description">\r\n` +
+        `                    <span class="sentence">\r\n` +
+        `                        <span class="text-phrase">Illustration description</span>\r\n` +
+        `                    </span>\r\n` +
+        `                </div>\r\n` +
+        `                <div class="content">\r\n` +
+        `                    <code class="code"></code>\r\n` +
+        `                </div>\r\n` +
+        `            </div>\r\n` +
+        `        </div>\r\n` +
         `    </div>\r\n` +
         `</article>`,
     );
