@@ -36,7 +36,7 @@ class ParagraphSectionPartTemplate extends SectionPartTemplate {
      */
     _Reduce() {
         return new ParagraphSectionPart({
-            Paragraph : this.Paragraph,
+            Paragraph : this.Paragraph.Reduce(),
         });
     }
 }
@@ -46,7 +46,7 @@ exports = module.exports = ParagraphSectionPartTemplate;
 
 
 const ParagraphSectionPart = require(`./paragraph-section-part`);
-const Paragraph = require(`./paragraph`);
+const Paragraph = require(`./paragraph-template`);
 
 
 const ParagraphClass = Paragraph;

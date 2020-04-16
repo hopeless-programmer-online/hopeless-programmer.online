@@ -1,6 +1,8 @@
 const TextPhraseTemplate = require(`./text-phrase-template`);
 const SentenceTemplate = require(`./sentence-template`);
 const ParagraphTemplate = require(`./paragraph-template`);
+const ParagraphSectionPartTemplate = require(`./paragraph-section-part-template`);
+const SectionTemplate = require(`./section-template`);
 const shortcuts = require(`./shortcuts`);
 
 
@@ -29,4 +31,23 @@ it(`Should create ParagraphTemplate on calling paragraph with string arguments`,
     expect(template.Sentences[1].Phrases).toHaveLength(1);
     expect(template.Sentences[1].Phrases[0]).toBeInstanceOf(TextPhraseTemplate);
     expect(template.Sentences[1].Phrases[0].String).toBe(`text #2`);
+});
+it(`Should create SectionTemplate on calling section`, () => {
+    const template = shortcuts.section(`section title`,
+        shortcuts.paragraph(
+            `sentence #1`,
+        ),
+    );
+
+    expect(template).toBeInstanceOf(SectionTemplate);
+    expect(template.Title.Sentences).toHaveLength(1);
+    expect(template.Title.Sentences[0].Phrases).toHaveLength(1);
+    expect(template.Title.Sentences[0].Phrases[0]).toBeInstanceOf(TextPhraseTemplate);
+    expect(template.Title.Sentences[0].Phrases[0].String).toBe(`section title`);
+    expect(template.Parts).toHaveLength(1);
+    expect(template.Parts[0]).toBeInstanceOf(ParagraphSectionPartTemplate);
+    expect(template.Parts[0].Paragraph.Sentences).toHaveLength(1);
+    expect(template.Parts[0].Paragraph.Sentences[0].Phrases).toHaveLength(1);
+    expect(template.Parts[0].Paragraph.Sentences[0].Phrases[0]).toBeInstanceOf(TextPhraseTemplate);
+    expect(template.Parts[0].Paragraph.Sentences[0].Phrases[0].String).toBe(`sentence #1`);
 });

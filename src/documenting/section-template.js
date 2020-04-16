@@ -7,10 +7,10 @@ class SectionTemplate {
      * @throws {Error}
      */
     constructor({ Title, Parts = [] }) {
-        if (Title instanceof ParagraphTemplate) {
+        if (Title instanceof ParagraphTemplate); else {
             throw new Error; // @todo
         }
-        if (Parts instanceof Array) {
+        if (Parts instanceof Array); else {
             throw new Error; // @todo
         }
         if (Parts.every(part => part instanceof Part)); else {
