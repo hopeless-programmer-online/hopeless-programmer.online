@@ -21,6 +21,7 @@ const Document = require(`./document`);
  * @typedef {string}                                          LexemeTemplateSource
  * @typedef {LexemeTemplate | LexemeTemplateSource}           LexemeTemplateLike
  * @typedef {LexemeTemplateLike}                              CodeLineTemplateSource
+ * @typedef {CodeLineTemplate | CodeLineTemplateSource}       CodeLineTemplateLike
  * @typedef {ParagraphTemplate}                               SectionPartTemplateSource
  * @typedef {SectionPartTemplate | SectionPartTemplateSource} SectionPartTemplateLike
  */
@@ -152,6 +153,7 @@ function toLexemes(somethings) {
 /**
  * @param   {...CodeLineTemplateSource} somethings
  * @returns {CodeLineTemplate}
+ * @throws  {Error}
  */
 function codeLine(...somethings) {
     const lexemes = toLexemes(somethings);
@@ -159,6 +161,26 @@ function codeLine(...somethings) {
     return new CodeLineTemplate({
         Lexemes : lexemes,
     });
+}
+/**
+ * @param   {CodeLineTemplateLike} something
+ * @returns {CodeLineTemplate}
+ * @throws  {Error}
+ */
+function toCodeLine(something) {
+    if (something instanceof CodeLineTemplate) {
+        return something;
+    }
+
+    return codeLine(something);
+}
+/**
+ * @param   {Array<CodeLineTemplateLike>} somethings
+ * @returns {Array<CodeLineTemplate>}
+ * @throws  {Error}
+ */
+function toCodeLines(somethings) {
+    return somethings.map(toCodeLine);
 }
 /**
  * @param   {SectionPartTemplateSource} something
@@ -237,6 +259,8 @@ exports.lexeme = lexeme;
 exports.toLexeme = toLexeme;
 exports.toLexemes = toLexemes;
 exports.codeLine = codeLine;
+exports.toCodeLine = toCodeLine;
+exports.toCodeLines = toCodeLines;
 exports.sectionPart = sectionPart;
 exports.toSectionPart = toSectionPart;
 exports.toSectionParts = toSectionParts;
