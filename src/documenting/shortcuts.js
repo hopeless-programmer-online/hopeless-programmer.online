@@ -2,6 +2,8 @@ const PhraseTemplate = require(`./phrase-template`);
 const TextPhraseTemplate = require(`./text-phrase-template`);
 const SentenceTemplate = require(`./sentence-template`);
 const ParagraphTemplate = require(`./paragraph-template`);
+const LexemeTemplate = require(`./lexeme-template`);
+const TextLexemeTemplate = require(`./text-lexeme-template`);
 const SectionPartTemplate = require(`./section-part-template`);
 const ParagraphSectionPartTemplate = require(`./paragraph-section-part-template`);
 const SectionTemplate = require(`./section-template`);
@@ -15,6 +17,8 @@ const Document = require(`./document`);
  * @typedef {SentenceTemplate | SentenceTemplateSource}       SentenceTemplateLike
  * @typedef {SentenceTemplateLike}                            ParagraphTemplateSource
  * @typedef {ParagraphTemplate | ParagraphTemplateSource}     ParagraphTemplateLike
+ * @typedef {string}                                          LexemeTemplateSource
+ * @typedef {LexemeTemplate | LexemeTemplateSource}           LexemeTemplateLike
  * @typedef {ParagraphTemplate}                               SectionPartTemplateSource
  * @typedef {SectionPartTemplate | SectionPartTemplateSource} SectionPartTemplateLike
  */
@@ -110,6 +114,40 @@ function toParagraph(something) {
     return paragraph(something);
 }
 /**
+ * @param   {LexemeTemplateSource} something
+ * @returns {LexemeTemplate}
+ * @throws  {Error}
+ */
+function lexeme(something) {
+    if (typeof something === `string`) {
+        return new TextLexemeTemplate({
+            String : something,
+        });
+    }
+
+    throw new Error; // @todo
+}
+/**
+ * @param   {LexemeTemplateLike} something
+ * @returns {LexemeTemplate}
+ * @throws  {Error}
+ */
+function toLexeme(something) {
+    if (something instanceof LexemeTemplate) {
+        return something;
+    }
+
+    return lexeme(something);
+}
+/**
+ * @param   {Array<LexemeTemplateLike>} somethings
+ * @returns {Array<LexemeTemplate>}
+ * @throws  {Error}
+ */
+function toLexemes(somethings) {
+    return somethings.map(toLexeme);
+}
+/**
  * @param   {SectionPartTemplateSource} something
  * @returns {SectionPartTemplate}
  * @throws  {Error}
@@ -182,6 +220,9 @@ exports.toSentence = toSentence;
 exports.toSentences = toSentences;
 exports.paragraph = paragraph;
 exports.toParagraph = toParagraph;
+exports.lexeme = lexeme;
+exports.toLexeme = toLexeme;
+exports.toLexemes = toLexemes;
 exports.sectionPart = sectionPart;
 exports.toSectionPart = toSectionPart;
 exports.toSectionParts = toSectionParts;

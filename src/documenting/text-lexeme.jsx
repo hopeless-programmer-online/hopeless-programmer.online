@@ -27,7 +27,19 @@ class TextLexeme extends Lexeme {
     get String() {
         return this.__string;
     }
+
+    /**
+     * @protected
+     * @override
+     * @returns   {html.Element}
+     */
+    _toHtml() {
+        return <pre class="text-lexeme">{this.String}</pre>;
+    }
 }
 
 
 exports = module.exports = TextLexeme;
+
+
+const html = require(`../html`);
