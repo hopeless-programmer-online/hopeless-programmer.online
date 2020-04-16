@@ -29,10 +29,11 @@ class TextPhrase extends Phrase {
     }
 
     /**
-     * @public
-     * @returns {html.Element}
+     * @protected
+     * @override
+     * @returns   {html.Element}
      */
-    toHtml() {
+    _toHtml() {
         return <span class="text-phrase">{this.String}</span>;
     }
 }
