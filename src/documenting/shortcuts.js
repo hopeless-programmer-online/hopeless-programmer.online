@@ -48,9 +48,31 @@ function sentence(...somethings) {
         Phrases : phrases,
     });
 }
+/**
+ * @param   {SentenceTemplate | PhraseTemplate | string} something
+ * @returns {SentenceTemplate}
+ * @throws  {Error}
+ */
+function toSentence(something) {
+    if (something instanceof SentenceTemplate) {
+        return something;
+    }
+
+    return sentence(something);
+}
+/**
+ * @param   {Array<SentenceTemplate | PhraseTemplate | string>} somethings
+ * @returns {Array<SentenceTemplate>}
+ * @throws  {Error}
+ */
+function toSentences(somethings) {
+    return somethings.map(toSentence);
+}
 
 
 exports.phrase = phrase;
 exports.toPhrase = toPhrase;
 exports.toPhrases = toPhrases;
 exports.sentence = sentence;
+exports.toSentence = toSentence;
+exports.toSentences = toSentences;
