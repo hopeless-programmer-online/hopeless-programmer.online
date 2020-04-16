@@ -2,14 +2,18 @@ const PhraseTemplate = require(`./phrase-template`);
 const TextPhraseTemplate = require(`./text-phrase-template`);
 const SentenceTemplate = require(`./sentence-template`);
 const ParagraphTemplate = require(`./paragraph-template`);
+const SectionPartTemplate = require(`./section-part-template`);
+const ParagraphSectionPartTemplate = require(`./paragraph-section-part-template`);
 
 
 /**
- * @typedef {string}                                    PhraseTemplateSource
- * @typedef {PhraseTemplate | PhraseTemplateSource}     PhraseTemplateLike
- * @typedef {PhraseTemplateLike}                        SentenceTemplateSource
- * @typedef {SentenceTemplate | SentenceTemplateSource} SentenceTemplateLike
- * @typedef {SentenceTemplateLike}                      ParagraphTemplateSource
+ * @typedef {string}                                          PhraseTemplateSource
+ * @typedef {PhraseTemplate | PhraseTemplateSource}           PhraseTemplateLike
+ * @typedef {PhraseTemplateLike}                              SentenceTemplateSource
+ * @typedef {SentenceTemplate | SentenceTemplateSource}       SentenceTemplateLike
+ * @typedef {SentenceTemplateLike}                            ParagraphTemplateSource
+ * @typedef {ParagraphTemplate}                               SectionPartTemplateSource
+ * @typedef {SectionPartTemplate | SectionPartTemplateSource} SectionPartTemplateLike
  */
 
 
@@ -90,6 +94,30 @@ function paragraph(...somethings) {
         Sentences : sentences,
     });
 }
+/**
+ * @param   {SectionPartTemplateSource} something
+ * @returns {SectionPartTemplate}
+ */
+function sectionPart(something) {
+    if (something instanceof ParagraphTemplate) {
+        return new ParagraphSectionPartTemplate({
+            Paragraph : something,
+        });
+    }
+
+    throw new Error; // @todo
+}
+/**
+ * @param   {SectionPartTemplateLike} something
+ * @returns {SectionPartTemplate}
+ */
+function toSectionPart(something) {
+    if (something instanceof SectionPartTemplate) {
+        return something;
+    }
+
+    return sectionPart(something);
+}
 
 
 exports.phrase = phrase;
@@ -99,3 +127,5 @@ exports.sentence = sentence;
 exports.toSentence = toSentence;
 exports.toSentences = toSentences;
 exports.paragraph = paragraph;
+exports.sectionPart = sectionPart;
+exports.toSectionPart = toSectionPart;
