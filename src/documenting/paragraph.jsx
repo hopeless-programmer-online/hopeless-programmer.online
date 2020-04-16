@@ -1,4 +1,9 @@
 class Paragraph {
+    /**
+     * @param  {Object}          object
+     * @param  {Array<Sentence>} object.Sentences
+     * @throws {Error}
+     */
     constructor({ Sentences = [] } = {}) {
         if (Sentences instanceof Array); else {
             throw new Error(); // @todo
@@ -21,10 +26,18 @@ class Paragraph {
     get Sentences() {
         return this.__sentences;
     }
+    /**
+     * @public
+     * @type   {string}
+     */
     get Text() {
         return this.Sentences.reduce((a,x) => a + x.Text, ``);
     }
 
+    /**
+     * @public
+     * @returns {html.Element}
+     */
     toHtml() {
         return <p class="paragraph">{this.Sentences.map(sentence => sentence.toHtml())}</p>;
     }

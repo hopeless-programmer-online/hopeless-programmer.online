@@ -1,4 +1,9 @@
 class Sentence {
+    /**
+     * @param  {Object}        object
+     * @param  {Array<Phrase>} object.Phrases
+     * @throws {Error}
+     */
     constructor({ Phrases = [] } = {}) {
         if (Phrases instanceof Array); else {
             throw new Error(); // @todo
@@ -21,12 +26,20 @@ class Sentence {
     get Phrases() {
         return this.__phrases;
     }
+    /**
+     * @public
+     * @type   {string}
+     */
     get Text() {
         return this.Phrases
             .filter(phrase => phrase instanceof TextPhrase)
             .reduce((a,x) => a + x.String, ``);
     }
 
+    /**
+     * @public
+     * @returns {html.Element}
+     */
     toHtml() {
         return <span class="sentence">{this.Phrases.map(phrase => phrase.toHtml())}</span>;
     }
