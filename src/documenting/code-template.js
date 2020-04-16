@@ -1,4 +1,4 @@
-class Code {
+class CodeTemplate {
     /**
      * @param  {Object}      object
      * @param  {Array<Line>} object.Lines
@@ -29,19 +29,20 @@ class Code {
 
     /**
      * @public
-     * @returns {html.Element}
+     * @returns {Code}
      */
-    toHtml() {
-        return (
-            <code class="code">
-            </code>
-        );
+    Reduce() {
+        const lines = this.Lines.map(line => line.Reduce());
+
+        return new Code({
+            Lines : lines,
+        });
     }
 }
 
 
-exports = module.exports = Code;
+exports = module.exports = CodeTemplate;
 
 
-const html = require(`../html`);
-const Line = require(`./code-line`);
+const Line = require(`./code-line-template`);
+const Code = require(`./code`);
