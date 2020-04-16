@@ -1,10 +1,20 @@
 const PhraseTemplate = require(`./phrase-template`);
 const TextPhraseTemplate = require(`./text-phrase-template`);
 const SentenceTemplate = require(`./sentence-template`);
+const ParagraphTemplate = require(`./paragraph-template`);
 
 
 /**
- * @param   {string}         something
+ * @typedef {string}                                    PhraseTemplateSource
+ * @typedef {PhraseTemplate | PhraseTemplateSource}     PhraseTemplateLike
+ * @typedef {PhraseTemplateLike}                        SentenceTemplateSource
+ * @typedef {SentenceTemplate | SentenceTemplateSource} SentenceTemplateLike
+ * @typedef {SentenceTemplateLike}                      ParagraphTemplateSource
+ */
+
+
+/**
+ * @param   {PhraseTemplateSource} something
  * @returns {PhraseTemplate}
  * @throws  {Error}
  */
@@ -18,7 +28,7 @@ function phrase(something) {
     throw new Error; // @todo
 }
 /**
- * @param   {PhraseTemplate | string} something
+ * @param   {PhraseTemplateLike} something
  * @returns {PhraseTemplate}
  * @throws  {Error}
  */
@@ -30,7 +40,7 @@ function toPhrase(something) {
     return phrase(something);
 }
 /**
- * @param   {Array<PhraseTemplate | string>} somethings
+ * @param   {Array<PhraseTemplateLike>} somethings
  * @returns {Array<PhraseTemplate>}
  * @throws  {Error}
  */
@@ -38,7 +48,7 @@ function toPhrases(somethings) {
     return somethings.map(toPhrase);
 }
 /**
- * @param  {...PhraseTemplate | string} somethings
+ * @param  {...SentenceTemplateSource} somethings
  * @throws {Error}
  */
 function sentence(...somethings) {
@@ -49,7 +59,7 @@ function sentence(...somethings) {
     });
 }
 /**
- * @param   {SentenceTemplate | PhraseTemplate | string} something
+ * @param   {SentenceTemplateLike} something
  * @returns {SentenceTemplate}
  * @throws  {Error}
  */
@@ -61,12 +71,24 @@ function toSentence(something) {
     return sentence(something);
 }
 /**
- * @param   {Array<SentenceTemplate | PhraseTemplate | string>} somethings
+ * @param   {Array<SentenceTemplateLike>} somethings
  * @returns {Array<SentenceTemplate>}
  * @throws  {Error}
  */
 function toSentences(somethings) {
     return somethings.map(toSentence);
+}
+/**
+ * @param   {...ParagraphTemplateSource} somethings
+ * @returns {ParagraphTemplate}
+ * @throws  {Error}
+ */
+function paragraph(...somethings) {
+    const sentences = toSentences(somethings);
+
+    return new ParagraphTemplate({
+        Sentences : sentences,
+    });
 }
 
 
@@ -76,3 +98,4 @@ exports.toPhrases = toPhrases;
 exports.sentence = sentence;
 exports.toSentence = toSentence;
 exports.toSentences = toSentences;
+exports.paragraph = paragraph;
