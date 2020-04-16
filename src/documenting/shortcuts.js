@@ -42,7 +42,7 @@ function toPhrases(somethings) {
  * @throws {Error}
  */
 function sentence(...somethings) {
-    const phrases = toPhrase(somethings);
+    const phrases = toPhrases(somethings);
 
     return new SentenceTemplate({
         Phrases : phrases,
