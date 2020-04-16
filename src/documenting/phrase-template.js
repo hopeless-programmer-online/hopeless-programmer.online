@@ -14,7 +14,7 @@ class PhraseTemplate {
     /**
      * @protected
      * @abstract
-     * @returns   {TextPhrase}
+     * @returns   {Phrase}
      */
     _Reduce() {
         throw new Error; // @todo
@@ -22,7 +22,7 @@ class PhraseTemplate {
 
     /**
      * @public
-     * @returns {TextPhrase}
+     * @returns {Phrase}
      */
     Reduce() {
         const phrase = this._Reduce();
