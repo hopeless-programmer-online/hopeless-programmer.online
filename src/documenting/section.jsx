@@ -1,4 +1,11 @@
 class Section {
+    /**
+     * @param  {Object}      object
+     * @param  {Paragraph}   object.Title
+     * @param  {number}      object.Index
+     * @param  {Array<Part>} object.Parts
+     * @throws {Error}
+     */
     constructor({ Title, Index, Parts = [] }) {
         if (Title instanceof Paragraph) {
             throw new Error; // @todo
