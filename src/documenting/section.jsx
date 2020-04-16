@@ -1,22 +1,63 @@
 class Section {
-    constructor({ Title, Parts = [] }) {
+    constructor({ Title, Index, Parts = [] }) {
+        if (Title instanceof Paragraph) {
+            throw new Error; // @todo
+        }
+        if (!Number.isInteger(Index) || Index <= 0) {
+            throw new Error; // @todo
+        }
+        if (Parts instanceof Array) {
+            throw new Error; // @todo
+        }
+        if (Parts.every(part => part instanceof Part)); else {
+            throw new Error(); // @todo
+        }
+
+        /**
+         * @private
+         * @type    {Paragraph}
+         */
         this.__title = Title;
+        /**
+         * @private
+         * @type    {number}
+         */
+        this.__index = Index;
+        /**
+         * @private
+         * @type    {Array<Part>}
+         */
         this.__parts = Parts;
     }
 
+    /**
+     * @public
+     * @type   {Paragraph}
+     */
     get Title() {
         return this.__title;
     }
+    /**
+     * @public
+     * @type   {number}
+     */
+    get Index() {
+        return this.__index;
+    }
+    /**
+     * @public
+     * @type   {Array<Part>}
+     */
     get Parts() {
         return this.__parts;
     }
 
-    toHtml(index) {
-        if (typeof index !== `number`) {
-            throw new Error; // @todo
-        }
-
-        const id = `section-${index}`;
+    /**
+     * @public
+     * @returns {html.Element}
+     */
+    toHtml() {
+        const id = `section-${this.Index}`;
 
         return (
             <div id={id} class="section">
@@ -35,3 +76,5 @@ exports = module.exports = Section;
 
 
 const html = require(`../html`);
+const Paragraph = require(`./paragraph`);
+const Part = require(`./section-part`);
