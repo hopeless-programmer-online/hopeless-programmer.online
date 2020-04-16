@@ -4,6 +4,7 @@ const SentenceTemplate = require(`./sentence-template`);
 const ParagraphTemplate = require(`./paragraph-template`);
 const SectionPartTemplate = require(`./section-part-template`);
 const ParagraphSectionPartTemplate = require(`./paragraph-section-part-template`);
+const SectionTemplate = require(`./section-template`);
 
 
 /**
@@ -12,6 +13,7 @@ const ParagraphSectionPartTemplate = require(`./paragraph-section-part-template`
  * @typedef {PhraseTemplateLike}                              SentenceTemplateSource
  * @typedef {SentenceTemplate | SentenceTemplateSource}       SentenceTemplateLike
  * @typedef {SentenceTemplateLike}                            ParagraphTemplateSource
+ * @typedef {ParagraphTemplate | ParagraphTemplateSource}     ParagraphTemplateLike
  * @typedef {ParagraphTemplate}                               SectionPartTemplateSource
  * @typedef {SectionPartTemplate | SectionPartTemplateSource} SectionPartTemplateLike
  */
@@ -95,8 +97,21 @@ function paragraph(...somethings) {
     });
 }
 /**
+ * @param   {ParagraphTemplateLike} something
+ * @returns {ParagraphTemplate}
+ * @throws  {Error}
+ */
+function toParagraph(something) {
+    if (something instanceof ParagraphTemplate) {
+        return something;
+    }
+
+    return paragraph(something);
+}
+/**
  * @param   {SectionPartTemplateSource} something
  * @returns {SectionPartTemplate}
+ * @throws  {Error}
  */
 function sectionPart(something) {
     if (something instanceof ParagraphTemplate) {
@@ -110,6 +125,7 @@ function sectionPart(something) {
 /**
  * @param   {SectionPartTemplateLike} something
  * @returns {SectionPartTemplate}
+ * @throws  {Error}
  */
 function toSectionPart(something) {
     if (something instanceof SectionPartTemplate) {
@@ -117,6 +133,29 @@ function toSectionPart(something) {
     }
 
     return sectionPart(something);
+}
+/**
+ * @param   {Array<SectionPartTemplateLike>} somethings
+ * @returns {Array<SectionPartTemplate>}
+ * @throws  {Error}
+ */
+function toSectionParts(somethings) {
+    return somethings.map(toSectionPart);
+}
+/**
+ * @param   {ParagraphTemplateLike}      title
+ * @param   {...SectionPartTemplateLike} parts
+ * @returns {SectionTemplate}
+ * @throws  {Error}
+ */
+function section(title, ...parts) {
+    const sectionTitle = toParagraph(title);
+    const sectionParts = toSectionParts(parts);
+
+    return new SectionTemplate({
+        Title : sectionTitle,
+        Parts : sectionParts,
+    });
 }
 
 
@@ -127,5 +166,8 @@ exports.sentence = sentence;
 exports.toSentence = toSentence;
 exports.toSentences = toSentences;
 exports.paragraph = paragraph;
+exports.toParagraph = toParagraph;
 exports.sectionPart = sectionPart;
 exports.toSectionPart = toSectionPart;
+exports.toSectionParts = toSectionParts;
+exports.section = section;
