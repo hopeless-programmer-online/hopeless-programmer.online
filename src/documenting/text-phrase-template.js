@@ -1,17 +1,12 @@
-const Phrase = require(`./phrase`);
-
-
-class TextPhrase extends Phrase {
+class TextPhraseTemplate {
     /**
      * @param {Object} object
      * @param {string} object.String
      */
     constructor({ String }) {
         if (typeof String !== `string`) {
-            throw new Error(); // @todo
+            throw new Error; // @todo
         }
-
-        super();
 
         /**
          * @private
@@ -30,15 +25,17 @@ class TextPhrase extends Phrase {
 
     /**
      * @public
-     * @returns {html.Element}
+     * @returns {TextPhrase}
      */
-    toHtml() {
-        return <span class="text-phrase">{this.String}</span>;
+    Reduce() {
+        return new TextPhrase({
+            String : this.String,
+        });
     }
 }
 
 
-exports = module.exports = TextPhrase;
+exports = module.exports = TextPhraseTemplate;
 
 
-const html = require(`../html`);
+const TextPhrase = require(`./text-phrase`);
