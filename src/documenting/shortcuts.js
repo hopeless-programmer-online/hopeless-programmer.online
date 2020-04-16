@@ -164,8 +164,8 @@ function section(title, ...parts) {
  * @returns {Document}
  */
 function document(title, ...sections) {
-    const documentTitle = toParagraph(title);
-    const documentSections = sections.map((template, index) => template.Reduce(index));
+    const documentTitle = toParagraph(title).Reduce();
+    const documentSections = sections.map((template, index) => template.Reduce(index + 1));
 
     return new Document({
         Title : documentTitle,

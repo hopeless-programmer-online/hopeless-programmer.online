@@ -7,17 +7,17 @@ class Section {
      * @throws {Error}
      */
     constructor({ Title, Index, Parts = [] }) {
-        if (Title instanceof Paragraph) {
+        if (Title instanceof Paragraph); else {
             throw new Error; // @todo
         }
         if (!Number.isInteger(Index) || Index <= 0) {
             throw new Error; // @todo
         }
-        if (Parts instanceof Array) {
+        if (Parts instanceof Array); else {
             throw new Error; // @todo
         }
         if (Parts.every(part => part instanceof Part)); else {
-            throw new Error(); // @todo
+            throw new Error; // @todo
         }
 
         /**

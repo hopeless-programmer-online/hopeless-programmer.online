@@ -34,7 +34,7 @@ class SectionPart {
     toHtml() {
         const element = this._toHtml();
 
-        if (element instanceof html.Element) {
+        if (element instanceof html.Element); else {
             throw new Error; // @todo
         }
 

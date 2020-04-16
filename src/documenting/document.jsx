@@ -4,11 +4,11 @@ class Document {
      * @param {Paragraph}      object.Title
      * @param {Array<Section>} object.Sections
      */
-    constructor({ Title, Sections }) {
+    constructor({ Title, Sections = [] }) {
         if (Title instanceof Paragraph); else {
             throw new Error; // @todo
         }
-        if (Sections instanceof Array) {
+        if (Sections instanceof Array); else {
             throw new Error; // @todo
         }
         if (Sections.every(section => section instanceof Section)); else {
@@ -54,7 +54,7 @@ class Document {
                         {this.Title.Sentences.map(sentence => sentence.toHtml())}
                     </h1>
                 </header>
-                {this.Sections.map((section, index) => section.toHtml(index + 1))}
+                {this.Sections.map(section => section.toHtml())}
             </article>
         );
     }
