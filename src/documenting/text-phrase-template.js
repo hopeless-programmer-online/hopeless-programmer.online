@@ -1,4 +1,7 @@
-class TextPhraseTemplate {
+const PhraseTemplate = require(`./phrase-template`);
+
+
+class TextPhraseTemplate extends PhraseTemplate {
     /**
      * @param {Object} object
      * @param {string} object.String
@@ -7,6 +10,8 @@ class TextPhraseTemplate {
         if (typeof String !== `string`) {
             throw new Error; // @todo
         }
+
+        super();
 
         /**
          * @private
@@ -24,10 +29,10 @@ class TextPhraseTemplate {
     }
 
     /**
-     * @public
-     * @returns {TextPhrase}
+     * @protected
+     * @returns   {TextPhrase}
      */
-    Reduce() {
+    _Reduce() {
         return new TextPhrase({
             String : this.String,
         });
