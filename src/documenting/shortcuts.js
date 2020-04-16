@@ -1,5 +1,6 @@
 const PhraseTemplate = require(`./phrase-template`);
 const TextPhraseTemplate = require(`./text-phrase-template`);
+const SentenceTemplate = require(`./sentence-template`);
 
 
 /**

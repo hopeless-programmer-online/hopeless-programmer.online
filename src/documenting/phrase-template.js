@@ -1,4 +1,7 @@
 class PhraseTemplate {
+    /**
+     * @throws {Error}
+     */
     constructor() {
         if (new.target === PhraseTemplate) {
             throw new Error; // @todo
@@ -23,6 +26,7 @@ class PhraseTemplate {
     /**
      * @public
      * @returns {Phrase}
+     * @throws  {Error}
      */
     Reduce() {
         const phrase = this._Reduce();
