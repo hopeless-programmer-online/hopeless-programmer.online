@@ -37,6 +37,7 @@ function transpile(root) {
                 target          : ts.ScriptTarget.Latest,
                 module          : ts.ModuleKind.CommonJS,
                 inlineSourceMap : true,
+                removeComments  : false,
                 jsx             : ts.JsxEmit.React,
                 jsxFactory      : `html.createElement`,
             },
