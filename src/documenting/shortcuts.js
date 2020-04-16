@@ -5,6 +5,7 @@ const ParagraphTemplate = require(`./paragraph-template`);
 const SectionPartTemplate = require(`./section-part-template`);
 const ParagraphSectionPartTemplate = require(`./paragraph-section-part-template`);
 const SectionTemplate = require(`./section-template`);
+const Document = require(`./document`);
 
 
 /**
@@ -157,6 +158,20 @@ function section(title, ...parts) {
         Parts : sectionParts,
     });
 }
+/**
+ * @param   {ParagraphTemplateLike} title
+ * @param   {...SectionTemplate}    sections
+ * @returns {Document}
+ */
+function document(title, ...sections) {
+    const documentTitle = toParagraph(title);
+    const documentSections = sections.map((template, index) => template.Reduce(index));
+
+    return new Document({
+        Title : documentTitle,
+        Sections : documentSections,
+    });
+}
 
 
 exports.phrase = phrase;
@@ -171,3 +186,4 @@ exports.sectionPart = sectionPart;
 exports.toSectionPart = toSectionPart;
 exports.toSectionParts = toSectionParts;
 exports.section = section;
+exports.document = document;
