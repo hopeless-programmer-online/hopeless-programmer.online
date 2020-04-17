@@ -1,40 +1,40 @@
-const PhraseTemplate = require(`./phrase-template`);
-const TextPhraseTemplate = require(`./text-phrase-template`);
-const SentenceTemplate = require(`./sentence-template`);
-const ParagraphTemplate = require(`./paragraph-template`);
-const LexemeTemplate = require(`./lexeme-template`);
-const TextLexemeTemplate = require(`./text-lexeme-template`);
-const CodeLineTemplate = require(`./code-line-template`);
-const SectionPartTemplate = require(`./section-part-template`);
-const ParagraphSectionPartTemplate = require(`./paragraph-section-part-template`);
-const SectionTemplate = require(`./section-template`);
+const Phrase = require(`./phrase`);
+const TextPhrase = require(`./text-phrase`);
+const Sentence = require(`./sentence`);
+const Paragraph = require(`./paragraph`);
+const Lexeme = require(`./lexeme`);
+const TextLexeme = require(`./text-lexeme`);
+const CodeLine = require(`./code-line`);
+const SectionPart = require(`./section-part`);
+const ParagraphSectionPart = require(`./paragraph-section-part`);
+const Section = require(`./section`);
 const Document = require(`./document`);
 
 
 /**
- * @typedef {string}                                          PhraseTemplateSource
- * @typedef {PhraseTemplate | PhraseTemplateSource}           PhraseTemplateLike
- * @typedef {PhraseTemplateLike}                              SentenceTemplateSource
- * @typedef {SentenceTemplate | SentenceTemplateSource}       SentenceTemplateLike
- * @typedef {SentenceTemplateLike}                            ParagraphTemplateSource
- * @typedef {ParagraphTemplate | ParagraphTemplateSource}     ParagraphTemplateLike
- * @typedef {string}                                          LexemeTemplateSource
- * @typedef {LexemeTemplate | LexemeTemplateSource}           LexemeTemplateLike
- * @typedef {LexemeTemplateLike}                              CodeLineTemplateSource
- * @typedef {CodeLineTemplate | CodeLineTemplateSource}       CodeLineTemplateLike
- * @typedef {ParagraphTemplate}                               SectionPartTemplateSource
- * @typedef {SectionPartTemplate | SectionPartTemplateSource} SectionPartTemplateLike
+ * @typedef {string}                          PhraseSource
+ * @typedef {Phrase | PhraseSource}           PhraseLike
+ * @typedef {PhraseLike}                      SentenceSource
+ * @typedef {Sentence | SentenceSource}       SentenceLike
+ * @typedef {SentenceLike}                    ParagraphSource
+ * @typedef {Paragraph | ParagraphSource}     ParagraphLike
+ * @typedef {string}                          LexemeSource
+ * @typedef {Lexeme | LexemeSource}           LexemeLike
+ * @typedef {LexemeLike}                      CodeLineSource
+ * @typedef {CodeLine | CodeLineSource}       CodeLineLike
+ * @typedef {Paragraph}                       SectionPartSource
+ * @typedef {SectionPart | SectionPartSource} SectionPartLike
  */
 
 
 /**
- * @param   {PhraseTemplateSource} something
- * @returns {PhraseTemplate}
+ * @param   {PhraseSource} something
+ * @returns {Phrase}
  * @throws  {Error}
  */
 function phrase(something) {
     if (typeof something === `string`) {
-        return new TextPhraseTemplate({
+        return new TextPhrase({
             String : something,
         });
     }
@@ -42,88 +42,88 @@ function phrase(something) {
     throw new Error; // @todo
 }
 /**
- * @param   {PhraseTemplateLike} something
- * @returns {PhraseTemplate}
+ * @param   {PhraseLike} something
+ * @returns {Phrase}
  * @throws  {Error}
  */
 function toPhrase(something) {
-    if (something instanceof PhraseTemplate) {
+    if (something instanceof Phrase) {
         return something;
     }
 
     return phrase(something);
 }
 /**
- * @param   {Array<PhraseTemplateLike>} somethings
- * @returns {Array<PhraseTemplate>}
+ * @param   {Array<PhraseLike>} somethings
+ * @returns {Array<Phrase>}
  * @throws  {Error}
  */
 function toPhrases(somethings) {
     return somethings.map(toPhrase);
 }
 /**
- * @param  {...SentenceTemplateSource} somethings
+ * @param  {...SentenceSource} somethings
  * @throws {Error}
  */
 function sentence(...somethings) {
     const phrases = toPhrases(somethings);
 
-    return new SentenceTemplate({
+    return new Sentence({
         Phrases : phrases,
     });
 }
 /**
- * @param   {SentenceTemplateLike} something
- * @returns {SentenceTemplate}
+ * @param   {SentenceLike} something
+ * @returns {Sentence}
  * @throws  {Error}
  */
 function toSentence(something) {
-    if (something instanceof SentenceTemplate) {
+    if (something instanceof Sentence) {
         return something;
     }
 
     return sentence(something);
 }
 /**
- * @param   {Array<SentenceTemplateLike>} somethings
- * @returns {Array<SentenceTemplate>}
+ * @param   {Array<SentenceLike>} somethings
+ * @returns {Array<Sentence>}
  * @throws  {Error}
  */
 function toSentences(somethings) {
     return somethings.map(toSentence);
 }
 /**
- * @param   {...ParagraphTemplateSource} somethings
- * @returns {ParagraphTemplate}
+ * @param   {...ParagraphSource} somethings
+ * @returns {Paragraph}
  * @throws  {Error}
  */
 function paragraph(...somethings) {
     const sentences = toSentences(somethings);
 
-    return new ParagraphTemplate({
+    return new Paragraph({
         Sentences : sentences,
     });
 }
 /**
- * @param   {ParagraphTemplateLike} something
- * @returns {ParagraphTemplate}
+ * @param   {ParagraphLike} something
+ * @returns {Paragraph}
  * @throws  {Error}
  */
 function toParagraph(something) {
-    if (something instanceof ParagraphTemplate) {
+    if (something instanceof Paragraph) {
         return something;
     }
 
     return paragraph(something);
 }
 /**
- * @param   {LexemeTemplateSource} something
- * @returns {LexemeTemplate}
+ * @param   {LexemeSource} something
+ * @returns {Lexeme}
  * @throws  {Error}
  */
 function lexeme(something) {
     if (typeof something === `string`) {
-        return new TextLexemeTemplate({
+        return new TextLexeme({
             String : something,
         });
     }
@@ -131,65 +131,65 @@ function lexeme(something) {
     throw new Error; // @todo
 }
 /**
- * @param   {LexemeTemplateLike} something
- * @returns {LexemeTemplate}
+ * @param   {LexemeLike} something
+ * @returns {Lexeme}
  * @throws  {Error}
  */
 function toLexeme(something) {
-    if (something instanceof LexemeTemplate) {
+    if (something instanceof Lexeme) {
         return something;
     }
 
     return lexeme(something);
 }
 /**
- * @param   {Array<LexemeTemplateLike>} somethings
- * @returns {Array<LexemeTemplate>}
+ * @param   {Array<LexemeLike>} somethings
+ * @returns {Array<Lexeme>}
  * @throws  {Error}
  */
 function toLexemes(somethings) {
     return somethings.map(toLexeme);
 }
 /**
- * @param   {...CodeLineTemplateSource} somethings
- * @returns {CodeLineTemplate}
+ * @param   {...CodeLineSource} somethings
+ * @returns {CodeLine}
  * @throws  {Error}
  */
 function codeLine(...somethings) {
     const lexemes = toLexemes(somethings);
 
-    return new CodeLineTemplate({
+    return new CodeLine({
         Lexemes : lexemes,
     });
 }
 /**
- * @param   {CodeLineTemplateLike} something
- * @returns {CodeLineTemplate}
+ * @param   {CodeLineLike} something
+ * @returns {CodeLine}
  * @throws  {Error}
  */
 function toCodeLine(something) {
-    if (something instanceof CodeLineTemplate) {
+    if (something instanceof CodeLine) {
         return something;
     }
 
     return codeLine(something);
 }
 /**
- * @param   {Array<CodeLineTemplateLike>} somethings
- * @returns {Array<CodeLineTemplate>}
+ * @param   {Array<CodeLineLike>} somethings
+ * @returns {Array<CodeLine>}
  * @throws  {Error}
  */
 function toCodeLines(somethings) {
     return somethings.map(toCodeLine);
 }
 /**
- * @param   {SectionPartTemplateSource} something
- * @returns {SectionPartTemplate}
+ * @param   {SectionPartSource} something
+ * @returns {SectionPart}
  * @throws  {Error}
  */
 function sectionPart(something) {
-    if (something instanceof ParagraphTemplate) {
-        return new ParagraphSectionPartTemplate({
+    if (something instanceof Paragraph) {
+        return new ParagraphSectionPart({
             Paragraph : something,
         });
     }
@@ -197,52 +197,51 @@ function sectionPart(something) {
     throw new Error; // @todo
 }
 /**
- * @param   {SectionPartTemplateLike} something
- * @returns {SectionPartTemplate}
+ * @param   {SectionPartLike} something
+ * @returns {SectionPart}
  * @throws  {Error}
  */
 function toSectionPart(something) {
-    if (something instanceof SectionPartTemplate) {
+    if (something instanceof SectionPart) {
         return something;
     }
 
     return sectionPart(something);
 }
 /**
- * @param   {Array<SectionPartTemplateLike>} somethings
- * @returns {Array<SectionPartTemplate>}
+ * @param   {Array<SectionPartLike>} somethings
+ * @returns {Array<SectionPart>}
  * @throws  {Error}
  */
 function toSectionParts(somethings) {
     return somethings.map(toSectionPart);
 }
 /**
- * @param   {ParagraphTemplateLike}      title
- * @param   {...SectionPartTemplateLike} parts
- * @returns {SectionTemplate}
+ * @param   {ParagraphLike}      title
+ * @param   {...SectionPartLike} parts
+ * @returns {Section}
  * @throws  {Error}
  */
 function section(title, ...parts) {
     const sectionTitle = toParagraph(title);
     const sectionParts = toSectionParts(parts);
 
-    return new SectionTemplate({
+    return new Section({
         Title : sectionTitle,
         Parts : sectionParts,
     });
 }
 /**
- * @param   {ParagraphTemplateLike} title
- * @param   {...SectionTemplate}    sections
+ * @param   {ParagraphLike} title
+ * @param   {...Section}    sections
  * @returns {Document}
  */
 function document(title, ...sections) {
-    const documentTitle = toParagraph(title).Reduce();
-    const documentSections = sections.map((template, index) => template.Reduce(index + 1));
+    const documentTitle = toParagraph(title);
 
     return new Document({
         Title : documentTitle,
-        Sections : documentSections,
+        Sections : sections,
     });
 }
 

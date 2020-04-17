@@ -15,6 +15,12 @@ class Document {
             throw new Error; // @todo
         }
 
+        Sections.forEach((section, index) => {
+            if (section.__Index === null) {
+                section.__Index = index + 1;
+            }
+        });
+
         /**
          * @private
          * @type    {Paragraph}
