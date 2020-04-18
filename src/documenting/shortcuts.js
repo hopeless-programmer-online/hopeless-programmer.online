@@ -5,6 +5,7 @@ const Paragraph = require(`./paragraph`);
 const Lexeme = require(`./lexeme`);
 const TextLexeme = require(`./text-lexeme`);
 const CodeLine = require(`./code-line`);
+const Code = require(`./code`);
 const SectionPart = require(`./section-part`);
 const ParagraphSectionPart = require(`./paragraph-section-part`);
 const Section = require(`./section`);
@@ -183,6 +184,16 @@ function toCodeLines(somethings) {
     return somethings.map(toCodeLine);
 }
 /**
+ * @param  {...CodeLineLike} somethings
+ */
+function code(...somethings) {
+    const lines = toCodeLines(somethings);
+
+    return new Code({
+        Lines : lines,
+    });
+}
+/**
  * @param   {SectionPartSource} something
  * @returns {SectionPart}
  * @throws  {Error}
@@ -258,6 +269,7 @@ exports.lexeme = lexeme;
 exports.toLexeme = toLexeme;
 exports.toLexemes = toLexemes;
 exports.codeLine = codeLine;
+exports.code = code;
 exports.toCodeLine = toCodeLine;
 exports.toCodeLines = toCodeLines;
 exports.sectionPart = sectionPart;

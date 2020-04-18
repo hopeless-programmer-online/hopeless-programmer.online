@@ -2,6 +2,7 @@ const TextPhrase = require(`./text-phrase`);
 const Sentence = require(`./sentence`);
 const Paragraph = require(`./paragraph`);
 const TextLexeme = require(`./text-lexeme`);
+const Code = require(`./code`);
 const CodeLine = require(`./code-line`);
 const ParagraphSectionPart = require(`./paragraph-section-part`);
 const Section = require(`./section`);
@@ -47,6 +48,18 @@ it(`Should create CodeLine on calling codeLine with string argument`, () => {
     expect(template.Lexemes).toHaveLength(1);
     expect(template.Lexemes[0]).toBeInstanceOf(TextLexeme);
     expect(template.Lexemes[0].String).toBe(`code`);
+});
+it(`Should create Code on calling code with string argument`, () => {
+    const template = shortcuts.code(`line #1`, `line #2`);
+
+    expect(template).toBeInstanceOf(Code);
+    expect(template.Lines).toHaveLength(2);
+    expect(template.Lines[0].Lexemes).toHaveLength(1);
+    expect(template.Lines[0].Lexemes[0]).toBeInstanceOf(TextLexeme);
+    expect(template.Lines[0].Lexemes[0].String).toBe(`line #1`);
+    expect(template.Lines[1].Lexemes).toHaveLength(1);
+    expect(template.Lines[1].Lexemes[0]).toBeInstanceOf(TextLexeme);
+    expect(template.Lines[1].Lexemes[0].String).toBe(`line #2`);
 });
 it(`Should create Section on calling section`, () => {
     const template = shortcuts.section(`section title`,

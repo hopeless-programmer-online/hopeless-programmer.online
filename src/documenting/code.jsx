@@ -12,6 +12,8 @@ class Code {
             throw new Error; // @todo
         }
 
+        Lines.forEach((line, index) => line.__Index = index + 1);
+
         /**
          * @private
          * @type    {Array<Line>}
