@@ -33,10 +33,11 @@ class IllustrationsSectionPart extends SectionPart {
     }
 
     /**
-     * @public
-     * @returns {html.Element}
+     * @protected
+     * @override
+     * @returns   {html.Element}
      */
-    toHtml() {
+    _toHtml() {
         return (
             <div class="illustrations">
                 {this.Illustrations.map(illustration => illustration.toHtml())}

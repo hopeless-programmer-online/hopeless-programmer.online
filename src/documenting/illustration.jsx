@@ -1,20 +1,20 @@
 class Illustration {
     /**
-     * @param  {Object}    object
-     * @param  {Paragraph} object.Title
-     * @param  {Paragraph} object.Description
-     * @param  {number}    object.Index
-     * @param  {Content}   object.Content
+     * @param  {Object}     object
+     * @param  {?Paragraph} object.Title
+     * @param  {Paragraph}  object.Description
+     * @param  {?number}    object.Index
+     * @param  {Content}    object.Content
      * @throws {Error}
      */
-    constructor({ Title, Description, Index, Content }) {
-        if (Title instanceof Paragraph); else {
+    constructor({ Title = null, Description, Index = null, Content }) {
+        if (Title instanceof Paragraph || Title === null); else {
             throw new Error; // @todo
         }
         if (Description instanceof Paragraph); else {
             throw new Error; // @todo
         }
-        if (typeof Index !== `number`); else {
+        if ((Number.isInteger(Index) && Index > 0) || Index === null); else {
             throw new Error; // @todo
         }
         if (Content instanceof ContentClass); else {
@@ -23,7 +23,7 @@ class Illustration {
 
         /**
          * @private
-         * @type    {Paragraph}
+         * @type    {?Paragraph}
          */
         this.__title = Title;
         /**
@@ -33,7 +33,7 @@ class Illustration {
         this.__description = Description;
         /**
          * @private
-         * @type    {number}
+         * @type    {?number}
          */
         this.__index = Index;
         /**
@@ -48,7 +48,27 @@ class Illustration {
      * @type   {Paragraph}
      */
     get Title() {
-        return this.__title;
+        const title = this.__title;
+
+        if (title === null) {
+            throw new Error; // @todo
+        }
+
+        return title;
+    }
+    /**
+     * @public
+     * @type   {Paragraph}
+     */
+    set __Title(title) {
+        if (title instanceof Paragraph); else {
+            throw new Error; // @todo
+        }
+        if (this.__title !== null) {
+            throw new Error; // @todo
+        }
+
+        this.__title = title;
     }
     /**
      * @public
@@ -62,7 +82,27 @@ class Illustration {
      * @type   {number}
      */
     get Index() {
-        return this.__index;
+        const index = this.__index;
+
+        if (index === null) {
+            throw new Error; // @todo
+        }
+
+        return index;
+    }
+    /**
+     * @private
+     * @type    {number}
+     */
+    set __Index(index) {
+        if (Number.isInteger(index) && index > 0); else {
+            throw new Error; // @todo
+        }
+        if (this.__index !== null) {
+            throw new Error; // @todo
+        }
+
+        this.__index = index;
     }
     /**
      * @public

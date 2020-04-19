@@ -6,25 +6,31 @@ const Lexeme = require(`./lexeme`);
 const TextLexeme = require(`./text-lexeme`);
 const CodeLine = require(`./code-line`);
 const Code = require(`./code`);
+const Illustration = require(`./illustration`);
+const IllustrationContent = require(`./illustration-content`);
+const CodeIllustrationContent = require(`./code-illustration-content`);
 const SectionPart = require(`./section-part`);
 const ParagraphSectionPart = require(`./paragraph-section-part`);
+const IllustrationsSectionPart = require(`./illustrations-section-part`);
 const Section = require(`./section`);
 const Document = require(`./document`);
 
 
 /**
- * @typedef {string}                          PhraseSource
- * @typedef {Phrase | PhraseSource}           PhraseLike
- * @typedef {PhraseLike}                      SentenceSource
- * @typedef {Sentence | SentenceSource}       SentenceLike
- * @typedef {SentenceLike}                    ParagraphSource
- * @typedef {Paragraph | ParagraphSource}     ParagraphLike
- * @typedef {string}                          LexemeSource
- * @typedef {Lexeme | LexemeSource}           LexemeLike
- * @typedef {LexemeLike}                      CodeLineSource
- * @typedef {CodeLine | CodeLineSource}       CodeLineLike
- * @typedef {Paragraph}                       SectionPartSource
- * @typedef {SectionPart | SectionPartSource} SectionPartLike
+ * @typedef {string}                                          PhraseSource
+ * @typedef {Phrase | PhraseSource}                           PhraseLike
+ * @typedef {PhraseLike}                                      SentenceSource
+ * @typedef {Sentence | SentenceSource}                       SentenceLike
+ * @typedef {SentenceLike}                                    ParagraphSource
+ * @typedef {Paragraph | ParagraphSource}                     ParagraphLike
+ * @typedef {string}                                          LexemeSource
+ * @typedef {Lexeme | LexemeSource}                           LexemeLike
+ * @typedef {LexemeLike}                                      CodeLineSource
+ * @typedef {CodeLine | CodeLineSource}                       CodeLineLike
+ * @typedef {Code}                                            IllustrationContentSource
+ * @typedef {IllustrationContent | IllustrationContentSource} IllustrationContentLike
+ * @typedef {Paragraph | Illustration | Array<Illustration> } SectionPartSource
+ * @typedef {SectionPart | SectionPartSource}                 SectionPartLike
  */
 
 
@@ -194,6 +200,38 @@ function code(...somethings) {
     });
 }
 /**
+ * @param   {IllustrationContentLike} something
+ * @returns {IllustrationContent}
+ * @throws  {Error}
+ */
+function toIllustrationContent(something) {
+    if (something instanceof IllustrationContent) {
+        return something;
+    }
+    if (something instanceof Code) {
+        return new CodeIllustrationContent({
+            Code : something,
+        });
+    }
+
+    throw new Error; // @todo
+}
+/**
+ * @param   {ParagraphLike}           description
+ * @param   {IllustrationContentLike} content
+ * @returns {Illustration}
+ * @throws  {Error}
+ */
+function illustration(description, content) {
+    const illustrationDescription = toParagraph(description);
+    const illustrationContent     = toIllustrationContent(content);
+
+    return new Illustration({
+        Description : illustrationDescription,
+        Content     : illustrationContent,
+    });
+}
+/**
  * @param   {SectionPartSource} something
  * @returns {SectionPart}
  * @throws  {Error}
@@ -202,6 +240,18 @@ function sectionPart(something) {
     if (something instanceof Paragraph) {
         return new ParagraphSectionPart({
             Paragraph : something,
+        });
+    }
+    if (something instanceof Illustration) {
+        return new IllustrationsSectionPart({
+            Illustrations : [
+                something,
+            ],
+        });
+    }
+    if (something instanceof Array && something.every(x => x instanceof Illustration)) {
+        return new IllustrationsSectionPart({
+            Illustrations : something,
         });
     }
 
@@ -272,6 +322,8 @@ exports.codeLine = codeLine;
 exports.code = code;
 exports.toCodeLine = toCodeLine;
 exports.toCodeLines = toCodeLines;
+exports.toIllustrationContent = toIllustrationContent;
+exports.illustration = illustration;
 exports.sectionPart = sectionPart;
 exports.toSectionPart = toSectionPart;
 exports.toSectionParts = toSectionParts;
