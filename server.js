@@ -1,6 +1,6 @@
+const path = require(`path`);
 const http = require(`http`);
 const http_status = require(`http-status`);
-const host = require(`./src/host`);
 const hosting = require(`./src/hosting`);
 
 
@@ -8,6 +8,18 @@ const { NotFoundError } = hosting;
 
 
 const server = http.createServer((req, res) => {
+    const hostPath = require.resolve(`./src/host`).match(/(.*)\.js$/)[1];
+
+    // remove host from cache
+    for (const id in require.cache) {
+        if (id === hostPath + `.js` || id.includes(hostPath + path.sep)) {
+            console.log(id);
+            delete require.cache[id];
+        }
+    }
+
+    const host = require(`./src/host`);
+
     try {
         try {
             // handling 405

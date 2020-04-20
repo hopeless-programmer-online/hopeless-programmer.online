@@ -5,6 +5,7 @@ const Paragraph = require(`./paragraph`);
 const Lexeme = require(`./lexeme`);
 const TextLexeme = require(`./text-lexeme`);
 const CommentLexeme = require(`./comment-lexeme`);
+const KeywordLexeme = require(`./keyword-lexeme`);
 const CodeLine = require(`./code-line`);
 const Code = require(`./code`);
 const Illustration = require(`./illustration`);
@@ -135,6 +136,15 @@ function toParagraph(something) {
  */
 function cm(string) {
     return new CommentLexeme({
+        String : string,
+    });
+}
+/**
+ * @param   {string}        string
+ * @returns {KeywordLexeme}
+ */
+function kw(string) {
+    return new KeywordLexeme({
         String : string,
     });
 }
@@ -337,6 +347,7 @@ exports.paragraph = paragraph;
 exports.toParagraph = toParagraph;
 exports.lexeme = lexeme;
 exports.cm = cm;
+exports.kw = kw;
 exports.toLexeme = toLexeme;
 exports.toLexemes = toLexemes;
 exports.codeLine = codeLine;

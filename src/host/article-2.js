@@ -30,36 +30,8 @@ exports = module.exports = new h.DocumentResource({
                 `Вони рятують ситуацію в цілому, але не додають коду елегантності чи однорідності. `,
             ]),
             [
-                s.illustration( ...[
-                    `Ідентифікатори "for", "auto", "if" та "else" є зарезервованими в С++ та використовуються в спеціальних конструкціях.`,
-                    s.code(
-                        `for (auto &value : values)`,
-                        `{`,
-                        `    if (value > 1.0)`,
-                        `    {`,
-                        `        value = 1.0;`,
-                        `    }`,
-                        `    else`,
-                        `    {`,
-                        `        value *= value;`,
-                        `    }`,
-                        `}`,
-                    ),
-                ]),
-                s.illustration( ...[
-                    ` Боротьба за зворотню сумісність в С++.`,
-                    s.code(
-                        [ `[[deprecated]]` ],
-                        [ `void f() `, cm(`// застаріла функція`) ],
-                        [ `{` ],
-                        [ `}` ],
-                        [ `` ],
-                        [ `deprecated `, cm(`// чому не так?`) ],
-                        [ `void g() `, cm(`// застаріла функція`) ],
-                        [ `{` ],
-                        [ `}` ],
-                    ),
-                ]),
+                require(`./article-2/code-1`),
+                require(`./article-2/code-2`),
             ],
             s.paragraph(...[
                 `Наскільки цей підхід виправданий? `,
@@ -76,23 +48,8 @@ exports = module.exports = new h.DocumentResource({
                 `Саме ж запропоноване рішення принципово не відрізняється від використання інших префіксів (див. Приклад коду №3). `,
             ]),
             [
-                s.illustration( ...[
-                    `Використання символу @ в C#.`,
-                    s.code(
-                        [ `var class  = 1;    `, cm(`// помилка`) ],
-                        [ `var @class = 2;    `, cm(`// ok`) ],
-                        [ `var _class = 3;    `, cm(`// теж ok`) ],
-                        [ `var the_class = 3; `, cm(`// і це теж ok`) ],
-                    ),
-                ]),
-                s.illustration( ...[
-                    `Обмеження механізму спеціальних ідентифікаторів.`,
-                    s.code(
-                        `var @      = 1; // помилка`,
-                        `var cl@ss  = 2; // теж помилка`,
-                        `var class@ = 3; // і це теж помилка`,
-                    ),
-                ]),
+                require(`./article-2/code-3`),
+                require(`./article-2/code-4`),
             ],
             s.paragraph(...[
                 `Окрім цього такий підхід не позбавлений недоліків. `,
@@ -126,46 +83,10 @@ exports = module.exports = new h.DocumentResource({
                 `Важливо те, що це дозволяє оголошувати змінні ідентичні до службових слів не призводячи до конфліктів (див. Приклад коду №8). `,
             ]),
             [
-                s.illustration( ...[
-                    `Оголошення змінних та функцій в PHP.`,
-                    s.code(
-                        cm(`# оголошення змінних`),
-                        `$one   = 1;`,
-                        `$two   = 2;`,
-                        `$three = 3;`,
-                        ``,
-                        cm(`# оголошення функцій`),
-                        `function first_function()  { ... }`,
-                        `function second_function() { ... }`,
-                        `function third_function()  { ... }`,
-                    ),
-                ]),
-                s.illustration( ...[
-                    `Локальні та глобальні ідентифікатори в LLVM починаються з префіксів % та @ відповідно.`,
-                    s.code(
-                        [ `define i32 @mul_add(i32 %x, i32 %y, i32 %z) { `, cm(`; глобальний ідентифікатор`) ],
-                        [ `entry:` ],
-                        [ `  %tmp = mul i32 %x, %y     `, cm(`; локальний ідентифікатор`) ],
-                        [ `  %tmp2 = add i32 %tmp, %z  `, cm(`; ще один локальний ідентифікатор`) ],
-                        [ `  ret i32 %tmp2` ],
-                        [ `}` ],
-                    ),
-                ]),
-                s.illustration( ...[
-                    `Приклади суфіксів в QBasic.`,
-                    s.code(
-                        [ `integer% = 1      `, cm(`'ціле число`) ],
-                        [ `real#    = 1.2    `, cm(`'дробове число`) ],
-                        [ `string$  = "text" `, cm(`'стрічка`) ],
-                    ),
-                ]),
-                s.illustration( ...[
-                    `Оголошення змінної не конфліктує зі службовим словом.`,
-                    s.code(
-                        `PRINT$ = "text to be printed"`,
-                        `PRINT PRINT$`,
-                    ),
-                ]),
+                require(`./article-2/code-5`),
+                require(`./article-2/code-6`),
+                require(`./article-2/code-7`),
+                require(`./article-2/code-8`),
             ],
             s.paragraph(...[
                 `Ідею з виділенням змінних можна поширити і на решту ідентифікаторів: функції, класи, простори імен, тощо. `,
@@ -194,22 +115,8 @@ exports = module.exports = new h.DocumentResource({
                 `Нерідко їх розміщують всередині одинарних або подвійних квадратних дужок ("[" та "]"). `,
             ]),
             [
-                s.illustration( ...[
-                    `Використання препроцесору в мові С.`,
-                    s.code(
-                        `#if __MY_HEADER__`,
-                        `#define __MY_HEADER__`,
-                        `#endif`,
-                    ),
-                ]),
-                s.illustration( ...[
-                    `Теґи в html.`,
-                    s.code(
-                        `<div>`,
-                        `    <b>Hello, world!</b>`,
-                        `</div>`,
-                    ),
-                ]),
+                require(`./article-2/code-9`),
+                require(`./article-2/code-10`),
             ],
         ]),
         s.section(`Змішаний підхід`, ...[
@@ -223,53 +130,9 @@ exports = module.exports = new h.DocumentResource({
                 `Також варто зауважити що при цьому службові слова можуть повністю зберігати виключний для себе синтаксис і навіть мати спеціальні типи. `,
             ]),
             [
-                s.illustration( ...[
-                    `Скорочення службових слів в JS.`,
-                    s.code(
-                        `function f() {`,
-                        `    ...`,
-                        `}`,
-                        ``,
-                        `var fn = function;`,
-                        ``,
-                        `fn g() {`,
-                        `    ...`,
-                        `}`,
-                    ),
-                ]),
-                s.illustration( ...[
-                    `Робота зі службовими словами як з ідентифікаторами в С++.`,
-                    s.code(
-                        `using @if   = if;`,
-                        `using @else = else;`,
-                        `using @for  = for;`,
-                        `using @auto = auto;`,
-                        ``,
-                        `@for (@auto &value : values)`,
-                        `{`,
-                        `    @if (value > 1.0)`,
-                        `    {`,
-                        `        value = 1.0;`,
-                        `    }`,
-                        `    @else`,
-                        `    {`,
-                        `        value *= value;`,
-                        `    }`,
-                        `}`,
-                    ),
-                ]),
-                s.illustration( ...[
-                    `Деталізація службових слів в Python.`,
-                    s.code(
-                        `def f():`,
-                        `    pass`,
-                        ``,
-                        `function = def`,
-                        ``,
-                        `function g():`,
-                        `    pass`,
-                    ),
-                ]),
+                require(`./article-2/code-11`),
+                require(`./article-2/code-12`),
+                require(`./article-2/code-13`),
             ],
             s.paragraph(...[
                 `Такий підхід робить можливим налаштування мови під конкретного користувача. `,

@@ -207,11 +207,6 @@ html {
                                             border-collapse         : collapse;
                                             background-color        : rgb(30, 30, 30);
                                             border                  : 2pt solid rgb(30, 30, 30);
-                                            /* font */
-                                            font-family             : consolas;
-                                            font-size               : 11pt;
-                                            font-style              : normal;
-                                            font-weight             : normal;
 
                                             * {
                                                 margin: 0;
@@ -238,7 +233,15 @@ html {
                                                     display: flex; // collapse spaces
 
                                                     > * {
+                                                        /* font */
+                                                        font-family             : consolas;
+                                                        font-size               : 11pt;
+                                                        font-style              : normal;
+                                                        font-weight             : normal;
                                                         display: inline;
+                                                    }
+                                                    > .keyword-lexeme {
+                                                        color: rgb(217, 135, 195);
                                                     }
                                                     > .comment-lexeme {
                                                         color: rgb(106, 153, 85);
@@ -298,5 +301,27 @@ html {
                 }
             }
         }
+    }
+}
+.github-corner:hover .octo-arm{
+    animation: octocat-wave 560ms ease-in-out;
+}
+@keyframes octocat-wave{
+    0%, 100% {
+        transform: rotate(0);
+    }
+    20%, 60% {
+        transform: rotate(-25deg);
+    }
+    40%, 80% {
+        transform: rotate(10deg);
+    }
+}
+@media (max-width:500px) {
+    .github-corner:hover .octo-arm {
+        animation: none;
+    }
+    .github-corner .octo-arm {
+        animation: octocat-wave 560ms ease-in-out;
     }
 }
