@@ -35,8 +35,11 @@ class Code {
      */
     toHtml() {
         return (
-            <code class="code">
-            </code>
+            <table class="code">
+                <tbody>
+                    {this.Lines.map(line => line.toHtml())}
+                </tbody>
+            </table>
         );
     }
 }

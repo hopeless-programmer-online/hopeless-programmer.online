@@ -4,6 +4,7 @@ const Sentence = require(`./sentence`);
 const Paragraph = require(`./paragraph`);
 const Lexeme = require(`./lexeme`);
 const TextLexeme = require(`./text-lexeme`);
+const CommentLexeme = require(`./comment-lexeme`);
 const CodeLine = require(`./code-line`);
 const Code = require(`./code`);
 const Illustration = require(`./illustration`);
@@ -26,7 +27,7 @@ const Document = require(`./document`);
  * @typedef {string}                                            LexemeSource
  * @typedef {Lexeme | LexemeSource}                             LexemeLike
  * @typedef {LexemeLike}                                        CodeLineSource
- * @typedef {CodeLine | CodeLineSource}                         CodeLineLike
+ * @typedef {CodeLine | CodeLineSource | Array<CodeLineSource>} CodeLineLike
  * @typedef {Code}                                              IllustrationContentSource
  * @typedef {IllustrationContent | IllustrationContentSource}   IllustrationContentLike
  * @typedef {Paragraph | Illustration | Array<Illustration> }   SectionPartSource
@@ -129,6 +130,15 @@ function toParagraph(something) {
     return paragraph(something);
 }
 /**
+ * @param   {string}        string
+ * @returns {CommentLexeme}
+ */
+function cm(string) {
+    return new CommentLexeme({
+        String : string,
+    });
+}
+/**
  * @param   {LexemeSource} something
  * @returns {Lexeme}
  * @throws  {Error}
@@ -140,7 +150,7 @@ function lexeme(something) {
         });
     }
 
-    throw new Error; // @todo
+    throw new Error(`${something} can't be converted into a lexeme.`);
 }
 /**
  * @param   {LexemeLike} something
@@ -182,6 +192,11 @@ function codeLine(...somethings) {
 function toCodeLine(something) {
     if (something instanceof CodeLine) {
         return something;
+    }
+    if (something instanceof Array) {
+        return new CodeLine({
+            Lexemes : toLexemes(something),
+        });
     }
 
     return codeLine(something);
@@ -321,6 +336,7 @@ exports.toSentences = toSentences;
 exports.paragraph = paragraph;
 exports.toParagraph = toParagraph;
 exports.lexeme = lexeme;
+exports.cm = cm;
 exports.toLexeme = toLexeme;
 exports.toLexemes = toLexemes;
 exports.codeLine = codeLine;

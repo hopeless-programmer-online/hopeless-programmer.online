@@ -44,3 +44,6 @@ class Lexeme {
 
 
 exports = module.exports = Lexeme;
+
+
+const html = require(`../html`);

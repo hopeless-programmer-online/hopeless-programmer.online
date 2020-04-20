@@ -7,7 +7,7 @@ const s = documenting.shortcuts;
 
 
 exports = module.exports = new h.DocumentResource({
-    Document : s.document([ `Сторінку не знайдено.`, `Код помилки : 500.` ],
+    Document : s.document([ `Внутрішня помилка серверу.`, `Код помилки : 500.` ],
         s.section(`У чому річ?`,
             s.paragraph(
                 `На сайті відбулась непередбачувана помилка. `,
