@@ -18,9 +18,12 @@ function template(title, content) {
             </head>
             <body>
                 <div class="header">
-                    <div class="icon">
+                    <div class="banner">
                         <img class="logo" alt="But... I..." src="media/but_i.png"/>
-                        <em class="quote">...коли не можеш оголосити змінну case, тому що це службове слово...</em>
+                        <div class="content">
+                            <h2 class="title">Безнадійний Програміст</h2>
+                            <em class="quote">...коли не можеш оголосити змінну case, тому що це службове слово...</em>
+                        </div>
                     </div>
                     <nav class="navigation">
                         <a class="button" href="/home">Головна</a>

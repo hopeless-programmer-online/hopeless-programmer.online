@@ -52,7 +52,7 @@ html {
         > .header {
             border-top: 2mm solid #596268;
 
-            > .icon {
+            > .banner {
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-start;
@@ -60,15 +60,28 @@ html {
                 > .logo {
                     height: 1in;
                 }
-                > .quote {
-                    @extend %text-default;
-
-                    font-style: oblique;
+                > .content {
                     flex-grow: 1;
                     display: flex;
                     flex-direction: column;
-                    justify-content: space-around;
-                    align-items: center;
+                    justify-content: flex-start;
+                    align-items: stretch;
+
+                    > .title {
+                        @extend %text-strong;
+
+                        margin: 0;
+                    }
+                    > .quote {
+                        @extend %text-default;
+
+                        font-style: oblique;
+                        flex-grow: 1;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-around;
+                        align-items: center;
+                    }
                 }
             }
             > .navigation {
