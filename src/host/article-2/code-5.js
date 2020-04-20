@@ -1,14 +1,14 @@
 const s = require(`../../documenting`).shortcuts;
-const { cm, kw } = s;
+const { cm, kw, lt } = s;
 
 
 exports = module.exports = s.illustration( ...[
     `Оголошення змінних та функцій в PHP.`,
     s.code(
         [ cm(`# оголошення змінних`) ],
-        [ `$one   = 1;` ],
-        [ `$two   = 2;` ],
-        [ `$three = 3;` ],
+        [ `$one   = `, lt(`1`), `;` ],
+        [ `$two   = `, lt(`2`), `;` ],
+        [ `$three = `, lt(`3`), `;` ],
         [ `` ],
         [ cm(`# оголошення функцій`) ],
         [ kw(`function`), ` first_function()  { ... }` ],

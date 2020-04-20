@@ -60,6 +60,13 @@ class Illustration {
      * @public
      * @type   {Paragraph}
      */
+    get __Title() {
+        return this.__title;
+    }
+    /**
+     * @public
+     * @type   {Paragraph}
+     */
     set __Title(title) {
         if (title instanceof Paragraph); else {
             throw new Error; // @todo
@@ -89,6 +96,13 @@ class Illustration {
         }
 
         return index;
+    }
+    /**
+     * @private
+     * @type    {number}
+     */
+    get __Index() {
+        return this.__index;
     }
     /**
      * @private

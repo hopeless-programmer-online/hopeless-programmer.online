@@ -1,3 +1,4 @@
+const fs = require(`fs`);
 const path = require(`path`);
 const http = require(`http`);
 const http_status = require(`http-status`);
@@ -7,15 +8,48 @@ const hosting = require(`./src/hosting`);
 const { NotFoundError } = hosting;
 
 
+const cache = {};
+
+
 const server = http.createServer((req, res) => {
     const hostPath = require.resolve(`./src/host`).match(/(.*)\.js$/)[1];
+
+    const toClean = new Set;
 
     // remove host from cache
     for (const id in require.cache) {
         if (id === hostPath + `.js` || id.includes(hostPath + path.sep)) {
-            console.log(id);
-            delete require.cache[id];
+            let refresh = false;
+
+            if (id in cache) {
+                const date = new Date(fs.lstatSync(id).mtime);
+
+                if (cache[id] < date) {
+                    cache[id] = date;
+
+                    refresh = true;
+                }
+            }
+            else {
+                cache[id] = new Date(fs.lstatSync(id).mtime);
+
+                refresh = true;
+            }
+
+            if (refresh) {
+                let module = require.cache[id];
+
+                while (module) {
+                    toClean.add(module.id);
+
+                    module = module.parent;
+                }
+            }
         }
+    }
+
+    for (const id of toClean) {
+        delete require.cache[id];
     }
 
     const host = require(`./src/host`);

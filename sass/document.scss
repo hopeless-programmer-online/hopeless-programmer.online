@@ -181,7 +181,7 @@ html {
                                         margin: 0;
                                         order: 2;
 
-                                        > .link {
+                                        > .link-button {
                                             @extend %text-link;
                                         }
                                     }
@@ -245,6 +245,15 @@ html {
                                                     }
                                                     > .comment-lexeme {
                                                         color: rgb(106, 153, 85);
+                                                    }
+                                                    > .literal-lexeme {
+
+                                                        &[type=number] {
+                                                            color: rgb(181, 206, 168);
+                                                        }
+                                                        &[type=string] {
+                                                            color: rgb(206, 145, 120);
+                                                        }
                                                     }
                                                 }
                                             }

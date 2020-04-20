@@ -1,5 +1,5 @@
 const s = require(`../../documenting`).shortcuts;
-const { kw } = s;
+const { kw, lt } = s;
 
 
 exports = module.exports = s.illustration( ...[
@@ -12,9 +12,9 @@ exports = module.exports = s.illustration( ...[
         [ `` ],
         [ kw(`@for`), ` (`, kw(`@auto`), ` &value : values)` ],
         [ `{` ],
-        [ `    `, kw(`@if`), ` (value > 1.0)` ],
+        [ `    `, kw(`@if`), ` (value > `, lt(`1.0`), `)` ],
         [ `    {` ],
-        [ `        value = 1.0;` ],
+        [ `        value = `, lt(`1.0`), `;` ],
         [ `    }` ],
         [ `    `, kw(`@else`) ],
         [ `    {` ],

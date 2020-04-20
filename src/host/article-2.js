@@ -4,7 +4,6 @@ const documenting = require(`../documenting`);
 
 const h = hosting;
 const s = documenting.shortcuts;
-const { cm } = s;
 
 
 exports = module.exports = new h.DocumentResource({

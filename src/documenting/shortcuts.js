@@ -6,6 +6,8 @@ const Lexeme = require(`./lexeme`);
 const TextLexeme = require(`./text-lexeme`);
 const CommentLexeme = require(`./comment-lexeme`);
 const KeywordLexeme = require(`./keyword-lexeme`);
+const LiteralLexeme = require(`./literal-lexeme`);
+const LiteralLexemeType = require(`./literal-lexeme-type`);
 const CodeLine = require(`./code-line`);
 const Code = require(`./code`);
 const Illustration = require(`./illustration`);
@@ -146,6 +148,21 @@ function cm(string) {
 function kw(string) {
     return new KeywordLexeme({
         String : string,
+    });
+}
+/**
+ * @param   {string}        string
+ * @returns {LiteralLexeme}
+ */
+function lt(string) {
+    const type =
+        (string === `true` || string === false) ? LiteralLexemeType.Boolean :
+        !Number.isNaN( parseFloat(string) )     ? LiteralLexemeType.Number  :
+        LiteralLexemeType.String;
+
+    return new LiteralLexeme({
+        String : string,
+        Type   : type,
     });
 }
 /**
@@ -348,6 +365,7 @@ exports.toParagraph = toParagraph;
 exports.lexeme = lexeme;
 exports.cm = cm;
 exports.kw = kw;
+exports.lt = lt;
 exports.toLexeme = toLexeme;
 exports.toLexemes = toLexemes;
 exports.codeLine = codeLine;

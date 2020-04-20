@@ -26,12 +26,16 @@ class Document {
             for (const part of section.Parts) {
                 if (part instanceof IllustrationsSectionPart) {
                     for (const illustration of part.Illustrations) {
-                        illustration.__Index = illustrationIndex;
+                        if (illustration.__Index === null {
+                            illustration.__Index = illustrationIndex;
+                        }
 
                         const content = illustration.Content;
 
                         if (content instanceof CodeIllustrationContent) {
-                            illustration.__Title = shortcuts.toParagraph(`Приклад коду №${codeIndex}`);
+                            if (illustration.__Title === null) {
+                                illustration.__Title = shortcuts.toParagraph(`Приклад коду №${codeIndex}`);
+                            }
 
                             ++codeIndex;
                         }
