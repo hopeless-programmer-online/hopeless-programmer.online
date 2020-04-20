@@ -176,6 +176,7 @@ html {
                                     > .title {
                                         @extend %text-strong;
 
+                                        width: max-content;
                                         text-align: center;
                                         margin: 0;
                                         order: 2;
