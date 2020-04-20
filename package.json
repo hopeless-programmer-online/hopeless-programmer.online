@@ -35,5 +35,8 @@
     "start-only": "node server.js",
     "start": "npm run build && npm run start-only"
   },
-  "dependencies": {}
+  "dependencies": {
+    "http-status": "^1.4.2",
+    "mime-types": "^2.1.26"
+  }
 }
