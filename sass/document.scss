@@ -31,6 +31,13 @@
         color: #db7373;
     }
 }
+%text-code {
+    /* font */
+    font-family             : consolas;
+    font-size               : 11pt;
+    font-style              : normal;
+    font-weight             : normal;
+}
 
 
 html, body {
@@ -217,6 +224,8 @@ html {
                                             }
                                             > tbody > .line {
                                                 > .index {
+                                                    @extend %text-code;
+
                                                     padding-left: 2pt;
                                                     padding-right: 2pt;
                                                     text-align: right;
@@ -233,15 +242,22 @@ html {
                                                     display: flex; // collapse spaces
 
                                                     > * {
-                                                        /* font */
-                                                        font-family             : consolas;
-                                                        font-size               : 11pt;
-                                                        font-style              : normal;
-                                                        font-weight             : normal;
+                                                        @extend %text-code;
+
                                                         display: inline;
                                                     }
                                                     > .keyword-lexeme {
                                                         color: rgb(217, 135, 195);
+                                                    }
+                                                    > .identifier-lexeme {
+                                                        color: rgb(156, 220, 254);
+
+                                                        &[name=void] {
+                                                            color: rgb(86, 156, 214);
+                                                        }
+                                                        &[type=function] {
+                                                            color: rgb(220, 220, 170);
+                                                        }
                                                     }
                                                     > .comment-lexeme {
                                                         color: rgb(106, 153, 85);

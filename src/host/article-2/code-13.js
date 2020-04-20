@@ -1,16 +1,16 @@
 const s = require(`../../documenting`).shortcuts;
-const { kw } = s;
+const { kw, f } = s;
 
 
 exports = module.exports = s.illustration( ...[
     `Деталізація службових слів в Python.`,
     s.code(
-        [ kw(`def`), ` f():` ],
+        [ kw(`def`), ` `, f(`f`), `():` ],
         [ `    `, kw(`pass`) ],
         [ `` ],
         [ kw(`function`), ` = `, kw(`def`) ],
         [ `` ],
-        [ kw(`function`), ` g():` ],
+        [ kw(`function`), ` `, f(`g`), `():` ],
         [ `    `, kw(`pass`) ],
     ),
 ]);

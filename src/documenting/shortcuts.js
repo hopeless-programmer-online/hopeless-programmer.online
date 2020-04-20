@@ -8,6 +8,8 @@ const CommentLexeme = require(`./comment-lexeme`);
 const KeywordLexeme = require(`./keyword-lexeme`);
 const LiteralLexeme = require(`./literal-lexeme`);
 const LiteralLexemeType = require(`./literal-lexeme-type`);
+const IdentifierLexeme = require(`./identifier-lexeme`);
+const IdentifierLexemeType = require(`./identifier-lexeme-type`);
 const CodeLine = require(`./code-line`);
 const Code = require(`./code`);
 const Illustration = require(`./illustration`);
@@ -163,6 +165,56 @@ function lt(string) {
     return new LiteralLexeme({
         String : string,
         Type   : type,
+    });
+}
+/**
+ * @param   {string}           string
+ * @returns {IdentifierLexeme}
+ */
+function a(string) {
+    return new IdentifierLexeme({
+        String : string,
+        Type   : IdentifierLexemeType.Argument,
+    });
+}
+/**
+ * @param   {string}           string
+ * @returns {IdentifierLexeme}
+ */
+function v(string) {
+    return new IdentifierLexeme({
+        String : string,
+        Type   : IdentifierLexemeType.Variable,
+    });
+}
+/**
+ * @param   {string}           string
+ * @returns {IdentifierLexeme}
+ */
+function f(string) {
+    return new IdentifierLexeme({
+        String : string,
+        Type   : IdentifierLexemeType.Function,
+    });
+}
+/**
+ * @param   {string}           string
+ * @returns {IdentifierLexeme}
+ */
+function c(string) {
+    return new IdentifierLexeme({
+        String : string,
+        Type   : IdentifierLexemeType.Class,
+    });
+}
+/**
+ * @param   {string}           string
+ * @returns {IdentifierLexeme}
+ */
+function p(string) {
+    return new IdentifierLexeme({
+        String : string,
+        Type   : IdentifierLexemeType.Property,
     });
 }
 /**
@@ -366,6 +418,11 @@ exports.lexeme = lexeme;
 exports.cm = cm;
 exports.kw = kw;
 exports.lt = lt;
+exports.a = a;
+exports.v = v;
+exports.f = f;
+exports.c = c;
+exports.p = p;
 exports.toLexeme = toLexeme;
 exports.toLexemes = toLexemes;
 exports.codeLine = codeLine;

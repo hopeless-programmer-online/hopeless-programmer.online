@@ -1,17 +1,17 @@
 const s = require(`../../documenting`).shortcuts;
-const { kw } = s;
+const { kw, f } = s;
 
 
 exports = module.exports = s.illustration( ...[
     `Скорочення службових слів в JS.`,
     s.code(
-        [ kw(`function`), ` f() {` ],
+        [ kw(`function`), ` `, f(`f`), `() {` ],
         [ `    ...` ],
         [ `}` ],
         [ `` ],
         [ kw(`var`), ` `, kw(`fn`), ` = `, kw(`function`), `;` ],
         [ `` ],
-        [ kw(`fn`), ` g() {` ],
+        [ kw(`fn`), ` `, f(`g`), `() {` ],
         [ `    ...` ],
         [ `}` ],
     ),
