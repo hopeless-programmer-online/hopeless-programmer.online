@@ -26,6 +26,7 @@ exports = module.exports = new h.Host({
     Routes : {
         "/" : home,
         "/home" : home,
+        "/about" : require(`./host/about`),
         // errors
         "/404" : new h.DocumentResource({
             Document : s.document([ `Сторінку не знайдено.`, `Код помилки : 404.` ],
