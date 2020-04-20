@@ -100,10 +100,12 @@ class Section {
         return (
             <div id={id} class="section">
                 <h2 class="title">
-                    {this.Title.Sentences.map(sentence => sentence.toHtml())}
                     <a class="link-button" href={`#${id}`}>#</a>
+                    {this.Title.toHtml()}
                 </h2>
-                {this.Parts.map(part => part.toHtml())}
+                <div class="parts">
+                    {this.Parts.map(part => part.toHtml())}
+                </div>
             </div>
         );
     }

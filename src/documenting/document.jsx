@@ -81,7 +81,9 @@ class Document {
                         {this.Title.Sentences.map(sentence => sentence.toHtml())}
                     </h1>
                 </header>
-                {this.Sections.map(section => section.toHtml())}
+                <div class="sections">
+                    {this.Sections.map(section => section.toHtml())}
+                </div>
             </article>
         );
     }
