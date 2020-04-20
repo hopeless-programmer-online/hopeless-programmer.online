@@ -17,20 +17,20 @@ const Document = require(`./document`);
 
 
 /**
- * @typedef {string}                                          PhraseSource
- * @typedef {Phrase | PhraseSource}                           PhraseLike
- * @typedef {PhraseLike}                                      SentenceSource
- * @typedef {Sentence | SentenceSource}                       SentenceLike
- * @typedef {SentenceLike}                                    ParagraphSource
- * @typedef {Paragraph | ParagraphSource}                     ParagraphLike
- * @typedef {string}                                          LexemeSource
- * @typedef {Lexeme | LexemeSource}                           LexemeLike
- * @typedef {LexemeLike}                                      CodeLineSource
- * @typedef {CodeLine | CodeLineSource}                       CodeLineLike
- * @typedef {Code}                                            IllustrationContentSource
- * @typedef {IllustrationContent | IllustrationContentSource} IllustrationContentLike
- * @typedef {Paragraph | Illustration | Array<Illustration> } SectionPartSource
- * @typedef {SectionPart | SectionPartSource}                 SectionPartLike
+ * @typedef {string}                                            PhraseSource
+ * @typedef {Phrase | PhraseSource}                             PhraseLike
+ * @typedef {PhraseLike}                                        SentenceSource
+ * @typedef {Sentence | SentenceSource}                         SentenceLike
+ * @typedef {SentenceLike}                                      ParagraphSource
+ * @typedef {Paragraph | ParagraphSource | Array<SentenceLike>} ParagraphLike
+ * @typedef {string}                                            LexemeSource
+ * @typedef {Lexeme | LexemeSource}                             LexemeLike
+ * @typedef {LexemeLike}                                        CodeLineSource
+ * @typedef {CodeLine | CodeLineSource}                         CodeLineLike
+ * @typedef {Code}                                              IllustrationContentSource
+ * @typedef {IllustrationContent | IllustrationContentSource}   IllustrationContentLike
+ * @typedef {Paragraph | Illustration | Array<Illustration> }   SectionPartSource
+ * @typedef {SectionPart | SectionPartSource}                   SectionPartLike
  */
 
 
@@ -119,6 +119,11 @@ function paragraph(...somethings) {
 function toParagraph(something) {
     if (something instanceof Paragraph) {
         return something;
+    }
+    if (something instanceof Array) {
+        const sentences = toSentences(something);
+
+        return paragraph(...sentences);
     }
 
     return paragraph(something);

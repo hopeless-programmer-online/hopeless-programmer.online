@@ -12,6 +12,8 @@ const server = http.createServer((req, res) => {
         try {
             // handling 405
             if (req.method !== `GET`) {
+                console.log(`405 : (${req.method}) ${req.url}`);
+
                 // handling as 405 with proper representation
                 try {
                     const resource = host.Resolve(`405`);
@@ -39,6 +41,8 @@ const server = http.createServer((req, res) => {
                 if (error instanceof NotFoundError); else {
                     throw error;
                 }
+
+                console.log(`404 : ${req.url}`);
 
                 // handling 404 with proper representation
                 try {
