@@ -1,18 +1,18 @@
 /**
  * @abstract
  */
-class SectionPart {
+class IllustrationContent {
     /**
      * @throws {Error}
      */
     constructor() {
-        if (new.target === SectionPart) {
+        if (new.target === IllustrationContent) {
             throw new Error(); // @todo
         }
-        if (this.toHtml !== SectionPart.prototype.toHtml) {
+        if (this.toHtml !== IllustrationContent.prototype.toHtml) {
             throw new Error; // @todo
         }
-        if (this._toHtml === SectionPart.prototype._toHtml) {
+        if (this._toHtml === IllustrationContent.prototype._toHtml) {
             throw new Error; // @todo
         }
     }
@@ -43,8 +43,7 @@ class SectionPart {
 }
 
 
-exports = module.exports = SectionPart;
+exports = module.exports = IllustrationContent;
 
 
 const html = require(`../html`);
-

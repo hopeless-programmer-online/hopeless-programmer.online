@@ -22,21 +22,21 @@
     "eslint": "^6.8.0",
     "jest": "^25.3.0",
     "rimraf": "^3.0.2",
-    "sass": "^1.26.3",
     "typescript": "^3.8.3"
   },
   "scripts": {
     "clean": "rimraf lib",
-    "build-sass": "sass sass:css",
-    "build-typescript": "tsc",
-    "build-views": "node ./lib/build-views.js",
-    "build-only": "npm run build-typescript && npm run build-sass && npm run build-views",
+    "build-typescript": "node build.js",
+    "build-only": "npm run build-typescript",
     "build": "npm run clean && npm run build-only",
     "test-only": "jest",
     "test": "npm run build && npm run test-only",
-    "start": "npm run build && node server.js"
+    "start-only": "node server.js",
+    "start": "npm run build && npm run start-only"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "sass": "^1.26.3",
+    "http-status": "^1.4.2",
+    "mime-types": "^2.1.26"
   }
 }

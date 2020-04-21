@@ -1,58 +1,82 @@
-const Document = require(`./document`);
-const Paragraph = require(`./paragraph`);
 const TextPhrase = require(`./text-phrase`);
+const Sentence = require(`./sentence`);
+const Paragraph = require(`./paragraph`);
+const TextLexeme = require(`./text-lexeme`);
+const Code = require(`./code`);
+const CodeLine = require(`./code-line`);
+const ParagraphSectionPart = require(`./paragraph-section-part`);
+const Section = require(`./section`);
 const shortcuts = require(`./shortcuts`);
 
 
-it(`Should create Paragraph on calling paragraph`, () => {
-    const paragraph = shortcuts.paragraph(
-        `first sentence`,
-        `second sentence`,
-        `third sentence`,
-    );
+it(`Should create TextPhrase on calling phrase with string argument`, () => {
+    const template = shortcuts.phrase(`text`);
 
-    expect(paragraph).toBeInstanceOf(Paragraph);
-    expect(paragraph.Sentences).toHaveLength(3);
-    expect(paragraph.Sentences[0].Phrases).toHaveLength(1);
-    expect(paragraph.Sentences[0].Phrases[0]).toBeInstanceOf(TextPhrase);
-    expect(paragraph.Sentences[0].Phrases[0].String).toBe(`first sentence`);
-    expect(paragraph.Sentences[1].Phrases).toHaveLength(1);
-    expect(paragraph.Sentences[1].Phrases[0]).toBeInstanceOf(TextPhrase);
-    expect(paragraph.Sentences[1].Phrases[0].String).toBe(`second sentence`);
-    expect(paragraph.Sentences[2].Phrases).toHaveLength(1);
-    expect(paragraph.Sentences[2].Phrases[0]).toBeInstanceOf(TextPhrase);
-    expect(paragraph.Sentences[2].Phrases[0].String).toBe(`third sentence`);
+    expect(template).toBeInstanceOf(TextPhrase);
+    expect(template.String).toBe(`text`);
 });
-it(`Should create Document on calling document`, () => {
-    const document = shortcuts.document(
-        `document title`,
-        shortcuts.section(
-            `section title`,
-            shortcuts.paragraph(
-                `first sentence`,
-                `second sentence`,
-                `third sentence`,
-            ),
-            shortcuts.paragraph(
-                `first sentence`,
-                `second sentence`,
-                `third sentence`,
-            ),
-        ),
-        shortcuts.section(
-            `section title`,
-            shortcuts.paragraph(
-                `first sentence`,
-                `second sentence`,
-                `third sentence`,
-            ),
-            shortcuts.code(
-                `line #1`,
-                `line #2`,
-                `line #3`,
-            ),
+it(`Should create Sentence on calling sentence with string argument`, () => {
+    const template = shortcuts.sentence(`text`);
+
+    expect(template).toBeInstanceOf(Sentence);
+    expect(template.Phrases).toHaveLength(1);
+    expect(template.Phrases[0]).toBeInstanceOf(TextPhrase);
+    expect(template.Phrases[0].String).toBe(`text`);
+});
+it(`Should create Paragraph on calling paragraph with string arguments`, () => {
+    const template = shortcuts.paragraph(`text #1`, `text #2`);
+
+    expect(template).toBeInstanceOf(Paragraph);
+    expect(template.Sentences).toHaveLength(2);
+    expect(template.Sentences[0].Phrases).toHaveLength(1);
+    expect(template.Sentences[0].Phrases[0]).toBeInstanceOf(TextPhrase);
+    expect(template.Sentences[0].Phrases[0].String).toBe(`text #1`);
+    expect(template.Sentences[1].Phrases).toHaveLength(1);
+    expect(template.Sentences[1].Phrases[0]).toBeInstanceOf(TextPhrase);
+    expect(template.Sentences[1].Phrases[0].String).toBe(`text #2`);
+});
+it(`Should create TextLexeme on calling lexeme with string argument`, () => {
+    const template = shortcuts.lexeme(`code`);
+
+    expect(template).toBeInstanceOf(TextLexeme);
+    expect(template.String).toBe(`code`);
+});
+it(`Should create CodeLine on calling codeLine with string argument`, () => {
+    const template = shortcuts.codeLine(`code`);
+
+    expect(template).toBeInstanceOf(CodeLine);
+    expect(template.Lexemes).toHaveLength(1);
+    expect(template.Lexemes[0]).toBeInstanceOf(TextLexeme);
+    expect(template.Lexemes[0].String).toBe(`code`);
+});
+it(`Should create Code on calling code with string argument`, () => {
+    const template = shortcuts.code(`line #1`, `line #2`);
+
+    expect(template).toBeInstanceOf(Code);
+    expect(template.Lines).toHaveLength(2);
+    expect(template.Lines[0].Lexemes).toHaveLength(1);
+    expect(template.Lines[0].Lexemes[0]).toBeInstanceOf(TextLexeme);
+    expect(template.Lines[0].Lexemes[0].String).toBe(`line #1`);
+    expect(template.Lines[1].Lexemes).toHaveLength(1);
+    expect(template.Lines[1].Lexemes[0]).toBeInstanceOf(TextLexeme);
+    expect(template.Lines[1].Lexemes[0].String).toBe(`line #2`);
+});
+it(`Should create Section on calling section`, () => {
+    const template = shortcuts.section(`section title`,
+        shortcuts.paragraph(
+            `sentence #1`,
         ),
     );
 
-    expect(document).toBeInstanceOf(Document);
+    expect(template).toBeInstanceOf(Section);
+    expect(template.Title.Sentences).toHaveLength(1);
+    expect(template.Title.Sentences[0].Phrases).toHaveLength(1);
+    expect(template.Title.Sentences[0].Phrases[0]).toBeInstanceOf(TextPhrase);
+    expect(template.Title.Sentences[0].Phrases[0].String).toBe(`section title`);
+    expect(template.Parts).toHaveLength(1);
+    expect(template.Parts[0]).toBeInstanceOf(ParagraphSectionPart);
+    expect(template.Parts[0].Paragraph.Sentences).toHaveLength(1);
+    expect(template.Parts[0].Paragraph.Sentences[0].Phrases).toHaveLength(1);
+    expect(template.Parts[0].Paragraph.Sentences[0].Phrases[0]).toBeInstanceOf(TextPhrase);
+    expect(template.Parts[0].Paragraph.Sentences[0].Phrases[0].String).toBe(`sentence #1`);
 });

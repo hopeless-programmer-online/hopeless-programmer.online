@@ -1,7 +1,7 @@
-const Phrase = require(`./phrase`);
+const Lexeme = require(`./lexeme`);
 
 
-class TextPhrase extends Phrase {
+class KeywordLexeme extends Lexeme {
     /**
      * @param {Object} object
      * @param {string} object.String
@@ -27,7 +27,19 @@ class TextPhrase extends Phrase {
     get String() {
         return this.__string;
     }
+
+    /**
+     * @protected
+     * @override
+     * @returns   {html.Element}
+     */
+    _toHtml() {
+        return <span class="keyword lexeme">{this.String}</span>;
+    }
 }
 
 
-exports = module.exports = TextPhrase;
+exports = module.exports = KeywordLexeme;
+
+
+const html = require(`../html`);
