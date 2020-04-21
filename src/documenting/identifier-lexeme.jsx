@@ -44,7 +44,7 @@ class IdentifierLexeme extends TextLexeme {
             this.Type === Type.Module   ? `module`   :
             error();
 
-        return <pre class="identifier-lexeme" type={type} name={this.String}>{this.String}</pre>;
+        return <span class="identifier lexeme" type={type} name={this.String}>{this.String}</span>;
     }
 }
 

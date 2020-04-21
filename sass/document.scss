@@ -43,6 +43,44 @@
     .link {
         @extend %text-link;
     }
+    .lexeme-phrase {
+
+        > .lexeme {
+            padding-left: 1pt;
+            padding-right: 1pt;
+        }
+    }
+}
+.lexeme {
+    @extend %text-code;
+
+    background-color : rgb(30, 30, 30);
+    color: rgb(220, 220, 220);
+
+    &.keyword {
+        color: rgb(217, 135, 195);
+    }
+    &.identifier {
+        color: rgb(156, 220, 254);
+
+        &[name=void] {
+            color: rgb(86, 156, 214);
+        }
+        &[type=function] {
+            color: rgb(220, 220, 170);
+        }
+    }
+    &.comment {
+        color: rgb(106, 153, 85);
+    }
+    &.literal {
+        &[type=number] {
+            color: rgb(181, 206, 168);
+        }
+        &[type=string] {
+            color: rgb(206, 145, 120);
+        }
+    }
 }
 
 
@@ -250,36 +288,12 @@ html {
                                                 > .content {
                                                     color: rgb(220, 220, 220);
                                                     display: flex; // collapse spaces
+                                                    white-space: pre;
 
                                                     > * {
                                                         @extend %text-code;
 
                                                         display: inline;
-                                                    }
-                                                    > .keyword-lexeme {
-                                                        color: rgb(217, 135, 195);
-                                                    }
-                                                    > .identifier-lexeme {
-                                                        color: rgb(156, 220, 254);
-
-                                                        &[name=void] {
-                                                            color: rgb(86, 156, 214);
-                                                        }
-                                                        &[type=function] {
-                                                            color: rgb(220, 220, 170);
-                                                        }
-                                                    }
-                                                    > .comment-lexeme {
-                                                        color: rgb(106, 153, 85);
-                                                    }
-                                                    > .literal-lexeme {
-
-                                                        &[type=number] {
-                                                            color: rgb(181, 206, 168);
-                                                        }
-                                                        &[type=string] {
-                                                            color: rgb(206, 145, 120);
-                                                        }
                                                     }
                                                 }
                                             }

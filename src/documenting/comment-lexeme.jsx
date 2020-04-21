@@ -8,7 +8,7 @@ class CommentLexeme extends TextLexeme {
      * @returns   {html.Element}
      */
     _toHtml() {
-        return <pre class="comment-lexeme">{this.String}</pre>;
+        return <span class="comment lexeme">{this.String}</span>;
     }
 }
 

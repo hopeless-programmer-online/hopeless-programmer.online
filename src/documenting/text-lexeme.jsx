@@ -34,7 +34,7 @@ class TextLexeme extends Lexeme {
      * @returns   {html.Element}
      */
     _toHtml() {
-        return <pre class="text-lexeme">{this.String}</pre>;
+        return <span class="text lexeme">{this.String}</span>;
     }
 }
 
