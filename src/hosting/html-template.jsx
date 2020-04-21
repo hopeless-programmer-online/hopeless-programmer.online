@@ -35,7 +35,13 @@ function template(title, content) {
                         <img class="logo" alt="But... I..." src="media/but_i.png"/>
                         <div class="content">
                             <h2 class="title">Безнадійний Програміст</h2>
-                            <em class="quote">...коли не можеш оголосити змінну case, тому що це службове слово...</em>
+                            <em class="quote">
+                                <span class="sentence">
+                                    <span class="text-phrase">...коли не можеш оголосити змінну </span>
+                                    <span class="lexeme-phrase"><span class="keyword lexeme" name="case">case</span></span>
+                                    <span class="text-phrase">, тому що це службове слово...</span>
+                                </span>
+                            </em>
                         </div>
                     </div>
                     <nav class="navigation">

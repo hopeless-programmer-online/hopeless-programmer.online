@@ -3,7 +3,7 @@ const { cm, kw, lt, v } = s;
 
 
 exports = module.exports = s.illustration( ...[
-    `Використання символу @ в C#.`,
+    s.sentence(`Використання символу `, s.lexeme(`@`), ` в C#.`),
     s.code(
         [ kw(`var`), ` `, v(`class`), `     = `, lt(`1`), `; `, cm(`// помилка`) ],
         [ kw(`var`), ` `, v(`@class`), `    = `, lt(`2`), `; `, cm(`// ok`) ],
