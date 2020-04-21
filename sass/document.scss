@@ -22,7 +22,6 @@
     @extend %text-default;
 
     color: #73a4db;
-    font-weight: bold; // ?
 
     &:visited {
         color: #73badb;
@@ -37,6 +36,13 @@
     font-size               : 11pt;
     font-style              : normal;
     font-weight             : normal;
+}
+
+
+.sentence {
+    .link {
+        @extend %text-link;
+    }
 }
 
 
@@ -179,6 +185,10 @@ html {
                                     align-items: center;
                                     flex-shrink: 1;
                                     flex-grow: 0;
+
+                                    &:target {
+                                        border-color: #73a4db;
+                                    }
 
                                     > .title {
                                         @extend %text-strong;

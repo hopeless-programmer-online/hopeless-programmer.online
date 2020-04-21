@@ -1,5 +1,6 @@
 const Phrase = require(`./phrase`);
 const TextPhrase = require(`./text-phrase`);
+const IllustrationReferencePhrase = require(`./illustration-reference-phrase`);
 const Sentence = require(`./sentence`);
 const Paragraph = require(`./paragraph`);
 const Lexeme = require(`./lexeme`);
@@ -23,7 +24,7 @@ const Document = require(`./document`);
 
 
 /**
- * @typedef {string}                                            PhraseSource
+ * @typedef {string | Illustration}                             PhraseSource
  * @typedef {Phrase | PhraseSource}                             PhraseLike
  * @typedef {PhraseLike}                                        SentenceSource
  * @typedef {Sentence | SentenceSource}                         SentenceLike
@@ -49,6 +50,11 @@ function phrase(something) {
     if (typeof something === `string`) {
         return new TextPhrase({
             String : something,
+        });
+    }
+    if (something instanceof Illustration) {
+        return new IllustrationReferencePhrase({
+            Illustration : something,
         });
     }
 
