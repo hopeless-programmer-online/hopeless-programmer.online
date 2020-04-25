@@ -2,6 +2,7 @@ const Phrase = require(`./phrase`);
 const TextPhrase = require(`./text-phrase`);
 const LinkPhrase = require(`./link-phrase`);
 const EmphasisPhrase = require(`./emphasis-phrase`);
+const FigurativePhrase = require(`./figurative-phrase`);
 const LexemePhrase = require(`./lexeme-phrase`);
 const IllustrationReferencePhrase = require(`./illustration-reference-phrase`);
 const Sentence = require(`./sentence`);
@@ -61,6 +62,15 @@ function link(string, url) {
  */
 function emphasis(string) {
     return new EmphasisPhrase({
+        String : string,
+    });
+}
+/**
+ * @param   {string}           string
+ * @returns {FigurativePhrase}
+ */
+function figurative(string) {
+    return new FigurativePhrase({
         String : string,
     });
 }
@@ -442,6 +452,7 @@ function document(title, ...sections) {
 
 exports.link = link;
 exports.emphasis = emphasis;
+exports.figurative = figurative;
 exports.phrase = phrase;
 exports.toPhrase = toPhrase;
 exports.toPhrases = toPhrases;
