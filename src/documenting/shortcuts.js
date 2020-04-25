@@ -1,5 +1,6 @@
 const Phrase = require(`./phrase`);
 const TextPhrase = require(`./text-phrase`);
+const LinkPhrase = require(`./link-phrase`);
 const LexemePhrase = require(`./lexeme-phrase`);
 const IllustrationReferencePhrase = require(`./illustration-reference-phrase`);
 const Sentence = require(`./sentence`);
@@ -42,6 +43,17 @@ const Document = require(`./document`);
  */
 
 
+/**
+ * @param   {string}     string
+ * @param   {string}     url
+ * @returns {LinkPhrase}
+ */
+function link(string, url) {
+    return new LinkPhrase({
+        String : string,
+        Url    : url,
+    });
+}
 /**
  * @param   {PhraseSource} something
  * @returns {Phrase}
@@ -418,6 +430,7 @@ function document(title, ...sections) {
 }
 
 
+exports.link = link;
 exports.phrase = phrase;
 exports.toPhrase = toPhrase;
 exports.toPhrases = toPhrases;
