@@ -43,6 +43,10 @@
     .link {
         @extend %text-link;
     }
+    .emphasis-phrase {
+        font-weight: normal;
+        text-decoration-line: underline;
+    }
     .lexeme-phrase {
 
         > .lexeme {
