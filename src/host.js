@@ -17,6 +17,7 @@ exports = module.exports = new h.Host({
         "/about" : require(`./host/about`),
         // articles
         "/article_2" : require(`./host/article-2`),
+        "/require" : require(`./host/require`),
         // errors
         "/404" : require(`./host/404`),
         "/405" : require(`./host/405`),

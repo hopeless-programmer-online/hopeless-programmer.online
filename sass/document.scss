@@ -50,6 +50,7 @@
     .lexeme-phrase {
 
         > .lexeme {
+            border-radius: 4pt;
             padding-left: 1pt;
             padding-right: 1pt;
         }
@@ -72,6 +73,9 @@
         }
         &[type=function] {
             color: rgb(220, 220, 170);
+        }
+        &[type=class] {
+            color: rgb(78, 201, 176);
         }
     }
     &.comment {
