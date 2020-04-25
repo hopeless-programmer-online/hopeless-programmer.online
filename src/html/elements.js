@@ -8,7 +8,7 @@ class Elements extends Array {
             const isText = element instanceof TextElement;
 
             if (!isText && !isPreviousText && !isFirst) {
-                string += LINE_BREAK;
+                string += COMMENT_BEGIN + LINE_BREAK + COMMENT_END;
             }
 
             string += element.toString();
@@ -25,6 +25,8 @@ class Elements extends Array {
 exports = module.exports = Elements;
 
 
+const COMMENT_BEGIN = `<!--`;
+const COMMENT_END = `-->`;
 const LINE_BREAK = `\r\n`;
 
 
