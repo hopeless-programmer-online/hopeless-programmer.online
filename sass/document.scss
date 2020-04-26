@@ -1,3 +1,7 @@
+$color-primary: #373d49;
+$color-selection: #e43636;
+
+
 %text-default {
     // font
     font-family             : Georgia,Cambria,serif;
@@ -5,7 +9,7 @@
     font-weight             : normal;
     font-feature-settings   : 'kern' 1,'onum' 1,'liga' 1;
     // text
-    color                   : #373d49;
+    color                   : $color-primary;
     text-decoration-line    : none;
 }
 %text-strong {
@@ -15,7 +19,7 @@
     font-weight           : bold;
     font-feature-settings : 'dlig' 1,'liga' 1,'lnum' 1,'kern' 1;
     // text
-    color                 : #373d49;
+    color                 : $color-primary;
     text-decoration-line  : none;
 }
 %text-link {
@@ -59,6 +63,9 @@
 
     color: rgb(220, 220, 220);
 
+    &::selection {
+        background-color: rgb(38, 79, 120);
+    }
     &.keyword {
         color: rgb(217, 135, 195);
     }
@@ -106,7 +113,7 @@ html {
         align-items: stretch;
 
         > .header {
-            border-top: 2mm solid #596268;
+            border-top: 2mm solid $color-primary;
 
             > .banner {
                 display: flex;
@@ -151,10 +158,10 @@ html {
 
                     flex-grow: 1;
                     text-align: center;
-                    border-bottom: 2mm solid #596268;
+                    border-bottom: 2mm solid $color-primary;
 
                     &:hover {
-                        border-color: #d74444;
+                        border-color: $color-selection;
                         background-color: #e4ebf0;
                         color: #db7373;
                     }
@@ -317,7 +324,7 @@ html {
             @extend %text-strong;
 
             text-align: center;
-            border-top: 2mm solid #596268;
+            border-top: 2mm solid $color-primary;
             background-color: #e4ebf0;
 
             > .references {
@@ -336,7 +343,7 @@ html {
                         justify-content: center;
                         align-items: center;
                         text-align: center;
-                        border-bottom: 2mm solid #596268;
+                        border-bottom: 2mm solid $color-primary;
 
                         img {
                             width: 1in;
@@ -345,7 +352,7 @@ html {
                         }
 
                         &:hover {
-                            border-color: #d74444;
+                            border-color: $color-selection;
                             background-color: #e4ebf0;
                             color: #db7373;
 
