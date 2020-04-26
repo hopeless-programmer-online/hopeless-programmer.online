@@ -3,11 +3,11 @@ const Phrase = require(`./phrase`);
 
 class LexemePhrase extends Phrase {
     /**
-     * @param {Object} object
-     * @param {Lexeme} object.Lexeme
+     * @param {Object}        object
+     * @param {Array<Lexeme>} object.Lexemes
      */
-    constructor({ Lexeme }) {
-        if (Lexeme instanceof LexemeClass); else {
+    constructor({ Lexemes }) {
+        if (Array.isArray(Lexemes) && Lexemes.every(lexeme => lexeme instanceof LexemeClass)); else {
             throw new Error(); // @todo
         }
 
@@ -15,17 +15,17 @@ class LexemePhrase extends Phrase {
 
         /**
          * @private
-         * @type    {Lexeme}
+         * @type    {Array<Lexeme>}
          */
-        this.__lexeme = Lexeme;
+        this.__lexemes = Lexemes;
     }
 
     /**
      * @public
-     * @type   {Lexeme}
+     * @type   {Array<Lexeme>}
      */
-    get Lexeme() {
-        return this.__lexeme;
+    get Lexemes() {
+        return this.__lexemes;
     }
 
     /**
@@ -34,7 +34,7 @@ class LexemePhrase extends Phrase {
      * @returns   {html.Element}
      */
     _toHtml() {
-        return <span class="lexeme-phrase">{this.Lexeme.toHtml()}</span>;
+        return <span class="lexeme-phrase">{this.Lexemes.map(lexeme => lexeme.toHtml())}</span>;
     }
 }
 

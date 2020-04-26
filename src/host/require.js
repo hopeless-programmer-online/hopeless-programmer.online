@@ -8,7 +8,7 @@ const s = documenting.shortcuts;
 
 const require_ = s.phrase(s.f(`require`));
 const module_ = s.phrase(s.c(`module`));
-const exports_ = [ module_, s.lexeme(`.`), s.v(`exports`) ];
+const exports_ = s.phrase([ s.c(`module`), s.lexeme(`.`), s.v(`exports`) ]);
 
 
 const code_1 = s.illustration( ...[
@@ -36,7 +36,7 @@ exports = module.exports = new h.DocumentResource({
                 s.sentence(`Весь процес можна умовно розбити на 3 етапи: пошук модуля, його виконання та кешування. `),
                 s.sentence(`В процесі пошуку `, require_, ` визначається з джерелом коду потрібного модуля. `),
                 s.sentence(`Далі, цей код буде виконаний в ізольованій області, зі своїми власними змінними `, require_, ` та `, module_, `. `),
-                s.sentence(`Після того як код виконано а `, ...exports_, ` заповнений відповідними значеннями, ця змінна зберігається в кеші. `),
+                s.sentence(`Після того як код виконано а `, exports_, ` заповнений відповідними значеннями, ця змінна зберігається в кеші. `),
                 s.sentence(`При подальших звернення до цього ж модуля він вже не буде виконуватись. `),
                 s.sentence(`Натомість, буде повернене значення збережене в кеші. `),
                 s.sentence(``),

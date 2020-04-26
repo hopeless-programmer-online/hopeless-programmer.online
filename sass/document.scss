@@ -48,18 +48,15 @@
         text-decoration-line: underline;
     }
     .lexeme-phrase {
-
-        > .lexeme {
-            border-radius: 4pt;
-            padding-left: 1pt;
-            padding-right: 1pt;
-        }
+        background-color : rgb(30, 30, 30);
+        padding-left: 2pt;
+        padding-right: 2pt;
+        border-radius: 5pt;
     }
 }
 .lexeme {
     @extend %text-code;
 
-    background-color : rgb(30, 30, 30);
     color: rgb(220, 220, 220);
 
     &.keyword {

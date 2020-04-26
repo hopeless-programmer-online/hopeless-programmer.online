@@ -28,7 +28,7 @@ const Document = require(`./document`);
 
 
 /**
- * @typedef {string | Illustration | Lexeme}                    PhraseSource
+ * @typedef {string | Illustration | Lexeme | Array<Lexeme> }   PhraseSource
  * @typedef {Phrase | PhraseSource}                             PhraseLike
  * @typedef {PhraseLike}                                        SentenceSource
  * @typedef {Sentence | SentenceSource}                         SentenceLike
@@ -92,7 +92,12 @@ function phrase(something) {
     }
     if (something instanceof Lexeme) {
         return new LexemePhrase({
-            Lexeme : something,
+            Lexemes : [ something ],
+        });
+    }
+    if (Array.isArray(something) && something.every(lexeme => lexeme instanceof Lexeme)) {
+        return new LexemePhrase({
+            Lexemes : something,
         });
     }
 
