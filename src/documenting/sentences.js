@@ -21,6 +21,14 @@ class Sentences extends Array {
 
     /**
      * @public
+     * @type   {string}
+     */
+    get Text() {
+        return this.reduce((text, sentence) => text + sentence.Text, ``);
+    }
+
+    /**
+     * @public
      * @returns {Array<html.Element>}
      */
     toHtml() {

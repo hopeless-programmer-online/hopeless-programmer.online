@@ -112,7 +112,7 @@ function phrase(something) {
         });
     }
 
-    throw new Error; // @todo
+    throw new Error(`${typeof something} ${something} can't be converted to phrase.`);
 }
 /**
  * @param   {PhraseLike} something
@@ -518,7 +518,7 @@ function section(title, ...parts) {
  * @returns {Document}
  */
 function document(title, ...sections) {
-    const documentTitle = toParagraph(title).Sentences;
+    const documentTitle = toSentences(title);
 
     return new Document({
         Title : documentTitle,

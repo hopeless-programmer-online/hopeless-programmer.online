@@ -7,7 +7,7 @@ it(`Should be function`, () => {
 });
 it(`Should converts ho html`, () => {
     const document = shortcuts.document(
-        `Document title`,
+        [ `Document`, `title` ],
         shortcuts.section(
             `Section title`,
             shortcuts.paragraph(
@@ -32,7 +32,10 @@ it(`Should converts ho html`, () => {
         `    --><header class="header"><!--\r\n` +
         `        --><h1 class="title"><!--\r\n` +
         `            --><span class="sentence"><!--\r\n` +
-        `                --><span class="text-phrase">Document title</span><!--\r\n` +
+        `                --><span class="text-phrase">Document</span><!--\r\n` +
+        `            --></span><!--\r\n` +
+        `            --><span class="sentence"><!--\r\n` +
+        `                --><span class="text-phrase">title</span><!--\r\n` +
         `            --></span><!--\r\n` +
         `        --></h1><!--\r\n` +
         `    --></header><!--\r\n` +

@@ -32,8 +32,16 @@ class Sentence {
      */
     get Text() {
         return this.Phrases
-            .filter(phrase => phrase instanceof TextPhrase)
-            .reduce((a,x) => a + x.String, ``);
+            .map(phrase =>
+                phrase instanceof TextPhrase   ? phrase.String :
+                phrase instanceof LexemePhrase ? (
+                    phrase.Lexeme instanceof TextLexeme
+                        ? phrase.Lexeme.String
+                        : ``
+                ) :
+                ``,
+            )
+            .reduce((a,x) => a + x, ``);
     }
 
     /**
@@ -52,3 +60,5 @@ exports = module.exports = Sentence;
 const html = require(`../html`);
 const Phrase = require(`./phrase`);
 const TextPhrase = require(`./text-phrase`);
+const LexemePhrase = require(`./lexeme-phrase`);
+const TextLexeme = require(`./text-lexeme`);
