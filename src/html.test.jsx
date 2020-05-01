@@ -27,23 +27,23 @@ it(`Should converts common html page`, () => {
 
     expect(page.Html5.toString()).toBe(
         `<!DOCTYPE html><!--\r\n` +
-        `--><html lang="en">\r\n` +
-        `    <head>\r\n` +
-        `        <meta charset="utf-8"><!--\r\n` +
+        `--><html lang="en"><!--\r\n` +
+        `    --><head><!--\r\n` +
+        `        --><meta charset="utf-8"><!--\r\n` +
         `        --><meta name="viewport" content="width=device-width, initial-scale=1.0"><!--\r\n` +
         `        --><title>JSX Test</title><!--\r\n` +
         `        --><link rel="stylesheet" href="styles.css"><!--\r\n` +
-        `        --><script src="script.js"></script>\r\n` +
-        `    </head><!--\r\n` +
-        `    --><body>\r\n` +
-        `        <div class="&quot;my-class&quot;" style="&#39;my-style&#39;">\r\n` +
-        `            <span>Hello, <b>JSX</b>!</span><!--\r\n` +
+        `        --><script src="script.js"></script><!--\r\n` +
+        `    --></head><!--\r\n` +
+        `    --><body><!--\r\n` +
+        `        --><div class="&quot;my-class&quot;" style="&#39;my-style&#39;"><!--\r\n` +
+        `            --><span>Hello, <b>JSX</b>!</span><!--\r\n` +
         `            --><hr><!--\r\n` +
-        `            --><div>\r\n` +
-        `                <i>&lt;&amp;JavaScript X&amp;&gt;</i>\r\n` +
-        `            </div>\r\n` +
-        `        </div>\r\n` +
-        `    </body>\r\n` +
-        `</html>\r\n`,
+        `            --><div><!--\r\n` +
+        `                --><i>&lt;&amp;JavaScript X&amp;&gt;</i><!--\r\n` +
+        `            --></div><!--\r\n` +
+        `        --></div><!--\r\n` +
+        `    --></body><!--\r\n` +
+        `--></html>\r\n`,
     );
 });

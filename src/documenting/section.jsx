@@ -7,7 +7,7 @@ class Section {
      * @throws {Error}
      */
     constructor({ Title, Index = null, Parts = [] }) {
-        if (Title instanceof Paragraph); else {
+        if (Title instanceof Sentences); else {
             throw new Error; // @todo
         }
         if ((Number.isInteger(Index) && Index > 0) || Index === null); else {
@@ -22,7 +22,7 @@ class Section {
 
         /**
          * @private
-         * @type    {Paragraph}
+         * @type    {Sentences}
          */
         this.__title = Title;
         /**
@@ -39,7 +39,7 @@ class Section {
 
     /**
      * @public
-     * @type   {Paragraph}
+     * @type   {Sentences}
      */
     get Title() {
         return this.__title;
@@ -116,5 +116,5 @@ exports = module.exports = Section;
 
 
 const html = require(`../html`);
-const Paragraph = require(`./paragraph`);
+const Sentences = require(`./sentences`);
 const Part = require(`./section-part`);

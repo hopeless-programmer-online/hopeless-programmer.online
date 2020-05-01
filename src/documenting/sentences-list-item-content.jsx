@@ -1,13 +1,17 @@
-class Paragraph {
+const ListItemContent = require(`./list-item-content`);
+
+
+class SentencesListItemContent extends ListItemContent {
     /**
-     * @param  {Object}    object
-     * @param  {Sentences} object.Sentences
-     * @throws {Error}
+     * @param {Object}    object
+     * @param {Sentences} object.Sentences
      */
-    constructor({ Sentences = new SentencesClass } = {}) {
+    constructor({ Sentences }) {
         if (Sentences instanceof SentencesClass); else {
             throw new Error(); // @todo
         }
+
+        super();
 
         /**
          * @private
@@ -23,25 +27,19 @@ class Paragraph {
     get Sentences() {
         return this.__sentences;
     }
-    /**
-     * @public
-     * @type   {string}
-     */
-    get Text() {
-        return this.Sentences.reduce((a,x) => a + x.Text, ``);
-    }
 
     /**
-     * @public
-     * @returns {html.Element}
+     * @protected
+     * @override
+     * @returns   {html.Element}
      */
-    toHtml() {
-        return <p class="paragraph">{this.Sentences.toHtml()}</p>;
+    _toHtml() {
+        return this.Sentences.toHtml();
     }
 }
 
 
-exports = module.exports = Paragraph;
+exports = module.exports = SentencesListItemContent;
 
 
 const html = require(`../html`);
@@ -49,3 +47,4 @@ const Sentences = require(`./sentences`);
 
 
 const SentencesClass = Sentences;
+

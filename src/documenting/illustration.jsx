@@ -1,14 +1,14 @@
 class Illustration {
     /**
      * @param  {Object}     object
-     * @param  {?Paragraph} object.Title
+     * @param  {?Sentences} object.Title
      * @param  {Paragraph}  object.Description
      * @param  {?number}    object.Index
      * @param  {Content}    object.Content
      * @throws {Error}
      */
     constructor({ Title = null, Description, Index = null, Content }) {
-        if (Title instanceof Paragraph || Title === null); else {
+        if (Title instanceof Sentences || Title === null); else {
             throw new Error; // @todo
         }
         if (Description instanceof Paragraph); else {
@@ -23,7 +23,7 @@ class Illustration {
 
         /**
          * @private
-         * @type    {?Paragraph}
+         * @type    {?Sentences}
          */
         this.__title = Title;
         /**
@@ -45,7 +45,7 @@ class Illustration {
 
     /**
      * @public
-     * @type   {Paragraph}
+     * @type   {Sentences}
      */
     get Title() {
         const title = this.__title;
@@ -58,17 +58,17 @@ class Illustration {
     }
     /**
      * @public
-     * @type   {Paragraph}
+     * @type   {Sentences}
      */
     get __Title() {
         return this.__title;
     }
     /**
      * @public
-     * @type   {Paragraph}
+     * @type   {Sentences}
      */
     set __Title(title) {
-        if (title instanceof Paragraph); else {
+        if (title instanceof Sentences); else {
             throw new Error; // @todo
         }
         if (this.__title !== null) {
@@ -136,7 +136,7 @@ class Illustration {
         return (
             <div id={id} class="illustration">
                 <h3 class="title">
-                    {this.Title.Sentences.map(sentence => sentence.toHtml())}
+                    {this.Title.toHtml()}
                     <a class="link-button" href={`#${id}`}>#</a>
                 </h3>
                 <div class="description">
@@ -155,6 +155,7 @@ exports = module.exports = Illustration;
 
 
 const html = require(`../html`);
+const Sentences = require(`./sentences`);
 const Paragraph = require(`./paragraph`);
 const Content = require(`./illustration-content`);
 

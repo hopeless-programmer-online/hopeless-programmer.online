@@ -1,11 +1,11 @@
 class Document {
     /**
      * @param {Object}         object
-     * @param {Paragraph}      object.Title
+     * @param {Sentences}      object.Title
      * @param {Array<Section>} object.Sections
      */
     constructor({ Title, Sections = [] }) {
-        if (Title instanceof Paragraph); else {
+        if (Title instanceof Sentences); else {
             throw new Error; // @todo
         }
         if (Sections instanceof Array); else {
@@ -34,7 +34,7 @@ class Document {
 
                         if (content instanceof CodeIllustrationContent) {
                             if (illustration.__Title === null) {
-                                illustration.__Title = shortcuts.toParagraph(`Приклад коду №${codeIndex}`);
+                                illustration.__Title = shortcuts.toParagraph(`Приклад коду №${codeIndex}`).Sentences;
                             }
 
                             ++codeIndex;
@@ -48,7 +48,7 @@ class Document {
 
         /**
          * @private
-         * @type    {Paragraph}
+         * @type    {Sentences}
          */
         this.__title = Title;
         /**
@@ -60,7 +60,7 @@ class Document {
 
     /**
      * @public
-     * @type   {Paragraph}
+     * @type   {Sentences}
      */
     get Title() {
         return this.__title;
@@ -82,7 +82,7 @@ class Document {
             <article class="document">
                 <header class="header">
                     <h1 class="title">
-                        {this.Title.Sentences.map(sentence => sentence.toHtml())}
+                        {this.Title.toHtml()}
                     </h1>
                 </header>
                 <div class="sections">
@@ -98,7 +98,7 @@ exports = module.exports = Document;
 
 
 const html = require(`../html`);
-const Paragraph = require(`./paragraph`);
+const Sentences = require(`./sentences`);
 const Section = require(`./section`);
 const IllustrationsSectionPart = require(`./illustrations-section-part`);
 const CodeIllustrationContent = require(`./code-illustration-content`);

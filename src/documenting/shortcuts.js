@@ -6,7 +6,13 @@ const FigurativePhrase = require(`./figurative-phrase`);
 const LexemePhrase = require(`./lexeme-phrase`);
 const IllustrationReferencePhrase = require(`./illustration-reference-phrase`);
 const Sentence = require(`./sentence`);
+const Sentences = require(`./sentences`);
 const Paragraph = require(`./paragraph`);
+const List = require(`./list`);
+const ListItem = require(`./list-item`);
+const ListItems = require(`./list-items`);
+const ListItemContent = require(`./list-item-content`);
+const SentencesListItemContent = require(`./sentences-list-item-content`);
 const Lexeme = require(`./lexeme`);
 const TextLexeme = require(`./text-lexeme`);
 const CommentLexeme = require(`./comment-lexeme`);
@@ -23,6 +29,7 @@ const CodeIllustrationContent = require(`./code-illustration-content`);
 const SectionPart = require(`./section-part`);
 const ParagraphSectionPart = require(`./paragraph-section-part`);
 const IllustrationsSectionPart = require(`./illustrations-section-part`);
+const ListSectionPart = require(`./list-section-part`);
 const Section = require(`./section`);
 const Document = require(`./document`);
 
@@ -32,6 +39,10 @@ const Document = require(`./document`);
  * @typedef {Phrase | PhraseSource}                             PhraseLike
  * @typedef {PhraseLike}                                        SentenceSource
  * @typedef {Sentence | SentenceSource}                         SentenceLike
+ * @typedef {SentenceLike | Array<SentenceLike>}                SentencesSource
+ * @typedef {Sentences | SentencesSource}                       SentencesLike
+ * @typedef {SentencesLike}                                     ListItemSource
+ * @typedef {ListItem | ListItemSource}                         ListItemLike
  * @typedef {SentenceLike}                                      ParagraphSource
  * @typedef {Paragraph | ParagraphSource | Array<SentenceLike>} ParagraphLike
  * @typedef {string}                                            LexemeSource
@@ -147,12 +158,19 @@ function toSentence(something) {
     return sentence(something);
 }
 /**
- * @param   {Array<SentenceLike>} somethings
- * @returns {Array<Sentence>}
+ * @param   {SentencesLike} something
+ * @returns {Sentences}
  * @throws  {Error}
  */
-function toSentences(somethings) {
-    return somethings.map(toSentence);
+function toSentences(something) {
+    if (something instanceof Sentences) {
+        return something;
+    }
+    if (something instanceof Array) {
+        return new Sentences(...something.map(toSentence));
+    }
+
+    return new Sentences(toSentence(something));
 }
 /**
  * @param   {...ParagraphSource} somethings
@@ -175,13 +193,62 @@ function toParagraph(something) {
     if (something instanceof Paragraph) {
         return something;
     }
-    if (something instanceof Array) {
-        const sentences = toSentences(something);
-
-        return paragraph(...sentences);
-    }
 
     return paragraph(something);
+}
+/**
+ * @param   {Array<ParagraphLike>} somethings
+ * @returns {Array<Paragraph>}
+ * @throws  {Error}
+ */
+function toParagraphs(somethings) {
+    return somethings.map(toParagraph);
+}
+/**
+ * @param   {...ListItemLike} somethings
+ * @returns {List}
+ * @throws  {Error}
+ */
+function list(...somethings) {
+    const items = toListItems(somethings);
+
+    return new List({
+        Items : items,
+    });
+}
+/**
+ * @param   {ListItemSource} something
+ * @returns {ListItem}
+ * @throws  {Error}
+ */
+function listItem(something) {
+    const sentences = toSentences(something);
+
+    return new ListItem({
+        Content : new SentencesListItemContent({
+            Sentences : sentences,
+        }),
+    });
+}
+/**
+ * @param   {ListItemLike} something
+ * @returns {ListItem}
+ * @throws  {Error}
+ */
+function toListItem(something) {
+    if (something instanceof ListItem) {
+        return something;
+    }
+
+    return listItem(something);
+}
+/**
+ * @param   {Array<ListItemLike>} somethings
+ * @returns {ListItems}
+ * @throws  {Error}
+ */
+function toListItems(somethings) {
+    return new ListItems(...somethings.map(toListItem));
 }
 /**
  * @param   {string}        string
@@ -397,6 +464,11 @@ function sectionPart(something) {
             ],
         });
     }
+    if (something instanceof List) {
+        return new ListSectionPart({
+            List : something,
+        });
+    }
     if (something instanceof Array && something.every(x => x instanceof Illustration)) {
         return new IllustrationsSectionPart({
             Illustrations : something,
@@ -432,7 +504,7 @@ function toSectionParts(somethings) {
  * @throws  {Error}
  */
 function section(title, ...parts) {
-    const sectionTitle = toParagraph(title);
+    const sectionTitle = toParagraph(title).Sentences;
     const sectionParts = toSectionParts(parts);
 
     return new Section({
@@ -446,7 +518,7 @@ function section(title, ...parts) {
  * @returns {Document}
  */
 function document(title, ...sections) {
-    const documentTitle = toParagraph(title);
+    const documentTitle = toParagraph(title).Sentences;
 
     return new Document({
         Title : documentTitle,
@@ -466,6 +538,11 @@ exports.toSentence = toSentence;
 exports.toSentences = toSentences;
 exports.paragraph = paragraph;
 exports.toParagraph = toParagraph;
+exports.toParagraphs = toParagraphs;
+exports.list = list;
+exports.listItem = listItem;
+exports.toListItem = toListItem;
+exports.toListItems = toListItems;
 exports.lexeme = lexeme;
 exports.cm = cm;
 exports.kw = kw;

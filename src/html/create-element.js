@@ -50,19 +50,23 @@ function createElement(name, attributes, ...elements) {
 
     const elementElements = new Elements;
 
-    for (const element of elements) {
-        if (typeof element === `string`) {
-            elementElements.push(new TextElement({
-                Text : element,
-            }));
-        }
-        else if (element instanceof Array) {
-            element.forEach(x => elementElements.push(x));
-        }
-        else {
-            elementElements.push(element);
+    function process(elements) {
+        for (const element of elements) {
+            if (typeof element === `string`) {
+                elementElements.push(new TextElement({
+                    Text : element,
+                }));
+            }
+            else if (element instanceof Array) {
+                process(element);
+            }
+            else {
+                elementElements.push(element);
+            }
         }
     }
+
+    process(elements);
 
     return new StandardElement({
         Name : name,
