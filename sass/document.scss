@@ -44,6 +44,13 @@ $color-selection: #e43636;
 
 
 .sentence {
+    @extend %text-default;
+
+    &:hover {
+        border-radius: 4pt;
+        background-color: rgba(54, 179, 228, 0.1);
+    }
+
     .link {
         @extend %text-link;
     }
@@ -92,6 +99,11 @@ $color-selection: #e43636;
         &[type=string] {
             color: rgb(206, 145, 120);
         }
+    }
+}
+h1, h2, h3, h4, h5, h6, .title {
+    .sentence {
+        @extend %text-strong;
     }
 }
 
@@ -213,8 +225,6 @@ html {
                         }
                         > .parts {
                             > .paragraph {
-                                @extend %text-default;
-
                                 text-align: justify;
                             }
                             > .illustrations {
@@ -366,6 +376,8 @@ html {
         }
     }
 }
+
+
 .github-corner:hover .octo-arm{
     animation: octocat-wave 560ms ease-in-out;
 }
