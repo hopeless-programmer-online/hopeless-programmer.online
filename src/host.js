@@ -24,6 +24,7 @@ exports = module.exports = new h.Host({
                 Items : new d.IndexItems(
                     new d.IndexItem({
                         Content : new d.DocumentIndexItemContent({
+                            Url      : `/require`,
                             Document : article_require.Document,
                         }),
                     }),

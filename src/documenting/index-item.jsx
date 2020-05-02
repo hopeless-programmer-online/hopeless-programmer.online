@@ -5,7 +5,7 @@ class IndexItem {
      */
     constructor({ Content }) {
         if (Content instanceof ContentClass); else {
-            throw new Error(); // @todo
+            throw new Error; // @todo
         }
 
         /**
@@ -28,7 +28,11 @@ class IndexItem {
      * @returns {html.Element}
      */
     toHtml() {
-        return <li>{this.Content.toHtml()}</li>;
+        return (
+            <li>
+                {this.Content.toHtml()}
+            </li>
+        );
     }
 }
 

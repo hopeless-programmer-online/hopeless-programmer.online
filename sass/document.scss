@@ -117,6 +117,9 @@ h3 {
 }
 
 
+a {
+    @extend %text-default;
+}
 html, body {
     margin: 0;
     padding: 0;

@@ -44,7 +44,7 @@ class Document {
      */
     toHtml() {
         return (
-            <article class="document">
+            <article class="index">
                 <header class="header">
                     <h1 class="title">
                         {this.Title.toHtml()}
