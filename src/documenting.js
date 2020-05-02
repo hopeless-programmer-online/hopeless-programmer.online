@@ -17,6 +17,11 @@ const CodeLine = require(`./documenting/code-line`);
 const Lexeme = require(`./documenting/lexeme`);
 const TextLexeme = require(`./documenting/text-lexeme`);
 const CommentLexeme = require(`./documenting/comment-lexeme`);
+const Index = require(`./documenting/index`);
+const IndexItem = require(`./documenting/index-item`);
+const IndexItems = require(`./documenting/index-items`);
+const IndexItemContent = require(`./documenting/index-item-content`);
+const DocumentIndexItemContent = require(`./documenting/document-index-item-content`);
 const shortcuts = require(`./documenting/shortcuts`);
 
 
@@ -36,4 +41,9 @@ exports.CodeLine = CodeLine;
 exports.Lexeme = Lexeme;
 exports.TextLexeme = TextLexeme;
 exports.CommentLexeme = CommentLexeme;
+exports.Index = Index;
+exports.IndexItem = IndexItem;
+exports.IndexItems = IndexItems;
+exports.IndexItemContent = IndexItemContent;
+exports.DocumentIndexItemContent = DocumentIndexItemContent;
 exports.shortcuts = shortcuts;

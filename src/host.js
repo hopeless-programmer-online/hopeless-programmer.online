@@ -3,11 +3,13 @@ const hosting = require(`./hosting`);
 const documenting = require(`./documenting`);
 
 
+const d = documenting;
 const h = hosting;
 const s = documenting.shortcuts;
 
 
 const home = require(`./host/home`);
+const article_require = require(`./host/require`);
 
 
 exports = module.exports = new h.Host({
@@ -15,9 +17,22 @@ exports = module.exports = new h.Host({
         "/" : home,
         "/home" : home,
         "/about" : require(`./host/about`),
+        // sections
+        "/articles" : new h.IndexResource({
+            Index : new d.Index({
+                Title : s.toSentences(`Статті`),
+                Items : new d.IndexItems(
+                    new d.IndexItem({
+                        Content : new d.DocumentIndexItemContent({
+                            Document : article_require.Document,
+                        }),
+                    }),
+                ),
+            }),
+        }),
         // articles
         "/article_2" : require(`./host/article-2`),
-        "/require" : require(`./host/require`),
+        "/require" : article_require,
         // errors
         "/404" : require(`./host/404`),
         "/405" : require(`./host/405`),
