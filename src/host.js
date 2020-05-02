@@ -10,6 +10,7 @@ const s = documenting.shortcuts;
 
 const home = require(`./host/home`);
 const article_require = require(`./host/require`);
+const article_2 = require(`./host/article-2`);
 
 
 exports = module.exports = new h.Host({
@@ -28,11 +29,17 @@ exports = module.exports = new h.Host({
                             Document : article_require.Document,
                         }),
                     }),
+                    new d.IndexItem({
+                        Content : new d.DocumentIndexItemContent({
+                            Url      : `/article_2`,
+                            Document : article_2.Document,
+                        }),
+                    }),
                 ),
             }),
         }),
         // articles
-        "/article_2" : require(`./host/article-2`),
+        "/article_2" : article_2,
         "/require" : article_require,
         // errors
         "/404" : require(`./host/404`),
