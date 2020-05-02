@@ -32,15 +32,22 @@ class Sentence {
      */
     get Text() {
         return this.Phrases
-            .map(phrase =>
-                phrase instanceof TextPhrase   ? phrase.String :
-                phrase instanceof LexemePhrase ? (
-                    phrase.Lexeme instanceof TextLexeme
-                        ? phrase.Lexeme.String
-                        : ``
-                ) :
-                ``,
-            )
+            .map(phrase => {
+                if (phrase instanceof TextPhrase) {
+                    return phrase.String;
+                }
+                if (phrase instanceof LexemePhrase) {
+                    return phrase.Lexemes.map(lexeme => {
+                        if (lexeme instanceof TextLexeme) {
+                            return lexeme.String;
+                        }
+
+                        return ``;
+                    });
+                }
+
+                return ``;
+            })
             .reduce((a,x) => a + x, ``);
     }
 
