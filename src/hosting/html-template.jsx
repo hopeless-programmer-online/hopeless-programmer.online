@@ -46,6 +46,7 @@ function template(title, content) {
                     </div>
                     <nav class="navigation">
                         <a class="button" href="/home">Головна</a>
+                        <a class="button" href="/articles">Статті</a>
                         <a class="button" href="/about">Про цей сайт</a>
                     </nav>
                 </div>
