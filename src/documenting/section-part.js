@@ -18,6 +18,15 @@ class SectionPart {
     }
 
     /**
+     * @public
+     * @virtual
+     * @type    {Sentences}
+     */
+    get Sentences() {
+        return new Sentences;
+    }
+
+    /**
      * @protected
      * @abstract
      * @returns   {html.Element}
@@ -47,4 +56,4 @@ exports = module.exports = SectionPart;
 
 
 const html = require(`../html`);
-
+const Sentences = require(`./sentences`);

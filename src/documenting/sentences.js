@@ -26,6 +26,16 @@ class Sentences extends Array {
     get Text() {
         return this.reduce((text, sentence) => text + sentence.Text, ``);
     }
+    /**
+     * @public
+     * @type   {Phrases}
+     */
+    get Phrases() {
+        return this.reduce(
+            (phrases, sentence) => new Phrases(...phrases, ...sentence.Phrases),
+            new Phrases,
+        );
+    }
 
     /**
      * @public
@@ -41,4 +51,5 @@ exports = module.exports = Sentences;
 
 
 const html = require(`../html`);
+const Phrases = require(`./phrases`);
 const Sentence = require(`./sentence`);

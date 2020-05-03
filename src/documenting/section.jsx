@@ -89,6 +89,26 @@ class Section {
     get Parts() {
         return this.__parts;
     }
+    /**
+     * @public
+     * @type   {Phrases}
+     */
+    get Phrases() {
+        return this.Sentences.Phrases;
+    }
+    /**
+     * @public
+     * @type   {Sentences}
+     */
+    get Sentences() {
+        const sentences = this.Parts
+            .reduce(
+                (sentences, part) => new Sentences(...sentences, ...part.Sentences),
+                new Sentences,
+            );
+
+        return sentences;
+    }
 
     /**
      * @public

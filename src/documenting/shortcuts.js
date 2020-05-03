@@ -1,17 +1,19 @@
 const Phrase = require(`./phrase`);
+const Phrases = require(`./phrases`);
 const TextPhrase = require(`./text-phrase`);
 const LinkPhrase = require(`./link-phrase`);
+const NotePhrase = require(`./note-phrase`);
 const EmphasisPhrase = require(`./emphasis-phrase`);
 const FigurativePhrase = require(`./figurative-phrase`);
 const LexemePhrase = require(`./lexeme-phrase`);
 const IllustrationReferencePhrase = require(`./illustration-reference-phrase`);
 const Sentence = require(`./sentence`);
 const Sentences = require(`./sentences`);
+const Note = require(`./note`);
 const Paragraph = require(`./paragraph`);
 const List = require(`./list`);
 const ListItem = require(`./list-item`);
 const ListItems = require(`./list-items`);
-const ListItemContent = require(`./list-item-content`);
 const SentencesListItemContent = require(`./sentences-list-item-content`);
 const Lexeme = require(`./lexeme`);
 const TextLexeme = require(`./text-lexeme`);
@@ -26,6 +28,7 @@ const Code = require(`./code`);
 const Illustration = require(`./illustration`);
 const IllustrationContent = require(`./illustration-content`);
 const CodeIllustrationContent = require(`./code-illustration-content`);
+const Sections = require(`./sections`);
 const SectionPart = require(`./section-part`);
 const ParagraphSectionPart = require(`./paragraph-section-part`);
 const IllustrationsSectionPart = require(`./illustrations-section-part`);
@@ -65,6 +68,17 @@ function link(string, url) {
     return new LinkPhrase({
         String : string,
         Url    : url,
+    });
+}
+/**
+ * @param   {SentencesLike} something
+ * @returns {NotePhrase}
+ */
+function note(something) {
+    return new NotePhrase({
+        Note : new Note({
+            Sentences : toSentences(something),
+        }),
     });
 }
 /**
@@ -128,11 +142,11 @@ function toPhrase(something) {
 }
 /**
  * @param   {Array<PhraseLike>} somethings
- * @returns {Array<Phrase>}
+ * @returns {Phrases}
  * @throws  {Error}
  */
 function toPhrases(somethings) {
-    return somethings.map(toPhrase);
+    return new Phrases(...somethings.map(toPhrase));
 }
 /**
  * @param  {...SentenceSource} somethings
@@ -522,12 +536,13 @@ function document(title, ...sections) {
 
     return new Document({
         Title : documentTitle,
-        Sections : sections,
+        Sections : new Sections(...sections),
     });
 }
 
 
 exports.link = link;
+exports.note = note;
 exports.emphasis = emphasis;
 exports.figurative = figurative;
 exports.phrase = phrase;

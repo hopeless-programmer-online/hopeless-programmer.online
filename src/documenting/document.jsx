@@ -1,19 +1,24 @@
 class Document {
     /**
-     * @param {Object}         object
-     * @param {Sentences}      object.Title
-     * @param {Array<Section>} object.Sections
+     * @param {Object}    object
+     * @param {Sentences} object.Title
+     * @param {Sections}  object.Sections
      */
-    constructor({ Title, Sections = [] }) {
+    constructor({ Title, Sections = new SectionsClass }) {
         if (Title instanceof Sentences); else {
             throw new Error; // @todo
         }
-        if (Sections instanceof Array); else {
+        if (Sections instanceof SectionsClass); else {
             throw new Error; // @todo
         }
-        if (Sections.every(section => section instanceof Section)); else {
-            throw new Error; // @todo
-        }
+
+        const notes = new Notes(
+            ...Sections.Phrases
+                .filter(phrase => phrase instanceof NotePhrase)
+                .map(phrase => phrase.Note)
+        );
+
+        notes.forEach((note, index) => note.__Index = index + 1);
 
         let illustrationIndex = 1;
         let codeIndex = 1;
@@ -56,6 +61,11 @@ class Document {
          * @type    {Array<Section>}
          */
         this.__sections = Sections;
+        /**
+         * @private
+         * @type    {Notes}
+         */
+        this.__notes = notes;
     }
 
     /**
@@ -88,6 +98,13 @@ class Document {
                 <div class="sections">
                     {this.Sections.map(section => section.toHtml())}
                 </div>
+                <footer>
+                    <table>
+                        <tbody>
+                            {this.__notes.toHtml()}
+                        </tbody>
+                    </table>
+                </footer>
             </article>
         );
     }
@@ -98,8 +115,14 @@ exports = module.exports = Document;
 
 
 const html = require(`../html`);
+const NotePhrase = require(`./note-phrase`);
 const Sentences = require(`./sentences`);
+const Notes = require(`./notes`);
 const Section = require(`./section`);
+const Sections = require(`./sections`);
 const IllustrationsSectionPart = require(`./illustrations-section-part`);
 const CodeIllustrationContent = require(`./code-illustration-content`);
 const shortcuts = require(`./shortcuts`);
+
+
+const SectionsClass = Sections;

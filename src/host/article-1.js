@@ -6,6 +6,7 @@ const h = hosting;
 const s = documenting.shortcuts;
 
 
+const note_1 = s.note(s.sentence(`У цій статті я буду вживати термін `, s.figurative(`перекриття`), ` замість звичного `, s.figurative(`приховування`), `. `));
 // const code_1 = require(`./article-2/code-1`);
 
 
@@ -13,7 +14,7 @@ exports = module.exports = new h.DocumentResource({
     Document : s.document([ `Думки вголос. `, `Незворотне перекриття ідентифікаторів. ` ],
         s.section(``, ...[
             s.paragraph(...[
-                s.sentence(`Явище `, s.figurative(`перекриття`), ` (`, s.figurative(`overlapping`), `) ідентифікаторів відоме ще з часів перших мов програмування. `),
+                s.sentence(`Явище `, s.figurative(`перекриття`), note_1, ` (`, s.figurative(`overlapping`), `) ідентифікаторів відоме ще з часів перших мов програмування. `),
                 s.sentence(`Мене турбує той факт що подібна проблема дожила до наших днів і зустрічається майже в кожній сучасній мові. `),
                 s.sentence(`Я вирішив присвятити цій темі окрему статтю, в якій і спробую викласти свої погляди на ситуацію. `),
             ]),
