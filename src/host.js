@@ -10,6 +10,7 @@ const s = documenting.shortcuts;
 
 const home = require(`./host/home`);
 const article_require = require(`./host/require`);
+const article_1 = require(`./host/article-1`);
 const article_2 = require(`./host/article-2`);
 
 
@@ -31,6 +32,12 @@ exports = module.exports = new h.Host({
                     }),
                     new d.IndexItem({
                         Content : new d.DocumentIndexItemContent({
+                            Url      : `/article_1`,
+                            Document : article_1.Document,
+                        }),
+                    }),
+                    new d.IndexItem({
+                        Content : new d.DocumentIndexItemContent({
                             Url      : `/article_2`,
                             Document : article_2.Document,
                         }),
@@ -39,6 +46,7 @@ exports = module.exports = new h.Host({
             }),
         }),
         // articles
+        "/article_1" : article_1,
         "/article_2" : article_2,
         "/require" : article_require,
         // errors
