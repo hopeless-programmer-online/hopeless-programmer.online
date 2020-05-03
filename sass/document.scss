@@ -75,6 +75,10 @@ $color-selection: #e43636;
     }
     &.keyword {
         color: rgb(217, 135, 195);
+
+        &[name=this] {
+            color: rgb(86, 156, 214);
+        }
     }
     &.identifier {
         color: rgb(156, 220, 254);
