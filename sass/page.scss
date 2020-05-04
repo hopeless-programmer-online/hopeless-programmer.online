@@ -50,6 +50,18 @@ article.hp-page {
                 }
             }
         }
+        // navbar
+        > nav > ul {
+            // flex
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            // size
+            margin: 0;
+            padding: 0;
+            // ul
+            list-style-type: none;
+        }
     }
     > section {
         // debug
