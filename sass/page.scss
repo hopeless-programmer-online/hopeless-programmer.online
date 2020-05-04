@@ -7,10 +7,49 @@ article.hp-page {
     align-items: stretch;
     // size
     height: 100%;
+    max-width: 8.5in;
+    margin: auto;
 
     > header {
         // debug
         background-color: tomato;
+
+        // banner
+        > figure {
+            // flex
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            // size
+            margin: 0;
+
+            > figcaption {
+                // flex
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                align-items: flex-start;
+                // flex-item
+                flex-grow: 1;
+                // size
+                width: min-content; // keeps the blockquote on the top, until the h2 fits
+
+                > h2 {
+                    // size
+                    margin: 0;
+                }
+                > blockquote {
+                    // flex
+                    display: flex;
+                    // flex-item
+                    align-self: center;
+                    // size
+                    margin: 0;
+                }
+            }
+        }
     }
     > section {
         // debug
