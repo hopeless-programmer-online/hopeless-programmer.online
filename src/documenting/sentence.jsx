@@ -53,7 +53,7 @@ class Sentence {
      * @returns {html.Element}
      */
     toHtml() {
-        return <span class="sentence">{this.Phrases.toHtml()}</span>;
+        return <span class="hp-class-sentence">{this.Phrases.toHtml()}</span>;
     }
 }
 

@@ -18,6 +18,7 @@ function template(title, content) {
                 <link rel="stylesheet" href="css/common.css" />
                 <link rel="stylesheet" href="css/page.css" />
                 <link rel="stylesheet" href="css/index.css" />
+                <link rel="stylesheet" href="css/sentence.css" />
                 {/* <script src="script.js" /> */}
             </head>
             <body class="hp-class-page">
@@ -25,14 +26,12 @@ function template(title, content) {
                     <figure>
                         <img alt="But... I..." src="media/but_i.png" style="height: 1in"/>
                         <figcaption>
-                            <h2>Безнадійний Програміст</h2>
+                            <h2>
+                                {s.sentence(`Безнадійний Програміст`).toHtml()}
+                            </h2>
                             <blockquote>
                                 <p>
-                                    <span class="sentence">
-                                        <span class="text-phrase">...коли не можеш оголосити змінну </span>
-                                        <span class="lexeme-phrase"><span class="keyword lexeme" name="case">case</span></span>
-                                        <span class="text-phrase">, тому що це службове слово...</span>
-                                    </span>
+                                    {s.sentence(s.figurative(`...коли не можеш оголосити змінну `), s.kw(`case`), s.figurative(`, тому що це службове слово...`)).toHtml()}
                                 </p>
                             </blockquote>
                         </figcaption>
@@ -114,3 +113,4 @@ exports = module.exports = template;
 
 
 const html = require(`../html`);
+const s = require(`../documenting/shortcuts`);
