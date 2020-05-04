@@ -18,7 +18,7 @@ function template(title, content) {
                 {/* <link rel="stylesheet" href="css/document.css" /> */}
                 {/* <script src="script.js" /> */}
             </head>
-            <body>
+            <body class="hp-page">
                 {/* <a href="https://github.com/hopeless-programmer-online/hopeless-programmer.online" class="github-corner" aria-label="View source on GitHub">
                     <svg
                         width="80"
@@ -32,56 +32,54 @@ function template(title, content) {
                         <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
                     </svg>
                 </a> */}
-                <article class="hp-page">
-                    <header>
-                        <figure>
-                            <img alt="But... I..." src="media/but_i.png" style="height: 1in"/>
-                            <figcaption>
-                                <h2>Безнадійний Програміст</h2>
-                                <blockquote>
-                                    <p>
-                                        <span class="sentence">
-                                            <span class="text-phrase">...коли не можеш оголосити змінну </span>
-                                            <span class="lexeme-phrase"><span class="keyword lexeme" name="case">case</span></span>
-                                            <span class="text-phrase">, тому що це службове слово...</span>
-                                        </span>
-                                    </p>
-                                </blockquote>
-                            </figcaption>
-                        </figure>
-                        <nav>
-                            <ul>
-                                <li><a href="/home">Головна</a></li>
-                                <li><a href="/articles">Статті</a></li>
-                                <li><a href="/about">Про цей сайт</a></li>
-                            </ul>
+                <header>
+                    <figure>
+                        <img alt="But... I..." src="media/but_i.png" style="height: 1in"/>
+                        <figcaption>
+                            <h2>Безнадійний Програміст</h2>
+                            <blockquote>
+                                <p>
+                                    <span class="sentence">
+                                        <span class="text-phrase">...коли не можеш оголосити змінну </span>
+                                        <span class="lexeme-phrase"><span class="keyword lexeme" name="case">case</span></span>
+                                        <span class="text-phrase">, тому що це службове слово...</span>
+                                    </span>
+                                </p>
+                            </blockquote>
+                        </figcaption>
+                    </figure>
+                    <nav>
+                        <ul>
+                            <li><a href="/home">Головна</a></li>
+                            <li><a href="/articles">Статті</a></li>
+                            <li><a href="/about">Про цей сайт</a></li>
+                        </ul>
+                    </nav>
+                </header>
+                <main>
+                    {content}
+                </main>
+                <footer>
+                    <address class="address">
+                        <small class="summary">hopeless-programmer.online</small>
+                        <br />
+                        <small class="years">2020 - {(new Date).getFullYear().toString()}</small>
+                        <br />
+                        <small class="contacts">Адміністрація: <a href="mailto: me@hopeless-programmer.online">me@hopeless-programmer.online</a></small>
+                    </address>
+                    <div class="references">
+                        <small class="caption">Цей сайт не існував би без цих відкритих технологій</small>
+                        <nav class="resources">
+                            <a class="resource" href="https://en.wikipedia.org/wiki/HTML5"><abbr title="HTML | Hypertext Markup Language"><img src="media/html5.svg" alt="HTML5" style="width: 1in; height: 1in" /></abbr></a>
+                            <a class="resource" href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets"><abbr title="CSS | Cascading Style Sheets"><img src="media/css3.svg" alt="CSS3" style="width: 1in; height: 1in" /></abbr></a>
+                            <a class="resource" href="https://en.wikipedia.org/wiki/ECMAScript#ES2015"><abbr title="ES6 | ECMAScript 6"><img src="media/es6.svg" alt="ES6" style="width: 1in; height: 1in" /></abbr></a>
+                            <a class="resource" href="https://en.wikipedia.org/wiki/React_(web_framework)#JSX"><abbr title="JSX | JavaScript XML"><img src="media/jsx.png" alt="JSX" style="width: 1in; height: 1in" /></abbr></a>
+                            <a class="resource" href="https://en.wikipedia.org/wiki/Sass_(stylesheet_language)"><abbr title="SASS | Syntactically Awesome Style Sheets"><img src="media/sass.svg" alt="SASS" style="width: 1in; height: 1in" /></abbr></a>
+                            <a class="resource" href="https://en.wikipedia.org/wiki/Node.js"><abbr title="NodeJS"><img src="media/nodejs.svg" alt="NodeJS" style="width: 1in; height: 1in" /></abbr></a>
+                            <a class="resource" href="https://jestjs.io"><abbr title="Jest"><img src="media/jest.svg" alt="Jest" style="width: 1in; height: 1in" /></abbr></a>
                         </nav>
-                    </header>
-                    <section>
-                        {content}
-                    </section>
-                    <footer>
-                        <address class="address">
-                            <small class="summary">hopeless-programmer.online</small>
-                            <br />
-                            <small class="years">2020 - {(new Date).getFullYear().toString()}</small>
-                            <br />
-                            <small class="contacts">Адміністрація: <a href="mailto: me@hopeless-programmer.online">me@hopeless-programmer.online</a></small>
-                        </address>
-                        <div class="references">
-                            <small class="caption">Цей сайт не існував би без цих відкритих технологій</small>
-                            <nav class="resources">
-                                <a class="resource" href="https://en.wikipedia.org/wiki/HTML5"><abbr title="HTML | Hypertext Markup Language"><img src="media/html5.svg" alt="HTML5" style="width: 1in; height: 1in" /></abbr></a>
-                                <a class="resource" href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets"><abbr title="CSS | Cascading Style Sheets"><img src="media/css3.svg" alt="CSS3" style="width: 1in; height: 1in" /></abbr></a>
-                                <a class="resource" href="https://en.wikipedia.org/wiki/ECMAScript#ES2015"><abbr title="ES6 | ECMAScript 6"><img src="media/es6.svg" alt="ES6" style="width: 1in; height: 1in" /></abbr></a>
-                                <a class="resource" href="https://en.wikipedia.org/wiki/React_(web_framework)#JSX"><abbr title="JSX | JavaScript XML"><img src="media/jsx.png" alt="JSX" style="width: 1in; height: 1in" /></abbr></a>
-                                <a class="resource" href="https://en.wikipedia.org/wiki/Sass_(stylesheet_language)"><abbr title="SASS | Syntactically Awesome Style Sheets"><img src="media/sass.svg" alt="SASS" style="width: 1in; height: 1in" /></abbr></a>
-                                <a class="resource" href="https://en.wikipedia.org/wiki/Node.js"><abbr title="NodeJS"><img src="media/nodejs.svg" alt="NodeJS" style="width: 1in; height: 1in" /></abbr></a>
-                                <a class="resource" href="https://jestjs.io"><abbr title="Jest"><img src="media/jest.svg" alt="Jest" style="width: 1in; height: 1in" /></abbr></a>
-                            </nav>
-                        </div>
-                    </footer>
-                </article>
+                    </div>
+                </footer>
             </body>
         </html>
     );
