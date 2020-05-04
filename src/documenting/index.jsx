@@ -44,15 +44,17 @@ class Document {
      */
     toHtml() {
         return (
-            <article class="index">
+            <article class="hp-class-index">
                 <header>
                     <h1>
                         {this.Title.toHtml()}
                     </h1>
                 </header>
-                <ul>
-                    {this.Items.toHtml()}
-                </ul>
+                <section>
+                    <ul>
+                        {this.Items.toHtml()}
+                    </ul>
+                </section>
             </article>
         );
     }

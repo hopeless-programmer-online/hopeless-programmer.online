@@ -60,6 +60,9 @@ exports = module.exports = new h.Host({
         "/css/page.css" : new h.SASSResource({
             Path : path.join(__dirname, `../sass/page.scss`),
         }),
+        "/css/index.css" : new h.SASSResource({
+            Path : path.join(__dirname, `../sass/index.scss`),
+        }),
         "/css/document.css" : new h.SASSResource({
             Path : path.join(__dirname, `../sass/document.scss`),
         }),

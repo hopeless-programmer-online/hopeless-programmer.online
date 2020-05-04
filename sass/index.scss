@@ -1,0 +1,36 @@
+article.hp-class-index {
+    margin-left: 4pt;
+    margin-right: 4pt;
+
+    > header {
+        // text
+        text-align: center;
+    }
+    > section > ul {
+        // debug
+        // background-color: tomato;
+        // ul
+        list-style-type: none;
+        // size
+        padding: 0;
+
+        > li {
+            // size
+            padding-left: 4pt;
+            // border
+            border-left-color: royalblue;
+            border-left-width: 16pt;
+            border-left-style: solid;
+
+            &:hover {
+                border-color: tomato;
+            }
+
+            > article {
+                > footer {
+                    text-align: right;
+                }
+            }
+        }
+    }
+}

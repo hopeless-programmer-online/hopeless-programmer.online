@@ -12,7 +12,7 @@ body.hp-class-page {
 
     > header {
         // debug
-        background-color: tomato;
+        // background-color: tomato;
 
         // banner
         > figure {
@@ -65,13 +65,13 @@ body.hp-class-page {
     }
     > main {
         // debug
-        background-color: royalblue;
+        // background-color: royalblue;
         // flex
         flex-grow: 1;
     }
     > footer {
         // debug
-        background-color: wheat;
+        // background-color: wheat;
         // text
         text-align: center;
 
@@ -80,12 +80,14 @@ body.hp-class-page {
             margin: 0;
 
             > dl {
+                // flex
                 display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
                 justify-content: center;
 
                 > dd {
+                    // size
                     margin: 4pt;
                 }
             }

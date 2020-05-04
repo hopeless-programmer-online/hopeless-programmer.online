@@ -63,7 +63,7 @@ class DocumentIndexItemContent extends IndexItemContent {
             ;
 
         return (
-            <article class="document index item">
+            <article>
                 <header>
                     <h2>
                         <a href={this.Url}>
