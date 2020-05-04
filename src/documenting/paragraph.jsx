@@ -36,7 +36,7 @@ class Paragraph {
      * @returns {html.Element}
      */
     toHtml() {
-        return <p class="paragraph">{this.Sentences.toHtml()}</p>;
+        return <p>{this.Sentences.toHtml()}</p>;
     }
 }
 

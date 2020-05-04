@@ -26,6 +26,10 @@
     // text
     color: palette.$text-important;
 
+    &:visited {
+        // color
+        color: royalblue;
+    }
     &:hover {
         // color
         color: palette.$text-hover;

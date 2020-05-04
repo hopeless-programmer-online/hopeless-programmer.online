@@ -17,8 +17,9 @@ function template(title, content) {
                 <link rel="icon" href="media/favicon.ico" type="image/x-icon" />
                 <link rel="stylesheet" href="css/common.css" />
                 <link rel="stylesheet" href="css/page.css" />
-                <link rel="stylesheet" href="css/index.css" />
                 <link rel="stylesheet" href="css/sentence.css" />
+                <link rel="stylesheet" href="css/index.css" />
+                <link rel="stylesheet" href="css/document.css" />
                 {/* <script src="script.js" /> */}
             </head>
             <body class="hp-class-page">

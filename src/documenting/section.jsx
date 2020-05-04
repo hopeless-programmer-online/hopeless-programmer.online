@@ -119,13 +119,11 @@ class Section {
 
         return (
             <section id={id} class="section">
-                <h2 class="title">
-                    <a class="link-button" href={`#${id}`}>#</a>
+                <h2>
+                    <a href={`#${id}`}>§</a>
                     {this.Title.toHtml()}
                 </h2>
-                <div class="parts">
-                    {this.Parts.map(part => part.toHtml())}
-                </div>
+                {this.Parts.map(part => part.toHtml())}
             </section>
         );
     }

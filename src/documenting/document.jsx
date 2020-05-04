@@ -105,15 +105,13 @@ class Document {
      */
     toHtml() {
         return (
-            <article class="document">
-                <header class="header">
-                    <h1 class="title">
+            <article class="hp-class-document">
+                <header>
+                    <h1>
                         {this.Title.toHtml()}
                     </h1>
                 </header>
-                <div class="sections">
-                    {this.Sections.map(section => section.toHtml())}
-                </div>
+                {this.Sections.map(section => section.toHtml())}
                 <footer>
                     <table>
                         <tbody>
