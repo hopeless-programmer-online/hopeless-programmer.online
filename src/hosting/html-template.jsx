@@ -62,7 +62,7 @@ function template(title, content) {
                     {content}
                 </main>
                 <footer>
-                    <address class="address">
+                    <address>
                         <a href="">hopeless-programmer.online</a>
                         <br />
                         <time datetime="2020-04-10">2020</time> - <time datetime={date.toISOString()}>{date.getFullYear().toString().padStart(4, 0)}</time>
@@ -71,7 +71,7 @@ function template(title, content) {
                     </address>
                     <figure>
                         <figcaption>Цей сайт не існував би без цих відкритих технологій</figcaption>
-                        <dl id="hp-id-references">
+                        <dl>
                             <dd>
                                 <a href="https://en.wikipedia.org/wiki/HTML5">
                                     <abbr title="HTML | Hypertext Markup Language">

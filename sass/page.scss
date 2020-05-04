@@ -72,5 +72,23 @@ body.hp-class-page {
     > footer {
         // debug
         background-color: wheat;
+        // text
+        text-align: center;
+
+        > figure {
+            // size
+            margin: 0;
+
+            > dl {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+
+                > dd {
+                    margin: 4pt;
+                }
+            }
+        }
     }
 }
