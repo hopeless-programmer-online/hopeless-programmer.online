@@ -278,27 +278,35 @@ html {
                                         border-color: #73a4db;
                                     }
 
-                                    > .title {
-                                        @extend %text-strong;
-
-                                        width: max-content;
-                                        text-align: center;
-                                        margin: 0;
+                                    > figcaption {
                                         order: 2;
+                                        display: flex;
+                                        flex-direction: column;
+                                        flex-wrap: nowrap;
+                                        align-items: center;
 
-                                        > .link-button {
-                                            @extend %text-link;
+                                        > .title {
+                                            @extend %text-strong;
+
+                                            width: max-content;
+                                            text-align: center;
+                                            margin: 0;
+                                            order: 2;
+
+                                            > .link-button {
+                                                @extend %text-link;
+                                            }
                                         }
-                                    }
-                                    > .description {
-                                        @extend %text-default;
+                                        > .description {
+                                            @extend %text-default;
 
-                                        text-align: center;
-                                        // word-break: break-all;
-                                        // word-wrap: break-word;
-                                        // flex-grow: 1;
-                                        order: 3;
-                                        font-size: smaller;
+                                            text-align: center;
+                                            // word-break: break-all;
+                                            // word-wrap: break-word;
+                                            // flex-grow: 1;
+                                            order: 3;
+                                            font-size: smaller;
+                                        }
                                     }
                                     > .content {
                                         order: 1;

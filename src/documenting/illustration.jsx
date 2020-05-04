@@ -134,18 +134,20 @@ class Illustration {
         const id = `illustration-${this.Index}`;
 
         return (
-            <div id={id} class="illustration">
-                <h3 class="title">
-                    {this.Title.toHtml()}
-                    <a class="link-button" href={`#${id}`}>#</a>
-                </h3>
-                <div class="description">
-                    {this.Description.Sentences.map(sentence => sentence.toHtml())}
-                </div>
+            <figure id={id} class="illustration">
                 <div class="content">
                     {this.Content.toHtml()}
                 </div>
-            </div>
+                <figcaption>
+                    <h3 class="title">
+                        {this.Title.toHtml()}
+                        <a class="link-button" href={`#${id}`}>#</a>
+                    </h3>
+                    <div class="description">
+                        {this.Description.Sentences.map(sentence => sentence.toHtml())}
+                    </div>
+                </figcaption>
+            </figure>
         );
     }
 }
