@@ -35,11 +35,18 @@ class Code {
      */
     toHtml() {
         return (
-            <table class="code">
-                <tbody>
-                    {this.Lines.map(line => line.toHtml())}
-                </tbody>
-            </table>
+            <code class="hp-class-code">
+                {
+                    this.Lines.reduce((lines, line) =>
+                        [ ...lines, line.toHtml(), <br /> ]
+                    ,[])
+                }
+            </code>
+            // <table class="code">
+            //     <tbody>
+            //         {this.Lines.map(line => line.toHtml())}
+            //     </tbody>
+            // </table>
         );
     }
 }

@@ -1,11 +1,30 @@
 @use "sass/text";
 
 article.hp-class-document {
+    > header {
+        > h1 {
+            // text
+            text-align: center;
+
+            > span.hp-class-sentence {
+                display: block;
+            }
+        }
+    }
     > section {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-end;
+
         > h2 {
             // flex
             display: flex;
             flex-direction: row;
+            // flex-item
+            order: 1;
+            flex-basis: 100%;
 
             > a {
                 @include text.link;
@@ -20,11 +39,47 @@ article.hp-class-document {
             }
         }
         > p {
+            // flex-item
+            order: 2;
             // text
             text-align: justify;
 
             > span.hp-class-sentence:first-child {
                 margin-left: 16pt;
+            }
+        }
+        > figure {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            // flex-item
+            order: 2;
+            // size
+            width: min-content;
+            padding: 4pt;
+            // border
+            border-width: 2pt;
+            border-style: dashed;
+            border-color: rgb(30, 30, 30);
+
+            > figcaption {
+                > h3 {
+                    // text
+                    white-space: pre;
+                    text-align: center;
+                    // size
+                    margin: 0;
+
+                    > a {
+                        @include text.link;
+                    }
+                }
+                > p {
+                    // text
+                    text-align: center;
+                    // size
+                    margin: 0;
+                }
             }
         }
     }

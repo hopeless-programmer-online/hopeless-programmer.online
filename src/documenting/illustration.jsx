@@ -135,17 +135,13 @@ class Illustration {
 
         return (
             <figure id={id} class="illustration">
-                <div class="content">
-                    {this.Content.toHtml()}
-                </div>
+                {this.Content.toHtml()}
                 <figcaption>
                     <h3 class="title">
                         {this.Title.toHtml()}
-                        <a class="link-button" href={`#${id}`}>#</a>
+                        <a href={`#${id}`}>§</a>
                     </h3>
-                    <div class="description">
-                        {this.Description.Sentences.map(sentence => sentence.toHtml())}
-                    </div>
+                    {this.Description.toHtml()}
                 </figcaption>
             </figure>
         );

@@ -1,0 +1,14 @@
+@use "sass/text";
+
+code.hp-class-code {
+    @include text.code;
+
+    // size
+    display: inline-block;
+    padding: 4pt;
+    // text
+    white-space: pre;
+    // color
+    background-color: rgb(30, 30, 30);
+    color: rgb(240, 240, 240);
+}

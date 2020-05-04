@@ -35,3 +35,11 @@
         color: palette.$text-hover;
     }
 }
+@mixin code {
+    /* font */
+    font-family : consolas;
+    font-size   : 11pt;
+    font-style  : normal;
+    font-weight : normal;
+    line-height : normal;
+}

@@ -26,6 +26,7 @@ const IdentifierLexemeType = require(`./identifier-lexeme-type`);
 const CodeLine = require(`./code-line`);
 const Code = require(`./code`);
 const Illustration = require(`./illustration`);
+const Illustrations = require(`./illustrations`);
 const IllustrationContent = require(`./illustration-content`);
 const CodeIllustrationContent = require(`./code-illustration-content`);
 const Sections = require(`./sections`);
@@ -485,7 +486,7 @@ function sectionPart(something) {
     }
     if (something instanceof Array && something.every(x => x instanceof Illustration)) {
         return new IllustrationsSectionPart({
-            Illustrations : something,
+            Illustrations : new Illustrations(...something),
         });
     }
 
