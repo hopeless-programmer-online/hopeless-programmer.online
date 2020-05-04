@@ -54,6 +54,12 @@ exports = module.exports = new h.Host({
         "/405" : require(`./host/405`),
         "/500" : require(`./host/500`),
         // sass
+        "/css/common.css" : new h.SASSResource({
+            Path : path.join(__dirname, `../sass/common.scss`),
+        }),
+        "/css/page.css" : new h.SASSResource({
+            Path : path.join(__dirname, `../sass/page.scss`),
+        }),
         "/css/document.css" : new h.SASSResource({
             Path : path.join(__dirname, `../sass/document.scss`),
         }),
