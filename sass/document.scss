@@ -120,6 +120,15 @@ h3 {
     font-size: 14pt;
 }
 
+.index {
+    > ul > li > article.document.index.item {
+        > footer {
+            @extend %text-default;
+
+            text-align: right;
+        }
+    }
+}
 
 a {
     @extend %text-default;

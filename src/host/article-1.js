@@ -31,6 +31,9 @@ const code_13 = require(`./article-1/code-13`);
 
 exports = module.exports = new h.DocumentResource({
     Document : s.document([ `Думки вголос. `, `Незворотне перекриття ідентифікаторів. ` ],
+        {
+            Date : new Date(`2019-02-07T00:00:00.000Z`),
+        },
         s.section(``, ...[
             s.paragraph(...[
                 s.sentence(`Явище `, s.figurative(`перекриття`), note_1, ` (`, s.figurative(`overlapping`), `) ідентифікаторів відоме ще з часів перших мов програмування. `),

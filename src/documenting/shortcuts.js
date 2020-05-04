@@ -528,14 +528,17 @@ function section(title, ...parts) {
 }
 /**
  * @param   {ParagraphLike} title
+ * @param   {Object}        object
+ * @param   {Date}          object.Date
  * @param   {...Section}    sections
  * @returns {Document}
  */
-function document(title, ...sections) {
+function document(title, { Date = new DateClass }, ...sections) {
     const documentTitle = toSentences(title);
 
     return new Document({
         Title : documentTitle,
+        Date,
         Sections : new Sections(...sections),
     });
 }
@@ -580,3 +583,6 @@ exports.toSectionPart = toSectionPart;
 exports.toSectionParts = toSectionParts;
 exports.section = section;
 exports.document = document;
+
+
+const DateClass = Date;

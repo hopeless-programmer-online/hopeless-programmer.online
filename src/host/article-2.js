@@ -23,6 +23,9 @@ const code_13 = require(`./article-2/code-13`);
 
 exports = module.exports = new h.DocumentResource({
     Document : s.document([ `Думки вголос. `, `Зарезервовані слова. ` ],
+        {
+            Date : new Date(`2019-01-22T00:00:00.000Z`),
+        },
         s.section(``, ...[
             s.paragraph(...[
                 s.sentence(`Дуже часто мови програмування грішать тим, що змішують в одну купу ідентифікатори та ключові слова. `),

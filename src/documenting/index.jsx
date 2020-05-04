@@ -45,8 +45,8 @@ class Document {
     toHtml() {
         return (
             <article class="index">
-                <header class="header">
-                    <h1 class="title">
+                <header>
+                    <h1>
                         {this.Title.toHtml()}
                     </h1>
                 </header>

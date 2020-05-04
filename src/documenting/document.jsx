@@ -2,10 +2,14 @@ class Document {
     /**
      * @param {Object}    object
      * @param {Sentences} object.Title
+     * @param {Date}      object.Date
      * @param {Sections}  object.Sections
      */
-    constructor({ Title, Sections = new SectionsClass }) {
+    constructor({ Title, Date = new DateClass, Sections = new SectionsClass }) {
         if (Title instanceof Sentences); else {
+            throw new Error; // @todo
+        }
+        if (Date instanceof DateClass); else {
             throw new Error; // @todo
         }
         if (Sections instanceof SectionsClass); else {
@@ -58,6 +62,11 @@ class Document {
         this.__title = Title;
         /**
          * @private
+         * @type    {Date}
+         */
+        this.__date = Date;
+        /**
+         * @private
          * @type    {Array<Section>}
          */
         this.__sections = Sections;
@@ -74,6 +83,13 @@ class Document {
      */
     get Title() {
         return this.__title;
+    }
+    /**
+     * @public
+     * @type   {Date}
+     */
+    get Date() {
+        return this.__date;
     }
     /**
      * @public
@@ -125,4 +141,5 @@ const CodeIllustrationContent = require(`./code-illustration-content`);
 const shortcuts = require(`./shortcuts`);
 
 
+const DateClass = Date;
 const SectionsClass = Sections;

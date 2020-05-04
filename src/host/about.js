@@ -7,7 +7,7 @@ const s = documenting.shortcuts;
 
 
 exports = module.exports = new h.DocumentResource({
-    Document : s.document(`Про цей сайт`,
+    Document : s.document(`Про цей сайт`, {},
         s.section(`Навіщо потрібен цей сайт?`,
             s.paragraph(
                 `Цей маленький сайт є місцем, де я зберігаю свої ідеї, проекти, а також матеріали якими я хочу поділитись зі світом. `,

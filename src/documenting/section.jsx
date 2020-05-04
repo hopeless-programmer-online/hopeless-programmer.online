@@ -118,7 +118,7 @@ class Section {
         const id = `section-${this.Index}`;
 
         return (
-            <div id={id} class="section">
+            <section id={id} class="section">
                 <h2 class="title">
                     <a class="link-button" href={`#${id}`}>#</a>
                     {this.Title.toHtml()}
@@ -126,7 +126,7 @@ class Section {
                 <div class="parts">
                     {this.Parts.map(part => part.toHtml())}
                 </div>
-            </div>
+            </section>
         );
     }
 }

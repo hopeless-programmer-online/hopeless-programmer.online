@@ -52,20 +52,37 @@ class DocumentIndexItemContent extends IndexItemContent {
      */
     _toHtml() {
         const document = this.Document;
+        /**
+         * @type {Date}
+         */
+        const date = document.Date;
         const paragraph = this.Document
             .Sections[0].Parts
             .find(part => part instanceof ParagraphSectionPart)
             .Paragraph
             ;
 
-        return [
-            <h2>
-                <a href={this.Url}>
-                    {document.Title.toHtml()}
-                </a>
-            </h2>,
-            paragraph.toHtml(),
-        ];
+        return (
+            <article class="document index item">
+                <header>
+                    <h2>
+                        <a href={this.Url}>
+                            {document.Title.toHtml()}
+                        </a>
+                    </h2>
+                </header>
+                {paragraph.toHtml()}
+                <footer>
+                    <time>
+                        {date.getFullYear().toString().padStart(4, 0)}
+                        -
+                        {(date.getMonth() + 1).toString().padStart(2, 0)}
+                        -
+                        {date.getDate().toString().padStart(2, 0)}
+                    </time>
+                </footer>
+            </article>
+        );
     }
 }
 

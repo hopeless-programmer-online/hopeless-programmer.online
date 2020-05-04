@@ -29,7 +29,7 @@ const code_1 = s.illustration( ...[
 
 
 exports = module.exports = new h.DocumentResource({
-    Document : s.document(s.sentence(`Все що я знаю про: `, s.f(`require`), `. `),
+    Document : s.document(s.sentence(`Все що я знаю про: `, s.f(`require`), `. `), {},
         s.section(`Модулі CommonJS. `, ...[
             s.paragraph(...[
                 s.sentence(`Існують різні підходи до організації роботи модулів. `),
