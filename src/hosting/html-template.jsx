@@ -4,6 +4,8 @@
  * @returns {html.Element}
  */
 function template(title, content) {
+    const date = new Date;
+
     return (
         <html lang="uk">
             <head>
@@ -18,7 +20,7 @@ function template(title, content) {
                 {/* <link rel="stylesheet" href="css/document.css" /> */}
                 {/* <script src="script.js" /> */}
             </head>
-            <body class="hp-page">
+            <body class="hp-class-page">
                 {/* <a href="https://github.com/hopeless-programmer-online/hopeless-programmer.online" class="github-corner" aria-label="View source on GitHub">
                     <svg
                         width="80"
@@ -61,24 +63,59 @@ function template(title, content) {
                 </main>
                 <footer>
                     <address class="address">
-                        <small class="summary">hopeless-programmer.online</small>
+                        <a href="">hopeless-programmer.online</a>
                         <br />
-                        <small class="years">2020 - {(new Date).getFullYear().toString()}</small>
+                        <time datetime="2020-04-10">2020</time> - <time datetime={date.toISOString()}>{date.getFullYear().toString().padStart(4, 0)}</time>
                         <br />
-                        <small class="contacts">Адміністрація: <a href="mailto: me@hopeless-programmer.online">me@hopeless-programmer.online</a></small>
+                        Адміністрація: <a href="mailto: me@hopeless-programmer.online">me@hopeless-programmer.online</a>
                     </address>
-                    <div class="references">
-                        <small class="caption">Цей сайт не існував би без цих відкритих технологій</small>
-                        <nav class="resources">
-                            <a class="resource" href="https://en.wikipedia.org/wiki/HTML5"><abbr title="HTML | Hypertext Markup Language"><img src="media/html5.svg" alt="HTML5" style="width: 1in; height: 1in" /></abbr></a>
-                            <a class="resource" href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets"><abbr title="CSS | Cascading Style Sheets"><img src="media/css3.svg" alt="CSS3" style="width: 1in; height: 1in" /></abbr></a>
-                            <a class="resource" href="https://en.wikipedia.org/wiki/ECMAScript#ES2015"><abbr title="ES6 | ECMAScript 6"><img src="media/es6.svg" alt="ES6" style="width: 1in; height: 1in" /></abbr></a>
-                            <a class="resource" href="https://en.wikipedia.org/wiki/React_(web_framework)#JSX"><abbr title="JSX | JavaScript XML"><img src="media/jsx.png" alt="JSX" style="width: 1in; height: 1in" /></abbr></a>
-                            <a class="resource" href="https://en.wikipedia.org/wiki/Sass_(stylesheet_language)"><abbr title="SASS | Syntactically Awesome Style Sheets"><img src="media/sass.svg" alt="SASS" style="width: 1in; height: 1in" /></abbr></a>
-                            <a class="resource" href="https://en.wikipedia.org/wiki/Node.js"><abbr title="NodeJS"><img src="media/nodejs.svg" alt="NodeJS" style="width: 1in; height: 1in" /></abbr></a>
-                            <a class="resource" href="https://jestjs.io"><abbr title="Jest"><img src="media/jest.svg" alt="Jest" style="width: 1in; height: 1in" /></abbr></a>
-                        </nav>
-                    </div>
+                    <figure>
+                        <figcaption>Цей сайт не існував би без цих відкритих технологій</figcaption>
+                        <dl id="hp-id-references">
+                            <dd>
+                                <a href="https://en.wikipedia.org/wiki/HTML5">
+                                    <abbr title="HTML | Hypertext Markup Language">
+                                        <img src="media/html5.svg" alt="HTML5" style="width: 1in; height: 1in" />
+                                    </abbr>
+                                </a>
+                            </dd>
+                            <dd>
+                                <a href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets">
+                                    <abbr title="CSS | Cascading Style Sheets">
+                                        <img src="media/css3.svg" alt="CSS3" style="width: 1in; height: 1in" />
+                                    </abbr>
+                                </a>
+                            </dd>
+                            <dd>
+                                <a href="https://en.wikipedia.org/wiki/ECMAScript#ES2015">
+                                    <abbr title="ES6 | ECMAScript 6">
+                                        <img src="media/es6.svg" alt="ES6" style="width: 1in; height: 1in" />
+                                    </abbr>
+                                </a>
+                            </dd>
+                            <dd>
+                                <a href="https://en.wikipedia.org/wiki/React_(web_framework)#JSX">
+                                    <abbr title="JSX | JavaScript XML">
+                                        <img src="media/react.svg" alt="JSX" style="width: 1in; height: 1in" />
+                                    </abbr>
+                                </a>
+                            </dd>
+                            <dd>
+                                <a href="https://en.wikipedia.org/wiki/Node.js">
+                                    <abbr title="NodeJS">
+                                        <img src="media/nodejs.svg" alt="NodeJS" style="width: 1in; height: 1in" />
+                                    </abbr>
+                                </a>
+                            </dd>
+                            <dd>
+                                <a href="https://jestjs.io">
+                                    <abbr title="Jest">
+                                        <img src="media/jest.svg" alt="Jest" style="width: 1in; height: 1in" />
+                                    </abbr>
+                                </a>
+                            </dd>
+                        </dl>
+                    </figure>
                 </footer>
             </body>
         </html>

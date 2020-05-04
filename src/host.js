@@ -79,8 +79,8 @@ exports = module.exports = new h.Host({
         "/media/es6.svg" : new h.FileResource({
             Path : path.join(__dirname, `../media/es6.svg`),
         }),
-        "/media/jsx.png" : new h.FileResource({
-            Path : path.join(__dirname, `../media/jsx.png`),
+        "/media/react.svg" : new h.FileResource({
+            Path : path.join(__dirname, `../media/react.svg`),
         }),
         "/media/nodejs.svg" : new h.FileResource({
             Path : path.join(__dirname, `../media/nodejs.svg`),
