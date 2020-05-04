@@ -68,13 +68,11 @@ class CodeLine {
      * @returns {html.Element}
      */
     toHtml() {
-        return (
-            this.Lexemes.map(lexeme => lexeme.toHtml())
-            // <tr class="line">
-            //     <td class="index">{this.Index}</td>
-            //     <td class="content">{this.Lexemes.map(lexeme => lexeme.toHtml())}</td>
-            // </tr>
-        );
+        return [
+            <span>{this.Index}</span>,
+            <span>{this.Lexemes.map(lexeme => lexeme.toHtml())}</span>,
+            <br />,
+        ];
     }
 }
 

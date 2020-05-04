@@ -24,6 +24,7 @@ const LiteralLexemeType = require(`./literal-lexeme-type`);
 const IdentifierLexeme = require(`./identifier-lexeme`);
 const IdentifierLexemeType = require(`./identifier-lexeme-type`);
 const CodeLine = require(`./code-line`);
+const CodeLines = require(`./code-lines`);
 const Code = require(`./code`);
 const Illustration = require(`./illustration`);
 const Illustrations = require(`./illustrations`);
@@ -413,11 +414,11 @@ function toCodeLine(something) {
 }
 /**
  * @param   {Array<CodeLineLike>} somethings
- * @returns {Array<CodeLine>}
+ * @returns {CodeLines}
  * @throws  {Error}
  */
 function toCodeLines(somethings) {
-    return somethings.map(toCodeLine);
+    return new CodeLines(...somethings.map(toCodeLine));
 }
 /**
  * @param  {...CodeLineLike} somethings

@@ -1,14 +1,43 @@
+@use "sass/palette";
 @use "sass/text";
 
 code.hp-class-code {
     @include text.code;
 
+    // grid
+    display: grid;
+    grid-template-columns: [index] auto [content] auto [break] auto;
+    column-gap: 8pt;
     // size
-    display: inline-block;
     padding: 4pt;
     // text
     white-space: pre;
     // color
-    background-color: rgb(30, 30, 30);
-    color: rgb(240, 240, 240);
+    background-color: palette.$code-background;
+    color: palette.$code-regular;
+
+    &::selection {
+        color: palette.$code-selection;
+    }
+
+    > span:nth-child(3n+1) {
+        // grid-item
+        grid-column: index / index;
+        justify-self: end;
+        // text
+        color: palette.$code-index;
+        // disable text selection
+        -webkit-user-select     : none; // Chrome all / Safari all
+        -moz-user-select        : none; // Firefox all
+        -ms-user-select         : none; // IE 10+
+        user-select             : none; // Likely future
+    }
+    > span:nth-child(3n+2) {
+        // grid-item
+        grid-column: content / content;
+    }
+    > br:nth-child(3n+3) {
+        // grid-item
+        grid-column: break / break;
+    }
 }

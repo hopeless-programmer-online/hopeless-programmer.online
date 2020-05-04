@@ -25,6 +25,9 @@ article.hp-class-document {
             // flex-item
             order: 1;
             flex-basis: 100%;
+            // size
+            margin-left: 8pt;
+            margin-right: 8pt;
 
             > a {
                 @include text.link;
@@ -43,6 +46,9 @@ article.hp-class-document {
             order: 2;
             // text
             text-align: justify;
+            // size
+            margin-left: 8pt;
+            margin-right: 8pt;
 
             > span.hp-class-sentence:first-child {
                 margin-left: 16pt;
