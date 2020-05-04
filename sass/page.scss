@@ -1,0 +1,25 @@
+article.hp-page {
+    // flex
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    // size
+    height: 100%;
+
+    > header {
+        // debug
+        background-color: tomato;
+    }
+    > section {
+        // debug
+        background-color: royalblue;
+        // flex
+        flex-grow: 1;
+    }
+    > footer {
+        // debug
+        background-color: wheat;
+    }
+}
