@@ -475,9 +475,7 @@ function sectionPart(something) {
     }
     if (something instanceof Illustration) {
         return new IllustrationsSectionPart({
-            Illustrations : [
-                something,
-            ],
+            Illustrations : new Illustrations(something),
         });
     }
     if (something instanceof List) {

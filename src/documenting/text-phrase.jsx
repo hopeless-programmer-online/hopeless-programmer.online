@@ -34,7 +34,7 @@ class TextPhrase extends Phrase {
      * @returns   {html.Element}
      */
     _toHtml() {
-        return <span class="text-phrase">{this.String}</span>;
+        return <span class="hp-class-phrase hp-class-text-phrase">{this.String}</span>;
     }
 }
 
