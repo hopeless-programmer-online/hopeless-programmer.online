@@ -24,12 +24,12 @@ exports = module.exports = new h.Host({
             Index : new d.Index({
                 Title : s.toSentences(`Статті`),
                 Items : new d.IndexItems(
-                    /*new d.IndexItem({
+                    new d.IndexItem({
                         Content : new d.DocumentIndexItemContent({
                             Url      : `/require`,
                             Document : article_require.Document,
                         }),
-                    }),*/
+                    }),
                     new d.IndexItem({
                         Content : new d.DocumentIndexItemContent({
                             Url      : `/article_1`,
@@ -48,7 +48,7 @@ exports = module.exports = new h.Host({
         // articles
         "/article_1" : article_1,
         "/article_2" : article_2,
-        // "/require" : article_require,
+        "/require" : article_require,
         // errors
         "/404" : require(`./host/404`),
         "/405" : require(`./host/405`),
