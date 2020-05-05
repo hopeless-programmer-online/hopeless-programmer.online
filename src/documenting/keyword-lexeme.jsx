@@ -34,7 +34,7 @@ class KeywordLexeme extends Lexeme {
      * @returns   {html.Element}
      */
     _toHtml() {
-        return <span class="keyword lexeme" name={this.String}>{this.String}</span>;
+        return <span class="hp-class-lexeme hp-class-keyword-lexeme" name={this.String}>{this.String}</span>;
     }
 }
 

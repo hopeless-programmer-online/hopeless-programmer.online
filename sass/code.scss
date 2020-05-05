@@ -1,6 +1,47 @@
 @use "sass/palette";
 @use "sass/text";
 
+span.hp-class-lexeme {
+    background-color: palette.$code-background;
+    color: palette.$code-regular;
+
+    &::selection {
+        background-color: palette.$code-selection;
+    }
+    &.hp-class-keyword-lexeme {
+        color: palette.$code-macro;
+
+        &[name=this],
+        &[name=function] {
+            color: palette.$code-keyword;
+        }
+    }
+    &.hp-class-identifier-lexeme {
+        color: palette.$code-variable;
+
+        &[name=void] {
+            color: palette.$code-keyword;
+        }
+        &[type=function] {
+            color: palette.$code-function;
+        }
+        &[type=class] {
+            color: palette.$code-class;
+        }
+    }
+    &.hp-class-comment-lexeme {
+        color: palette.$code-comments;
+    }
+    &.hp-class-literal-lexeme {
+        &[type=number] {
+            color: palette.$code-number;
+        }
+        &[type=string] {
+            color: palette.$code-string;
+        }
+    }
+}
+
 code.hp-class-code {
     @include text.code;
 
@@ -14,11 +55,6 @@ code.hp-class-code {
     white-space: pre;
     // color
     background-color: palette.$code-background;
-    color: palette.$code-regular;
-
-    &::selection {
-        color: palette.$code-selection;
-    }
 
     > span:nth-child(3n+1) {
         // grid-item
