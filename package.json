@@ -38,5 +38,8 @@
     "sass": "^1.26.3",
     "http-status": "^1.4.2",
     "mime-types": "^2.1.26"
+  },
+  "engines": {
+    "node": "^13.12.0"
   }
 }

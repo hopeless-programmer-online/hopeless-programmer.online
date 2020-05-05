@@ -18,9 +18,18 @@ class SectionPart {
     }
 
     /**
+     * @public
+     * @virtual
+     * @type    {Sentences}
+     */
+    get Sentences() {
+        return new Sentences;
+    }
+
+    /**
      * @protected
      * @abstract
-     * @returns   {html.Element}
+     * @returns   {html.Element | Array<html.Element>}
      */
     _toHtml() {
         throw new Error; // @todo
@@ -28,13 +37,17 @@ class SectionPart {
 
     /**
      * @public
-     * @returns {html.Element}
+     * @returns {html.Element | Array<html.Element>}
      * @throws  {Error}
      */
     toHtml() {
         const element = this._toHtml();
 
-        if (element instanceof html.Element); else {
+        if (
+            element instanceof html.Element
+            ||
+            (element instanceof Array && element.every(element => element instanceof html.Element))
+        ); else {
             throw new Error; // @todo
         }
 
@@ -47,4 +60,4 @@ exports = module.exports = SectionPart;
 
 
 const html = require(`../html`);
-
+const Sentences = require(`./sentences`);

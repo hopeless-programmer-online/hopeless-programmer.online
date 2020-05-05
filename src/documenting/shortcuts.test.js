@@ -69,10 +69,10 @@ it(`Should create Section on calling section`, () => {
     );
 
     expect(template).toBeInstanceOf(Section);
-    expect(template.Title.Sentences).toHaveLength(1);
-    expect(template.Title.Sentences[0].Phrases).toHaveLength(1);
-    expect(template.Title.Sentences[0].Phrases[0]).toBeInstanceOf(TextPhrase);
-    expect(template.Title.Sentences[0].Phrases[0].String).toBe(`section title`);
+    expect(template.Title).toHaveLength(1);
+    expect(template.Title[0].Phrases).toHaveLength(1);
+    expect(template.Title[0].Phrases[0]).toBeInstanceOf(TextPhrase);
+    expect(template.Title[0].Phrases[0].String).toBe(`section title`);
     expect(template.Parts).toHaveLength(1);
     expect(template.Parts[0]).toBeInstanceOf(ParagraphSectionPart);
     expect(template.Parts[0].Paragraph.Sentences).toHaveLength(1);

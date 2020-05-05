@@ -3,15 +3,12 @@ const SectionPart = require(`./section-part`);
 
 class IllustrationsSectionPart extends SectionPart {
     /**
-     * @param  {Object}              object
-     * @param  {Array<Illustration>} object.Illustrations
+     * @param  {Object}       object
+     * @param  {Illustration} object.Illustrations
      * @throws {Error}
      */
-    constructor({ Illustrations = [] } = {}) {
-        if (Illustrations instanceof Array); else {
-            throw new Error; // @todo
-        }
-        if (Illustrations.every(illustration => illustration instanceof Illustration)); else {
+    constructor({ Illustrations = new IllustrationsClass } = {}) {
+        if (Illustrations instanceof IllustrationsClass); else {
             throw new Error; // @todo
         }
 
@@ -19,14 +16,14 @@ class IllustrationsSectionPart extends SectionPart {
 
         /**
          * @private
-         * @type    {Array<Illustration>}
+         * @type    {Illustration}
          */
         this.__illustrations = Illustrations;
     }
 
     /**
      * @public
-     * @type   {Array<Sentence>}
+     * @type   {Illustrations}
      */
     get Illustrations() {
         return this.__illustrations;
@@ -35,14 +32,10 @@ class IllustrationsSectionPart extends SectionPart {
     /**
      * @protected
      * @override
-     * @returns   {html.Element}
+     * @returns   {Array<html.Element>}
      */
     _toHtml() {
-        return (
-            <div class="illustrations">
-                {this.Illustrations.map(illustration => illustration.toHtml())}
-            </div>
-        );
+        return this.Illustrations.toHtml();
     }
 }
 
@@ -51,4 +44,7 @@ exports = module.exports = IllustrationsSectionPart;
 
 
 const html = require(`../html`);
-const Illustration = require(`./illustration`);
+const Illustrations = require(`./illustrations`);
+
+
+const IllustrationsClass = Illustrations;

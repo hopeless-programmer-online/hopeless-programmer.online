@@ -41,7 +41,7 @@ class IdentifierLexeme extends TextLexeme {
             this.Type === Type.String  ? `string`  :
             error();
 
-        return <span class="literal lexeme" type={type}>{this.String}</span>;
+        return <span class="hp-class-lexeme hp-class-literal-lexeme" type={type}>{this.String}</span>;
     }
 }
 

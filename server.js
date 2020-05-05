@@ -52,9 +52,9 @@ const server = http.createServer((req, res) => {
         delete require.cache[id];
     }
 
-    const host = require(`./src/host`);
-
     try {
+        const host = require(`./src/host`);
+
         try {
             // handling 405
             if (req.method !== `GET`) {

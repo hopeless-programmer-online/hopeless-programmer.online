@@ -7,7 +7,7 @@ const s = documenting.shortcuts;
 
 
 exports = module.exports = new h.DocumentResource({
-    Document : s.document(`Ласкаво просимо!`,
+    Document : s.document(`Ласкаво просимо!`, {},
         s.section(`Сайт в процесі розробки`,
             s.paragraph(
                 `Вітаю на моєму сайті! `,

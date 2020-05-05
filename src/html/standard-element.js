@@ -23,10 +23,10 @@ class StandardElement extends BasicElement {
 
         if (elements.length > 0){
             if (elements[0] instanceof BasicElement) {
-                content = `\r\n${INDENTATION}${content}`;
+                content = `<!--\r\n${INDENTATION}-->${content}`;
             }
             if (elements[elements.length - 1] instanceof BasicElement) {
-                content = `${content}\r\n`;
+                content = `${content}<!--\r\n-->`;
             }
         }
 

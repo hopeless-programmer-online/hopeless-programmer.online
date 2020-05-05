@@ -35,11 +35,9 @@ class Code {
      */
     toHtml() {
         return (
-            <table class="code">
-                <tbody>
-                    {this.Lines.map(line => line.toHtml())}
-                </tbody>
-            </table>
+            <code class="hp-class-code">
+                {this.Lines.toHtml()}
+            </code>
         );
     }
 }

@@ -1,5 +1,6 @@
 const Paragraph = require(`./paragraph`);
 const Sentence = require(`./sentence`);
+const Sentences = require(`./sentences`);
 
 
 it(`Should be function`, () => {
@@ -11,9 +12,6 @@ it(`Should returns object on creating without arguments`, () => {
 it(`Should returns object on creating with empty arguments`, () => {
     expect(new Paragraph({})).toBeInstanceOf(Paragraph);
 });
-it(`Should returns object on creating with empty array as "Sentences" argument`, () => {
-    expect(new Paragraph({ Sentences : [] })).toBeInstanceOf(Paragraph);
-});
 it(`Should throws on creating with non array "Sentences" argument`, () => {
     expect(() => new Paragraph({ Sentences : 1 })).toThrowError(Error);
 });
@@ -21,9 +19,9 @@ it(`Should throws on creating with incorrect "Sentences" argument`, () => {
     expect(() => new Paragraph({ Sentences : [ 1 ] })).toThrowError(Error);
 });
 it(`Should returns object on creating`, () => {
-    const sentences = [
+    const sentences = new Sentences(
         new Sentence,
-    ];
+    );
 
     expect(new Paragraph({ Sentences : sentences })).toBeInstanceOf(Paragraph);
 });
@@ -37,10 +35,10 @@ it(`Should returns empty array on getting "Sentences" after creating with empty 
 
     expect(paragraph.Sentences).toHaveLength(0);
 });
-it(`Should returns array of Sentences after creating`, () => {
-    const sentences = [
+it(`Should returns Sentences after creating`, () => {
+    const sentences = new Sentences(
         new Sentence,
-    ];
+    );
     const paragraph = new Paragraph({
         Sentences : sentences,
     });

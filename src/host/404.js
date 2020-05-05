@@ -7,7 +7,7 @@ const s = documenting.shortcuts;
 
 
 exports = module.exports = new h.DocumentResource({
-    Document : s.document([ `Сторінку не знайдено.`, `Код помилки : 404.` ],
+    Document : s.document([ `Сторінку не знайдено.`, `Код помилки : 404.` ], {},
         s.section(`У чому річ?`,
             s.paragraph(
                 `Сторінка на яку ви намагаєтесь перейти не існує. `,

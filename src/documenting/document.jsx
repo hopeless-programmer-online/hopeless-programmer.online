@@ -1,19 +1,28 @@
 class Document {
     /**
-     * @param {Object}         object
-     * @param {Paragraph}      object.Title
-     * @param {Array<Section>} object.Sections
+     * @param {Object}    object
+     * @param {Sentences} object.Title
+     * @param {Date}      object.Date
+     * @param {Sections}  object.Sections
      */
-    constructor({ Title, Sections = [] }) {
-        if (Title instanceof Paragraph); else {
+    constructor({ Title, Date = new DateClass, Sections = new SectionsClass }) {
+        if (Title instanceof Sentences); else {
             throw new Error; // @todo
         }
-        if (Sections instanceof Array); else {
+        if (Date instanceof DateClass); else {
             throw new Error; // @todo
         }
-        if (Sections.every(section => section instanceof Section)); else {
+        if (Sections instanceof SectionsClass); else {
             throw new Error; // @todo
         }
+
+        const notes = new Notes(
+            ...Sections.Phrases
+                .filter(phrase => phrase instanceof NotePhrase)
+                .map(phrase => phrase.Note)
+        );
+
+        notes.forEach((note, index) => note.__Index = index + 1);
 
         let illustrationIndex = 1;
         let codeIndex = 1;
@@ -34,7 +43,7 @@ class Document {
 
                         if (content instanceof CodeIllustrationContent) {
                             if (illustration.__Title === null) {
-                                illustration.__Title = shortcuts.toParagraph(`Приклад коду №${codeIndex}`);
+                                illustration.__Title = shortcuts.toParagraph(`Приклад коду №${codeIndex}`).Sentences;
                             }
 
                             ++codeIndex;
@@ -48,22 +57,39 @@ class Document {
 
         /**
          * @private
-         * @type    {Paragraph}
+         * @type    {Sentences}
          */
         this.__title = Title;
+        /**
+         * @private
+         * @type    {Date}
+         */
+        this.__date = Date;
         /**
          * @private
          * @type    {Array<Section>}
          */
         this.__sections = Sections;
+        /**
+         * @private
+         * @type    {Notes}
+         */
+        this.__notes = notes;
     }
 
     /**
      * @public
-     * @type   {Paragraph}
+     * @type   {Sentences}
      */
     get Title() {
         return this.__title;
+    }
+    /**
+     * @public
+     * @type   {Date}
+     */
+    get Date() {
+        return this.__date;
     }
     /**
      * @public
@@ -79,15 +105,20 @@ class Document {
      */
     toHtml() {
         return (
-            <article class="document">
-                <header class="header">
-                    <h1 class="title">
-                        {this.Title.Sentences.map(sentence => sentence.toHtml())}
+            <article class="hp-class-document">
+                <header>
+                    <h1>
+                        {this.Title.toHtml()}
                     </h1>
                 </header>
-                <div class="sections">
-                    {this.Sections.map(section => section.toHtml())}
-                </div>
+                {this.Sections.map(section => section.toHtml())}
+                <footer>
+                    <table>
+                        <tbody>
+                            {this.__notes.toHtml()}
+                        </tbody>
+                    </table>
+                </footer>
             </article>
         );
     }
@@ -98,8 +129,15 @@ exports = module.exports = Document;
 
 
 const html = require(`../html`);
-const Paragraph = require(`./paragraph`);
+const NotePhrase = require(`./note-phrase`);
+const Sentences = require(`./sentences`);
+const Notes = require(`./notes`);
 const Section = require(`./section`);
+const Sections = require(`./sections`);
 const IllustrationsSectionPart = require(`./illustrations-section-part`);
 const CodeIllustrationContent = require(`./code-illustration-content`);
 const shortcuts = require(`./shortcuts`);
+
+
+const DateClass = Date;
+const SectionsClass = Sections;

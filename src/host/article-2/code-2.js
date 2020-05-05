@@ -3,7 +3,7 @@ const { cm, kw, c, f } = s;
 
 
 exports = module.exports = s.illustration( ...[
-    ` Боротьба за зворотню сумісність в С++.`,
+    `Боротьба за зворотню сумісність в С++.`,
     s.code(
         [ kw(`[[deprecated]]`) ],
         [ c(`void`), ` `, f(`f`), `() `, cm(`// застаріла функція`) ],

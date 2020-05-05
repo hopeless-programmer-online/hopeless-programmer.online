@@ -1,0 +1,142 @@
+@use "sass/palette";
+@use "sass/text.scss";
+
+body.hp-class-page {
+    // flex
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    // size
+    height: 100%;
+    max-width: 8.5in;
+    margin: auto;
+
+    > header {
+        // debug
+        // background-color: tomato;
+
+        // banner
+        > figure {
+            // flex
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            // size
+            margin: 0;
+
+            > figcaption {
+                // flex
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                align-items: flex-start;
+                // flex-item
+                flex-grow: 1;
+                // size
+                width: min-content; // keeps the blockquote on the top, until the h2 fits
+
+                > h2 {
+                    @include text.strong;
+
+                    // size
+                    margin: 0;
+                }
+                > blockquote {
+                    // flex
+                    display: flex;
+                    // flex-item
+                    align-self: center;
+                    // size
+                    margin: 0;
+                }
+            }
+        }
+        // navbar
+        > nav > ul {
+            // flex
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            // size
+            margin: 0;
+            padding: 0;
+            // ul
+            list-style-type: none;
+
+            > li {
+                // flex
+                display: flex;
+                justify-content: stretch;
+                // flex-item
+                flex-grow: 1;
+                // text
+                text-align: center;
+
+                > a {
+                    @include text.strong;
+
+                    // flex-item
+                    flex-grow: 1;
+                    // border
+                    border-bottom: 4pt solid palette.$text-regular;
+
+                    &:hover {
+                        border-color: palette.$text-hover;
+                        color: palette.$text-hover;
+                    }
+                }
+            }
+        }
+    }
+    > main {
+        // debug
+        // background-color: royalblue;
+        // flex
+        flex-grow: 1;
+    }
+    > footer {
+        @include text.regular;
+
+        // debug
+        // background-color: wheat;
+        // text
+        text-align: center;
+        // border
+        border-top: 4pt solid palette.$text-regular;
+        background-color: palette.$background-highlight;
+
+        a {
+            @include text.link;
+        }
+
+        > figure {
+            // size
+            margin: 0;
+
+            > dl {
+                // flex
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+
+                > dd {
+                    // size
+                    margin: 4pt;
+
+                    > a > abbr > img {
+                        filter: grayscale(100%);
+
+                        &:hover {
+                            filter: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
