@@ -5,6 +5,7 @@
  */
 function template(title, content) {
     const date = new Date;
+    const sentence = (...x) => s.sentence(...x).toHtml();
 
     return (
         <html lang="uk">
@@ -28,12 +29,10 @@ function template(title, content) {
                     <figure>
                         <img alt="But... I..." src="media/but_i.png" style="height: 1in"/>
                         <figcaption>
-                            <h2>
-                                {s.sentence(`Безнадійний Програміст`).toHtml()}
-                            </h2>
+                            <h2>Безнадійний Програміст</h2>
                             <blockquote>
                                 <p>
-                                    {s.sentence(s.figurative(`...коли не можеш оголосити змінну `), s.kw(`case`), s.figurative(`, тому що це службове слово...`)).toHtml()}
+                                    {sentence(s.figurative(`...коли не можеш оголосити змінну `), s.kw(`case`), s.figurative(`, тому що це службове слово...`))}
                                 </p>
                             </blockquote>
                         </figcaption>
@@ -58,7 +57,9 @@ function template(title, content) {
                         Адміністрація: <a href="mailto: me@hopeless-programmer.online">me@hopeless-programmer.online</a>
                     </address>
                     <figure>
-                        <figcaption>Цей сайт не існував би без цих відкритих технологій</figcaption>
+                        <figcaption>
+                            Цей сайт не існував би без цих відкритих технологій
+                        </figcaption>
                         <dl>
                             <dd>
                                 <a href="https://en.wikipedia.org/wiki/HTML5">

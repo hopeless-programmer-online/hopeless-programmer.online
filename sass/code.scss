@@ -51,10 +51,6 @@ span.hp-class-lexeme-phrase {
     border-radius: 5pt;
     padding-left: 2pt;
     padding-right: 2pt;
-
-    > span.hp-class-lexeme {
-        @extend %lexeme;
-    }
 }
 
 code.hp-class-code {
