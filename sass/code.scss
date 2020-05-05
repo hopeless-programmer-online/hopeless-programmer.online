@@ -1,8 +1,9 @@
 @use "sass/palette";
 @use "sass/text";
 
-span.hp-class-lexeme {
-    background-color: palette.$code-background;
+%lexeme {
+    @include text.code;
+
     color: palette.$code-regular;
 
     &::selection {
@@ -39,6 +40,20 @@ span.hp-class-lexeme {
         &[type=string] {
             color: palette.$code-string;
         }
+    }
+}
+
+span.hp-class-lexeme {
+    @extend %lexeme;
+}
+span.hp-class-lexeme-phrase {
+    background-color: palette.$code-background;
+    border-radius: 5pt;
+    padding-left: 2pt;
+    padding-right: 2pt;
+
+    > span.hp-class-lexeme {
+        @extend %lexeme;
     }
 }
 
