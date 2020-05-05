@@ -1,4 +1,5 @@
 const Sentence = require(`./sentence`);
+const Phrases = require(`./phrases`);
 const TextPhrase = require(`./text-phrase`);
 
 
@@ -11,9 +12,6 @@ it(`Should returns object on creating without arguments`, () => {
 it(`Should returns object on creating with empty arguments`, () => {
     expect(new Sentence({})).toBeInstanceOf(Sentence);
 });
-it(`Should returns object on creating with empty array as "Phrases" argument`, () => {
-    expect(new Sentence({ Phrases : [] })).toBeInstanceOf(Sentence);
-});
 it(`Should throws on creating with non array "Phrases" argument`, () => {
     expect(() => new Sentence({ Phrases : 1 })).toThrowError(Error);
 });
@@ -21,11 +19,11 @@ it(`Should throws on creating with incorrect "Phrases" argument`, () => {
     expect(() => new Sentence({ Phrases : [ 1 ] })).toThrowError(Error);
 });
 it(`Should returns object on creating`, () => {
-    const phrases = [
+    const phrases = new Phrases(
         new TextPhrase({
             String : `text`,
         }),
-    ];
+    );
 
     expect(new Sentence({ Phrases : phrases })).toBeInstanceOf(Sentence);
 });
@@ -40,11 +38,11 @@ it(`Should returns empty array on getting "Phrases" after creating with empty ar
     expect(sentence.Phrases).toHaveLength(0);
 });
 it(`Should returns array of Phrases after creating`, () => {
-    const phrases = [
+    const phrases = new Phrases(
         new TextPhrase({
             String : `text`,
         }),
-    ];
+    );
     const sentence = new Sentence({
         Phrases : phrases,
     });

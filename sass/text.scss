@@ -1,0 +1,49 @@
+@use "sass/palette";
+
+@mixin regular {
+    // font
+    font-family             : Georgia, Cambria, serif;
+    font-style              : normal;
+    font-weight             : normal;
+    font-feature-settings   : 'kern' 1,'onum' 1,'liga' 1;
+    // text
+    color                   : palette.$text-regular;
+    text-decoration-line    : none;
+}
+@mixin strong {
+    // font
+    font-family           : Source Sans Pro, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-style            : normal;
+    font-weight           : bold;
+    font-feature-settings : 'dlig' 1,'liga' 1,'lnum' 1,'kern' 1;
+    // text
+    color                 : palette.$text-regular;
+    text-decoration-line  : none;
+}
+@mixin link {
+    @include regular;
+
+    // text
+    color: palette.$text-important;
+
+    &:visited {
+        // color
+        color: royalblue;
+    }
+    &:hover {
+        // color
+        color: palette.$text-hover;
+    }
+}
+@mixin code {
+    /* font */
+    font-family : consolas;
+    font-size   : 11pt;
+    font-style  : normal;
+    font-weight : normal;
+    line-height : normal;
+}
+
+a {
+    text-decoration-line: none;
+}

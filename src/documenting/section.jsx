@@ -7,7 +7,7 @@ class Section {
      * @throws {Error}
      */
     constructor({ Title, Index = null, Parts = [] }) {
-        if (Title instanceof Paragraph); else {
+        if (Title instanceof Sentences); else {
             throw new Error; // @todo
         }
         if ((Number.isInteger(Index) && Index > 0) || Index === null); else {
@@ -22,7 +22,7 @@ class Section {
 
         /**
          * @private
-         * @type    {Paragraph}
+         * @type    {Sentences}
          */
         this.__title = Title;
         /**
@@ -39,7 +39,7 @@ class Section {
 
     /**
      * @public
-     * @type   {Paragraph}
+     * @type   {Sentences}
      */
     get Title() {
         return this.__title;
@@ -89,6 +89,26 @@ class Section {
     get Parts() {
         return this.__parts;
     }
+    /**
+     * @public
+     * @type   {Phrases}
+     */
+    get Phrases() {
+        return this.Sentences.Phrases;
+    }
+    /**
+     * @public
+     * @type   {Sentences}
+     */
+    get Sentences() {
+        const sentences = this.Parts
+            .reduce(
+                (sentences, part) => new Sentences(...sentences, ...part.Sentences),
+                new Sentences,
+            );
+
+        return sentences;
+    }
 
     /**
      * @public
@@ -98,15 +118,13 @@ class Section {
         const id = `section-${this.Index}`;
 
         return (
-            <div id={id} class="section">
-                <h2 class="title">
-                    <a class="link-button" href={`#${id}`}>#</a>
+            <section id={id} class="section">
+                <h2>
+                    <a href={`#${id}`}>§</a>
                     {this.Title.toHtml()}
                 </h2>
-                <div class="parts">
-                    {this.Parts.map(part => part.toHtml())}
-                </div>
-            </div>
+                {this.Parts.map(part => part.toHtml())}
+            </section>
         );
     }
 }
@@ -116,5 +134,5 @@ exports = module.exports = Section;
 
 
 const html = require(`../html`);
-const Paragraph = require(`./paragraph`);
+const Sentences = require(`./sentences`);
 const Part = require(`./section-part`);

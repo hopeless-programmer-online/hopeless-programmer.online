@@ -1,0 +1,90 @@
+@use "sass/palette";
+@use "sass/text";
+
+%lexeme {
+    @include text.code;
+
+    color: palette.$code-regular;
+
+    &::selection {
+        background-color: palette.$code-selection;
+    }
+    &.hp-class-keyword-lexeme {
+        color: palette.$code-macro;
+
+        &[name=this],
+        &[name=function] {
+            color: palette.$code-keyword;
+        }
+    }
+    &.hp-class-identifier-lexeme {
+        color: palette.$code-variable;
+
+        &[name=void] {
+            color: palette.$code-keyword;
+        }
+        &[type=function] {
+            color: palette.$code-function;
+        }
+        &[type=class] {
+            color: palette.$code-class;
+        }
+    }
+    &.hp-class-comment-lexeme {
+        color: palette.$code-comments;
+    }
+    &.hp-class-literal-lexeme {
+        &[type=number] {
+            color: palette.$code-number;
+        }
+        &[type=string] {
+            color: palette.$code-string;
+        }
+    }
+}
+
+span.hp-class-lexeme {
+    @extend %lexeme;
+}
+span.hp-class-lexeme-phrase {
+    background-color: palette.$code-background;
+    border-radius: 5pt;
+    padding-left: 2pt;
+    padding-right: 2pt;
+}
+
+code.hp-class-code {
+    @include text.code;
+
+    // grid
+    display: grid;
+    grid-template-columns: [index] auto [content] auto [break] auto;
+    column-gap: 8pt;
+    // size
+    padding: 4pt;
+    // text
+    white-space: pre;
+    // color
+    background-color: palette.$code-background;
+
+    > span:nth-child(3n+1) {
+        // grid-item
+        grid-column: index / index;
+        justify-self: end;
+        // text
+        color: palette.$code-index;
+        // disable text selection
+        -webkit-user-select     : none; // Chrome all / Safari all
+        -moz-user-select        : none; // Firefox all
+        -ms-user-select         : none; // IE 10+
+        user-select             : none; // Likely future
+    }
+    > span:nth-child(3n+2) {
+        // grid-item
+        grid-column: content / content;
+    }
+    > br:nth-child(3n+3) {
+        // grid-item
+        grid-column: break / break;
+    }
+}

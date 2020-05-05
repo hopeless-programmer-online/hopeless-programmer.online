@@ -27,6 +27,14 @@ class ParagraphSectionPart extends SectionPart {
     get Paragraph() {
         return this.__paragraph;
     }
+    /**
+     * @public
+     * @override
+     * @type     {Sentences}
+     */
+    get Sentences() {
+        return this.Paragraph.Sentences;
+    }
 
     /**
      * @protected
@@ -44,6 +52,7 @@ exports = module.exports = ParagraphSectionPart;
 
 const html = require(`../html`);
 const Paragraph = require(`./paragraph`);
+const Sentences = require(`./sentences`);
 
 
 const ParagraphClass = Paragraph;

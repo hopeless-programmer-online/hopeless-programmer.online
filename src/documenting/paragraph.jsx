@@ -1,27 +1,24 @@
 class Paragraph {
     /**
-     * @param  {Object}          object
-     * @param  {Array<Sentence>} object.Sentences
+     * @param  {Object}    object
+     * @param  {Sentences} object.Sentences
      * @throws {Error}
      */
-    constructor({ Sentences = [] } = {}) {
-        if (Sentences instanceof Array); else {
-            throw new Error(); // @todo
-        }
-        if (Sentences.every(sentence => sentence instanceof Sentence)); else {
+    constructor({ Sentences = new SentencesClass } = {}) {
+        if (Sentences instanceof SentencesClass); else {
             throw new Error(); // @todo
         }
 
         /**
          * @private
-         * @type    {Array<Sentence>}
+         * @type    {Sentences}
          */
         this.__sentences = Sentences;
     }
 
     /**
      * @public
-     * @type   {Array<Sentence>}
+     * @type   {Sentences}
      */
     get Sentences() {
         return this.__sentences;
@@ -39,7 +36,7 @@ class Paragraph {
      * @returns {html.Element}
      */
     toHtml() {
-        return <p class="paragraph">{this.Sentences.map(sentence => sentence.toHtml())}</p>;
+        return <p>{this.Sentences.toHtml()}</p>;
     }
 }
 
@@ -48,4 +45,7 @@ exports = module.exports = Paragraph;
 
 
 const html = require(`../html`);
-const Sentence = require(`./sentence`);
+const Sentences = require(`./sentences`);
+
+
+const SentencesClass = Sentences;

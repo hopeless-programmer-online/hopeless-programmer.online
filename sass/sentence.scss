@@ -1,0 +1,39 @@
+@use "sass/text";
+
+span.hp-class-sentence {
+    @include text.regular;
+
+    a {
+        @include text.link;
+    }
+}
+
+p {
+    span.hp-class-sentence {
+        &:hover {
+            background-color: aliceblue;
+        }
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    span.hp-class-sentence {
+        @include text.strong;
+    }
+}
+
+h1 {
+    span.hp-class-sentence {
+        font-size: 20pt;
+    }
+}
+h2 {
+    span.hp-class-sentence {
+        font-size: 16pt;
+    }
+}
+h3 {
+    span.hp-class-sentence {
+        font-size: 12pt;
+    }
+}
