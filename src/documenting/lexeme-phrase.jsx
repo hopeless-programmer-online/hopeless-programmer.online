@@ -34,7 +34,7 @@ class LexemePhrase extends Phrase {
      * @returns   {html.Element}
      */
     _toHtml() {
-        return <span class="hp-class-phrase hp-class-lexeme-phrase">{this.Lexemes.map(lexeme => lexeme.toHtml())}</span>;
+        return <code class="hp-class-phrase hp-class-lexeme-phrase">{this.Lexemes.map(lexeme => lexeme.toHtml())}</code>;
     }
 }
 
