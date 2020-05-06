@@ -23,6 +23,9 @@
         &[name=void] {
             color: palette.$code-keyword;
         }
+        &[type=variable][name=exports] {
+            color: palette.$code-class;
+        }
         &[type=function] {
             color: palette.$code-function;
         }
