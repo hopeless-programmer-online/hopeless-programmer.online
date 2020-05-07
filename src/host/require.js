@@ -10,6 +10,8 @@ const $require = s.f(`require`);
 const $module = s.c(`module`);
 const $exports_v = s.v(`exports`);
 const $exports_p = s.p(`exports`);
+const $main_s = s.lt(`"main"`);
+const $exports_s = s.lt(`"exports"`);
 const $module_exports = s.phrase([ s.c(`module`), s.lexeme(`.`), s.p(`exports`) ]);
 const free_variables = `https://uk.wikipedia.org/wiki/%D0%92%D1%96%D0%BB%D1%8C%D0%BD%D1%96_%D1%96_%D0%B7%D0%B2%27%D1%8F%D0%B7%D0%B0%D0%BD%D1%96_%D0%B7%D0%BC%D1%96%D0%BD%D0%BD%D1%96`;
 const builtinModules = s.phrase([ s.f(`require`), s.lexeme(`(`), s.lt(`\`module\``), s.lexeme(`).`), s.p(`builtinModules`) ]);
@@ -17,6 +19,8 @@ const require_doc = `https://nodejs.org/api/modules.html#modules_all_together`;
 const require_source = `https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js`;
 const cpp_addon = `https://nodejs.org/api/addons.html`;
 const json_doc = `https://uk.wikipedia.org/wiki/JSON`;
+const package_json_doc = `https://nodejs.org/en/knowledge/getting-started/npm/what-is-the-file-package-json/`;
+const package_json = s.lt(`package.json`);
 
 const note_1 = s.note([
     s.sentence(`Мається на увазі те, що змінні виглядають так, наче оголошені у зовнішній області коду, а не всередині функції і, відповідно, доступні в будь-якому місці модуля. `),
@@ -79,6 +83,14 @@ const code_4 = s.illustration( ...[
         [ `configureSomething(config);` ],
     ),
 ]);
+const code_5 = s.illustration( ...[
+    s.sentence(`Мінімальний вміст `, package_json, `. `),
+    s.code(
+        [ `{` ],
+        [ `    "main": "./src/main"` ],
+        [ `}` ],
+    ),
+]);
 
 
 exports = module.exports = new h.DocumentResource({
@@ -132,7 +144,7 @@ exports = module.exports = new h.DocumentResource({
             s.paragraph(...[
                 s.sentence(`В першу чергу, при зверненні до модуля функція `, $require, ` визначається з тим, де розміщується його код. `),
                 s.sentence(`Частина модулів NodeJS є вбудованою (наприклад `, s.lt(`path`), `) і має певний пріоритет на цьому етапі. `),
-                s.sentence(`Повний перелік ідентифікаторів цих модулів можна отримати за допомогою звернення до `, builtinModules, code_2, `. `),
+                s.sentence(`Повний перелік ідентифікаторів цих модулів можна отримати за допомогою звернення до `, builtinModules, ` `, code_2, `. `),
                 s.sentence(`Для нас важливо те, що ідентифікатори цих модулів є вийнятковими і при зверненні до них `, $require, ` негайно повертає їхній вміст, оминаючи всі подальші етапи. `),
                 s.sentence(`Така особливість алгоритму має певні наслідки, які стануть зрозумілими дещо згодом, а саме: ми не зможемо завантажити модулі, ідентифікатори яких збігаються з ідентифікаторами вбудованих модулів NodeJS. `),
             ]),
@@ -145,6 +157,8 @@ exports = module.exports = new h.DocumentResource({
                 s.sentence(`У двох інших випадках - за аналогією зі шляхами в файловій системі, відносно поточного каталогу. `),
             ]),
             code_3,
+        ]),
+        s.section(`Завантаження файлу. `, ...[
             s.paragraph(...[
                 s.sentence(`Коли відносний шлях встановлено - `, $require, ` починає процес пошуку потрібного файлу, який відбувається у декілька етапів.  `),
                 s.sentence(`Якщо розширення файлу не вказано, то для випадку `, s.phrase([ s.f(`require`), s.lexeme(`(`), s.lt(`"./memes"`), s.lexeme(`)`) ]), ` алгоритм буде намагатись по черзі завантажувати наступні файли:`),
@@ -156,16 +170,52 @@ exports = module.exports = new h.DocumentResource({
                 s.sentence(`Файл з розширення `, s.lt(`.node`), `: `, s.lt(`"./memes.node"`), `, інтерпретований як `, s.link(`модуль С++`, cpp_addon), `. `),
             ]),
             s.paragraph(...[
-                s.sentence(`З такого порядку завантаження можна зробити два важливих висновки. `),
+                s.sentence(`Якщо потрібного файлу не знайдено - функція кине помилку. `),
+                s.sentence(`З такого порядку завантаження можна зробити три важливих висновки. `),
                 s.sentence(`По-перше, `, $require, ` буде намагатись завантажити файл `, s.emphasis(`без розширення`), `, причому буде робити це `, s.emphasis(`в першу чергу`), `. `),
                 s.sentence(`По-друге, `, $require, ` - це найлегший спосіб завантажити просту конфігурацію `, code_4, `. `),
                 s.sentence(`До того ж, ця конфігурація може бути як звичайним JSON файлом, так і CommonJS модулем. `),
+                s.sentence(`По-третє, вказувати розширення файлу не обов'язково. `),
+                s.sentence(`Ця особливість може в незначній мірі допомогти, якщо в подальшому розширення файлу зміниться, або сам файл буде замінений каталогом. `),
             ]),
             code_4,
+        ]),
+        s.section(`Завантаження каталогу. `, ...[
             s.paragraph(...[
-                s.sentence(`Якщо потрібного файлу не існує, але існує каталог з таким же іменем, `, $require, ` `),
-                s.sentence(` `),
+                s.sentence(`Якщо потрібного файлу не існує, але існує каталог з таким же іменем, `, $require, ` перейде до наступного етапу: завантаження каталогу. `),
+                s.sentence(`Цей етап сильно пов'язаний з пакетами npm та, зокрема, зі спеціальним файлом, в якому ці пакети зберігають свої метадані: `, s.link(`package.json`, package_json_doc), `. `),
             ]),
+            s.paragraph(...[
+                s.sentence(`Простіше буде почати з огляду того випадку, коли у вказаному каталозі відсутній `, package_json,`. `),
+                s.sentence(`В такому разі `, $require, ` буде шукати в цьому каталозі інший спеціальний файл - `, s.lt(`index.js`), `. `),
+                s.sentence(`Якщо бути точним, то алгоритм буде послідовно шукати файли `, s.lt(`index`), ` з наступними розширеннями:`),
+            ]),
+            s.list(...[
+                s.sentence(`Файл з розширення `, s.lt(`.js`), `: `, s.lt(`"index.js"`), `. `),
+                s.sentence(`Файл з розширення `, s.lt(`.json`), `: `, s.lt(`"index.json"`), `, інтерпретований як `, s.link(`JSON`, json_doc), `. `),
+                s.sentence(`Файл з розширення `, s.lt(`.node`), `: `, s.lt(`"index.node"`), `, інтерпретований як `, s.link(`модуль С++`, cpp_addon), `. `),
+            ]),
+            s.paragraph(...[
+                s.sentence(`Дуже важливим буде зауважити те, що на відміну від завантаження файлу з попереднього розділу, у цьому випадку файл без розширення `, s.emphasis(`ігнорується`), `. `),
+                s.sentence(`Важко сказати наскільки виправданою є така практика - використання файлу `, s.lt(`index`), ` замість `, package_json, `. `),
+                s.sentence(`Але про неї безумовно є сенс знати, щоб зрозуміти як працюють `, s.figurative(`пакети`), ` без файлу `, package_json, `. `),
+            ]),
+            s.paragraph(...[
+                s.sentence(`Підсумовуючи все сказане вище - можна зробити ще два короткі висновки. `),
+                s.sentence(`По-перше, `, package_json, ` не особливо то і потрібен для того, щоб завантажити вміст каталогу. `),
+                s.sentence(`По-друге, на відміну від завантаження файлу, у цьому випадку `, s.lt(`index`), ` без розширення не буде завантажено. `),
+            ]),
+        ]),
+        s.section(s.sentence(`Завантаження `, package_json, `. `), ...[
+            s.paragraph(...[
+                s.sentence(`Якщо в каталозі за вказаним шляхом існує файл `, package_json, `, то `, $require, ` завантажить і інтерпретує його як JSON. `),
+                s.sentence(`Зараз у цьому файлі для нас важливе лише одне поле - `, $main_s, `. `),
+                s.sentence(`Воно повинно містити шлях до потрібного файлу відносно того, каталогу в якому знаходиться `, package_json, ` `, code_5, `. `),
+                s.sentence(`Якщо цього поля або файлу немає - буде завантажено файл `, s.lt(`index`), ` за вищезгаданою схемою. `),
+                s.sentence(`Важливо, що шлях до файлу не обов'язково починати з крапки, він все одно буде вважатись відносним. `),
+                s.sentence(``),
+            ]),
+            code_5,
         ]),
         /*s.section(`Загальні принципи. `, ...[
             s.paragraph(...[
