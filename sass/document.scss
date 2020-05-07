@@ -54,6 +54,10 @@ article.hp-class-document {
                 margin-left: 16pt;
             }
         }
+        > ul {
+            // flex-item
+            order: 2;
+        }
         > figure {
             display: flex;
             flex-direction: column;
