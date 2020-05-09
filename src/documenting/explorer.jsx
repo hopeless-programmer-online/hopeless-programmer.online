@@ -29,7 +29,7 @@ class Explorer {
      */
     toHtml() {
         return (
-            <article>
+            <article class="hp-class-explorer">
                 <header>
                     <nav>
                         {this.Items.toHtml()}

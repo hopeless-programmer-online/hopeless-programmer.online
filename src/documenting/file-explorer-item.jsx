@@ -24,6 +24,7 @@ class FileExplorerItem extends ContentableExplorerItem {
         return (
             <label>
                 <input name="selection" type="radio" />
+                <span class="hp-class-radio" />
                 {this.Name}
             </label>
         );

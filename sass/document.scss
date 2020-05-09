@@ -78,6 +78,42 @@ article.hp-class-document {
                 max-width: 100%;
                 overflow-x: auto;
             }
+            > article.hp-class-explorer {
+                background-color: rosybrown;
+
+                > header {
+                    > nav {
+                        ul {
+                            list-style-type: none;
+                            padding: 0;
+
+                            > li {
+                                > label {
+                                    white-space: pre;
+
+                                    > input {
+                                        position: absolute;
+                                        opacity: 0;
+                                        cursor: pointer;
+                                        height: 0;
+                                        width: 0;
+
+                                        &:checked {
+                                            background-color: red;
+                                        }
+                                        &::after {
+                                            content: "*";
+                                        }
+                                    }
+                                    > input + .hp-class-radio {
+                                        background-color: blue;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             > figcaption {
                 > h3 {
                     // text
