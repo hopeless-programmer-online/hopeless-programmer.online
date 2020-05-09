@@ -26,10 +26,15 @@ const IdentifierLexemeType = require(`./identifier-lexeme-type`);
 const CodeLine = require(`./code-line`);
 const CodeLines = require(`./code-lines`);
 const Code = require(`./code`);
+const FileExplorerItem = require(`./file-explorer-item`);
+const CodeFileExplorerItemContent = require(`./code-file-explorer-item-content`);
+const ExplorerItems = require(`./explorer-items`);
+const Explorer = require(`./explorer`);
 const Illustration = require(`./illustration`);
 const Illustrations = require(`./illustrations`);
 const IllustrationContent = require(`./illustration-content`);
 const CodeIllustrationContent = require(`./code-illustration-content`);
+const ExplorerIllustrationContent = require(`./explorer-illustration-content`);
 const Sections = require(`./sections`);
 const SectionPart = require(`./section-part`);
 const ParagraphSectionPart = require(`./paragraph-section-part`);
@@ -54,7 +59,7 @@ const Document = require(`./document`);
  * @typedef {Lexeme | LexemeSource}                             LexemeLike
  * @typedef {LexemeLike}                                        CodeLineSource
  * @typedef {CodeLine | CodeLineSource | Array<CodeLineSource>} CodeLineLike
- * @typedef {Code}                                              IllustrationContentSource
+ * @typedef {Code | Explorer}                                   IllustrationContentSource
  * @typedef {IllustrationContent | IllustrationContentSource}   IllustrationContentLike
  * @typedef {Paragraph | Illustration | Array<Illustration> }   SectionPartSource
  * @typedef {SectionPart | SectionPartSource}                   SectionPartLike
@@ -430,6 +435,51 @@ function code(...somethings) {
         Lines : lines,
     });
 }
+
+function toFileExplorerItemContent(something) {
+    if (something instanceof Code) {
+        return new CodeFileExplorerItemContent({
+            Code : something,
+        });
+    }
+
+    throw new Error; // @todo
+}
+
+function toExplorerItems(somethings) {
+    if (somethings instanceof Object) {
+        const items = Object
+            .entries(somethings)
+            .map(([ name, content ]) => {
+                // @todo: move to function
+
+                const fileContent = toFileExplorerItemContent(content);
+
+                if (content instanceof Code) {
+                    return new FileExplorerItem({
+                        Name    : name,
+                        Content : fileContent,
+                    });
+                }
+
+                throw new Error; // @todo
+            });
+
+        return new ExplorerItems(...items);
+    }
+
+    throw new Error; // @todo
+}
+
+function explorer(something = {}) {
+    const items = toExplorerItems(something);
+
+    return new Explorer({
+        Items : items,
+    });
+}
+
+
 /**
  * @param   {IllustrationContentLike} something
  * @returns {IllustrationContent}
@@ -442,6 +492,11 @@ function toIllustrationContent(something) {
     if (something instanceof Code) {
         return new CodeIllustrationContent({
             Code : something,
+        });
+    }
+    if (something instanceof Explorer) {
+        return new ExplorerIllustrationContent({
+            Explorer : something,
         });
     }
 
@@ -574,6 +629,7 @@ exports.toLexeme = toLexeme;
 exports.toLexemes = toLexemes;
 exports.codeLine = codeLine;
 exports.code = code;
+exports.explorer = explorer;
 exports.toCodeLine = toCodeLine;
 exports.toCodeLines = toCodeLines;
 exports.toIllustrationContent = toIllustrationContent;
