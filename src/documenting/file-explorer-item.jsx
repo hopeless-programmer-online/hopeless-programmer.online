@@ -1,7 +1,7 @@
-const ExplorerItem = require(`./explorer-item`);
+const ContentableExplorerItem = require(`./contentable-explorer-item`);
 
 
-class FileExplorerItem extends ExplorerItem {
+class FileExplorerItem extends ContentableExplorerItem {
     /**
      * @param {Object}  object
      * @param {string}  object.Name
@@ -22,10 +22,10 @@ class FileExplorerItem extends ExplorerItem {
      */
     _toHtml() {
         return (
-            <span>
+            <label>
                 <input name="selection" type="radio" />
-                <label>{this.Name}</label>
-            </span>
+                {this.Name}
+            </label>
         );
     }
 }

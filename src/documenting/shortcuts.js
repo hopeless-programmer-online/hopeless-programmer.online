@@ -28,6 +28,7 @@ const CodeLines = require(`./code-lines`);
 const Code = require(`./code`);
 const FileExplorerItem = require(`./file-explorer-item`);
 const CodeFileExplorerItemContent = require(`./code-file-explorer-item-content`);
+const DirectoryExplorerItem = require(`./directory-explorer-item`);
 const ExplorerItems = require(`./explorer-items`);
 const Explorer = require(`./explorer`);
 const Illustration = require(`./illustration`);
@@ -453,12 +454,18 @@ function toExplorerItems(somethings) {
             .map(([ name, content ]) => {
                 // @todo: move to function
 
-                const fileContent = toFileExplorerItemContent(content);
-
                 if (content instanceof Code) {
+                    const fileContent = toFileExplorerItemContent(content);
+
                     return new FileExplorerItem({
                         Name    : name,
                         Content : fileContent,
+                    });
+                }
+                else if (typeof content === `object` && content !== null && content.constructor === Object) {
+                    return new DirectoryExplorerItem({
+                        Name  : name,
+                        Items : toExplorerItems(content),
                     });
                 }
 

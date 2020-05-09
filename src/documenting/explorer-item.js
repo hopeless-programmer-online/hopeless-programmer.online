@@ -5,14 +5,10 @@ class ExplorerItem {
     /**
      * @param  {Object} object
      * @param  {string} object.Name
-     * @param  {Content} object.Content
      * @throws {Error}
      */
-    constructor({ Name, Content }) {
+    constructor({ Name }) {
         if (typeof Name !== `string`) {
-            throw new Error; // @todo
-        }
-        if (Content instanceof ContentClass); else {
             throw new Error; // @todo
         }
 
@@ -31,11 +27,6 @@ class ExplorerItem {
          * @type    {string}
          */
         this.__name = Name;
-        /**
-         * @private
-         * @type    {Content}
-         */
-        this.__content = Content;
     }
 
     /**
@@ -44,13 +35,6 @@ class ExplorerItem {
      */
     get Name() {
         return this.__name;
-    }
-    /**
-     * @public
-     * @type   {Content}
-     */
-    get Content() {
-        return this.__content;
     }
 
     /**
@@ -83,7 +67,3 @@ exports = module.exports = ExplorerItem;
 
 
 const html = require(`../html`);
-const Content = require(`./explorer-item-content`);
-
-
-const ContentClass = Content;
