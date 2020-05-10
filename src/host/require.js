@@ -2,6 +2,12 @@ const hosting = require(`../hosting`);
 const documenting = require(`../documenting`);
 
 
+/**
+ * @todo правила запису ідентифіката модуля
+ * @todo різниця в поведінці між require(`x`) (package.exports) та require(`./x`) (package.main)
+ */
+
+
 const h = hosting;
 const s = documenting.shortcuts;
 
@@ -11,7 +17,7 @@ const $module = s.c(`module`);
 const $exports_v = s.v(`exports`);
 const $exports_p = s.p(`exports`);
 const $main_s = s.lt(`"main"`);
-const $exports_s = s.lt(`"exports"`);
+const exports_s = s.lt(`"exports"`);
 const module_exports = s.phrase([ s.c(`module`), s.lexeme(`.`), s.p(`exports`) ]);
 const module_paths = s.phrase([ s.c(`module`), s.lexeme(`.`), s.p(`paths`) ]);
 const free_variables = `https://uk.wikipedia.org/wiki/%D0%92%D1%96%D0%BB%D1%8C%D0%BD%D1%96_%D1%96_%D0%B7%D0%B2%27%D1%8F%D0%B7%D0%B0%D0%BD%D1%96_%D0%B7%D0%BC%D1%96%D0%BD%D0%BD%D1%96`;
@@ -26,6 +32,7 @@ const index = s.lt(`index`);
 const node_modules = s.lt(`node_modules`);
 const node_modules_doc = `https://nodejs.org/api/modules.html#modules_loading_from_node_modules_folders`;
 const global_folders_doc = `https://nodejs.org/api/modules.html#modules_loading_from_the_global_folders`;
+const scope_doc = `https://docs.npmjs.com/misc/scope`;
 
 const note_1 = s.note([
     s.sentence(`Мається на увазі те, що змінні виглядають так, наче оголошені у зовнішній області коду, а не всередині функції і, відповідно, доступні в будь-якому місці модуля. `),
@@ -103,6 +110,21 @@ const code_5 = s.illustration( ...[
         [ `{` ],
         [ `    "main": "./src/main"` ],
         [ `}` ],
+    ),
+]);
+const code_6 = s.illustration( ...[
+    s.sentence(`Приклад того, як може виглядати `, module_paths, ` всередині файлу `, s.lt(`C:/projects/nodejs/script.js`), `. `),
+    s.code(
+        [ `console.log(module.paths);` ],
+        [ s.cm(`/* `) ],
+        [ s.cm(` * [`) ],
+        [ s.cm(` *     "C:/projects/nodejs/node_modules",`) ],
+        [ s.cm(` *     "C:/projects/node_modules",`) ],
+        [ s.cm(` *     "C:/node_modules",`) ],
+        [ s.cm(` *     "C:/Users/Hopeless Programmer/.node_modules",`) ],
+        [ s.cm(` *     "C:/Users/Hopeless Programmer/.node_libraries",`) ],
+        [ s.cm(` * ]`) ],
+        [ s.cm(` */`) ],
     ),
 ]);
 
@@ -246,13 +268,14 @@ exports = module.exports = new h.DocumentResource({
                 s.sentence(``),
             ]),
         ]),
-        s.section(s.sentence(`Пошук модуля в `, module_paths, `.`), ...[
+        s.section(s.sentence(`Шляхи `, module_paths, `.`), ...[
             s.paragraph(...[
-                s.sentence(`Якщо ідентифікатор модуля не збігається з ідентифікатором жодного вбудованого модуля і не є відносним шляхом, `, $require, ` починає пошук потрібного модуля серед набору шляхів `, module_paths, note_3, `. `),
+                s.sentence(`Якщо ідентифікатор модуля не збігається з ідентифікатором жодного вбудованого модуля і не є відносним шляхом, `, $require, ` починає пошук потрібного модуля серед набору шляхів `, module_paths, note_3, ` `, code_6, `. `),
                 s.sentence(`Це поле є масивом стрічок - повних шляхів до каталогів, в яких слід шукати модулі. `),
                 s.sentence(`Пошук відбувається послідовно і якщо модуль не знайдено за першим шляхом, алгоритм переходить до наступного. `),
                 s.sentence(`Якщо ж модуль не вдається знайти за жодним зі шляхів - `, $require, ` кидає помилку. `),
             ]),
+            code_6,
             s.paragraph(...[
                 s.sentence(`Набір шляхів `, module_paths, ` складається за певним правилом і сильно залежить від розташування того модуля, в якому відбуваєтсья виклик `, $require, `. `),
                 s.sentence(`Першими у цьому масиві виступатимуть шляхи до каталогів `, node_modules, `. `),
@@ -273,10 +296,34 @@ exports = module.exports = new h.DocumentResource({
                 s.sentence(`Офіційна документація налогошує на тому, що ці шляхи підтримуються з історичних причин, а усі потрібні модулі наполегливо радять зберігати в локальних каталога `, node_modules, `. `),
             ]),
         ]),
-        s.section(``, ...[
+        s.section(s.sentence(`Пошук в `, module_paths, `.`), ...[
+            s.paragraph(...[
+                s.sentence(`Хоча пошук модуля в `, module_paths, ` багато в чому схожий з тим пошуком, який відбується за відносним шляхом, він все ж має одну `, s.emphasis(`дуже суттєву`), ` відмінність. `),
+                s.sentence(`Ідея крутиться навколо `, exports_s, ` - ще одного поля файлу `, package_json, `. `),
+                s.sentence(`Воно слугує джерелом інформації про те, які шляхи всередині самого модуля є відкритими до завантаження через `, $require, `, а які є приватними. `),
+                s.sentence(`Тобто `, exports_s, ` визначає чи можемо ми завантажити файл `, s.lt(`doge`), ` всередині модуля `, s.lt(`memes`), ` як `, s.phrase([ $require, s.lexeme(`(`), s.lt(`"memes/doge"`), s.lexeme(`)`) ]), ` і яким чином буде інтепретуватись шлях до цього файлу. `),
+                s.sentence(`Але давайте про все це по-порядку...`),
+            ]),
+            s.paragraph(...[
+                s.sentence(`На цьому етапі у нас вже є сформований список каталогів в яких потрібно проводити пошук - `, module_paths, `. `),
+                s.sentence(`Рухаючись по ньому `, $require, ` трактує ідентифікатор потрібного нам модуля як комбінацію його імені та шляху всередині самого модуля за наявності такого. `),
+                s.sentence(`Цей внутрішній шлях починається з косої риски (`, s.lt(`/`), `) і є послідовністю ідентифікаторів модулів розділених нею ж. `),
+                s.sentence(`Наприклад, це може бути `, s.phrase([ $require, s.lexeme(`(`), s.lt(`"my-module/path/to/submodule"`), s.lexeme(`)`) ]), `, де ідентифікатором модуля буде вважатись `, s.lt(`my-module`), ` а внутрішнім шляхом - `, s.lt(`/path/to/submodule`), `. `),
+            ]),
+            s.paragraph(...[
+                s.sentence(`Додатково, ідентифікатор самого модуля може починатись зі `, s.emphasis(`спеціального`), ` префіксу який вказує на `, s.link(`область`, scope_doc), `. `),
+                s.sentence(`Такий префікс повинен починатись з символу `, s.lt(`@`), ` закінчуватись косою рискою (`, s.lt(`/`), `), а між ними - містити ідентифікатор області. `),
+                s.sentence(`Такий префікс дозволяє оголошувати модулі з іменами, які вже є зарезервовані за вбудованими модулями, або пакетами npm, при цьому не створюючи неоднозначностей. `),
+                s.sentence(`Наприклад, можна оголосити модуль `, s.lt(`@my/path`), ` і це не буде конфліктувати з вбудованим модулем `, s.lt(`path`), `. `),
+            ]),
             s.paragraph(...[
                 s.sentence(``),
             ]),
         ]),
+        // s.section(``, ...[
+        //     s.paragraph(...[
+        //         s.sentence(``),
+        //     ]),
+        // ]),
     ),
 });
