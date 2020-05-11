@@ -38,5 +38,6 @@ module.exports = {
             `error`,
             `always-multiline`,
         ],
+        "no-undef": `error`,
     },
 };
