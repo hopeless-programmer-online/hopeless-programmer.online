@@ -13,6 +13,9 @@
         color: palette.$code-macro;
 
         &[name=this],
+        &[name=using],
+        &[name=namespace],
+        &[name=auto],
         &[name=function] {
             color: palette.$code-keyword;
         }
@@ -20,9 +23,6 @@
     &.hp-class-identifier-lexeme {
         color: palette.$code-variable;
 
-        &[name=void] {
-            color: palette.$code-keyword;
-        }
         &[type=variable][name=exports] {
             color: palette.$code-class;
         }
@@ -31,6 +31,11 @@
         }
         &[type=class] {
             color: palette.$code-class;
+        }
+        &[name=void],
+        &[name=int],
+        &[name=float] {
+            color: palette.$code-keyword;
         }
     }
     &.hp-class-comment-lexeme {
