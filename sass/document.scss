@@ -1,3 +1,4 @@
+@use "sass/palette";
 @use "sass/text";
 
 article.hp-class-document {
@@ -98,5 +99,9 @@ article.hp-class-document {
                 }
             }
         }
+    }
+    > footer {
+        // border
+        border-top: 2pt dashed palette.$text-regular;
     }
 }
