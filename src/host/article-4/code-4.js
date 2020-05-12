@@ -2,7 +2,7 @@ const s = require(`../../documenting`).shortcuts;
 
 
 exports = module.exports = s.illustration( ...[
-    s.sentence(``),
+    s.sentence(`Динамічний вибір формату при перетворенні даних.`),
     s.code(
         [ s.cm(`// type = "json" або "xml"`) ],
         [ s.kw(`function`), ` `, s.f(`f`), `(`, s.v(`object`), `, `, s.v(`type`), `) {` ],
