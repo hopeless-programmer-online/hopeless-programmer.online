@@ -44,6 +44,9 @@ const number_Accept_visitor = s.phrase([ s.v(`number`), `.`, s.f(`Accept`), `(`,
 const visitor_VisitNumber_number = s.phrase([ s.v(`visitor`), `.`, s.f(`VisitNumber`), `(`, s.v(`number`), `)` ]);
 const number = s.v(`number`);
 const visitor = s.v(`visitor`);
+const others = s.phrase([ `...`, s.v(`others`) ]);
+const $Object = s.c(`Object`);
+const Object_Accept = s.phrase([ s.c(`Object`), `.`, s.f(`Accept`) ]);
 
 exports = module.exports = new h.DocumentResource({
     Document : s.document([ `Це можна покращити! `, `Відвідувач та ECMAScript 6. ` ],
@@ -214,7 +217,7 @@ exports = module.exports = new h.DocumentResource({
                 s.sentence(`І знову перешкодою для цього може стати статична типізація, відсутня в JavaScript. `),
                 s.sentence(`В інших мовах часто доводиться передавати такі аргументи через `, s.link(`поля`, `https://uk.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D0%B5_%D0%BA%D0%BB%D0%B0%D1%81%D1%83`), ` самого відвідувача, але в нашому випадку це не потрібно. `),
                 s.sentence(`Окрім цього, використовуючи ECMAScript 6 можна не лише зробити додаткові аргументи можливими, але й зручними та інтуїтивно зрозумілими. `),
-                s.sentence(`Використовуючи оператори для `, s.link(`решти аргументів`, `https://developer.mozilla.org/uk/docs/Web/JavaScript/Reference/Functions/%D1%80%D0%B5%D1%88%D1%82%D0%B0_%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D1%96%D0%B2`), ` та `, s.link(`розпакування`, `https://developer.mozilla.org/uk/docs/Web/JavaScript/Reference/Operators/%D0%9E%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80_%D1%80%D0%BE%D0%B7%D0%BF%D0%B0%D0%BA%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F`), ` можна вирішити все розмноживши єдиний рядок - `, /*code(`JavaScript`, code.line(`...others`)),*/ ` (див. `, code_14, `). `),
+                s.sentence(`Використовуючи оператори для `, s.link(`решти аргументів`, `https://developer.mozilla.org/uk/docs/Web/JavaScript/Reference/Functions/%D1%80%D0%B5%D1%88%D1%82%D0%B0_%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D1%96%D0%B2`), ` та `, s.link(`розпакування`, `https://developer.mozilla.org/uk/docs/Web/JavaScript/Reference/Operators/%D0%9E%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80_%D1%80%D0%BE%D0%B7%D0%BF%D0%B0%D0%BA%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F`), ` можна вирішити все розмноживши єдиний рядок - `, others, ` (див. `, code_14, `). `),
                 s.sentence(`Це не лише `, s.emphasis(`не`), ` буде конфліктувати з базовим класом і рештою інфраструктури, але й дозволить реалізувати різну кількість і типи аргументів для різних відвідуваних об'єктів. `),
             ]),
             code_14,
@@ -222,9 +225,9 @@ exports = module.exports = new h.DocumentResource({
         s.section(`Ще не все!`, ...[
             s.paragraph(...[
                 s.sentence(`Можна не зупинятись на досягнутому. `),
-                s.sentence(`Ще одна область для вдосконалення - це особлива диспетчеризація тих класів, які успадковують `, /*code(`JavaScript`, code.line(code.ca(`Object`))),*/ `, але `, s.emphasis(`не`), ` реалізують метод `, /*code(`JavaScript`, code.line(code.fd(`Accept`))),*/ `. `),
+                s.sentence(`Ще одна область для вдосконалення - це особлива диспетчеризація тих класів, які успадковують `, $Object, `, але `, s.emphasis(`не`), ` реалізують метод `, Accept, `. `),
                 s.sentence(`Для цього можна ввести у відвідувач додатковий метод, який буде опрацьовувати ці об'єкти. `),
-                s.sentence(`Також метод `, /*code(`JavaScript`, code.line(code.ca(`Object`), `.`, code.fa(`Accept`))),*/ ` тепер буде мати початкову реалізацію, а похідні класи зможуть змінювати її за бажанням (див. `, code_15, `). `),
+                s.sentence(`Також метод `, Object_Accept, ` тепер буде мати початкову реалізацію, а похідні класи зможуть змінювати її за бажанням (див. `, code_15, `). `),
             ]),
             code_15,
             s.paragraph(...[
@@ -242,7 +245,7 @@ exports = module.exports = new h.DocumentResource({
                 s.sentence(`Але є спосіб боротись з цим. `),
                 s.sentence(`Можна оголосити ще один опрацьовувач в базовому класі відвідувача. `),
                 s.sentence(`Він буде працювати `, s.emphasis(`лише`), ` з тими об'єктами, обробка яких `, s.emphasis(`не`), ` є заміщеною в похідному класі. `),
-                s.sentence(`Досягається це за допомогою перенаправлення з усіх методів `, /*code(`JavaScript`, code.line(code.fa(`Visit`), `*`)),*/ ` базового класу (див. `, code_17, `). `),
+                s.sentence(`Досягається це за допомогою перенаправлення з усіх методів `, Visit, ` базового класу (див. `, code_17, `). `),
                 s.sentence(`Заміщені ж методи не будуть наділені такою поведінкою, реалізуючи натомість код для опрацювання об'єкта конкретного типу. `),
                 s.sentence(`Такий підхід не лише зменшить кількість коду, але й позбавить нас необхідності в додаванні нових методів. `),
             ]),
