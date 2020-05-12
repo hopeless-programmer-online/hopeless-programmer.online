@@ -13,6 +13,8 @@
         color: palette.$code-macro;
 
         &[name=this],
+        &[name=class],
+        &[name=extends],
         &[name=using],
         &[name=namespace],
         &[name=auto],
