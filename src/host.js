@@ -14,6 +14,7 @@ const article_1 = require(`./host/article-1`);
 const article_2 = require(`./host/article-2`);
 const article_3 = require(`./host/article-3`);
 const article_4 = require(`./host/article-4`);
+const article_5 = require(`./host/article-5`);
 
 
 exports = module.exports = new h.Host({
@@ -56,6 +57,12 @@ exports = module.exports = new h.Host({
                             Document : article_4.Document,
                         }),
                     }),
+                    new d.IndexItem({
+                        Content : new d.DocumentIndexItemContent({
+                            Url      : `/article_5`,
+                            Document : article_5.Document,
+                        }),
+                    }),
                 ),
             }),
         }),
@@ -64,6 +71,7 @@ exports = module.exports = new h.Host({
         "/article_2" : article_2,
         "/article_3" : article_3,
         "/article_4" : article_4,
+        "/article_5" : article_5,
         "/require" : article_require,
         // errors
         "/404" : require(`./host/404`),
