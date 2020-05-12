@@ -122,9 +122,9 @@ function phrase(something) {
             Lexemes : [ something ],
         });
     }
-    if (Array.isArray(something) && something.every(lexeme => lexeme instanceof Lexeme)) {
+    if (Array.isArray(something) && something.some(lexeme => lexeme instanceof Lexeme)) {
         return new LexemePhrase({
-            Lexemes : something,
+            Lexemes : toLexemes(something),
         });
     }
 

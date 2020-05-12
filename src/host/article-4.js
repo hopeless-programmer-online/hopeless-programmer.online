@@ -33,6 +33,17 @@ const note_3    = s.note(...[
 const note_4    = s.note(s.sentence(`Це не повинно створювати для компілятора якихось труднощів, адже мова йде про `, s.emphasis(`не`), ` віртуальну функцію. `));
 const note_5    = s.note(`Звичайно, статична типізація не є вадою безпосередньо і в прямому розумінні. `, `Тут мається на увазі те, що разом з іншими особливостями статично типізованих мов реалізувати подібне рішення стає важко. `);
 
+const object_Accept_visitor = s.phrase([ s.v(`object`), `.`, s.f(`Accept`), `(`, s.v(`visitor`), `)` ]);
+const visitor_Visit_object = s.phrase([ s.v(`visitor`), `.`, s.f(`Visit`), `(`, s.v(`object`), `)` ]);
+const visitor_Visit_number = s.phrase([ s.v(`visitor`), `.`, s.f(`Visit`), `(`, s.v(`number`), `)` ]);
+const Visit = s.f(`Visit`);
+const Accept = s.f(`Accept`);
+const VisitNumber = s.f(`VisitNumber`);
+const VisitString = s.f(`VisitString`);
+const number_Accept_visitor = s.phrase([ s.v(`number`), `.`, s.f(`Accept`), `(`, s.v(`visitor`), `)` ]);
+const visitor_VisitNumber_number = s.phrase([ s.v(`visitor`), `.`, s.f(`VisitNumber`), `(`, s.v(`number`), `)` ]);
+const number = s.v(`number`);
+const visitor = s.v(`visitor`);
 
 exports = module.exports = new h.DocumentResource({
     Document : s.document([ `Це можна покращити! `, `Відвідувач та ECMAScript 6. ` ],
@@ -174,21 +185,21 @@ exports = module.exports = new h.DocumentResource({
         s.section(`Розвиваємо ідею`, ...[
             s.paragraph(...[
                 s.sentence(`Перше, що можна покращити - це зовнішній вигляд. `),
-                s.sentence(`Можна перенести виклик `, /*code(`JavaScript`, code.line(code.va(`object`), `.`, code.fc(`Accept`), `(`, code.vp(`visitor`), `)`)),*/ ` всередину нового методу: `, /*code(`JavaScript`, code.line(code.va(`visitor`), `.`, code.fc(`Visit`), `(`, code.vp(`object`), `)`)),*/ ` (див. `, code_12, `). `),
+                s.sentence(`Можна перенести виклик `, object_Accept_visitor, ` всередину нового методу: `, visitor_Visit_object, ` (див. `, code_12, `). `),
                 s.sentence(`З точки зору продуктивності ми радше за все нічого не втратимо, такий виклик легко може бути оптимізований`, note_4, `. `),
-                s.sentence(`З точки ж зору синтаксису метод `, /*code(`JavaScript`, code.line(code.fd(`Visit`))),*/ ` візуально легше зіставити з методами `, /*code(`JavaScript`, code.line(code.fd(`VisitNumber`))),*/ `, `, /*code(`JavaScript`, code.line(code.fd(`VisitString`))),*/ ` і т.д.. `),
+                s.sentence(`З точки ж зору синтаксису метод `, Visit, ` візуально легше зіставити з методами `, VisitNumber, `, `, VisitString, ` і т.д.. `),
                 s.sentence(`Створюється ілюзія того, що поліморфізм діє через аргументи і автоматично вибирає ту реалізацію, яка збігається з типом відвідуваного об'єкту. `),
             ]),
             code_12,
             s.paragraph(...[
-                s.sentence(`Іншими словами - зв'язок між `, /*code(`JavaScript`, code.line(code.va(`number`), `.`, code.fc(`Accept`), `(`, code.vp(`visitor`), `)`)),*/ ` та `, /*code(`JavaScript`, code.line(code.va(`visitor`), `.`, code.fc(`VisitNumber`), `(`, code.vp(`number`), `)`)),*/ ` не є очевидний. `),
-                s.sentence(`Дуже важко здогадатись, що перший метод об'єкта `, /*code(`JavaScript`, code.line(code.va(`number`))),*/ ` призведе до виклику іншого методу об'єкта `, /*code(`JavaScript`, code.line(code.va(`visitor`))),*/ `. `),
-                s.sentence(`А от у випадку `, /*code(`JavaScript`, code.line(code.va(`visitor`), `.`, code.fc(`Visit`), `(`, code.vp(`number`), `)`)),*/ ` та `, /*code(`JavaScript`, code.line(code.va(`visitor`), `.`, code.fc(`VisitNumber`), `(`, code.vp(`number`), `)`)),*/ ` все простіше. `),
+                s.sentence(`Іншими словами - зв'язок між `, number_Accept_visitor, ` та `, visitor_VisitNumber_number, ` не є очевидний. `),
+                s.sentence(`Дуже важко здогадатись, що перший метод об'єкта `, number, ` призведе до виклику іншого методу об'єкта `, visitor, `. `),
+                s.sentence(`А от у випадку `, visitor_Visit_number, ` та `, visitor_VisitNumber_number, ` все простіше. `),
                 s.sentence(`Методи не лише мають схожі назви, але й стосуються одного і того ж об'єкта. `),
                 s.sentence(`У цьому випадку користувачу легше дистанціюватись від особливостей реалізації, віддавши все на волю `, s.figurative(`магії`), `. `),
             ]),
             s.paragraph(...[
-                s.sentence(`Далі, ми можемо використати динамічну типізацію JavaScript і дозволити методам `, /*code(`JavaScript`, code.line(code.fd(`Visit`))),*/ `, `, /*code(`JavaScript`, code.line(code.fd(`Accept`))),*/ ` та `, /*code(`JavaScript`, code.line(code.fd(`VisitNumber`))),*/ ` повертати результат. `),
+                s.sentence(`Далі, ми можемо використати динамічну типізацію JavaScript і дозволити методам `, Visit, `, `, Accept, ` та `, VisitNumber, ` повертати результат. `),
                 s.sentence(`В статично типізованих мовах цього важко досягнути, оскільки тип результату має бути відомий заздалегідь. `),
                 s.sentence(`Доводиться йти на компроміси. `),
                 s.sentence(`Можна відмовитись від результату, акумулюючи його всередині об'єкта. `),
