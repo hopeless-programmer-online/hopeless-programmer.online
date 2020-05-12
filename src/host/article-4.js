@@ -6,23 +6,23 @@ const h = hosting;
 const s = documenting.shortcuts;
 
 
-// const code_1 = require(`./article-4/code-1`);
-// const code_2 = require(`./article-4/code-2`);
-// const code_3 = require(`./article-4/code-3`);
-// const code_4 = require(`./article-4/code-4`);
-// const code_5 = require(`./article-4/code-5`);
-// const code_6 = require(`./article-4/code-6`);
-// const code_7 = require(`./article-4/code-7`);
-// const code_8 = require(`./article-4/code-8`);
-// const code_9 = require(`./article-4/code-9`);
-// const code_10 = require(`./article-4/code-10`);
-// const code_11 = require(`./article-4/code-11`);
-// const code_12 = require(`./article-4/code-12`);
-// const code_13 = require(`./article-4/code-13`);
-// const code_14 = require(`./article-4/code-14`);
-// const code_15 = require(`./article-4/code-15`);
-// const code_16 = require(`./article-4/code-16`);
-// const code_17 = require(`./article-4/code-17`);
+const code_1 = require(`./article-4/code-1`);
+const code_2 = require(`./article-4/code-2`);
+const code_3 = require(`./article-4/code-3`);
+const code_4 = require(`./article-4/code-4`);
+const code_5 = require(`./article-4/code-5`);
+const code_6 = require(`./article-4/code-6`);
+const code_7 = require(`./article-4/code-7`);
+const code_8 = require(`./article-4/code-8`);
+const code_9 = require(`./article-4/code-9`);
+const code_10 = require(`./article-4/code-10`);
+const code_11 = require(`./article-4/code-11`);
+const code_12 = require(`./article-4/code-12`);
+const code_13 = require(`./article-4/code-13`);
+const code_14 = require(`./article-4/code-14`);
+const code_15 = require(`./article-4/code-15`);
+const code_16 = require(`./article-4/code-16`);
+const code_17 = require(`./article-4/code-17`);
 
 const note_1    = s.note(`Насправді мені просто було ліньки шукати матеріал по темі. `);
 const note_2    = s.note(s.sentence(`А це нам точно знадобиться, `, s.link(`Мерфі гарантує`, `https://uk.wikipedia.org/wiki/%D0%97%D0%B0%D0%BA%D0%BE%D0%BD_%D0%9C%D0%B5%D1%80%D1%84%D1%96`), `!.`));
@@ -62,7 +62,7 @@ exports = module.exports = new h.DocumentResource({
             s.paragraph(...[
                 s.sentence(`Для початку варто було б згадати навіщо взагалі потрібен відвідувач. `),
                 s.sentence(`Припустимо що у нас є деяка ієрархія класів. `),
-                s.sentence(`Наприклад, примітиви типу чисел, стрічок, масивів і т.д. (див. `, /*reference(require(`./code_1.js`)),*/ `). `),
+                s.sentence(`Наприклад, примітиви типу чисел, стрічок, масивів і т.д. (див. `, code_1, `). `),
                 s.sentence(`Наповнення цих класів не є важливим, а тому ми залишимо його за кулісами. `),
                 s.sentence(`Завдання - реалізувати програму яка б перетворювала екземпляри цих класів в, наприклад, `, s.link(`JSON`, `https://uk.wikipedia.org/wiki/JSON`), `. `),
             ]),
@@ -77,14 +77,14 @@ exports = module.exports = new h.DocumentResource({
             s.paragraph(...[
                 s.sentence(`То що б ми зробили будучи на місці розробників JavaScript? `),
                 s.sentence(`Одним із найпростіших рішень є додавання в кожен клас спеціального методу. `),
-                s.sentence(`Цей метод відповідає за перетворення відповідного об'єкта і викликається безпосередньо (див. `, /*reference(require(`./code_2.js`)),*/ `). `),
+                s.sentence(`Цей метод відповідає за перетворення відповідного об'єкта і викликається безпосередньо (див. `, code_2, `). `),
                 s.sentence(`На перший погляд така ідея є абсолютно здоровою, адже вона вирішує поставлену задачу. `),
                 s.sentence(`Але це лише на перший погляд... `),
             ]),
-            // [
-            //     require(`./code_1.js`),
-            //     require(`./code_2.js`),
-            // ],
+            [
+                code_1,
+                code_2,
+            ],
             s.paragraph(...[
                 s.sentence(`Тепер звернемось до свого внутрішнього критика і спробуємо знайти вади в подібному дизайні. `),
                 s.sentence(`Перше що можна помітити - це `, s.link(`нагромадження обов'язків`, `https://uk.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF_%D1%94%D0%B4%D0%B8%D0%BD%D0%BE%D0%B3%D0%BE_%D0%BE%D0%B1%D0%BE%D0%B2%27%D1%8F%D0%B7%D0%BA%D1%83`), `. `),
@@ -94,20 +94,20 @@ exports = module.exports = new h.DocumentResource({
                 s.sentence(`Вони стають залежними одна від одної, хоча це `, s.emphasis(`не`), ` є необхідним. `),
             ]),
             s.paragraph(...[
-                s.sentence(`Далі, якщо нам знадобиться підтримка ще одного формату, наприклад, `, s.link(`XML`, `https://uk.wikipedia.org/wiki/XML`), `, то доведеться додавати в `, s.emphasis(`існуючі`), ` класи нові методи (див. `, /*reference(require(`./code_3.js`)),*/ `). `),
+                s.sentence(`Далі, якщо нам знадобиться підтримка ще одного формату, наприклад, `, s.link(`XML`, `https://uk.wikipedia.org/wiki/XML`), `, то доведеться додавати в `, s.emphasis(`існуючі`), ` класи нові методи (див. `, code_3, `). `),
                 s.sentence(`Така залежність змушує нас `, s.link(`модифікувати вже написані класи`, `https://uk.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF_%D0%B2%D1%96%D0%B4%D0%BA%D1%80%D0%B8%D1%82%D0%BE%D1%81%D1%82%D1%96/%D0%B7%D0%B0%D0%BA%D1%80%D0%B8%D1%82%D0%BE%D1%81%D1%82%D1%96`), `, замість того щоб розширювати їх. `),
             ]),
-            // [
-            //     require(`./code_3.js`),
-            //     require(`./code_4.js`),
-            // ],
+            [
+                code_3,
+                code_4,
+            ],
             s.paragraph(...[
                 s.sentence(`Зрештою, перетворення в JSON та XML виглядають дуже схожими операціями. `),
                 s.sentence(`І було б природно мати можливість `, s.emphasis(`динамічно`), ` `, s.link(`замінювати одну операцію іншою`, `https://uk.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF_%D0%BF%D1%96%D0%B4%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8_%D0%9B%D1%96%D1%81%D0%BA%D0%BE%D0%B2`), note_3, `. `),
                 s.sentence(`Але вибрана нами стратегія не дає нам змоги зробити це. `),
                 s.sentence(`Для цього необхідно замінити метод. `),
                 s.sentence(`А зробити це `, s.emphasis(`динамічно`), ` в статично-типізованих мовах програмування неможливо. `),
-                s.sentence(`На щастя тут ми можемо використати особливість JavaScript і викликати метод за іменем (див. `, /*reference(require(`./code_4.js`)),*/ `). `),
+                s.sentence(`На щастя тут ми можемо використати особливість JavaScript і викликати метод за іменем (див. `, code_4, `). `),
                 s.sentence(`В даному випадку це спрацює, хоч такий пошук і не є швидкою операцією. `),
             ]),
         ]),
@@ -115,14 +115,12 @@ exports = module.exports = new h.DocumentResource({
             s.paragraph(...[
                 s.sentence(`Для усунення цих вад і використовують відвідувача. `),
                 s.sentence(`Ідея полягає у тому, що потрібно відділити дані від алгоритмів їх опрацювання. `),
-                s.sentence(`Кінцевим результатом мав би стати дизайн, де методи ToJSON та ToXML перетворюються в окремі класи JSON та XML (див. `, /*reference(require(`./code_5.js`)),*/ `). `),
+                s.sentence(`Кінцевим результатом мав би стати дизайн, де методи ToJSON та ToXML перетворюються в окремі класи JSON та XML (див. `, code_5, `). `),
             ]),
-            // [
-            //     require(`./code_5.js`),
-            // ],
+            code_5,
             s.paragraph(...[
                 s.sentence(`Але і тут не все так просто. Це завдання теж можна вирішити не єдиним способом, причому з різною ефективністю. `),
-                s.sentence(`Є три досить поширені та однаково неефективні ідеї (див. `, /*reference(require(`./code_6.js`)),*/ `, `, /*reference(require(`./code_7.js`)),*/ ` та `, /*reference(require(`./code_8.js`)),*/ `): `),
+                s.sentence(`Є три досить поширені та однаково неефективні ідеї (див. `, code_6, `, `, code_7, ` та `, code_8, `): `),
             ]),
             s.list(...[
                 s.sentence(`Ввести допоміжне поле для визначення типу об'єкта і в залежності від нього проводити галуження. `),
@@ -131,28 +129,28 @@ exports = module.exports = new h.DocumentResource({
             ]),
             s.paragraph(...[
                 s.sentence(`Ці підходи теж вирішують завдання, але кожен з них має свої вади. `),
-                s.sentence(`По-перше, якщо проводити галуження виходячи з конструктора об'єкта (див. `, /*reference(require(`./code_6.js`)),*/ `), то ми втрачаємо сумісність з усіма похідними класами. `),
-                s.sentence(`По-друге, введення додаткового поля для визначення типу (див. `, /*reference(require(`./code_7.js`)),*/ `) є надлишковим, оскільки інформація про тип може бути виведена з деякого аналогу `, /*term*/(`таблиці віртуальних методів`), `. `),
+                s.sentence(`По-перше, якщо проводити галуження виходячи з конструктора об'єкта (див. `, code_6, `), то ми втрачаємо сумісність з усіма похідними класами. `),
+                s.sentence(`По-друге, введення додаткового поля для визначення типу (див. `, code_7, `) є надлишковим, оскільки інформація про тип може бути виведена з деякого аналогу `, /*term*/(`таблиці віртуальних методів`), `. `),
                 s.sentence(`По-третє і галуження, і приведення до типу не є дешевими операціями. `),
                 s.sentence(`В даному випадку є можливість обійтись без їхнього використання. `),
             ]),
-            // [
-            //     require(`./code_6.js`),
-            //     require(`./code_7.js`),
-            //     require(`./code_8.js`),
-            // ],
+            [
+                code_6,
+                code_7,
+                code_8,
+            ],
         ]),
         s.section(`Реалізація`, ...[
             s.paragraph(...[
                 s.sentence(`Класична реалізація відвідувача позбавлена згаданих вище вад. `),
-                s.sentence(`Перший крок - це створення деякої проміжної ланки, яка б надавала можливість звернення до об'єктів відповідно до їхнього `, s.link(`типу`, `https://uk.wikipedia.org/wiki/%D0%A2%D0%B8%D0%BF_%D0%B4%D0%B0%D0%BD%D0%B8%D1%85`), ` (див. `, /*reference(require(`./code_9.js`)),*/ `). `),
+                s.sentence(`Перший крок - це створення деякої проміжної ланки, яка б надавала можливість звернення до об'єктів відповідно до їхнього `, s.link(`типу`, `https://uk.wikipedia.org/wiki/%D0%A2%D0%B8%D0%BF_%D0%B4%D0%B0%D0%BD%D0%B8%D1%85`), ` (див. `, code_9, `). `),
                 s.sentence(`Наступний крок - це передача процесу `, s.link(`диспетчеризації`, `https://uk.wikipedia.org/wiki/%D0%9C%D1%83%D0%BB%D1%8C%D1%82%D0%B8%D0%BC%D0%B5%D1%82%D0%BE%D0%B4`), ` в область відповідальності самого об'єкта. `),
-                s.sentence(`Тобто, тепер саме `, /*term*/(`число`), ` приймає рішення що з ним потрібно працювати як з числом (див. `, /*reference(require(`./code_10.js`)),*/ `). `),
+                s.sentence(`Тобто, тепер саме `, /*term*/(`число`), ` приймає рішення що з ним потрібно працювати як з числом (див. `, code_10, `). `),
             ]),
-            // [
-            //     require(`./code_9.js`),
-            //     require(`./code_10.js`),
-            // ],
+            [
+                code_9,
+                code_10,
+            ],
             s.paragraph(...[
                 s.sentence(`Останній крок - це використання `, s.link(`поліморфізму`, `https://uk.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D1%96%D0%BC%D0%BE%D1%80%D1%84%D1%96%D0%B7%D0%BC_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F)`), ` в класах з попередніх кроків. `),
                 s.sentence(`Введення `, s.link(`абстрактного методу`, `https://uk.wikipedia.org/wiki/%D0%90%D0%B1%D1%81%D1%82%D1%80%D0%B0%D0%BA%D1%82%D0%BD%D0%B8%D0%B9_%D0%BC%D0%B5%D1%82%D0%BE%D0%B4`), ` в `, /*term*/(`об'єкт`), ` дозволить опрацьовувати як `, /*term*/(`число`), ` так і `, /*term*/(`стрічку`), ` `, s.emphasis(`без`), ` визначення їхнього типу. `),
@@ -160,15 +158,13 @@ exports = module.exports = new h.DocumentResource({
                 s.sentence(`Таким чином похідні класи зможуть визначати алгоритми опрацювання для `, s.emphasis(`конкретних`), ` типів, уникаючи приведення. `),
             ]),
             s.paragraph(...[
-                s.sentence(`Класи JSON та XML лише `, s.link(`успадковують`, `https://uk.wikipedia.org/wiki/%D0%A3%D1%81%D0%BF%D0%B0%D0%B4%D0%BA%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F)`), ` Visitor і реалізовують методи для опрацювання відповідних класів (див. `, /*reference(require(`./code_11.js`)),*/ `). `),
+                s.sentence(`Класи JSON та XML лише `, s.link(`успадковують`, `https://uk.wikipedia.org/wiki/%D0%A3%D1%81%D0%BF%D0%B0%D0%B4%D0%BA%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F)`), ` Visitor і реалізовують методи для опрацювання відповідних класів (див. `, code_11, `). `),
                 s.sentence(/*term*/(`Перенаправлення`), ` викликів відповідно до типу відбувається неявно, зусиллями самих опрацьовуваних об'єктів. `),
                 s.sentence(`Усе це відбувається задешево - ціною виклику лише одного `, s.link(`віртуального методу`, `https://uk.wikipedia.org/wiki/%D0%92%D1%96%D1%80%D1%82%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D0%B8%D0%B9_%D0%BC%D0%B5%D1%82%D0%BE%D0%B4`), `. `),
                 s.sentence(`Це дешевше ніж галуження чи приведення до типу. `),
                 s.sentence(`Можливо, виходячи з постановки задачі, це `, s.emphasis(`в принципі`), ` найдешевший варіант з точки зору швидкодії. `),
             ]),
-            // [
-            //     require(`./code_11.js`),
-            // ],
+            code_11,
             s.paragraph(...[
                 s.sentence(`Ось це була `, s.figurative(`класична`), ` реалізація відвідувача. `),
                 s.sentence(`Та, яка часто використовується в статично-типізованих мовах типу `, s.link(`C#`, `https://uk.wikipedia.org/wiki/C_Sharp`), `, `, s.link(`Java`, `https://uk.wikipedia.org/wiki/Java`), ` чи `, s.link(`C++`, `https://uk.wikipedia.org/wiki/C%2B%2B`), `. `),
@@ -178,14 +174,12 @@ exports = module.exports = new h.DocumentResource({
         s.section(`Розвиваємо ідею`, ...[
             s.paragraph(...[
                 s.sentence(`Перше, що можна покращити - це зовнішній вигляд. `),
-                s.sentence(`Можна перенести виклик `, /*code(`JavaScript`, code.line(code.va(`object`), `.`, code.fc(`Accept`), `(`, code.vp(`visitor`), `)`)),*/ ` всередину нового методу: `, /*code(`JavaScript`, code.line(code.va(`visitor`), `.`, code.fc(`Visit`), `(`, code.vp(`object`), `)`)),*/ ` (див. `, /*reference(require(`./code_12.js`)),*/ `). `),
+                s.sentence(`Можна перенести виклик `, /*code(`JavaScript`, code.line(code.va(`object`), `.`, code.fc(`Accept`), `(`, code.vp(`visitor`), `)`)),*/ ` всередину нового методу: `, /*code(`JavaScript`, code.line(code.va(`visitor`), `.`, code.fc(`Visit`), `(`, code.vp(`object`), `)`)),*/ ` (див. `, code_12, `). `),
                 s.sentence(`З точки зору продуктивності ми радше за все нічого не втратимо, такий виклик легко може бути оптимізований`, note_4, `. `),
                 s.sentence(`З точки ж зору синтаксису метод `, /*code(`JavaScript`, code.line(code.fd(`Visit`))),*/ ` візуально легше зіставити з методами `, /*code(`JavaScript`, code.line(code.fd(`VisitNumber`))),*/ `, `, /*code(`JavaScript`, code.line(code.fd(`VisitString`))),*/ ` і т.д.. `),
                 s.sentence(`Створюється ілюзія того, що поліморфізм діє через аргументи і автоматично вибирає ту реалізацію, яка збігається з типом відвідуваного об'єкту. `),
             ]),
-            // [
-            //     require(`./code_12.js`),
-            // ],
+            code_12,
             s.paragraph(...[
                 s.sentence(`Іншими словами - зв'язок між `, /*code(`JavaScript`, code.line(code.va(`number`), `.`, code.fc(`Accept`), `(`, code.vp(`visitor`), `)`)),*/ ` та `, /*code(`JavaScript`, code.line(code.va(`visitor`), `.`, code.fc(`VisitNumber`), `(`, code.vp(`number`), `)`)),*/ ` не є очевидний. `),
                 s.sentence(`Дуже важко здогадатись, що перший метод об'єкта `, /*code(`JavaScript`, code.line(code.va(`number`))),*/ ` призведе до виклику іншого методу об'єкта `, /*code(`JavaScript`, code.line(code.va(`visitor`))),*/ `. `),
@@ -201,49 +195,43 @@ exports = module.exports = new h.DocumentResource({
                 s.sentence(`Але це робить неможливим використання функціонального програмування, та й узагалі погано впливає на зручність механізму в цілому. `),
                 s.sentence(`Можна повертати абстрактний результат, який потім можна буде привести до потрібного типу. `),
                 s.sentence(`Це створює зайву операцію приведення, але допомагає обійти дану проблему. `),
-                s.sentence(`На щастя JavaScript позбавлений цих `, s.figurative(`вад`), note_5, `, а тому ми можемо дозволити собі подібну розкіш (див. `, /*reference(require(`./code_13.js`)),*/ `). `),
+                s.sentence(`На щастя JavaScript позбавлений цих `, s.figurative(`вад`), note_5, `, а тому ми можемо дозволити собі подібну розкіш (див. `, code_13, `). `),
             ]),
-            // [
-            //     require(`./code_13.js`),
-            // ],
+            code_13,
             s.paragraph(...[
                 s.sentence(`Також часто виникає питання про додаткові аргументи при відвідуванні об'єктів. `),
                 s.sentence(`І знову перешкодою для цього може стати статична типізація, відсутня в JavaScript. `),
                 s.sentence(`В інших мовах часто доводиться передавати такі аргументи через `, s.link(`поля`, `https://uk.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D0%B5_%D0%BA%D0%BB%D0%B0%D1%81%D1%83`), ` самого відвідувача, але в нашому випадку це не потрібно. `),
                 s.sentence(`Окрім цього, використовуючи ECMAScript 6 можна не лише зробити додаткові аргументи можливими, але й зручними та інтуїтивно зрозумілими. `),
-                s.sentence(`Використовуючи оператори для `, s.link(`решти аргументів`, `https://developer.mozilla.org/uk/docs/Web/JavaScript/Reference/Functions/%D1%80%D0%B5%D1%88%D1%82%D0%B0_%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D1%96%D0%B2`), ` та `, s.link(`розпакування`, `https://developer.mozilla.org/uk/docs/Web/JavaScript/Reference/Operators/%D0%9E%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80_%D1%80%D0%BE%D0%B7%D0%BF%D0%B0%D0%BA%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F`), ` можна вирішити все розмноживши єдиний рядок - `, /*code(`JavaScript`, code.line(`...others`)),*/ ` (див. `, /*reference(require(`./code_14.js`)),*/ `). `),
+                s.sentence(`Використовуючи оператори для `, s.link(`решти аргументів`, `https://developer.mozilla.org/uk/docs/Web/JavaScript/Reference/Functions/%D1%80%D0%B5%D1%88%D1%82%D0%B0_%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D1%96%D0%B2`), ` та `, s.link(`розпакування`, `https://developer.mozilla.org/uk/docs/Web/JavaScript/Reference/Operators/%D0%9E%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80_%D1%80%D0%BE%D0%B7%D0%BF%D0%B0%D0%BA%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F`), ` можна вирішити все розмноживши єдиний рядок - `, /*code(`JavaScript`, code.line(`...others`)),*/ ` (див. `, code_14, `). `),
                 s.sentence(`Це не лише `, s.emphasis(`не`), ` буде конфліктувати з базовим класом і рештою інфраструктури, але й дозволить реалізувати різну кількість і типи аргументів для різних відвідуваних об'єктів. `),
             ]),
-            // [
-            //     require(`./code_14.js`),
-            // ],
+            code_14,
         ]),
         s.section(`Ще не все!`, ...[
             s.paragraph(...[
                 s.sentence(`Можна не зупинятись на досягнутому. `),
                 s.sentence(`Ще одна область для вдосконалення - це особлива диспетчеризація тих класів, які успадковують `, /*code(`JavaScript`, code.line(code.ca(`Object`))),*/ `, але `, s.emphasis(`не`), ` реалізують метод `, /*code(`JavaScript`, code.line(code.fd(`Accept`))),*/ `. `),
                 s.sentence(`Для цього можна ввести у відвідувач додатковий метод, який буде опрацьовувати ці об'єкти. `),
-                s.sentence(`Також метод `, /*code(`JavaScript`, code.line(code.ca(`Object`), `.`, code.fa(`Accept`))),*/ ` тепер буде мати початкову реалізацію, а похідні класи зможуть змінювати її за бажанням (див. `, /*reference(require(`./code_15.js`)),*/ `). `),
+                s.sentence(`Також метод `, /*code(`JavaScript`, code.line(code.ca(`Object`), `.`, code.fa(`Accept`))),*/ ` тепер буде мати початкову реалізацію, а похідні класи зможуть змінювати її за бажанням (див. `, code_15, `). `),
             ]),
-            // [
-            //     require(`./code_15.js`),
-            // ],
+            code_15,
             s.paragraph(...[
                 s.sentence(`Ще один розповсюджений недолік класичної реалізації відвідувача - це необхідність визначати всі його методи, навіть якщо більша їх половина має ідентичний код. `),
                 s.sentence(`Припустимо, що ми хочемо перетворювати в JSON `, s.emphasis(`лише`), ` числа. `),
                 s.sentence(`Усі ж інші об'єкти ми будемо повертати у вигляді порожньої стрічки. `),
-                s.sentence(`В такій ситуації нам доведеться визначити стільки методів, скільки класів існує в нашій ієрархії (див. `, /*reference(require(`./code_16.js`)),*/ `). `),
+                s.sentence(`В такій ситуації нам доведеться визначити стільки методів, скільки класів існує в нашій ієрархії (див. `, code_16, `). `),
                 s.sentence(`Окрім цього, така реалізація буде не стабільною, оскільки додавання нових класів буде змушувати нас додавати нові `, s.emphasis(`однотипні`), ` методи до похідного відвідувача. `),
             ]),
-            // [
-            //     require(`./code_16.js`),
-            //     require(`./code_17.js`),
-            // ],
+            [
+                code_16,
+                code_17,
+            ],
             s.paragraph(...[
                 s.sentence(`Але є спосіб боротись з цим. `),
                 s.sentence(`Можна оголосити ще один опрацьовувач в базовому класі відвідувача. `),
                 s.sentence(`Він буде працювати `, s.emphasis(`лише`), ` з тими об'єктами, обробка яких `, s.emphasis(`не`), ` є заміщеною в похідному класі. `),
-                s.sentence(`Досягається це за допомогою перенаправлення з усіх методів `, /*code(`JavaScript`, code.line(code.fa(`Visit`), `*`)),*/ ` базового класу (див. `, /*reference(require(`./code_17.js`)),*/ `). `),
+                s.sentence(`Досягається це за допомогою перенаправлення з усіх методів `, /*code(`JavaScript`, code.line(code.fa(`Visit`), `*`)),*/ ` базового класу (див. `, code_17, `). `),
                 s.sentence(`Заміщені ж методи не будуть наділені такою поведінкою, реалізуючи натомість код для опрацювання об'єкта конкретного типу. `),
                 s.sentence(`Такий підхід не лише зменшить кількість коду, але й позбавить нас необхідності в додаванні нових методів. `),
             ]),
