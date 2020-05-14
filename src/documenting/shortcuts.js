@@ -26,6 +26,7 @@ const IdentifierLexemeType = require(`./identifier-lexeme-type`);
 const CodeLine = require(`./code-line`);
 const CodeLines = require(`./code-lines`);
 const Code = require(`./code`);
+const CodeLanguage = require(`./code-language`);
 const Illustration = require(`./illustration`);
 const Illustrations = require(`./illustrations`);
 const IllustrationContent = require(`./illustration-content`);
@@ -421,13 +422,26 @@ function toCodeLines(somethings) {
     return new CodeLines(...somethings.map(toCodeLine));
 }
 /**
- * @param  {...CodeLineLike} somethings
+ * @param   {...CodeLineLike} somethings
+ * @returns {Code}
  */
 function code(...somethings) {
     const lines = toCodeLines(somethings);
 
     return new Code({
         Lines : lines,
+    });
+}
+/**
+ * @param   {...CodeLineLike} somethings
+ * @returns {Code}
+ */
+function js(...somethings) {
+    const lines = toCodeLines(somethings);
+
+    return new Code({
+        Language : CodeLanguage.JavaScript,
+        Lines    : lines,
     });
 }
 /**
@@ -574,6 +588,7 @@ exports.toLexeme = toLexeme;
 exports.toLexemes = toLexemes;
 exports.codeLine = codeLine;
 exports.code = code;
+exports.js = js;
 exports.toCodeLine = toCodeLine;
 exports.toCodeLines = toCodeLines;
 exports.toIllustrationContent = toIllustrationContent;
