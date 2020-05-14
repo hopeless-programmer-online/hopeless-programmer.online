@@ -49,18 +49,9 @@ class LexemePhrase extends Phrase {
      * @returns   {html.Element}
      */
     _toHtml() {
-        const language = {
-            [Language.PlainText]  : `plain-text`,
-            [Language.JavaScript] : `javascript`,
-        }[this.Language];
-
-        if (language === undefined) {
-            throw new Error; // @todo
-        }
-
         return <code
             class="hp-class-phrase hp-class-lexeme-phrase"
-            data-hp-language={language}
+            data-hp-language={deduce(this.Language)}
         >
             {this.Lexemes.map(lexeme => lexeme.toHtml())}
         </code>;
@@ -76,6 +67,7 @@ const html = require(`../html`);
 
 const Lexeme = require(`./lexeme`);
 const Language = require(`./code-language`);
+const deduce = require(`./deduce-language-attribute`);
 
 
 const LexemeClass = Lexeme;

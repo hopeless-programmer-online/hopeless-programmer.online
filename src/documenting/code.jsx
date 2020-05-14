@@ -50,17 +50,8 @@ class Code {
      * @returns {html.Element}
      */
     toHtml() {
-        const language = {
-            [Language.PlainText]  : `plain-text`,
-            [Language.JavaScript] : `javascript`,
-        }[this.Language];
-
-        if (language === undefined) {
-            throw new Error; // @todo
-        }
-
         return (
-            <code class="hp-class-code" data-hp-language={language}>
+            <code class="hp-class-code" data-hp-language={deduce(this.Language)}>
                 {this.Lines.toHtml()}
             </code>
         );
@@ -73,6 +64,7 @@ exports = module.exports = Code;
 
 const html = require(`../html`);
 const Language = require(`./code-language`);
+const deduce = require(`./deduce-language-attribute`);
 const Line = require(`./code-line`);
 
 
