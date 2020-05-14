@@ -1,18 +1,15 @@
 class Code {
     /**
-     * @param  {Object}      object
-     * @param  {Language}    object.Language
-     * @param  {Array<Line>} object.Lines
+     * @param  {Object}   object
+     * @param  {Language} object.Language
+     * @param  {Lines}    object.Lines
      * @throws {Error}
      */
-    constructor({ Language = LanguageEnum.PlainText, Lines = [] } = {}) {
+    constructor({ Language = LanguageEnum.PlainText, Lines = new LinesClass } = {}) {
         if (!Object.values(LanguageEnum).includes(Language)) {
             throw new Error; // @todo
         }
-        if (Lines instanceof Array); else {
-            throw new Error; // @todo
-        }
-        if (Lines.every(line => line instanceof Line)); else {
+        if (Lines instanceof LinesClass); else {
             throw new Error; // @todo
         }
 
@@ -25,7 +22,7 @@ class Code {
         this.__language = Language;
         /**
          * @private
-         * @type    {Array<Line>}
+         * @type    {Lines}
          */
         this.__lines = Lines;
     }
@@ -39,7 +36,7 @@ class Code {
     }
     /**
      * @public
-     * @type   {Array<Line>}
+     * @type   {Lines}
      */
     get Lines() {
         return this.__lines;
@@ -65,7 +62,8 @@ exports = module.exports = Code;
 const html = require(`../html`);
 const Language = require(`./code-language`);
 const deduce = require(`./deduce-language-attribute`);
-const Line = require(`./code-line`);
+const Lines = require(`./code-lines`);
 
 
 const LanguageEnum = Language;
+const LinesClass = Lines;

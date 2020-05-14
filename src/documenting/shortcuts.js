@@ -16,6 +16,7 @@ const ListItem = require(`./list-item`);
 const ListItems = require(`./list-items`);
 const SentencesListItemContent = require(`./sentences-list-item-content`);
 const Lexeme = require(`./lexeme`);
+const Lexemes = require(`./lexemes`);
 const TextLexeme = require(`./text-lexeme`);
 const CommentLexeme = require(`./comment-lexeme`);
 const KeywordLexeme = require(`./keyword-lexeme`);
@@ -41,24 +42,24 @@ const Document = require(`./document`);
 
 
 /**
- * @typedef {string | Illustration | Lexeme | Array<Lexeme> }   PhraseSource
- * @typedef {Phrase | PhraseSource}                             PhraseLike
- * @typedef {PhraseLike}                                        SentenceSource
- * @typedef {Sentence | SentenceSource}                         SentenceLike
- * @typedef {SentenceLike | Array<SentenceLike>}                SentencesSource
- * @typedef {Sentences | SentencesSource}                       SentencesLike
- * @typedef {SentencesLike}                                     ListItemSource
- * @typedef {ListItem | ListItemSource}                         ListItemLike
- * @typedef {SentenceLike}                                      ParagraphSource
- * @typedef {Paragraph | ParagraphSource | Array<SentenceLike>} ParagraphLike
- * @typedef {string}                                            LexemeSource
- * @typedef {Lexeme | LexemeSource}                             LexemeLike
- * @typedef {LexemeLike}                                        CodeLineSource
- * @typedef {CodeLine | CodeLineSource | Array<CodeLineSource>} CodeLineLike
- * @typedef {Code}                                              IllustrationContentSource
- * @typedef {IllustrationContent | IllustrationContentSource}   IllustrationContentLike
- * @typedef {Paragraph | Illustration | Array<Illustration> }   SectionPartSource
- * @typedef {SectionPart | SectionPartSource}                   SectionPartLike
+ * @typedef {string | Illustration | Lexeme | Array<Lexeme>  Code } PhraseSource
+ * @typedef {Phrase | PhraseSource}                                 PhraseLike
+ * @typedef {PhraseLike}                                            SentenceSource
+ * @typedef {Sentence | SentenceSource}                             SentenceLike
+ * @typedef {SentenceLike | Array<SentenceLike>}                    SentencesSource
+ * @typedef {Sentences | SentencesSource}                           SentencesLike
+ * @typedef {SentencesLike}                                         ListItemSource
+ * @typedef {ListItem | ListItemSource}                             ListItemLike
+ * @typedef {SentenceLike}                                          ParagraphSource
+ * @typedef {Paragraph | ParagraphSource | Array<SentenceLike>}     ParagraphLike
+ * @typedef {string}                                                LexemeSource
+ * @typedef {Lexeme | LexemeSource}                                 LexemeLike
+ * @typedef {LexemeLike}                                            CodeLineSource
+ * @typedef {CodeLine | CodeLineSource | Array<CodeLineSource>}     CodeLineLike
+ * @typedef {Code}                                                  IllustrationContentSource
+ * @typedef {IllustrationContent | IllustrationContentSource}       IllustrationContentLike
+ * @typedef {Paragraph | Illustration | Array<Illustration> }       SectionPartSource
+ * @typedef {SectionPart | SectionPartSource}                       SectionPartLike
  */
 
 
@@ -120,12 +121,18 @@ function phrase(something) {
     }
     if (something instanceof Lexeme) {
         return new LexemePhrase({
-            Lexemes : [ something ],
+            Lexemes : new Lexemes(something),
         });
     }
     if (Array.isArray(something) && something.some(lexeme => lexeme instanceof Lexeme)) {
         return new LexemePhrase({
             Lexemes : toLexemes(something),
+        });
+    }
+    if (something instanceof Code) {
+        return new LexemePhrase({
+            Language : something.Language,
+            Lexemes  : something.Lines.Lexemes,
         });
     }
 
@@ -378,11 +385,11 @@ function toLexeme(something) {
 }
 /**
  * @param   {Array<LexemeLike>} somethings
- * @returns {Array<Lexeme>}
+ * @returns {Lexemes}
  * @throws  {Error}
  */
 function toLexemes(somethings) {
-    return somethings.map(toLexeme);
+    return new Lexemes(...somethings.map(toLexeme));
 }
 /**
  * @param   {...CodeLineSource} somethings

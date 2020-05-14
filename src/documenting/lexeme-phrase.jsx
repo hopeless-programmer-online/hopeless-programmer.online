@@ -3,15 +3,15 @@ const Phrase = require(`./phrase`);
 
 class LexemePhrase extends Phrase {
     /**
-     * @param {Object}        object
-     * @param {Array<Lexeme>} object.Lexemes
+     * @param {Object}  object
+     * @param {Lexemes} object.Lexemes
      */
-    constructor({ Language = LanguageEnum.PlainText, Lexemes = [] } = {}) {
+    constructor({ Language = LanguageEnum.PlainText, Lexemes = new LexemesClass } = {}) {
         if (!Object.values(LanguageEnum).includes(Language)) {
             throw new Error; // @todo
         }
-        if (Array.isArray(Lexemes) && Lexemes.every(lexeme => lexeme instanceof LexemeClass)); else {
-            throw new Error(); // @todo
+        if (Lexemes instanceof LexemesClass); else {
+            throw new Error; // @todo
         }
 
         super();
@@ -23,7 +23,7 @@ class LexemePhrase extends Phrase {
         this.__language = Language;
         /**
          * @private
-         * @type    {Array<Lexeme>}
+         * @type    {Lexemes}
          */
         this.__lexemes = Lexemes;
     }
@@ -37,7 +37,7 @@ class LexemePhrase extends Phrase {
     }
     /**
      * @public
-     * @type   {Array<Lexeme>}
+     * @type   {Lexemes}
      */
     get Lexemes() {
         return this.__lexemes;
@@ -53,7 +53,7 @@ class LexemePhrase extends Phrase {
             class="hp-class-phrase hp-class-lexeme-phrase"
             data-hp-language={deduce(this.Language)}
         >
-            {this.Lexemes.map(lexeme => lexeme.toHtml())}
+            {this.Lexemes.toHtml()}
         </code>;
     }
 }
@@ -65,10 +65,10 @@ exports = module.exports = LexemePhrase;
 const html = require(`../html`);
 
 
-const Lexeme = require(`./lexeme`);
+const Lexemes = require(`./lexemes`);
 const Language = require(`./code-language`);
 const deduce = require(`./deduce-language-attribute`);
 
 
-const LexemeClass = Lexeme;
+const LexemesClass = Lexemes;
 const LanguageEnum = Language;
