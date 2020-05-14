@@ -4,6 +4,7 @@ const documenting = require(`../documenting`);
 
 const h = hosting;
 const s = documenting.shortcuts;
+const { section, paragraph, sentence } = s;
 
 
 // const code_1 = require(`./article-4/code-1`);
@@ -30,6 +31,8 @@ const covariance_wiki = `https://uk.wikipedia.org/wiki/%D0%9A%D0%BE%D0%B2%D0%B0%
 const smart_pointers_wiki = `https://uk.wikipedia.org/wiki/%D0%A0%D0%BE%D0%B7%D1%83%D0%BC%D0%BD%D1%96_%D0%B2%D0%BA%D0%B0%D0%B7%D1%96%D0%B2%D0%BD%D0%B8%D0%BA%D0%B8`;
 const factory_method_wiki = `https://uk.wikipedia.org/wiki/%D0%A4%D0%B0%D0%B1%D1%80%D0%B8%D1%87%D0%BD%D0%B8%D0%B9_%D0%BC%D0%B5%D1%82%D0%BE%D0%B4_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F)`;
 const virtual_method_wiki = `https://uk.wikipedia.org/wiki/%D0%92%D1%96%D1%80%D1%82%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D0%B8%D0%B9_%D0%BC%D0%B5%D1%82%D0%BE%D0%B4`;
+const open_close_wiki = `https://uk.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF_%D0%B2%D1%96%D0%B4%D0%BA%D1%80%D0%B8%D1%82%D0%BE%D1%81%D1%82%D1%96/%D0%B7%D0%B0%D0%BA%D1%80%D0%B8%D1%82%D0%BE%D1%81%D1%82%D1%96`;
+const dependency_inversion_wiki = `https://uk.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF_%D1%96%D0%BD%D0%B2%D0%B5%D1%80%D1%81%D1%96%D1%97_%D0%B7%D0%B0%D0%BB%D0%B5%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D0%B5%D0%B9`;
 
 
 // const std_shared_ptr             = code(`C++`, code.line(code.na(`std`), `::`, code.ca(`shared_ptr`)));
@@ -52,57 +55,57 @@ exports = module.exports = new h.DocumentResource({
         {
             Date : new Date(`2019-04-01T00:00:00.000Z`),
         },
-        s.section(``,
-            s.paragraph(
+        s.section(``, ...[
+            s.paragraph(...[
                 s.sentence(`Не завжди недоліки мови можна побачити неозброєним оком. `),
                 s.sentence(`Деякі з них проявляються лише при вирішенні дуже специфічних завдань. `),
                 s.sentence(`Про існування цього я не знав аж доки кілька років тому не вирішив почати писати `, s.figurative(`правильний код`), `. `),
-            ),
-            s.paragraph(
+            ]),
+            s.paragraph(...[
                 s.sentence(`Я вирішував банальну задачу але з використанням популярних і часто рекомендованих підходів. `),
                 s.sentence(`Серед них були `, /*negation(`інтерфейси`),*/ ` чисті `, s.link(`абстрактні класи`, abstract_class_wiki), `, `, s.link(`коваріантність`, covariance_wiki), `, `, s.link(`розумні вказівники`, smart_pointers_wiki), ` та `, s.link(`фабричний метод`, factory_method_wiki), `. `),
                 s.sentence(`І можливо все було б добре, якби я не спробував застосувати всі підходи одночасно. `),
                 s.sentence(`У підсумку мені таки вдалось змусити все працювати, але не без велосипедів та милиць. `),
                 s.sentence(`І виною всьому був той факт, що в `, s.link(`С++`, `https://uk.wikipedia.org/wiki/C%2B%2B`), ` неможливо перекрити `, s.link(`віртуальний метод`, virtual_method_wiki), `. `),
                 s.sentence(`Вам напевно цікаво як все це пов'язано? `),
-            ),
-        ),
-        /*article.section(`Мета?`,
-            paragraph(
-                sentence(`Розглянемо шаблон проектування `, link(`фабричний метод`, `https://uk.wikipedia.org/wiki/%D0%A4%D0%B0%D0%B1%D1%80%D0%B8%D1%87%D0%BD%D0%B8%D0%B9_%D0%BC%D0%B5%D1%82%D0%BE%D0%B4_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F)`), `. `),
-                sentence(`Його ідея полягає в тому, що ми делегуємо деякому об'єкту - фабриці - створення інших об'єктів (див. `, reference(require(`./code_1.js`)), `). `),
-                sentence(`При цьому і продукт який повертає фабрика, і метод його створення є поліморфними. `),
-                sentence(`Такий підхід дозволяє розширювати продукт та змінювати алгоритм його попередньої обробки, не втручаючись в код який цей продукт використовує (див. `, reference(require(`./code_2.js`)), `). `),
-            ),
-            [
-                require(`./code_1.js`),
-                require(`./code_2.js`),
-            ],
-            paragraph(
-                sentence(`Шаблон фабричний метод є дуже популярним, оскільки він дає змогу системі `, link(`розширюватись`, `https://uk.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF_%D0%B2%D1%96%D0%B4%D0%BA%D1%80%D0%B8%D1%82%D0%BE%D1%81%D1%82%D1%96/%D0%B7%D0%B0%D0%BA%D1%80%D0%B8%D1%82%D0%BE%D1%81%D1%82%D1%96`), ` і робить користувачів залежними не від реалізацій, а `, link(`від абстракцій`, `https://uk.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF_%D1%96%D0%BD%D0%B2%D0%B5%D1%80%D1%81%D1%96%D1%97_%D0%B7%D0%B0%D0%BB%D0%B5%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D0%B5%D0%B9`), `. `),
-                sentence(`Проте реалізація цього шаблону в С++ може зіштовхнутись з проблемами. `),
-                sentence(`Зокрема, фабричний метод може виявитись несумісним з іншими цікавими підходами. `),
-                sentence(`Щоб показати це давайте спробуємо додати до нього коваріантність та розумні вказівники. `),
-            ),
-        ),
-        article.section(`Пироги!`,
-            [
-                illustration([ `Ірисово-корицевий пиріг. `, `З любов'ю від Торіель. ` ], picture(`./../../media/images/butterscotch_cinnamon_pie.png`)),
-            ],
+            ]),
+        ]),
+        s.section(`Мета?`, ...[
+            s.paragraph(...[
+                s.sentence(`Розглянемо шаблон проектування `, s.link(`фабричний метод`, factory_method_wiki), `. `),
+                s.sentence(`Його ідея полягає в тому, що ми делегуємо деякому об'єкту - фабриці - створення інших об'єктів (див. `, /*reference(require(`./code_1.js`)),*/ `). `),
+                s.sentence(`При цьому і продукт який повертає фабрика, і метод його створення є поліморфними. `),
+                s.sentence(`Такий підхід дозволяє розширювати продукт та змінювати алгоритм його попередньої обробки, не втручаючись в код який цей продукт використовує (див. `, /*reference(require(`./code_2.js`)),*/ `). `),
+            ]),
+            // [
+            //     require(`./code_1.js`),
+            //     require(`./code_2.js`),
+            // ],
+            s.paragraph(...[
+                s.sentence(`Шаблон фабричний метод є дуже популярним, оскільки він дає змогу системі `, s.link(`розширюватись`, open_close_wiki), ` і робить користувачів залежними не від реалізацій, а `, s.link(`від абстракцій`, dependency_inversion_wiki), `. `),
+                s.sentence(`Проте реалізація цього шаблону в С++ може зіштовхнутись з проблемами. `),
+                s.sentence(`Зокрема, фабричний метод може виявитись несумісним з іншими цікавими підходами. `),
+                s.sentence(`Щоб показати це давайте спробуємо додати до нього коваріантність та розумні вказівники. `),
+            ]),
+        ]),
+        section(`Пироги!`, ...[
+            // [
+            //     illustration([ `Ірисово-корицевий пиріг. `, `З любов'ю від Торіель. ` ], picture(`./../../media/images/butterscotch_cinnamon_pie.png`)),
+            // ],
             paragraph(
                 sentence(`В якості прикладу ми розглянемо кондитерські вироби. `),
                 sentence(`Зокрема, пироги. `),
-                sentence(`Нам потрібен пекар який здатен їх пекти (див. `, reference(require(`./code_3.js`)), `). `),
-                sentence(`Причому пекарі та пироги розділені на два конкуруючі табори: пекарі які печуть пироги з корицею (див. `, reference(require(`./code_4.js`)), `) та пекарі які печуть пироги з ірисом (див. `, reference(require(`./code_5.js`)), `). `),
+                sentence(`Нам потрібен пекар який здатен їх пекти (див. `, /*reference(require(`./code_3.js`)),*/ `). `),
+                sentence(`Причому пекарі та пироги розділені на два конкуруючі табори: пекарі які печуть пироги з корицею (див. `, /*reference(require(`./code_4.js`)),*/ `) та пекарі які печуть пироги з ірисом (див. `, /*reference(require(`./code_5.js`)),*/ `). `),
                 sentence(`В даному випадку пекар виступає фабрикою, а пиріг - продуктом цієї фабрики. `),
             ),
-            [
-                require(`./code_3.js`),
-                require(`./code_4.js`),
-                require(`./code_5.js`),
-            ],
-        ),
-        article.section(`Час покращувати код!`,
+            // [
+            //     require(`./code_3.js`),
+            //     require(`./code_4.js`),
+            //     require(`./code_5.js`),
+            // ],
+        ]),
+        /*article.section(`Час покращувати код!`,
             paragraph(
                 sentence(`Можна звернути увагу на те, що метод `, CinnamonBaker_Bake, ` завжди повертає екземпляр класу `, CinnamonPie, `. `),
                 sentence(`Це важливо, адже можуть існувати користувачі які працює з класом `, CinnamonBaker, ` безпосередньо`, note_1, `. `),
