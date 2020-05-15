@@ -3,7 +3,7 @@ const s = require(`../../documenting`).shortcuts;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`З коду не є очевидно з котрого з просторів імен потрібно викликати функцію. `),
-    s.code(
+    s.cpp(
         [ `namespace A {` ],
         [ `    void f();` ],
         [ `}` ],

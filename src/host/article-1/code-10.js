@@ -4,7 +4,7 @@ const { kw, lt, v, f, a, cm } = s;
 
 exports = module.exports = s.illustration( ...[
     `Звернення до перекритих полів в С++.`,
-    s.code(
+    s.code(`c++`,
         [ `struct A` ],
         [ `{` ],
         [ `    int x = 1;` ],

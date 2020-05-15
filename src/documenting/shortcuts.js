@@ -432,7 +432,26 @@ function toCodeLines(somethings) {
  * @param   {...CodeLineLike} somethings
  * @returns {Code}
  */
-function code(...somethings) {
+function code(language, ...somethings) {
+    language =
+        language === `plain` ? CodeLanguage.PlainText  :
+        language === `js`    ? CodeLanguage.JavaScript :
+        language === `json`  ? CodeLanguage.JSON       :
+        language === `c`     ? CodeLanguage.C          :
+        language === `c++`   ? CodeLanguage.CPlusPlus  :
+        language === `c#`    ? CodeLanguage.CSharp     :
+        language === `php`   ? CodeLanguage.PHP        :
+        language === `html`  ? CodeLanguage.HTML       :
+        language === `css`   ? CodeLanguage.CSS        :
+        language === `sass`  ? CodeLanguage.SASS       :
+        language === `scss`  ? CodeLanguage.SCSS       :
+        language === `xml`   ? CodeLanguage.XML        :
+        language === `py`    ? CodeLanguage.Python     :
+        language === `llvm`  ? CodeLanguage.LLVM       :
+        language === `qb`    ? CodeLanguage.QBasic     :
+        language === `tex`   ? CodeLanguage.TeX        :
+        language;
+
     const lines = toCodeLines(somethings);
 
     return new Code({
@@ -448,6 +467,30 @@ function js(...somethings) {
 
     return new Code({
         Language : CodeLanguage.JavaScript,
+        Lines    : lines,
+    });
+}
+/**
+ * @param   {...CodeLineLike} somethings
+ * @returns {Code}
+ */
+function cs(...somethings) {
+    const lines = toCodeLines(somethings);
+
+    return new Code({
+        Language : CodeLanguage.CSharp,
+        Lines    : lines,
+    });
+}
+/**
+ * @param   {...CodeLineLike} somethings
+ * @returns {Code}
+ */
+function cpp(...somethings) {
+    const lines = toCodeLines(somethings);
+
+    return new Code({
+        Language : CodeLanguage.CPlusPlus,
         Lines    : lines,
     });
 }
@@ -596,6 +639,8 @@ exports.toLexemes = toLexemes;
 exports.codeLine = codeLine;
 exports.code = code;
 exports.js = js;
+exports.cs = cs;
+exports.cpp = cpp;
 exports.toCodeLine = toCodeLine;
 exports.toCodeLines = toCodeLines;
 exports.toIllustrationContent = toIllustrationContent;

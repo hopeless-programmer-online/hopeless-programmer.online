@@ -4,7 +4,7 @@ const { kw, lt, v, f, a, cm } = s;
 
 exports = module.exports = s.illustration( ...[
     `Звернення в порядку оголошення. `,
-    s.code(
+    s.code(`c++`,
         [ `int x = 1;` ],
         [ `` ],
         [ `{` ],

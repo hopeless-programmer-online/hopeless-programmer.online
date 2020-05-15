@@ -4,7 +4,7 @@ const { kw, lt, v, f, a, cm } = s;
 
 exports = module.exports = s.illustration( ...[
     `Звернення до перекритих аргументів функції.`,
-    s.code(
+    s.code(`c++`,
         [ `void f(int x = 1)` ],
         [ `{` ],
         [ `    int x = 2;` ],

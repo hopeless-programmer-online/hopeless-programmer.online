@@ -4,7 +4,7 @@ const { kw, v, f, a, cm, c, p } = s;
 
 exports = module.exports = s.illustration( ...[
     `Зворотне перекриття поля класу аргументом в C#.`,
-    s.code(
+    s.code(`c#`,
         [ kw(`class`), ` `, c(`X`), ` {` ],
         [ `    `, c(`int`), ` `, v(`x`), `;` ],
         [ `    ` ],

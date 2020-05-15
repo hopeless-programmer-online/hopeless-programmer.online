@@ -4,7 +4,7 @@ const { kw, lt, v } = s;
 
 exports = module.exports = s.illustration( ...[
     `Робота зі службовими словами як з ідентифікаторами в С++.`,
-    s.code(
+    s.cpp(
         [ kw(`using`), ` `, kw(`@if`), `   = `, kw(`if`), `;` ],
         [ kw(`using`), ` `, kw(`@else`), ` = `, kw(`else`), `;` ],
         [ kw(`using`), ` `, kw(`@for`), `  = `, kw(`for`), `;` ],

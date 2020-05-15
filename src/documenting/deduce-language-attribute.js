@@ -26,4 +26,18 @@ const Language = require(`./code-language`);
 const lookup = {
     [Language.PlainText]  : `plain-text`,
     [Language.JavaScript] : `javascript`,
+    [Language.JSON]       : `json`,
+    [Language.C]          : `c`,
+    [Language.CPlusPlus]  : `cplusplus`,
+    [Language.CSharp]     : `csharp`,
+    [Language.PHP]        : `php`,
+    [Language.HTML]       : `html`,
+    [Language.CSS]        : `css`,
+    [Language.SASS]       : `sass`,
+    [Language.SCSS]       : `scss`,
+    [Language.XML]        : `xml`,
+    [Language.Python]     : `python`,
+    [Language.LLVM]       : `llvm`,
+    [Language.QBasic]     : `qbasic`,
+    [Language.TeX]        : `tex`,
 };

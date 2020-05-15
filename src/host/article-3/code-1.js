@@ -3,7 +3,7 @@ const s = require(`../../documenting`).shortcuts;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Використання перевантажених за результатом функцій в представленні художника. `),
-    s.code(
+    s.cpp(
         [ `int   f() {` ],
         [ `    return 1;` ],
         [ `}` ],

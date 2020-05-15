@@ -4,7 +4,7 @@ const { lt, v, f, cm, c } = s;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Звернення до глобального об'єкта в С++ за допомогою оператора `, s.lexeme(`::`), `.`),
-    s.code(
+    s.code(`c++`,
         [ c(`int`), ` `, v(`x`), ` = `, lt(`5`), `;` ],
         [ `` ],
         [ c(`void`), ` `, f(`f`), `() {` ],

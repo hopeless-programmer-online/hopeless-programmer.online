@@ -3,7 +3,7 @@ const s = require(`../../documenting`).shortcuts;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Явне приведення перевантаженої функції до певної сигнатури. `),
-    s.code(
+    s.cpp(
         [ `void f();` ],
         [ `void f();` ],
         [ `` ],

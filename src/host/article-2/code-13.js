@@ -4,7 +4,7 @@ const { kw, f } = s;
 
 exports = module.exports = s.illustration( ...[
     `Деталізація службових слів в Python.`,
-    s.code(
+    s.code(`py`,
         [ kw(`def`), ` `, f(`f`), `():` ],
         [ `    `, kw(`pass`) ],
         [ `` ],

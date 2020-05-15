@@ -33,7 +33,7 @@ function template(title, content) {
                             <h2>Безнадійний Програміст</h2>
                             <blockquote>
                                 <p>
-                                    {sentence(s.figurative(`...коли не можеш оголосити змінну `), s.kw(`case`), s.figurative(`, тому що це службове слово...`))}
+                                    {sentence(s.figurative(`...коли не можеш оголосити змінну `), s.js(s.kw(`case`)), s.figurative(`, тому що це службове слово...`))}
                                 </p>
                             </blockquote>
                         </figcaption>
