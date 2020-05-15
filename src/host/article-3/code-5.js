@@ -1,13 +1,14 @@
 const s = require(`../../documenting`).shortcuts;
+const { kw, cm, f, c, v } = s;
 
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Явне приведення перевантаженої функції до певної сигнатури. `),
     s.cpp(
-        [ `void f();` ],
-        [ `void f();` ],
+        [ c(`void`), ` `, f(`f`), `();` ],
+        [ c(`void`), ` `, f(`f`), `();` ],
         [ `` ],
-        [ `auto g = f;                              // неоднозначність` ],
-        [ `auto h = static_cast<void(*)(float)>(f); // вирішення` ],
+        [ kw(`auto`), ` `, v(`g`), ` = f;                              `, cm(`// неоднозначність`) ],
+        [ kw(`auto`), ` `, v(`h`), ` = `, kw(`static_cast`), `<`, c(`void`), `(*)(`, c(`float`), `)>(`, f(`f`), `); `, cm(`// вирішення`) ],
     ),
 ]);

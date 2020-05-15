@@ -1,14 +1,15 @@
 const s = require(`../../documenting`).shortcuts;
+const { cm, c, f } = s;
 
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Виклик функції, результат якої збігається з типом аргументу.`),
     s.cpp(
-        [ `int   f();` ],
-        [ `float f();` ],
+        [ c(`int`), `   `, f(`f`), `();` ],
+        [ c(`float`), ` `, f(`f`), `();` ],
         [ `` ],
-        [ `void  g(float);` ],
+        [ c(`void`), `  `, f(`g`), `(`, c(`float`), `);` ],
         [ `` ],
-        [ `g(f()); // float f()` ],
+        [ f(`g`), `(`, f(`f`), `()); `, cm(`// float f()`) ],
     ),
 ]);
