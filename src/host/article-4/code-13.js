@@ -6,7 +6,7 @@ exports = module.exports = s.illustration( ...[
         s.sentence(`Метод VisitNumber повертає значення замість того, щоб зберігати його. `),
         s.sentence(`П'ятірка виводиться лише з міркувань абстрагування від наповнення класу Number : )`),
     ]),
-    s.code(
+    s.js(
         [ s.kw(`class`), ` `, s.c(`Visitor`), ` {` ],
         [ `    `, s.f(`Visit`), `(`, s.v(`object`), `) {` ],
         [ `        `, s.kw(`return`), ` `, s.v(`object`), `.`, s.f(`Accept`), `(`, s.kw(`this`), `);` ],

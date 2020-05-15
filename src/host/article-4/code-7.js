@@ -3,7 +3,7 @@ const s = require(`../../documenting`).shortcuts;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Галуження з використанням типу об'єкта.`),
-    s.code(
+    s.js(
         [ s.kw(`class`), ` `, s.c(`Number`), ` `, s.kw(`extends`), ` `, s.c(`Object`), ` {` ],
         [ `    `, s.kw(`get`), ` `, s.f(`Type`), `() {` ],
         [ `        `, s.kw(`return`), ` `, s.lt(`"number"`), `;` ],

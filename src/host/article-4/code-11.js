@@ -3,7 +3,7 @@ const s = require(`../../documenting`).shortcuts;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Похідний клас JSON лише реалізує абстрактні методи Visitor. Перенаправлення відповідно до типу об'єкта відбувається "за кулісами".`),
-    s.code(
+    s.js(
         [ s.kw(`class`), ` `, s.c(`Visitor`), ` {` ],
         [ `    `, s.f(`VisitBoolean`), `(`, s.v(`boolean`), `); `, s.cm(`// абстрактний`) ],
         [ `    `, s.f(`VisitNumber`), ` (`, s.v(`number`), `);  `, s.cm(`// абстрактний`) ],

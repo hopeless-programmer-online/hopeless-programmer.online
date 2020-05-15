@@ -4,7 +4,7 @@ const { kw, cm, f, c, v, lt } = s;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Тепер обробкою усіх нецікавих класів займається метод VisitOther.`),
-    s.code(
+    s.js(
         [ kw(`class`), ` `, c(`Visitor`), ` {` ],
         [ `    `, f(`VisitOther`), `(`, v(`object`), `); `, cm(`  // абстрактний`) ],
         [ `    `, f(`VisitObject`), `(`, v(`object`), `) {`, cm(` // віртуальний`) ],

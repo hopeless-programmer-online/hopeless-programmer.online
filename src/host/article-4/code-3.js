@@ -3,7 +3,7 @@ const s = require(`../../documenting`).shortcuts;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Зі збільшенням кількості підтримуваних форматів росте і кількість методів.`),
-    s.code(
+    s.js(
         [ s.kw(`class`), ` `, s.c(`Object`), ` {` ],
         [ `    `, s.f(`ToJSON`), `(); `, s.cm(`// абстрактний`) ],
         [ `    `, s.f(`ToXML`), `();  `, s.cm(`// абстрактний`) ],

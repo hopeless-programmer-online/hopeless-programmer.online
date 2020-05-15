@@ -3,7 +3,7 @@ const s = require(`../../documenting`).shortcuts;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Ієрархія класів базових об'єктів.`),
-    s.code(
+    s.js(
         [ s.kw(`class`), ` `, s.c(`Object`), ` {}` ],
         [ s.kw(`class`), ` `, s.c(`Boolean`), ` `, s.kw(`extends`), ` `, s.c(`Object`), ` {}` ],
         [ s.kw(`class`), ` `, s.c(`Number`), `  `, s.kw(`extends`), ` `, s.c(`Object`), ` {}` ],

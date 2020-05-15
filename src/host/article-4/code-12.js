@@ -3,7 +3,7 @@ const s = require(`../../documenting`).shortcuts;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Легше зіставити VisitNumber з Visit, а не з Accept.`),
-    s.code(
+    s.js(
         [ s.kw(`class`), ` `, s.c(`Visitor`), ` {` ],
         [ `    `, s.f(`Visit`), `(`, s.v(`object`), `) {` ],
         [ `        `, s.v(`object`), `.`, s.c(`Accept`), `(`, s.kw(`this`), `);` ],

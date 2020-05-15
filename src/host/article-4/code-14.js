@@ -3,7 +3,7 @@ const s = require(`../../documenting`).shortcuts;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Використовуючи динамічну типізацію можна передавати в методи додаткові аргументи.`),
-    s.code(
+    s.js(
         [ s.kw(`class`), ` `, s.c(`Visitor`), ` {` ],
         [ `    `, s.f(`Visit`), `(`, s.v(`object`), `, ...`, s.v(`others`), `) {` ],
         [ `        `, s.kw(`return`), ` `, s.a(`object`), `.`, s.f(`Accept`), `(`, s.kw(`this`), `, ...`, s.a(`others`), `);` ],

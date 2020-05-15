@@ -3,7 +3,7 @@ const s = require(`../../documenting`).shortcuts;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Відвідувані класи викликають відповідні їм методи з класу Visitor.`),
-    s.code(
+    s.js(
         [ s.kw(`class`), ` `, s.c(`Object`), ` {` ],
         [ `    `, s.f(`Accept`), `(`, s.v(`visitor`), `); `, s.cm(`// абстрактний`) ],
         [ `}` ],
