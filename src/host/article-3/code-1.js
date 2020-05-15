@@ -1,20 +1,21 @@
 const s = require(`../../documenting`).shortcuts;
+const { kw, c, f, lt, cm, v } = s;
 
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Використання перевантажених за результатом функцій в представленні художника. `),
     s.cpp(
-        [ `int   f() {` ],
-        [ `    return 1;` ],
+        [ c(`int`), `   `, f(`f`), `() {` ],
+        [ `    `, kw(`return`), ` `, lt(`1`), `;` ],
         [ `}` ],
-        [ `float f() {` ],
-        [ `    return 2.0;` ],
+        [ c(`float`), ` `, f(`f`), `() {` ],
+        [ `    `, kw(`return`), ` `, lt(`2.0`), `;` ],
         [ `}` ],
         [ `` ],
-        [ `int   x = f();` ],
-        [ `float y = f();` ],
+        [ c(`int`), `   `, v(`x`), ` = `, f(`f`), `();` ],
+        [ c(`float`), ` `, v(`y`), ` = `, f(`f`), `();` ],
         [ `` ],
-        [ `print(x); // 1` ],
-        [ `print(y); // 2` ],
+        [ f(`print`), `(`, v(`x`), `); `, cm(`// 1`) ],
+        [ f(`print`), `(`, v(`y`), `); `, cm(`// 2`) ],
     ),
 ]);

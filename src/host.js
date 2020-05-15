@@ -99,6 +99,9 @@ exports = module.exports = new h.Host({
         "/css/javascript.css" : new h.SASSResource({
             Path : path.join(__dirname, `../sass/javascript.scss`),
         }),
+        "/css/cplusplus.css" : new h.SASSResource({
+            Path : path.join(__dirname, `../sass/cplusplus.scss`),
+        }),
         // media
         "/media/favicon.ico" : new h.FileResource({
             Path : path.join(__dirname, `../media/favicon.ico`),
