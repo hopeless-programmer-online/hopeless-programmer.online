@@ -1,20 +1,21 @@
 const s = require(`../../documenting`).shortcuts;
+const { kw, cm, f, c } = s;
 
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`З коду не є очевидно з котрого з просторів імен потрібно викликати функцію. `),
     s.cpp(
-        [ `namespace A {` ],
-        [ `    void f();` ],
+        [ kw(`namespace`), ` `, c(`A`), ` {` ],
+        [ `    `, c(`void`), ` `, f(`f`), `();` ],
         [ `}` ],
-        [ `namespace B {` ],
-        [ `    void f();` ],
+        [ kw(`namespace`), ` `, c(`B`), ` {` ],
+        [ `    `, c(`void`), ` `, f(`f`), `();` ],
         [ `}` ],
         [ `` ],
-        [ `using namespace A;` ],
-        [ `using namespace B;` ],
+        [ kw(`using`), ` `, kw(`namespace`), ` `, c(`A`), `;` ],
+        [ kw(`using`), ` `, kw(`namespace`), ` `, c(`B`), `;` ],
         [ `` ],
-        [ `f();    // неоднозначність` ],
-        [ `A::f(); // вирішення` ],
+        [ f(`f`), `();    `, cm(`// неоднозначність`) ],
+        [ c(`A`), `::`, f(`f`), `(); `, cm(`// вирішення`) ],
     ),
 ]);
