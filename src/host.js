@@ -87,6 +87,7 @@ exports = module.exports = new h.Host({
             `code`,
             `javascript`,
             `cplusplus`,
+            `csharp`,
         ].reduce((all, name) => ({
             ...all,
             [`/css/${name}.css`] : new h.SASSResource({
