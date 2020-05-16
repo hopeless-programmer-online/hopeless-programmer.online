@@ -29,6 +29,7 @@ function template(title, content) {
                 <link rel="stylesheet" href="css/py.css" />
                 <link rel="stylesheet" href="css/qbasic.css" />
                 <link rel="stylesheet" href="css/llvm.css" />
+                <link rel="stylesheet" href="css/html.css" />
                 <link rel="stylesheet" href="css/document.css" />
                 {/* <script src="script.js" /> */}
             </head>
