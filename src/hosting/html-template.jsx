@@ -21,6 +21,15 @@ function template(title, content) {
                 <link rel="stylesheet" href="css/sentence.css" />
                 <link rel="stylesheet" href="css/index.css" />
                 <link rel="stylesheet" href="css/code.css" />
+                <link rel="stylesheet" href="css/javascript.css" />
+                <link rel="stylesheet" href="css/c.css" />
+                <link rel="stylesheet" href="css/cplusplus.css" />
+                <link rel="stylesheet" href="css/csharp.css" />
+                <link rel="stylesheet" href="css/php.css" />
+                <link rel="stylesheet" href="css/py.css" />
+                <link rel="stylesheet" href="css/qbasic.css" />
+                <link rel="stylesheet" href="css/llvm.css" />
+                <link rel="stylesheet" href="css/html.css" />
                 <link rel="stylesheet" href="css/document.css" />
                 {/* <script src="script.js" /> */}
             </head>
@@ -32,7 +41,7 @@ function template(title, content) {
                             <h2>Безнадійний Програміст</h2>
                             <blockquote>
                                 <p>
-                                    {sentence(s.figurative(`...коли не можеш оголосити змінну `), s.kw(`case`), s.figurative(`, тому що це службове слово...`))}
+                                    {sentence(s.figurative(`...коли не можеш оголосити змінну `), s.js(s.kw(`case`)), s.figurative(`, тому що це службове слово...`))}
                                 </p>
                             </blockquote>
                         </figcaption>

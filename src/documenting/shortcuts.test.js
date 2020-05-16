@@ -50,7 +50,7 @@ it(`Should create CodeLine on calling codeLine with string argument`, () => {
     expect(template.Lexemes[0].String).toBe(`code`);
 });
 it(`Should create Code on calling code with string argument`, () => {
-    const template = shortcuts.code(`line #1`, `line #2`);
+    const template = shortcuts.code(`c`, `line #1`, `line #2`);
 
     expect(template).toBeInstanceOf(Code);
     expect(template.Lines).toHaveLength(2);

@@ -1,18 +1,15 @@
 class CodeLine {
     /**
-     * @param  {Object}        object
-     * @param  {number}        object.Index
-     * @param  {Array<Lexeme>} object.Lexemes
+     * @param  {Object}  object
+     * @param  {number}  object.Index
+     * @param  {Lexemes} object.Lexemes
      * @throws {Error}
      */
-    constructor({ Index = null, Lexemes = [] } = {}) {
+    constructor({ Index = null, Lexemes = new LexemesClass } = {}) {
         if ((Number.isInteger(Index) && Index > 0) || Index === null); else {
             throw new Error; // @todo
         }
-        if (Lexemes instanceof Array); else {
-            throw new Error; // @todo
-        }
-        if (Lexemes.every(lexeme => lexeme instanceof Lexeme)); else {
+        if (Lexemes instanceof LexemesClass); else {
             throw new Error; // @todo
         }
 
@@ -23,7 +20,7 @@ class CodeLine {
         this.__index = Index;
         /**
          * @private
-         * @type    {Array<Lexeme>}
+         * @type    {Lexemes}
          */
         this.__lexemes = Lexemes;
     }
@@ -57,7 +54,7 @@ class CodeLine {
     }
     /**
      * @public
-     * @type   {Array<Lexeme>}
+     * @type   {Lexemes}
      */
     get Lexemes() {
         return this.__lexemes;
@@ -70,7 +67,7 @@ class CodeLine {
     toHtml() {
         return [
             <span>{this.Index}</span>,
-            <span>{this.Lexemes.map(lexeme => lexeme.toHtml())}</span>,
+            <span>{this.Lexemes.toHtml()}</span>,
             <br />,
         ];
     }
@@ -81,4 +78,7 @@ exports = module.exports = CodeLine;
 
 
 const html = require(`../html`);
-const Lexeme = require(`./lexeme`);
+const Lexemes = require(`./lexemes`);
+
+
+const LexemesClass = Lexemes;

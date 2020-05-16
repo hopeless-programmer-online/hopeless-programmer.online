@@ -4,7 +4,7 @@ const { kw, lt, v, f, a, cm, p } = s;
 
 exports = module.exports = s.illustration( ...[
     `Звернення через глобальний об'єкт в JavaScript.`,
-    s.code(
+    s.js(
         [ kw(`var`), ` `, v(`x`), ` = `, lt(`5`), `;` ],
         [ `` ],
         [ kw(`function`), ` `, f(`f`), `() {` ],

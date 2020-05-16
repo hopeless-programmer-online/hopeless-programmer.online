@@ -1,6 +1,14 @@
+@use "sass/palette";
 @use "sass/text";
 
 article.hp-class-document {
+    // flex
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    // size
+    height: 100%;
+
     > header {
         > h1 {
             // text
@@ -12,6 +20,7 @@ article.hp-class-document {
         }
     }
     > section {
+        // flex
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -133,6 +142,22 @@ article.hp-class-document {
                     margin: 0;
                 }
             }
+        }
+    }
+    > footer {
+        // flex
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: stretch;
+        // flex-item
+        flex-grow: 1;
+
+        > table {
+            // border
+            border-top: 2pt dashed palette.$text-regular;
+            // size
+            width: 100%;
         }
     }
 }

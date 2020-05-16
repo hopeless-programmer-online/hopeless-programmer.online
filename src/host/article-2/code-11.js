@@ -4,7 +4,7 @@ const { kw, f } = s;
 
 exports = module.exports = s.illustration( ...[
     `Скорочення службових слів в JS.`,
-    s.code(
+    s.js(
         [ kw(`function`), ` `, f(`f`), `() {` ],
         [ `    ...` ],
         [ `}` ],

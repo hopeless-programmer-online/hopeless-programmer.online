@@ -16,6 +16,7 @@ const ListItem = require(`./list-item`);
 const ListItems = require(`./list-items`);
 const SentencesListItemContent = require(`./sentences-list-item-content`);
 const Lexeme = require(`./lexeme`);
+const Lexemes = require(`./lexemes`);
 const TextLexeme = require(`./text-lexeme`);
 const CommentLexeme = require(`./comment-lexeme`);
 const KeywordLexeme = require(`./keyword-lexeme`);
@@ -31,6 +32,7 @@ const CodeFileExplorerItemContent = require(`./code-file-explorer-item-content`)
 const DirectoryExplorerItem = require(`./directory-explorer-item`);
 const ExplorerItems = require(`./explorer-items`);
 const Explorer = require(`./explorer`);
+const CodeLanguage = require(`./code-language`);
 const Illustration = require(`./illustration`);
 const Illustrations = require(`./illustrations`);
 const IllustrationContent = require(`./illustration-content`);
@@ -46,24 +48,24 @@ const Document = require(`./document`);
 
 
 /**
- * @typedef {string | Illustration | Lexeme | Array<Lexeme> }   PhraseSource
- * @typedef {Phrase | PhraseSource}                             PhraseLike
- * @typedef {PhraseLike}                                        SentenceSource
- * @typedef {Sentence | SentenceSource}                         SentenceLike
- * @typedef {SentenceLike | Array<SentenceLike>}                SentencesSource
- * @typedef {Sentences | SentencesSource}                       SentencesLike
- * @typedef {SentencesLike}                                     ListItemSource
- * @typedef {ListItem | ListItemSource}                         ListItemLike
- * @typedef {SentenceLike}                                      ParagraphSource
- * @typedef {Paragraph | ParagraphSource | Array<SentenceLike>} ParagraphLike
- * @typedef {string}                                            LexemeSource
- * @typedef {Lexeme | LexemeSource}                             LexemeLike
- * @typedef {LexemeLike}                                        CodeLineSource
- * @typedef {CodeLine | CodeLineSource | Array<CodeLineSource>} CodeLineLike
- * @typedef {Code | Explorer}                                   IllustrationContentSource
- * @typedef {IllustrationContent | IllustrationContentSource}   IllustrationContentLike
- * @typedef {Paragraph | Illustration | Array<Illustration> }   SectionPartSource
- * @typedef {SectionPart | SectionPartSource}                   SectionPartLike
+ * @typedef {string | Illustration | Lexeme | Array<Lexeme>  Code } PhraseSource
+ * @typedef {Phrase | PhraseSource}                                 PhraseLike
+ * @typedef {PhraseLike}                                            SentenceSource
+ * @typedef {Sentence | SentenceSource}                             SentenceLike
+ * @typedef {SentenceLike | Array<SentenceLike>}                    SentencesSource
+ * @typedef {Sentences | SentencesSource}                           SentencesLike
+ * @typedef {SentencesLike}                                         ListItemSource
+ * @typedef {ListItem | ListItemSource}                             ListItemLike
+ * @typedef {SentenceLike}                                          ParagraphSource
+ * @typedef {Paragraph | ParagraphSource | Array<SentenceLike>}     ParagraphLike
+ * @typedef {string}                                                LexemeSource
+ * @typedef {Lexeme | LexemeSource}                                 LexemeLike
+ * @typedef {LexemeLike}                                            CodeLineSource
+ * @typedef {CodeLine | CodeLineSource | Array<CodeLineSource>}     CodeLineLike
+ * @typedef {Code | Explorer}                                       IllustrationContentSource
+ * @typedef {IllustrationContent | IllustrationContentSource}       IllustrationContentLike
+ * @typedef {Paragraph | Illustration | Array<Illustration> }       SectionPartSource
+ * @typedef {SectionPart | SectionPartSource}                       SectionPartLike
  */
 
 
@@ -125,12 +127,18 @@ function phrase(something) {
     }
     if (something instanceof Lexeme) {
         return new LexemePhrase({
-            Lexemes : [ something ],
+            Lexemes : new Lexemes(something),
         });
     }
-    if (Array.isArray(something) && something.every(lexeme => lexeme instanceof Lexeme)) {
+    if (Array.isArray(something) && something.some(lexeme => lexeme instanceof Lexeme)) {
         return new LexemePhrase({
-            Lexemes : something,
+            Lexemes : toLexemes(something),
+        });
+    }
+    if (something instanceof Code) {
+        return new LexemePhrase({
+            Language : something.Language,
+            Lexemes  : something.Lines.Lexemes,
         });
     }
 
@@ -383,11 +391,11 @@ function toLexeme(something) {
 }
 /**
  * @param   {Array<LexemeLike>} somethings
- * @returns {Array<Lexeme>}
+ * @returns {Lexemes}
  * @throws  {Error}
  */
 function toLexemes(somethings) {
-    return somethings.map(toLexeme);
+    return new Lexemes(...somethings.map(toLexeme));
 }
 /**
  * @param   {...CodeLineSource} somethings
@@ -427,13 +435,70 @@ function toCodeLines(somethings) {
     return new CodeLines(...somethings.map(toCodeLine));
 }
 /**
- * @param  {...CodeLineLike} somethings
+ * @param   {...CodeLineLike} somethings
+ * @returns {Code}
  */
-function code(...somethings) {
+function code(language, ...somethings) {
+    language =
+        language === `plain` ? CodeLanguage.PlainText  :
+        language === `js`    ? CodeLanguage.JavaScript :
+        language === `json`  ? CodeLanguage.JSON       :
+        language === `c`     ? CodeLanguage.C          :
+        language === `c++`   ? CodeLanguage.CPlusPlus  :
+        language === `c#`    ? CodeLanguage.CSharp     :
+        language === `php`   ? CodeLanguage.PHP        :
+        language === `html`  ? CodeLanguage.HTML       :
+        language === `css`   ? CodeLanguage.CSS        :
+        language === `sass`  ? CodeLanguage.SASS       :
+        language === `scss`  ? CodeLanguage.SCSS       :
+        language === `xml`   ? CodeLanguage.XML        :
+        language === `py`    ? CodeLanguage.Python     :
+        language === `llvm`  ? CodeLanguage.LLVM       :
+        language === `qb`    ? CodeLanguage.QBasic     :
+        language === `tex`   ? CodeLanguage.TeX        :
+        CodeLanguage.PlainText;
+
     const lines = toCodeLines(somethings);
 
     return new Code({
-        Lines : lines,
+        Language : language,
+        Lines    : lines,
+    });
+}
+/**
+ * @param   {...CodeLineLike} somethings
+ * @returns {Code}
+ */
+function js(...somethings) {
+    const lines = toCodeLines(somethings);
+
+    return new Code({
+        Language : CodeLanguage.JavaScript,
+        Lines    : lines,
+    });
+}
+/**
+ * @param   {...CodeLineLike} somethings
+ * @returns {Code}
+ */
+function cs(...somethings) {
+    const lines = toCodeLines(somethings);
+
+    return new Code({
+        Language : CodeLanguage.CSharp,
+        Lines    : lines,
+    });
+}
+/**
+ * @param   {...CodeLineLike} somethings
+ * @returns {Code}
+ */
+function cpp(...somethings) {
+    const lines = toCodeLines(somethings);
+
+    return new Code({
+        Language : CodeLanguage.CPlusPlus,
+        Lines    : lines,
     });
 }
 
@@ -637,6 +702,9 @@ exports.toLexemes = toLexemes;
 exports.codeLine = codeLine;
 exports.code = code;
 exports.explorer = explorer;
+exports.js = js;
+exports.cs = cs;
+exports.cpp = cpp;
 exports.toCodeLine = toCodeLine;
 exports.toCodeLines = toCodeLines;
 exports.toIllustrationContent = toIllustrationContent;

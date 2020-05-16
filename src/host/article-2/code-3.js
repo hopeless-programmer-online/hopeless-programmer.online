@@ -4,7 +4,7 @@ const { cm, kw, lt, v } = s;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Використання символу `, s.lexeme(`@`), ` в C#.`),
-    s.code(
+    s.cs(
         [ kw(`var`), ` `, v(`class`), `     = `, lt(`1`), `; `, cm(`// помилка`) ],
         [ kw(`var`), ` `, v(`@class`), `    = `, lt(`2`), `; `, cm(`// ok`) ],
         [ kw(`var`), ` `, v(`_class`), `    = `, lt(`3`), `; `, cm(`// теж ok`) ],

@@ -3,26 +3,41 @@ const Phrase = require(`./phrase`);
 
 class LexemePhrase extends Phrase {
     /**
-     * @param {Object}        object
-     * @param {Array<Lexeme>} object.Lexemes
+     * @param {Object}  object
+     * @param {Lexemes} object.Lexemes
      */
-    constructor({ Lexemes }) {
-        if (Array.isArray(Lexemes) && Lexemes.every(lexeme => lexeme instanceof LexemeClass)); else {
-            throw new Error(); // @todo
+    constructor({ Language = LanguageEnum.PlainText, Lexemes = new LexemesClass } = {}) {
+        if (!Object.values(LanguageEnum).includes(Language)) {
+            throw new Error; // @todo
+        }
+        if (Lexemes instanceof LexemesClass); else {
+            throw new Error; // @todo
         }
 
         super();
 
         /**
          * @private
-         * @type    {Array<Lexeme>}
+         * @type    {Language}
+         */
+        this.__language = Language;
+        /**
+         * @private
+         * @type    {Lexemes}
          */
         this.__lexemes = Lexemes;
     }
 
     /**
      * @public
-     * @type   {Array<Lexeme>}
+     * @type   {Language}
+     */
+    get Language() {
+        return this.__language;
+    }
+    /**
+     * @public
+     * @type   {Lexemes}
      */
     get Lexemes() {
         return this.__lexemes;
@@ -34,7 +49,12 @@ class LexemePhrase extends Phrase {
      * @returns   {html.Element}
      */
     _toHtml() {
-        return <code class="hp-class-phrase hp-class-lexeme-phrase">{this.Lexemes.map(lexeme => lexeme.toHtml())}</code>;
+        return <code
+            class="hp-class-phrase hp-class-lexeme-phrase"
+            data-hp-language={deduce(this.Language)}
+        >
+            {this.Lexemes.toHtml()}
+        </code>;
     }
 }
 
@@ -45,7 +65,10 @@ exports = module.exports = LexemePhrase;
 const html = require(`../html`);
 
 
-const Lexeme = require(`./lexeme`);
+const Lexemes = require(`./lexemes`);
+const Language = require(`./code-language`);
+const deduce = require(`./deduce-language-attribute`);
 
 
-const LexemeClass = Lexeme;
+const LexemesClass = Lexemes;
+const LanguageEnum = Language;
