@@ -86,6 +86,7 @@ exports = module.exports = new h.Host({
             `document`,
             `code`,
             `javascript`,
+            `c`,
             `cplusplus`,
             `csharp`,
             `php`,

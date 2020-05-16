@@ -22,6 +22,7 @@ function template(title, content) {
                 <link rel="stylesheet" href="css/index.css" />
                 <link rel="stylesheet" href="css/code.css" />
                 <link rel="stylesheet" href="css/javascript.css" />
+                <link rel="stylesheet" href="css/c.css" />
                 <link rel="stylesheet" href="css/cplusplus.css" />
                 <link rel="stylesheet" href="css/csharp.css" />
                 <link rel="stylesheet" href="css/php.css" />
