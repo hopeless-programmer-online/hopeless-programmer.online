@@ -91,6 +91,7 @@ exports = module.exports = new h.Host({
             `csharp`,
             `php`,
             `py`,
+            `qbasic`,
         ].reduce((all, name) => ({
             ...all,
             [`/css/${name}.css`] : new h.SASSResource({
