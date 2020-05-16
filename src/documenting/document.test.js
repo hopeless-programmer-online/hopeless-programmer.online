@@ -21,7 +21,7 @@ it(`Should converts ho html`, () => {
             ),
             shortcuts.illustration(
                 `Illustration description`,
-                shortcuts.code(
+                shortcuts.code(`c`,
                 ),
             ),
         ),
@@ -72,7 +72,11 @@ it(`Should converts ho html`, () => {
         `            --></li><!--\r\n` +
         `        --></ul><!--\r\n` +
         `        --><figure id="hp-id-illustration-1"><!--\r\n` +
-        `            --><code class="hp-class-code"></code><!--\r\n` +
+        `            --><figure class="hp-class-code" data-hp-language="c"><!--\r\n` +
+        `                --><figcaption><!--\r\n` +
+        `                    --><img alt="c" src="./media/icons/c.svg">example.c</figcaption><!--\r\n` +
+        `                --><code></code><!--\r\n` +
+        `            --></figure><!--\r\n` +
         `            --><figcaption><!--\r\n` +
         `                --><h3><!--\r\n` +
         `                    --><span class="hp-class-sentence"><!--\r\n` +
