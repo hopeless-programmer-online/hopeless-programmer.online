@@ -88,6 +88,7 @@ exports = module.exports = new h.Host({
             `javascript`,
             `cplusplus`,
             `csharp`,
+            `php`,
         ].reduce((all, name) => ({
             ...all,
             [`/css/${name}.css`] : new h.SASSResource({
@@ -95,6 +96,9 @@ exports = module.exports = new h.Host({
             }),
         }), {}),
         // media
+        [`favicon.ico`] : new h.FileResource({
+            Path : path.join(__dirname, `../media/favicon.ico`),
+        }),
         ...[
             `favicon.ico`,
             `but_i.png`,

@@ -24,6 +24,7 @@ function template(title, content) {
                 <link rel="stylesheet" href="css/javascript.css" />
                 <link rel="stylesheet" href="css/cplusplus.css" />
                 <link rel="stylesheet" href="css/csharp.css" />
+                <link rel="stylesheet" href="css/php.css" />
                 <link rel="stylesheet" href="css/document.css" />
                 {/* <script src="script.js" /> */}
             </head>
