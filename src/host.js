@@ -78,58 +78,38 @@ exports = module.exports = new h.Host({
         "/405" : require(`./host/405`),
         "/500" : require(`./host/500`),
         // sass
-        "/css/common.css" : new h.SASSResource({
-            Path : path.join(__dirname, `../sass/common.scss`),
-        }),
-        "/css/page.css" : new h.SASSResource({
-            Path : path.join(__dirname, `../sass/page.scss`),
-        }),
-        "/css/index.css" : new h.SASSResource({
-            Path : path.join(__dirname, `../sass/index.scss`),
-        }),
-        "/css/sentence.css" : new h.SASSResource({
-            Path : path.join(__dirname, `../sass/sentence.scss`),
-        }),
-        "/css/document.css" : new h.SASSResource({
-            Path : path.join(__dirname, `../sass/document.scss`),
-        }),
-        "/css/code.css" : new h.SASSResource({
-            Path : path.join(__dirname, `../sass/code.scss`),
-        }),
-        "/css/javascript.css" : new h.SASSResource({
-            Path : path.join(__dirname, `../sass/javascript.scss`),
-        }),
-        "/css/cplusplus.css" : new h.SASSResource({
-            Path : path.join(__dirname, `../sass/cplusplus.scss`),
-        }),
+        ...[
+            `common`,
+            `page`,
+            `index`,
+            `sentence`,
+            `document`,
+            `code`,
+            `javascript`,
+            `cplusplus`,
+        ].reduce((all, name) => ({
+            ...all,
+            [`/css/${name}.css`] : new h.SASSResource({
+                Path : path.join(__dirname, `../sass/${name}.scss`),
+            }),
+        }), {}),
         // media
-        "/media/favicon.ico" : new h.FileResource({
-            Path : path.join(__dirname, `../media/favicon.ico`),
-        }),
-        "/media/but_i.png" : new h.FileResource({
-            Path : path.join(__dirname, `../media/but_i.png`),
-        }),
-        "/media/html5.svg" : new h.FileResource({
-            Path : path.join(__dirname, `../media/html5.svg`),
-        }),
-        "/media/css3.svg" : new h.FileResource({
-            Path : path.join(__dirname, `../media/css3.svg`),
-        }),
-        "/media/es6.svg" : new h.FileResource({
-            Path : path.join(__dirname, `../media/es6.svg`),
-        }),
-        "/media/react.svg" : new h.FileResource({
-            Path : path.join(__dirname, `../media/react.svg`),
-        }),
-        "/media/nodejs.svg" : new h.FileResource({
-            Path : path.join(__dirname, `../media/nodejs.svg`),
-        }),
-        "/media/sass.svg" : new h.FileResource({
-            Path : path.join(__dirname, `../media/sass.svg`),
-        }),
-        "/media/jest.svg" : new h.FileResource({
-            Path : path.join(__dirname, `../media/jest.svg`),
-        }),
+        ...[
+            `favicon.ico`,
+            `but_i.png`,
+            `html5.svg`,
+            `css3.svg`,
+            `es6.svg`,
+            `react.svg`,
+            `nodejs.svg`,
+            `sass.svg`,
+            `jest.svg`,
+        ].reduce((all, name) => ({
+            ...all,
+            [`/media/${name}`] : new h.FileResource({
+                Path : path.join(__dirname, `../media/${name}`),
+            }),
+        }), {}),
         // icons
         ...[
             `c`,
