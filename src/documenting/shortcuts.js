@@ -450,12 +450,13 @@ function code(language, ...somethings) {
         language === `llvm`  ? CodeLanguage.LLVM       :
         language === `qb`    ? CodeLanguage.QBasic     :
         language === `tex`   ? CodeLanguage.TeX        :
-        language;
+        CodeLanguage.PlainText;
 
     const lines = toCodeLines(somethings);
 
     return new Code({
-        Lines : lines,
+        Language : language,
+        Lines    : lines,
     });
 }
 /**
