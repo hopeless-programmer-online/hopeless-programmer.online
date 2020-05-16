@@ -1,0 +1,40 @@
+@use "sass/palette";
+@use "sass/text";
+
+figure.hp-class-code[data-hp-language=llvm] > code > span:nth-child(3n+2),
+code.hp-class-lexeme-phrase[data-hp-language=llvm] {
+    > span.hp-class-lexeme {
+        &.hp-class-keyword-lexeme {
+            color: palette.$code-macro;
+        }
+        &.hp-class-identifier-lexeme {
+            color: palette.$code-variable;
+
+            &[type=variable][name=exports] {
+                color: palette.$code-class;
+            }
+            &[type=function] {
+                color: palette.$code-function;
+            }
+            &[type=class] {
+                color: palette.$code-class;
+            }
+            &[name=void],
+            &[name=int],
+            &[name=float] {
+                color: palette.$code-keyword;
+            }
+        }
+        &.hp-class-comment-lexeme {
+            color: palette.$code-comments;
+        }
+        &.hp-class-literal-lexeme {
+            &[type=number] {
+                color: palette.$code-number;
+            }
+            &[type=string] {
+                color: palette.$code-string;
+            }
+        }
+    }
+}
