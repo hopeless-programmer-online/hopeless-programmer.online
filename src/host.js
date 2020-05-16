@@ -130,5 +130,25 @@ exports = module.exports = new h.Host({
         "/media/jest.svg" : new h.FileResource({
             Path : path.join(__dirname, `../media/jest.svg`),
         }),
+        // icons
+        ...[
+            `c`,
+            `cpp`,
+            `c-sharp`,
+            `css`,
+            `html`,
+            `javascript`,
+            `json`,
+            `php`,
+            `python`,
+            `sass`,
+            `scss`,
+            `xml`,
+        ].reduce((all, name) => ({
+            ...all,
+            [`/media/icons/${name}.svg`] : new h.FileResource({
+                Path : path.join(__dirname, `../media/icons/${name}.svg`),
+            }),
+        }), {}),
     },
 });

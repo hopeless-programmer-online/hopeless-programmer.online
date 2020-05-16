@@ -21,38 +21,56 @@ code.hp-class-lexeme-phrase {
     padding-right: 2pt;
 }
 
-code.hp-class-code {
+figure.hp-class-code {
     @include text.code;
 
-    // grid
-    display: grid;
-    grid-template-columns: [index] auto [content] auto [break] auto;
-    column-gap: 8pt;
-    // size
-    padding: 4pt;
-    // text
-    white-space: pre;
-    // color
-    background-color: palette.$code-background;
+    background-color: rgb(37, 37, 38);
 
-    > span:nth-child(3n+1) {
-        // grid-item
-        grid-column: index / index;
-        justify-self: end;
+    > figcaption {
+        width: min-content;
+        padding: 4pt;
+        background-color: palette.$code-background;
+        color: white;
+        // flex
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        > img {
+            height: 18pt;
+        }
+    }
+    > code {
+        // grid
+        display: grid;
+        grid-template-columns: [index] auto [content] auto [break] auto;
+        column-gap: 8pt;
+        // size
+        padding: 4pt;
         // text
-        color: palette.$code-index;
-        // disable text selection
-        -webkit-user-select     : none; // Chrome all / Safari all
-        -moz-user-select        : none; // Firefox all
-        -ms-user-select         : none; // IE 10+
-        user-select             : none; // Likely future
-    }
-    > span:nth-child(3n+2) {
-        // grid-item
-        grid-column: content / content;
-    }
-    > br:nth-child(3n+3) {
-        // grid-item
-        grid-column: break / break;
+        white-space: pre;
+        // color
+        background-color: palette.$code-background;
+
+        > span:nth-child(3n+1) {
+            // grid-item
+            grid-column: index / index;
+            justify-self: end;
+            // text
+            color: palette.$code-index;
+            // disable text selection
+            -webkit-user-select     : none; // Chrome all / Safari all
+            -moz-user-select        : none; // Firefox all
+            -ms-user-select         : none; // IE 10+
+            user-select             : none; // Likely future
+        }
+        > span:nth-child(3n+2) {
+            // grid-item
+            grid-column: content / content;
+        }
+        > br:nth-child(3n+3) {
+            // grid-item
+            grid-column: break / break;
+        }
     }
 }

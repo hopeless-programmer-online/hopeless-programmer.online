@@ -47,10 +47,37 @@ class Code {
      * @returns {html.Element}
      */
     toHtml() {
+        function img(name) {
+            return <img alt={name} src={`./media/icons/${name}.svg`} />;
+        }
+
+        const language = this.Language;
+        const [ icon, title ] =
+            language === Language.JavaScript ? [ img(`javascript`), `example.js` ] :
+            language === Language.JSON       ? [ img(`json`), `example.json` ]     :
+            language === Language.C          ? [ img(`c`), `example.c` ]           :
+            language === Language.CPlusPlus  ? [ img(`cpp`), `example.cpp` ]       :
+            language === Language.CSharp     ? [ img(`c-sharp`), `example.cs` ]    :
+            language === Language.PHP        ? [ img(`php`), `example.php` ]       :
+            language === Language.HTML       ? [ img(`html`), `example.html` ]     :
+            language === Language.CSS        ? [ img(`css`), `example.css` ]       :
+            language === Language.SASS       ? [ img(`sass`), `example.sass` ]     :
+            language === Language.SCSS       ? [ img(`sass`), `example.scss` ]     :
+            language === Language.XML        ? [ img(`xml`), `example.xml` ]       :
+            language === Language.Python     ? [ img(`python`), `example.py` ]     :
+            language === Language.TeX        ? [ img(`tex`), `example.tex` ]       :
+            [ <span />, `example` ];
+
         return (
-            <code class="hp-class-code" data-hp-language={deduce(this.Language)}>
-                {this.Lines.toHtml()}
-            </code>
+            <figure class="hp-class-code" data-hp-language={deduce(this.Language)}>
+                <figcaption>
+                    {icon}
+                    {title}
+                </figcaption>
+                <code>
+                    {this.Lines.toHtml()}
+                </code>
+            </figure>
         );
     }
 }
