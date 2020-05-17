@@ -19,6 +19,7 @@ article.hp-class-explorer {
             grid-row: 1;
             justify-self: center;
             align-self: center;
+            font-size: 9pt;
         }
         > input {
             grid-column: 1;
@@ -30,6 +31,7 @@ article.hp-class-explorer {
 
             > figcaption.hp-class-code-header {
                 background-color: transparent;
+                padding: 0;
             }
         }
         > input:checked + label {
