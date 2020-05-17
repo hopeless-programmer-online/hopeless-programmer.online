@@ -35,7 +35,7 @@ class CodeFileExplorerItemContent extends FileExplorerItemContent {
      */
     _toHtml() {
         const id = `hp-id-explorer-${this.Item.Explorer.Index}-item-${this.Item.Index}`;
-        const header = deduceHeader(`example`, this.Code.Language);
+        const header = deduceHeader(this.Item.Name, false, this.Code.Language); // @todo
 
         return [
             <input

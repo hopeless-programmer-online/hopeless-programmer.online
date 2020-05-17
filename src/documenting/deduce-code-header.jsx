@@ -1,4 +1,4 @@
-function deduce(title, language) {
+function deduce(title, ext, language) {
     const [ icon, extension ] =
         language === Language.JavaScript ? [ `javascript`, `.js`   ] :
         language === Language.JSON       ? [ `json`,       `.json` ] :
@@ -20,7 +20,7 @@ function deduce(title, language) {
     return (
         <figcaption class="hp-class-code-header">
             <img alt={icon} src={`./media/icons/${icon}.svg`} />
-            {title + extension}
+            {title + (ext === null ? extension : ``)}
         </figcaption>
     );
 }
