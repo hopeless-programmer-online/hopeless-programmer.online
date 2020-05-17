@@ -17,10 +17,12 @@ function deduce(title, language) {
         language === Language.QBasic     ? [ `default`,    `.qb`   ] :
         [ `default`, `.txt` ];
 
-    return [
-        <img alt={icon} src={`./media/icons/${icon}.svg`} />,
-        title + extension,
-    ];
+    return (
+        <figcaption class="hp-class-code-header">
+            <img alt={icon} src={`./media/icons/${icon}.svg`} />
+            {title + extension}
+        </figcaption>
+    );
 }
 
 

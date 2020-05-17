@@ -18,6 +18,8 @@ class ContentableExplorerItem extends ExplorerItem {
 
         super({ Name });
 
+        Content.__Item = this;
+
         /**
          * @private
          * @type    {Content}

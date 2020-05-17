@@ -34,10 +34,20 @@ class CodeFileExplorerItemContent extends FileExplorerItemContent {
      * @returns   {html.Element | Array<html.Element>}
      */
     _toHtml() {
+        const id = `hp-id-explorer-${this.Item.Explorer.Index}-item-${this.Item.Index}`;
+        const header = deduceHeader(`example`, this.Code.Language);
+
         return [
-            <span>
-                {deduceHeader(`example`, this.Code.Language)}
-            </span>,
+            <input
+                id={id}
+                name="selection"
+                type="radio"
+            />,
+            <label for={id}>
+                {``.padStart(this.Item.Level, `-`)}
+                {header}
+            </label>,
+            header,
             <figure class="hp-class-code" data-hp-language={deduceAttribute(this.Code.Language)}>
                 {this.Code.toHtml()}
             </figure>,

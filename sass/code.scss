@@ -26,20 +26,6 @@ figure.hp-class-code {
 
     background-color: rgb(37, 37, 38);
 
-    > figcaption {
-        width: min-content;
-        padding: 4pt;
-        background-color: palette.$code-background;
-        color: white;
-        // flex
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-
-        > img {
-            height: 18pt;
-        }
-    }
     > code {
         // grid
         display: grid;
@@ -72,5 +58,21 @@ figure.hp-class-code {
             // grid-item
             grid-column: break / break;
         }
+    }
+}
+figcaption.hp-class-code-header {
+    width: min-content;
+    padding: 4pt;
+    background-color: palette.$code-background;
+    color: white;
+    // flex
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    > img {
+        height: 18pt;
     }
 }

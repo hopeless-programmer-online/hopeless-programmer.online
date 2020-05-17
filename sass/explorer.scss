@@ -27,27 +27,18 @@ article.hp-class-explorer {
         > label {
             grid-column: 1/3;
             justify-self: stretch;
+
+            > figcaption.hp-class-code-header {
+                background-color: transparent;
+            }
         }
         > input:checked + label {
             background-color: palette.$code-selection;
         }
-        > label + span {
+        > label + figcaption.hp-class-code-header {
             grid-column: 3;
             grid-row: 1/2;
-            width: min-content;
-            padding: 4pt;
-            background-color: palette.$code-background;
-            color: white;
-            // flex
             display: none;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: flex-start;
-            align-items: center;
-
-            > img {
-                height: 18pt;
-            }
         }
         > figure.hp-class-code {
             grid-column: 3;
@@ -57,10 +48,10 @@ article.hp-class-explorer {
             justify-self: start;
             align-self: start;
         }
-        > input:checked + label + span {
+        > input:checked + label + figcaption.hp-class-code-header {
             display: flex;
         }
-        > input:checked + label + span + figure.hp-class-code {
+        > input:checked + label + figcaption.hp-class-code-header + figure.hp-class-code {
             display: initial;
         }
     }

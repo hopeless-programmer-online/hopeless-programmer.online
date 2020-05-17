@@ -21,15 +21,7 @@ class FileExplorerItem extends ContentableExplorerItem {
      * @returns   {Array<html.Element>}
      */
     _toHtml() {
-        const id = `hp-id-explorer-${this.Explorer.Index}-item-${this.Index}`;
-
         return [
-            <input
-                id={id}
-                name="selection"
-                type="radio"
-            />,
-            <label for={id}>{``.padStart(this.Level, `-`) + this.Name}</label>,
             this.Content.toHtml(),
         ];
     }
