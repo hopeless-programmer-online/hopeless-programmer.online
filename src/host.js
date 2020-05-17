@@ -102,7 +102,7 @@ exports = module.exports = new h.Host({
             }),
         }), {}),
         // media
-        [`favicon.ico`] : new h.FileResource({
+        [`/favicon.ico`] : new h.FileResource({
             Path : path.join(__dirname, `../media/favicon.ico`),
         }),
         ...[
@@ -135,6 +135,7 @@ exports = module.exports = new h.Host({
             `sass`,
             `scss`,
             `xml`,
+            `default`,
         ].reduce((all, name) => ({
             ...all,
             [`/media/icons/${name}.svg`] : new h.FileResource({

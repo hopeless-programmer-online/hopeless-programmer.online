@@ -34,7 +34,14 @@ class CodeIllustrationContent extends IllustrationContent {
      * @returns   {html.Element}
      */
     _toHtml() {
-        return this.Code.toHtml();
+        return (
+            <figure class="hp-class-code" data-hp-language={deduceAttribute(this.Code.Language)}>
+                <figcaption>
+                    {deduceHeader(`example`, this.Code.Language)}
+                </figcaption>
+                {this.Code.toHtml()}
+            </figure>
+        );
     }
 }
 
@@ -42,7 +49,10 @@ class CodeIllustrationContent extends IllustrationContent {
 exports = module.exports = CodeIllustrationContent;
 
 
+const html = require(`../html`);
 const Code = require(`./code`);
+const deduceAttribute = require(`./deduce-language-attribute`);
+const deduceHeader = require(`./deduce-code-header`);
 
 
 const CodeClass = Code;

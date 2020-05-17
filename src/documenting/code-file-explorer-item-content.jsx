@@ -35,8 +35,12 @@ class CodeFileExplorerItemContent extends FileExplorerItemContent {
      */
     _toHtml() {
         return [
-            <span>name</span>,
-            this.Code.toHtml(),
+            <span>
+                {deduceHeader(`example`, this.Code.Language)}
+            </span>,
+            <figure class="hp-class-code" data-hp-language={deduceAttribute(this.Code.Language)}>
+                {this.Code.toHtml()}
+            </figure>,
         ];
     }
 }
@@ -47,6 +51,8 @@ exports = module.exports = CodeFileExplorerItemContent;
 
 const html = require(`../html`);
 const Code = require(`./code`);
+const deduceAttribute = require(`./deduce-language-attribute`);
+const deduceHeader = require(`./deduce-code-header`);
 
 
 const CodeClass = Code;
