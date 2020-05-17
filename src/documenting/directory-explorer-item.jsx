@@ -32,16 +32,15 @@ class DirectoryExplorerItem extends ExplorerItem {
     /**
      * @protected
      * @override
-     * @returns   {html.Element}
+     * @returns   {Array<html.Element>}
      */
     _toHtml() {
-        return (
-            <span>
-                {/* <input name="selection" type="radio" /> */}
-                <label>{this.Name}</label>
-                {this.Items.toHtml()}
-            </span>
-        );
+        return [
+            <label>
+                {this.Name}
+            </label>,
+            this.Items.toHtml(),
+        ];
     }
 }
 

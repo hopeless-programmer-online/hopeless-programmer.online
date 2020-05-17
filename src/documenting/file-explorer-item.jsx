@@ -18,16 +18,20 @@ class FileExplorerItem extends ContentableExplorerItem {
     /**
      * @protected
      * @override
-     * @returns   {html.Element}
+     * @returns   {Array<html.Element>}
      */
     _toHtml() {
-        return (
-            <label>
-                <input name="selection" type="radio" />
-                <span class="hp-class-radio" />
-                {this.Name}
-            </label>
-        );
+        const id = `hp-id-explorer-${this.Explorer.Index}-item-${this.Index}`;
+
+        return [
+            <input
+                id={id}
+                name="selection"
+                type="radio"
+            />,
+            <label for={id}>{``.padStart(this.Level, `-`) + this.Name}</label>,
+            this.Content.toHtml(),
+        ];
     }
 }
 

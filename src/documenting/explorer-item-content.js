@@ -28,14 +28,14 @@ class ExplorerItem {
 
     /**
      * @public
-     * @returns {html.Element}
+     * @returns {html.Element | Array<html.Element>}
      * @throws  {Error}
      */
     toHtml() {
         const element = this._toHtml();
 
-        if (element instanceof html.Element); else {
-            throw new Error; // @todo
+        if (!html.Element.IsLike(element)) {
+            throw new Error(`${typeof element} ${element} is not html.Element or Array<html.Element>.`);
         }
 
         return element;

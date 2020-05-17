@@ -319,6 +319,19 @@ exports = module.exports = new h.DocumentResource({
             s.paragraph(...[
                 s.sentence(``),
             ]),
+            s.illustration(`lol`,
+                s.explorer({
+                    a : s.code(`c`,
+                        `kek #1`,
+                        `kek #2`,
+                    ),
+                    b : s.code(`c`,
+                        `line #1`,
+                        `line #2`,
+                        `line #3`,
+                    ),
+                }),
+            ),
         ]),
         // s.section(``, ...[
         //     s.paragraph(...[

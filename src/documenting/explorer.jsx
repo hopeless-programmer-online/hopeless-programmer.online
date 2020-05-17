@@ -8,6 +8,17 @@ class Explorer {
             throw new Error(`${typeof Items} ${Items} is not ExplorerItems.`);
         }
 
+        Items.forEach((item, index) => {
+            item.__Explorer = this;
+            item.__Index = `${index + 1}`;
+            item.__Level = 0;
+        });
+
+        /**
+         * @private
+         * @type    {?number}
+         */
+        this.__index = null;
         /**
          * @private
          * @type    {Items}
@@ -15,6 +26,33 @@ class Explorer {
         this.__items = Items;
     }
 
+    /**
+     * @public
+     * @type   {number}
+     */
+    get Index() {
+        const index = this.__index;
+
+        if (index === null) {
+            throw new Error; // @todo
+        }
+
+        return index;
+    }
+    /**
+     * @private
+     * @type    {number}
+     */
+    set __Index(index) {
+        if (Number.isInteger(index) && index > 0); else {
+            throw new Error; // @todo
+        }
+        if (this.__index !== null) {
+            throw new Error; // @todo
+        }
+
+        this.__index = index;
+    }
     /**
      * @public
      * @type   {Items}
@@ -30,11 +68,10 @@ class Explorer {
     toHtml() {
         return (
             <article class="hp-class-explorer">
-                <header>
-                    <nav>
-                        {this.Items.toHtml()}
-                    </nav>
-                </header>
+                <section>
+                    <span>EXPLORER</span>
+                    {this.Items.toHtml()}
+                </section>
             </article>
         );
     }

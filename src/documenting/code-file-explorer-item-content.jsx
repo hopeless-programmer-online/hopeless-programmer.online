@@ -31,10 +31,13 @@ class CodeFileExplorerItemContent extends FileExplorerItemContent {
     /**
      * @protected
      * @override
-     * @returns   {html.Element}
+     * @returns   {html.Element | Array<html.Element>}
      */
     _toHtml() {
-        return this.Code.toHtml();
+        return [
+            <span>name</span>,
+            this.Code.toHtml(),
+        ];
     }
 }
 
@@ -42,6 +45,7 @@ class CodeFileExplorerItemContent extends FileExplorerItemContent {
 exports = module.exports = CodeFileExplorerItemContent;
 
 
+const html = require(`../html`);
 const Code = require(`./code`);
 
 

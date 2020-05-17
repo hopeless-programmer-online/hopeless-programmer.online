@@ -54,6 +54,8 @@ class Document {
                                 illustration.__Title = shortcuts.toParagraph(`Приклад №${exampleIndex}`).Sentences;
                             }
 
+                            content.Explorer.__Index = exampleIndex;
+
                             ++exampleIndex;
                         }
 
@@ -140,7 +142,6 @@ const html = require(`../html`);
 const NotePhrase = require(`./note-phrase`);
 const Sentences = require(`./sentences`);
 const Notes = require(`./notes`);
-const Section = require(`./section`);
 const Sections = require(`./sections`);
 const IllustrationsSectionPart = require(`./illustrations-section-part`);
 const CodeIllustrationContent = require(`./code-illustration-content`);

@@ -7,16 +7,16 @@ class ExplorerItems extends Array {
     }
 
     /**
-     * @param  {...Item} phrases
+     * @param  {...Item} items
      */
-    constructor(...phrases) {
-        phrases.forEach((item, index) => {
+    constructor(...items) {
+        items.forEach((item, index) => {
             if (item instanceof Item); else {
                 throw new Error(`Element #${index} (${typeof item} ${String(item)}) is not a item.`);
             }
         });
 
-        super(...phrases);
+        super(...items);
     }
 
     /**
@@ -24,17 +24,7 @@ class ExplorerItems extends Array {
      * @returns {Array<html.Element>}
      */
     toHtml() {
-        return (
-            <ul>
-                {
-                    this.map(item =>
-                        <li>
-                            {item.toHtml()}
-                        </li>,
-                    )
-                }
-            </ul>
-        );
+        return this.map(item => item.toHtml());
     }
 }
 
