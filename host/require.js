@@ -14,6 +14,7 @@ const {
     document,
     section,
     paragraph,
+    list,
     sentence,
     emphasis,
     figurative,
@@ -26,6 +27,7 @@ const {
     f,
     c,
     p,
+    lt,
 } = s;
 
 
@@ -37,16 +39,20 @@ const $exports_p = js(p(`exports`));
 // const exports_s = s.lt(`"exports"`);
 const module_exports = js( c(`module`), `.`, p(`exports`) );
 // const module_paths = s.phrase([ s.c(`module`), s.lexeme(`.`), s.p(`paths`) ]);
+const common_js = `http://wiki.commonjs.org/wiki/Modules/1.1.1`;
+const es_modules = `https://nodejs.org/api/esm.html`;
+const npm = `https://en.wikipedia.org/wiki/Npm_(software)`;
 const free_variables = `https://uk.wikipedia.org/wiki/%D0%92%D1%96%D0%BB%D1%8C%D0%BD%D1%96_%D1%96_%D0%B7%D0%B2%27%D1%8F%D0%B7%D0%B0%D0%BD%D1%96_%D0%B7%D0%BC%D1%96%D0%BD%D0%BD%D1%96`;
+const nodejs_modules = `https://nodejs.org/api/modules.html`;
 // const builtinModules = s.phrase([ s.f(`require`), s.lexeme(`(`), s.lt(`\`module\``), s.lexeme(`).`), s.p(`builtinModules`) ]);
 // const require_doc = `https://nodejs.org/api/modules.html#modules_all_together`;
 // const require_source = `https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js`;
 // const cpp_addon = `https://nodejs.org/api/addons.html`;
 // const json_doc = `https://uk.wikipedia.org/wiki/JSON`;
 // const package_json_doc = `https://nodejs.org/en/knowledge/getting-started/npm/what-is-the-file-package-json/`;
-// const package_json = s.lt(`package.json`);
+const package_json = js(lt(`package.json`));
 // const index = s.lt(`index`);
-// const node_modules = s.lt(`node_modules`);
+const node_modules = js(lt(`node_modules`));
 // const node_modules_doc = `https://nodejs.org/api/modules.html#modules_loading_from_node_modules_folders`;
 // const global_folders_doc = `https://nodejs.org/api/modules.html#modules_loading_from_the_global_folders`;
 // const scope_doc = `https://docs.npmjs.com/misc/scope`;
@@ -159,7 +165,7 @@ exports = module.exports = new h.DocumentResource({
                 sentence(`Вцілому, для мови JavaScript є різні погодження щодо систем модулів. `),
                 sentence(`Деякі призначені для браузерів, інші до певної міри платформо-незалежні, а деякі навіть потребують розширення синтаксису. `),
                 // [1] @todo написати про те, що в останніх версія NodeJS також є можливість використовувати модулі ECMAScript
-                sentence(`Наша цільова платформа - NodeJS - використовує систему модулів CommonJS[1], а вже вона визначає потрібну нам функцію - `, $require, `. `),
+                sentence(`Наша цільова платформа - NodeJS - використовує систему модулів `, link(`CommonJS`, common_js), `[1], а вже вона визначає потрібну нам функцію - `, $require, `. `),
             ]),
             paragraph(...[
                 sentence(`Але тут варто наголосити на тому, що хоч формально модулі в NodeJS це модулі CommonJS, не всі CommonJS модулі повинні бути такими, якими вони є в NodeJS. `),
@@ -205,12 +211,56 @@ exports = module.exports = new h.DocumentResource({
                 sentence(`Їх наповнення та поведінка залежить від багатьох дрібних чинників, про що ми і поговоримо далі. `),
                 sentence(`Але важливо ще й те, що навіть приймаючи до уваги особливості цих двох змінних - вони не перестають бути звичайними об'єктами JavaScript. `),
                 sentence(`Весь їхній функціонал може бути описаний звичайним кодом зі змінних та функцій, без залучення особливого синтаксису та розширення мови. `),
-                sentence(`Це якісно відрізняє модулі CommonJS від інших модулів, наприклад модулів ECMAScript. `),
+                sentence(`Це якісно відрізняє модулі CommonJS від інших модулів, наприклад модулів `, link(`ECMAScript`, es_modules), `. `),
             ]),
         ]),
         section(`Різновиди модулів в NodeJS.`, ...[
             paragraph(...[
-                sentence(``),
+                sentence(`Модулі що використовуються в NodeJS за походженням можна умовно розділити на три категорії:`),
+            ]),
+            list(...[
+                [
+                    sentence(`Вбудовані модулі. `),
+                    sentence(`Ці модулі повністю інтегровані в NodeJS та надаються разом з його дистрибутивом. `),
+                ],
+                [
+                    sentence(`Локальні модулі. `),
+                    sentence(`Зазвичай так можна назвати ті модулі, які безпосередньо описують нашу програму. `),
+                    sentence(`До їх переліку можна включити файли з класами, функціями, конфігурацією, тощо. `),
+                ],
+                [
+                    sentence(`Пакети з реєстру npm. `),
+                    sentence(`Ці модулі здебільшого є повністю самостійними сутностями, що призначені для виконання специфічних завдань. `),
+                    sentence(`Більшість з них знаходиться у вільному доступі і може бути завантажена атоматично за допомогою `, link(`менеджера пакетів NodeJS`, npm), `. `),
+                    sentence(`Для них відведені спеціальні каталоги - `, node_modules, `, про які ми поговоримо згодом. `),
+                ],
+            ]),
+            paragraph(...[
+                sentence(`Такий поділ часто можна зустріти в інших статтях або почути від досвідчених користувачів. `),
+                sentence(`Але у цій статті я буду використовувати також і альтернативну класифікацію. `),
+                sentence(`Зокрема, через деталі роботи функції `, $require, ` та підходу до завантаження модулів вцілому. `),
+                sentence(`І зараз я поясню чому. `),
+            ]),
+            paragraph(...[
+                sentence(`В `, link(`офіційній документації для модулів`, nodejs_modules), ` не часто оперують такими термінами як `, figurative(`пакети npm`), `. `),
+                sentence(`І це не випадково. `),
+                sentence(`Як ми побачимо далі, не всі модулі розташовані в `, node_modules, ` зобов'язані мати відношення до npm. `),
+                sentence(`Також, пакет npm можна без проблем завантажити навіть без одного з його головних його атрибутів - файлу `, package_json, `. `),
+                sentence(`Ну і далеко не кожен модуль з файлом `, package_json, ` є пакетом. `),
+            ]),
+            paragraph(...[
+                sentence(`У зв'язку з цим, пропоную `, emphasis(`на додачу`), ` до загальноприйнятої класифікації умовно розділити модулі на наступні три категорії:`),
+            ]),
+            list(...[
+                [
+                    sentence(`Вбудовані модулі. `),
+                ],
+                [
+                    sentence(`Модулі - файли. `),
+                ],
+                [
+                    sentence(`Модулі - каталоги. `),
+                ],
             ]),
         ]),
         /*s.section(`Пошук. `, ...[
