@@ -9,12 +9,6 @@ const s = documenting.shortcuts;
 
 
 const home = require(`./host/home`);
-const article_require = require(`./host/require`);
-// const article_1 = require(`./host/article-1`);
-// const article_2 = require(`./host/article-2`);
-// const article_3 = require(`./host/article-3`);
-// const article_4 = require(`./host/article-4`);
-// const article_5 = require(`./host/article-5`);
 
 
 exports = module.exports = new h.Host({
@@ -22,58 +16,11 @@ exports = module.exports = new h.Host({
         "/" : home,
         "/home" : home,
         "/about" : require(`./host/about`),
-        // sections
-        "/articles" : new h.IndexResource({
-            Index : new d.Index({
-                Title : s.toSentences(`Статті`),
-                Items : new d.IndexItems(
-                    new d.IndexItem({
-                        Content : new d.DocumentIndexItemContent({
-                            Url      : `/require`,
-                            Document : article_require.Document,
-                        }),
-                    }),
-                    /*new d.IndexItem({
-                        Content : new d.DocumentIndexItemContent({
-                            Url      : `/article_1`,
-                            Document : article_1.Document,
-                        }),
-                    }),
-                    new d.IndexItem({
-                        Content : new d.DocumentIndexItemContent({
-                            Url      : `/article_2`,
-                            Document : article_2.Document,
-                        }),
-                    }),
-                    new d.IndexItem({
-                        Content : new d.DocumentIndexItemContent({
-                            Url      : `/article_3`,
-                            Document : article_3.Document,
-                        }),
-                    }),
-                    new d.IndexItem({
-                        Content : new d.DocumentIndexItemContent({
-                            Url      : `/article_4`,
-                            Document : article_4.Document,
-                        }),
-                    }),
-                    new d.IndexItem({
-                        Content : new d.DocumentIndexItemContent({
-                            Url      : `/article_5`,
-                            Document : article_5.Document,
-                        }),
-                    }),*/
-                ),
-            }),
-        }),
         // articles
-        // "/article_1" : article_1,
-        // "/article_2" : article_2,
-        // "/article_3" : article_3,
-        // "/article_4" : article_4,
-        // "/article_5" : article_5,
-        "/require" : article_require,
-        // errors
+        ...mapArticles(
+            `require`,
+        ),
+        // internal
         "/404" : require(`./host/404`),
         "/405" : require(`./host/405`),
         "/500" : require(`./host/500`),
@@ -144,3 +91,38 @@ exports = module.exports = new h.Host({
         }), {}),
     },
 });
+
+
+function mapArticles(...names) {
+    const articles = names.reduce(
+        (all, name) => ({
+            ...all,
+            [name] : require(`./host/${name}`),
+        }),
+        {},
+    );
+
+    return {
+        ...Object.entries(articles)
+            .reduce(
+                (all, [ name, article ]) => ({ ...all, [`/${name}`] : article }),
+                {},
+            ),
+        [`/articles`] : new h.IndexResource({
+            Index : new d.Index({
+                Title : s.toSentences(`Статті`),
+                Items : new d.IndexItems(
+                    ...Object.entries(articles)
+                        .map(([ name, article ]) =>
+                            new d.IndexItem({
+                                Content : new d.DocumentIndexItemContent({
+                                    Url      : `/${name}`,
+                                    Document : article.Document,
+                                }),
+                            }),
+                        ),
+                ),
+            }),
+        }),
+    };
+}
