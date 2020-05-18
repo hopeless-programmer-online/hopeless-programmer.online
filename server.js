@@ -12,7 +12,7 @@ const cache = {};
 
 
 const server = http.createServer((req, res) => {
-    const hostPath = require.resolve(`./lib/host`).match(/(.*)\.js$/)[1];
+    const hostPath = require.resolve(`./host`).match(/(.*)\.js$/)[1];
 
     const toClean = new Set;
 
@@ -53,7 +53,7 @@ const server = http.createServer((req, res) => {
     }
 
     try {
-        const host = require(`./lib/host`);
+        const host = require(`./host`);
 
         try {
             // handling 405

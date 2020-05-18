@@ -2,6 +2,10 @@
   "name": "hopeless-programmer.online",
   "version": "0.2.0",
   "description": "Web site",
+  "exports": {
+    "./hosting": "./lib/hosting",
+    "./documenting": "./lib/documenting"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hopeless-programmer-online/hopeless-programmer.online.git"

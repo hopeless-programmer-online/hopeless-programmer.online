@@ -1,6 +1,6 @@
 const path = require(`path`);
-const hosting = require(`./hosting`);
-const documenting = require(`./documenting`);
+const hosting = require(`hopeless-programmer.online/hosting`);
+const documenting = require(`hopeless-programmer.online/documenting`);
 
 
 const d = documenting;
@@ -10,11 +10,11 @@ const s = documenting.shortcuts;
 
 const home = require(`./host/home`);
 const article_require = require(`./host/require`);
-const article_1 = require(`./host/article-1`);
-const article_2 = require(`./host/article-2`);
-const article_3 = require(`./host/article-3`);
-const article_4 = require(`./host/article-4`);
-const article_5 = require(`./host/article-5`);
+// const article_1 = require(`./host/article-1`);
+// const article_2 = require(`./host/article-2`);
+// const article_3 = require(`./host/article-3`);
+// const article_4 = require(`./host/article-4`);
+// const article_5 = require(`./host/article-5`);
 
 
 exports = module.exports = new h.Host({
@@ -33,7 +33,7 @@ exports = module.exports = new h.Host({
                             Document : article_require.Document,
                         }),
                     }),
-                    new d.IndexItem({
+                    /*new d.IndexItem({
                         Content : new d.DocumentIndexItemContent({
                             Url      : `/article_1`,
                             Document : article_1.Document,
@@ -62,16 +62,16 @@ exports = module.exports = new h.Host({
                             Url      : `/article_5`,
                             Document : article_5.Document,
                         }),
-                    }),
+                    }),*/
                 ),
             }),
         }),
         // articles
-        "/article_1" : article_1,
-        "/article_2" : article_2,
-        "/article_3" : article_3,
-        "/article_4" : article_4,
-        "/article_5" : article_5,
+        // "/article_1" : article_1,
+        // "/article_2" : article_2,
+        // "/article_3" : article_3,
+        // "/article_4" : article_4,
+        // "/article_5" : article_5,
         "/require" : article_require,
         // errors
         "/404" : require(`./host/404`),
@@ -98,12 +98,12 @@ exports = module.exports = new h.Host({
         ].reduce((all, name) => ({
             ...all,
             [`/css/${name}.css`] : new h.SASSResource({
-                Path : path.join(__dirname, `../sass/${name}.scss`),
+                Path : path.join(__dirname, `./sass/${name}.scss`),
             }),
         }), {}),
         // media
         [`/favicon.ico`] : new h.FileResource({
-            Path : path.join(__dirname, `../media/favicon.ico`),
+            Path : path.join(__dirname, `./media/favicon.ico`),
         }),
         ...[
             `favicon.ico`,
@@ -118,7 +118,7 @@ exports = module.exports = new h.Host({
         ].reduce((all, name) => ({
             ...all,
             [`/media/${name}`] : new h.FileResource({
-                Path : path.join(__dirname, `../media/${name}`),
+                Path : path.join(__dirname, `./media/${name}`),
             }),
         }), {}),
         // icons
@@ -139,7 +139,7 @@ exports = module.exports = new h.Host({
         ].reduce((all, name) => ({
             ...all,
             [`/media/icons/${name}.svg`] : new h.FileResource({
-                Path : path.join(__dirname, `../media/icons/${name}.svg`),
+                Path : path.join(__dirname, `./media/icons/${name}.svg`),
             }),
         }), {}),
     },

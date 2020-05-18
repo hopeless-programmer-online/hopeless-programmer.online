@@ -1,5 +1,5 @@
-const hosting = require(`../hosting`);
-const documenting = require(`../documenting`);
+const hosting = require(`hopeless-programmer.online/hosting`);
+const documenting = require(`hopeless-programmer.online/documenting`);
 
 
 /**
@@ -10,128 +10,155 @@ const documenting = require(`../documenting`);
 
 const h = hosting;
 const s = documenting.shortcuts;
+const {
+    document,
+    section,
+    paragraph,
+    sentence,
+} = s;
 
 
-const $require = s.f(`require`);
-const $module = s.c(`module`);
-const $exports_v = s.v(`exports`);
-const $exports_p = s.p(`exports`);
-const $main_s = s.lt(`"main"`);
-const exports_s = s.lt(`"exports"`);
-const module_exports = s.phrase([ s.c(`module`), s.lexeme(`.`), s.p(`exports`) ]);
-const module_paths = s.phrase([ s.c(`module`), s.lexeme(`.`), s.p(`paths`) ]);
-const free_variables = `https://uk.wikipedia.org/wiki/%D0%92%D1%96%D0%BB%D1%8C%D0%BD%D1%96_%D1%96_%D0%B7%D0%B2%27%D1%8F%D0%B7%D0%B0%D0%BD%D1%96_%D0%B7%D0%BC%D1%96%D0%BD%D0%BD%D1%96`;
-const builtinModules = s.phrase([ s.f(`require`), s.lexeme(`(`), s.lt(`\`module\``), s.lexeme(`).`), s.p(`builtinModules`) ]);
-const require_doc = `https://nodejs.org/api/modules.html#modules_all_together`;
-const require_source = `https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js`;
-const cpp_addon = `https://nodejs.org/api/addons.html`;
-const json_doc = `https://uk.wikipedia.org/wiki/JSON`;
-const package_json_doc = `https://nodejs.org/en/knowledge/getting-started/npm/what-is-the-file-package-json/`;
-const package_json = s.lt(`package.json`);
-const index = s.lt(`index`);
-const node_modules = s.lt(`node_modules`);
-const node_modules_doc = `https://nodejs.org/api/modules.html#modules_loading_from_node_modules_folders`;
-const global_folders_doc = `https://nodejs.org/api/modules.html#modules_loading_from_the_global_folders`;
-const scope_doc = `https://docs.npmjs.com/misc/scope`;
+const $require = s.js(s.f(`require`));
+// const $module = s.c(`module`);
+// const $exports_v = s.v(`exports`);
+// const $exports_p = s.p(`exports`);
+// const $main_s = s.lt(`"main"`);
+// const exports_s = s.lt(`"exports"`);
+// const module_exports = s.phrase([ s.c(`module`), s.lexeme(`.`), s.p(`exports`) ]);
+// const module_paths = s.phrase([ s.c(`module`), s.lexeme(`.`), s.p(`paths`) ]);
+// const free_variables = `https://uk.wikipedia.org/wiki/%D0%92%D1%96%D0%BB%D1%8C%D0%BD%D1%96_%D1%96_%D0%B7%D0%B2%27%D1%8F%D0%B7%D0%B0%D0%BD%D1%96_%D0%B7%D0%BC%D1%96%D0%BD%D0%BD%D1%96`;
+// const builtinModules = s.phrase([ s.f(`require`), s.lexeme(`(`), s.lt(`\`module\``), s.lexeme(`).`), s.p(`builtinModules`) ]);
+// const require_doc = `https://nodejs.org/api/modules.html#modules_all_together`;
+// const require_source = `https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js`;
+// const cpp_addon = `https://nodejs.org/api/addons.html`;
+// const json_doc = `https://uk.wikipedia.org/wiki/JSON`;
+// const package_json_doc = `https://nodejs.org/en/knowledge/getting-started/npm/what-is-the-file-package-json/`;
+// const package_json = s.lt(`package.json`);
+// const index = s.lt(`index`);
+// const node_modules = s.lt(`node_modules`);
+// const node_modules_doc = `https://nodejs.org/api/modules.html#modules_loading_from_node_modules_folders`;
+// const global_folders_doc = `https://nodejs.org/api/modules.html#modules_loading_from_the_global_folders`;
+// const scope_doc = `https://docs.npmjs.com/misc/scope`;
 
-const note_1 = s.note([
-    s.sentence(`Мається на увазі те, що змінні виглядають так, наче оголошені у зовнішній області коду, а не всередині функції і, відповідно, доступні в будь-якому місці модуля. `),
-    s.sentence(`Не зважаючи на це, ці змінні є унікальними для кожного модуля (про що згадується далі), а тому характеристика `, s.figurative(`глобальні`), ` може бути оманливою. `),
-]);
-const note_2 = s.note([
-    s.sentence(`Аналізуючи код функції `, $require, ` на `, s.link(`github`, require_source), ` мені не вдалось знайти у ньому місце, де б оброблявся випадок звернення до модуля через `, s.lt(`/`), ` і без крапок. `),
-    s.sentence(`Але оскільки в `, s.link(`офіційній документації`, require_doc), ` такий випадок вказаний - я вирішив включити його у статтю. `),
-]);
-const note_3 = s.note([
-    s.sentence(`Часто можна зустріти статті (включно з `, s.link(`офіційною документацією`, node_modules_doc), `), де цей етап називають пошуком в `, node_modules, `. `),
-    s.sentence(`В переважній більшості випакдів подібна термінологія не сильно розходиться з істиною, але повний перелік каталогів все ж не обмежується `, node_modules, ` і, окрім цього, може змінюватись. `),
-    s.sentence(`А тому, зважаючи ще й на те, що для цього переліку каталогів існує окрема стандартизована змінна - `, module_paths, ` - я вважаю є сенс оновити термінологію. `),
-]);
+// const note_1 = s.note([
+//     s.sentence(`Мається на увазі те, що змінні виглядають так, наче оголошені у зовнішній області коду, а не всередині функції і, відповідно, доступні в будь-якому місці модуля. `),
+//     s.sentence(`Не зважаючи на це, ці змінні є унікальними для кожного модуля (про що згадується далі), а тому характеристика `, s.figurative(`глобальні`), ` може бути оманливою. `),
+// ]);
+// const note_2 = s.note([
+//     s.sentence(`Аналізуючи код функції `, $require, ` на `, s.link(`github`, require_source), ` мені не вдалось знайти у ньому місце, де б оброблявся випадок звернення до модуля через `, s.lt(`/`), ` і без крапок. `),
+//     s.sentence(`Але оскільки в `, s.link(`офіційній документації`, require_doc), ` такий випадок вказаний - я вирішив включити його у статтю. `),
+// ]);
+// const note_3 = s.note([
+//     s.sentence(`Часто можна зустріти статті (включно з `, s.link(`офіційною документацією`, node_modules_doc), `), де цей етап називають пошуком в `, node_modules, `. `),
+//     s.sentence(`В переважній більшості випакдів подібна термінологія не сильно розходиться з істиною, але повний перелік каталогів все ж не обмежується `, node_modules, ` і, окрім цього, може змінюватись. `),
+//     s.sentence(`А тому, зважаючи ще й на те, що для цього переліку каталогів існує окрема стандартизована змінна - `, module_paths, ` - я вважаю є сенс оновити термінологію. `),
+// ]);
 
-const code_1 = s.illustration( ...[
-    s.sentence(`Приклад роботи з модулями. `),
-    s.code(
-        [ `// завантаження функції для додавання` ],
-        [ `const add = require("add");` ],
-        [ `` ],
-        [ `// функція для подвоєння числа` ],
-        [ `function double(x) {` ],
-        [ `    return add(x, x);` ],
-        [ `}` ],
-        [ `` ],
-        [ `// функція для потроєння числа` ],
-        [ `function triple(x) {` ],
-        [ `    return add(x, double(x));` ],
-        [ `}` ],
-        [ `` ],
-        [ `// експорт функцій назовні` ],
-        [ `exports.double = double;` ],
-        [ `exports.triple = triple;` ],
-    ),
-]);
-const code_2 = s.illustration( ...[
-    s.sentence(`Перелік вбудованих модулів. `),
-    s.code(
-        [ s.cm(`// список усіх вбудованих модулів NodeJS`) ],
-        [ s.f(`require`), `(`, s.lt(`\`module\``), `).`, s.p(`builtinModules`), `;` ],
-        [ s.cm(`/**`) ],
-        [ s.cm(` * [`) ],
-        [ s.cm(` *     "path",`) ],
-        [ s.cm(` *     "http",`) ],
-        [ s.cm(` *     "fs",`) ],
-        [ s.cm(` *     ...`) ],
-        [ s.cm(` * ]`) ],
-        [ s.cm(` */`) ],
-    ),
-]);
-const code_3 = s.illustration( ...[
-    s.sentence(`Завантаження файлу використовуючи відносний шлях. `),
-    s.code(
-        [ `// модуль з того ж каталогу` ],
-        [ `const neighbor = require("./neighbor");` ],
-        [ `// модуль з вкладеного каталогу` ],
-        [ `const child    = require("./folder/child");` ],
-        [ `// модуль з зовнішнього каталогу` ],
-        [ `const parent   = require("../parent");` ],
-    ),
-]);
-const code_4 = s.illustration( ...[
-    s.sentence(`Завантаження JSON конфігурації за допомогою `, $require, `. `),
-    s.code(
-        [ `// завантаження config.js(on)` ],
-        [ `const config = require("./config");` ],
-        [ `` ],
-        [ `configureSomething(config);` ],
-    ),
-]);
-const code_5 = s.illustration( ...[
-    s.sentence(`Мінімальний вміст `, package_json, `. `),
-    s.code(
-        [ `{` ],
-        [ `    "main": "./src/main"` ],
-        [ `}` ],
-    ),
-]);
-const code_6 = s.illustration( ...[
-    s.sentence(`Приклад того, як може виглядати `, module_paths, ` всередині файлу `, s.lt(`C:/projects/nodejs/script.js`), `. `),
-    s.code(
-        [ `console.log(module.paths);` ],
-        [ s.cm(`/* `) ],
-        [ s.cm(` * [`) ],
-        [ s.cm(` *     "C:/projects/nodejs/node_modules",`) ],
-        [ s.cm(` *     "C:/projects/node_modules",`) ],
-        [ s.cm(` *     "C:/node_modules",`) ],
-        [ s.cm(` *     "C:/Users/Hopeless Programmer/.node_modules",`) ],
-        [ s.cm(` *     "C:/Users/Hopeless Programmer/.node_libraries",`) ],
-        [ s.cm(` * ]`) ],
-        [ s.cm(` */`) ],
-    ),
-]);
+// const code_1 = s.illustration( ...[
+//     s.sentence(`Приклад роботи з модулями. `),
+//     s.code(
+//         [ `// завантаження функції для додавання` ],
+//         [ `const add = require("add");` ],
+//         [ `` ],
+//         [ `// функція для подвоєння числа` ],
+//         [ `function double(x) {` ],
+//         [ `    return add(x, x);` ],
+//         [ `}` ],
+//         [ `` ],
+//         [ `// функція для потроєння числа` ],
+//         [ `function triple(x) {` ],
+//         [ `    return add(x, double(x));` ],
+//         [ `}` ],
+//         [ `` ],
+//         [ `// експорт функцій назовні` ],
+//         [ `exports.double = double;` ],
+//         [ `exports.triple = triple;` ],
+//     ),
+// ]);
+// const code_2 = s.illustration( ...[
+//     s.sentence(`Перелік вбудованих модулів. `),
+//     s.code(
+//         [ s.cm(`// список усіх вбудованих модулів NodeJS`) ],
+//         [ s.f(`require`), `(`, s.lt(`\`module\``), `).`, s.p(`builtinModules`), `;` ],
+//         [ s.cm(`/**`) ],
+//         [ s.cm(` * [`) ],
+//         [ s.cm(` *     "path",`) ],
+//         [ s.cm(` *     "http",`) ],
+//         [ s.cm(` *     "fs",`) ],
+//         [ s.cm(` *     ...`) ],
+//         [ s.cm(` * ]`) ],
+//         [ s.cm(` */`) ],
+//     ),
+// ]);
+// const code_3 = s.illustration( ...[
+//     s.sentence(`Завантаження файлу використовуючи відносний шлях. `),
+//     s.code(
+//         [ `// модуль з того ж каталогу` ],
+//         [ `const neighbor = require("./neighbor");` ],
+//         [ `// модуль з вкладеного каталогу` ],
+//         [ `const child    = require("./folder/child");` ],
+//         [ `// модуль з зовнішнього каталогу` ],
+//         [ `const parent   = require("../parent");` ],
+//     ),
+// ]);
+// const code_4 = s.illustration( ...[
+//     s.sentence(`Завантаження JSON конфігурації за допомогою `, $require, `. `),
+//     s.code(
+//         [ `// завантаження config.js(on)` ],
+//         [ `const config = require("./config");` ],
+//         [ `` ],
+//         [ `configureSomething(config);` ],
+//     ),
+// ]);
+// const code_5 = s.illustration( ...[
+//     s.sentence(`Мінімальний вміст `, package_json, `. `),
+//     s.code(
+//         [ `{` ],
+//         [ `    "main": "./src/main"` ],
+//         [ `}` ],
+//     ),
+// ]);
+// const code_6 = s.illustration( ...[
+//     s.sentence(`Приклад того, як може виглядати `, module_paths, ` всередині файлу `, s.lt(`C:/projects/nodejs/script.js`), `. `),
+//     s.code(
+//         [ `console.log(module.paths);` ],
+//         [ s.cm(`/* `) ],
+//         [ s.cm(` * [`) ],
+//         [ s.cm(` *     "C:/projects/nodejs/node_modules",`) ],
+//         [ s.cm(` *     "C:/projects/node_modules",`) ],
+//         [ s.cm(` *     "C:/node_modules",`) ],
+//         [ s.cm(` *     "C:/Users/Hopeless Programmer/.node_modules",`) ],
+//         [ s.cm(` *     "C:/Users/Hopeless Programmer/.node_libraries",`) ],
+//         [ s.cm(` * ]`) ],
+//         [ s.cm(` */`) ],
+//     ),
+// ]);
 
 
 exports = module.exports = new h.DocumentResource({
-    Document : s.document(s.sentence(`Все що я знаю про: `, $require, `. `), {},
-        s.section(`Модулі. `, ...[
+    Document : document(sentence(`Все що я знаю про: `, $require, `. `), {},
+        section(`Що таке модулі?`, ...[
+            paragraph(...[
+                sentence(`Зазвичай код програми не зберігається в одному-єдиному файлі. `),
+                sentence(`Якщо файлів багато - виникають питання щодо того, як код у різних файлах взаємодіє. `),
+                sentence(`Це може включати в себе порядок виконання файлів, залежності між ними, доступ до змінних оголошених у зовнішніх файлах та інше. `),
+                sentence(`Модулі - це свого роду домовленість про те, як повинна відбуватись ця взаємодія. `),
+            ]),
+            paragraph(...[
+                sentence(`Вцілому, для мови JavaScript є різні погодження щодо систем модулів. `),
+                sentence(`Деякі призначені для браузерів, інші до певної міри платформо-незалежні, а деякі навіть потребують розширення синтаксису. `),
+                // [1] @todo написати про те, що в останніх версія NodeJS також є можливість використовувати модулі ECMAScript
+                sentence(`Наша цільова платформа - NodeJS - використовує систему модулів CommonJS[1], а вже вона визначає потрібну нам функцію - `, $require, `. `),
+            ]),
+            paragraph(...[
+                sentence(`Тут варто наголосити на тому, що хоч формально модулі в NodeJS це модулі CommonJS, не всі CommonJS модулі повинні бути такими, якими вони є в NodeJS. `),
+                sentence(`Це правило працює лише в один бік, а тому надалі говорячи про модулі ми будемо мати на увазі виключно їх реалізацію в NodeJS. `),
+            ]),
+            paragraph(...[
+                sentence(``),
+            ]),
+        ]),
+        /*s.section(`Модулі. `, ...[
             // s.paragraph(...[
             //     // s.sentence(`Існують різні підходи до організації роботи модулів. `),
             //     // s.sentence(`NodeJS використовує модулі CommonJS, а той, в свою чергу, визначає функцію `, $require, `. `),
@@ -334,7 +361,7 @@ exports = module.exports = new h.DocumentResource({
                     ),
                 }),
             ),
-        ]),
+        ]),*/
         // s.section(``, ...[
         //     s.paragraph(...[
         //         s.sentence(``),

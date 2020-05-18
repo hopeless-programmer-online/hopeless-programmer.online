@@ -1,5 +1,5 @@
-const hosting = require(`../hosting`);
-const documenting = require(`../documenting`);
+const hosting = require(`hopeless-programmer.online/hosting`);
+const documenting = require(`hopeless-programmer.online/documenting`);
 
 
 const h = hosting;
