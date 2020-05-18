@@ -65,6 +65,7 @@ figcaption.hp-class-code-header {
     padding: 4pt;
     background-color: palette.$code-background;
     color: white;
+    white-space: pre;
     // flex
     display: flex;
     flex-direction: row;
