@@ -46,6 +46,8 @@ const npm = `https://en.wikipedia.org/wiki/Npm_(software)`;
 const free_variables = `https://uk.wikipedia.org/wiki/%D0%92%D1%96%D0%BB%D1%8C%D0%BD%D1%96_%D1%96_%D0%B7%D0%B2%27%D1%8F%D0%B7%D0%B0%D0%BD%D1%96_%D0%B7%D0%BC%D1%96%D0%BD%D0%BD%D1%96`;
 const nodejs_modules = `https://nodejs.org/api/modules.html`;
 const builtinModules = js( f(`require`), `(`, lt(`"module"`), `).`, p(`builtinModules`) );
+const posix = `https://uk.wikipedia.org/wiki/POSIX`;
+const url = `https://uk.wikipedia.org/wiki/%D0%A3%D0%BD%D1%96%D1%84%D1%96%D0%BA%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B9_%D0%BB%D0%BE%D0%BA%D0%B0%D1%82%D0%BE%D1%80_%D1%80%D0%B5%D1%81%D1%83%D1%80%D1%81%D1%96%D0%B2`;
 // const require_doc = `https://nodejs.org/api/modules.html#modules_all_together`;
 // const require_source = `https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js`;
 // const cpp_addon = `https://nodejs.org/api/addons.html`;
@@ -72,7 +74,7 @@ const note_1 = note([
 //     s.sentence(`А тому, зважаючи ще й на те, що для цього переліку каталогів існує окрема стандартизована змінна - `, module_paths, ` - я вважаю є сенс оновити термінологію. `),
 // ]);
 
-const code_1 = illustration( ...[
+const code_1 = illustration(...[
     sentence(`Приклад роботи з модулями. `),
     js(
         [ `// завантаження функції для додавання` ],
@@ -93,7 +95,7 @@ const code_1 = illustration( ...[
         [ `exports.triple = triple;` ],
     ),
 ]);
-const code_2 = illustration( ...[
+const code_2 = illustration(...[
     sentence(`Перелік вбудованих модулів. `),
     js(
         [ cm(`// список усіх вбудованих модулів NodeJS`) ],
@@ -107,6 +109,21 @@ const code_2 = illustration( ...[
         [ cm(` * ]`) ],
         [ cm(` */`) ],
     ),
+]);
+const explorer_1 = illustration(...[
+    sentence(`Обидва способи запису шляху (з використанням `, js(lt(`/`)), ` або `, js(lt(`\\\\`)), `) підтримуються, але рекомендований `, emphasis(`лише`), ` `, link(`POSIX`, posix), `. `),
+    s.explorer({
+        [`script.js`] : js(
+            [ `// запис шляху до файлу в форматі posix` ],
+            [ `require("./module-a");` ],
+            [ `` ],
+            [ `// запис шляху до файлу в форматі windows` ],
+            [ `require(".\\\\module-a");` ],
+        ),
+        [`module-a.js`] : js(
+            [ `exports = module.exports = "module-a";` ],
+        ),
+    }),
 ]);
 // const code_3 = s.illustration( ...[
 //     s.sentence(`Завантаження файлу використовуючи відносний шлях. `),
@@ -292,6 +309,21 @@ exports = module.exports = new h.DocumentResource({
                 sentence(`Їх повний перелік можна отримати за допомогою функції `, builtinModules, ` `, code_2, `. `),
             ]),
             code_2,
+            paragraph(...[
+                sentence(`Також модуль можна завантажити за допомогою відносного шляху, на кшталт `, js(lt(`"./path/to/module"`)), `. `),
+                sentence(`Такий шлях радять записувати в форматі аналогічному до того, що використовується в `, link(`POSIX`, posix), `, а саме - з використанням косої риски (`, js(lt(`/`)), `) в якості розділювача. `),
+                sentence(`Запис через `, emphasis(`подвійну`), ` обернену косу риску (`, js(lt(`\\\\`)), `) теж спрацює, але його радять уникати `, explorer_1, `. `),
+            ]),
+            explorer_1,
+            paragraph(...[
+                sentence(`Для цієї форми працюють ті ж обмеження, що і для шляхів в файловій системі та `, link(`URL`, url), `. `),
+                sentence(`Зокрема, заборонені символи які використовуються в якості контролюючих, пропуски до або після ідентифікатора, тощо. `),
+                sentence(`Також варто звернути увагу на те, що вказувати розширення файлів не обов'язково і згодом ми з'ясуємо чому. `),
+                sentence(``),
+            ]),
+            paragraph(...[
+                sentence(``),
+            ]),
         ]),
         /*s.section(`Пошук. `, ...[
             s.paragraph(...[
