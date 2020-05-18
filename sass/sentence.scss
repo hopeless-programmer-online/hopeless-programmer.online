@@ -8,7 +8,7 @@ span.hp-class-sentence {
     }
 }
 
-p {
+p, ul {
     span.hp-class-sentence {
         &:hover {
             background-color: aliceblue;
