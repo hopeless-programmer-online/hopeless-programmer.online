@@ -26,7 +26,7 @@
   },
   "scripts": {
     "clean": "rimraf lib",
-    "build-typescript": "node build.js",
+    "build-typescript": "tsc",
     "build-only": "npm run build-typescript",
     "build": "npm run clean && npm run build-only",
     "test-only": "jest",

@@ -2,7 +2,7 @@ const fs = require(`fs`);
 const path = require(`path`);
 const http = require(`http`);
 const http_status = require(`http-status`);
-const hosting = require(`./src/hosting`);
+const hosting = require(`./lib/hosting`);
 
 
 const { NotFoundError } = hosting;
@@ -12,7 +12,7 @@ const cache = {};
 
 
 const server = http.createServer((req, res) => {
-    const hostPath = require.resolve(`./src/host`).match(/(.*)\.js$/)[1];
+    const hostPath = require.resolve(`./lib/host`).match(/(.*)\.js$/)[1];
 
     const toClean = new Set;
 
@@ -53,7 +53,7 @@ const server = http.createServer((req, res) => {
     }
 
     try {
-        const host = require(`./src/host`);
+        const host = require(`./lib/host`);
 
         try {
             // handling 405
