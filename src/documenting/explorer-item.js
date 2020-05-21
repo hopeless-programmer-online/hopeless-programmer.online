@@ -107,7 +107,7 @@ class ExplorerItem {
     }
     /**
      * @public
-     * @type   {string}
+     * @type   {number}
      */
     get Level() {
         const level = this.__level;
@@ -120,7 +120,7 @@ class ExplorerItem {
     }
     /**
      * @private
-     * @type    {string}
+     * @type    {number}
      */
     set __Level(level) {
         if (Number.isInteger(level) && level >= 0); else {

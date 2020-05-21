@@ -82,6 +82,7 @@ exports = module.exports = new h.Host({
             `sass`,
             `scss`,
             `xml`,
+            `folder`,
             `default`,
         ].reduce((all, name) => ({
             ...all,
