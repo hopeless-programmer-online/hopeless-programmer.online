@@ -40,7 +40,7 @@ class CodeFileExplorerItemContent extends FileExplorerItemContent {
         return [
             <input
                 id={id}
-                name="selection"
+                name={`hp-explorer-${this.Item.Explorer.Index}-selection`}
                 type="radio"
             />,
             <label for={id}>
