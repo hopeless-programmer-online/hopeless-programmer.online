@@ -5,6 +5,7 @@ const documenting = require(`hopeless-programmer.online/documenting`);
 /**
  * @todo правила запису ідентифіката модуля
  * @todo різниця в поведінці між require(`x`) (package.exports) та require(`./x`) (package.main)
+ * @todo https://www.npmjs.com/package/validate-npm-package-name
  */
 
 
@@ -48,6 +49,7 @@ const nodejs_modules = `https://nodejs.org/api/modules.html`;
 const builtinModules = js( f(`require`), `(`, lt(`"module"`), `).`, p(`builtinModules`) );
 const posix = `https://uk.wikipedia.org/wiki/POSIX`;
 const url = `https://uk.wikipedia.org/wiki/%D0%A3%D0%BD%D1%96%D1%84%D1%96%D0%BA%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B9_%D0%BB%D0%BE%D0%BA%D0%B0%D1%82%D0%BE%D1%80_%D1%80%D0%B5%D1%81%D1%83%D1%80%D1%81%D1%96%D0%B2`;
+const scope = `https://docs.npmjs.com/misc/scope`;
 // const require_doc = `https://nodejs.org/api/modules.html#modules_all_together`;
 // const require_source = `https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js`;
 // const cpp_addon = `https://nodejs.org/api/addons.html`;
@@ -59,6 +61,8 @@ const node_modules = js(lt(`node_modules`));
 // const node_modules_doc = `https://nodejs.org/api/modules.html#modules_loading_from_node_modules_folders`;
 // const global_folders_doc = `https://nodejs.org/api/modules.html#modules_loading_from_the_global_folders`;
 // const scope_doc = `https://docs.npmjs.com/misc/scope`;
+const slash = js(lt(`/`));
+const validate_npm = `https://www.npmjs.com/package/validate-npm-package-name`;
 
 const note_1 = note([
     sentence(`Мається на увазі те, що змінні виглядають так, наче оголошені у зовнішній області коду, а не всередині функції і, відповідно, доступні в будь-якому місці модуля. `),
@@ -311,7 +315,7 @@ exports = module.exports = new h.DocumentResource({
             code_2,
             paragraph(...[
                 sentence(`Також модуль можна завантажити за допомогою відносного шляху, на кшталт `, js(lt(`"./path/to/module"`)), `. `),
-                sentence(`Такий шлях радять записувати в форматі аналогічному до того, що використовується в `, link(`POSIX`, posix), `, а саме - з використанням косої риски (`, js(lt(`/`)), `) в якості розділювача. `),
+                sentence(`Такий шлях радять записувати в форматі аналогічному до того, що використовується в `, link(`POSIX`, posix), `, а саме - з використанням косої риски (`, slash, `) в якості розділювача. `),
                 sentence(`Запис через `, emphasis(`подвійну`), ` обернену косу риску (`, js(lt(`\\\\`)), `) теж спрацює, але його радять уникати `, explorer_1, `. `),
             ]),
             explorer_1,
@@ -319,10 +323,52 @@ exports = module.exports = new h.DocumentResource({
                 sentence(`Для цієї форми працюють ті ж обмеження, що і для шляхів в файловій системі та `, link(`URL`, url), `. `),
                 sentence(`Зокрема, заборонені символи які використовуються в якості контролюючих, пропуски до або після ідентифікатора, тощо. `),
                 sentence(`Також варто звернути увагу на те, що вказувати розширення файлів не обов'язково і згодом ми з'ясуємо чому. `),
-                sentence(``),
+                sentence(`Як можна було помітити, вказувати розширення файлу не обов'язково і згодом ми торкнемось цього питання. `),
+                sentence(`Ще варто знати що завантажувати таким чином можна не лише файли. `),
             ]),
             paragraph(...[
-                sentence(``),
+                sentence(`Остання форма запису ідентифікатора модуля - це його повне ім'я. `),
+                sentence(`Воно може складатись з декількох частин в певному порядку, а саме: `),
+            ]),
+            list(...[
+                [
+                    sentence(`Префікс `, link(`області`, scope), `. `),
+                    sentence(`Ця частина починається з символу `, js(lt(`@`)), `, за яким йде ідентифікато. `),
+                    sentence(`Прикладом такого префікса може бути `, js(lt(`@types`)), `, `, js(lt(`@babel`)), ` або `, js(lt(`@my-scope`)), `.`),
+                ],
+                [
+                    sentence(`Ідентифікатор модуля. `),
+                    sentence(`Наприклад, `, js(lt(`typescript`)), ` або `, js(lt(`mime-types`)), `. `),
+                ],
+                [
+                    sentence(`Шлях до підмодуля, який складається з ідетифікаторів розділених косою рискою (`, slash, `). `),
+                    sentence(`Це може бути як єдиний ідентифікатор (наприклад, `, js(lt(`submodule`)), `) так і декілька (наприклад, `, js(lt(`path/to/submodule`)), `). `),
+                ],
+            ]),
+            paragraph(...[
+                sentence(`Префікс області та шлях до підмодуля не є обов'язковими. `),
+                sentence(`Усі складові з'єднуються між собою за допомогою косої риски (`, slash, `) і разом нагадують щось на кшталт `, js(lt(`@my-scope/my-module/my-submodule/my-class`)), `. `),
+                sentence(`До ідентифікаторів з яких складаються ці частини висувається ряд вимог, а саме:`),
+            ]),
+            list(...[
+                sentence(`Повний ідентифікатор повинен бути не порожнім. `),
+                sentence(`Довжина повного ідентифікатора повинна не перевищувати 214 симолів. `),
+                sentence(`Літери повинні бути записані лише в нижньому регістрі. `),
+                sentence(`Повний ідентифікатор не повинен містити символів, які не дозволені при записі `, link(`URL`, url), ` (оскільки ім'я може бути використане в якості URL). `),
+                sentence(`Ідентифікатор не повинен починатись з символів `, js(lt(`.`)), ` та `, js(lt(`_`)), `. `),
+                sentence(`Ідентифікатор не повинен містити пропусків на початку, або в кінці. `),
+                [
+                    sentence(`Ідентифікатор повинен відрізнятись від зарезервованих імен, таких як:`),
+                    list(...[
+                        sentence(js(lt(`node.js`)), ` та `, js(lt(`io.js`)), `. `),
+                        sentence(`Вбудовані модулі NodeJS (`, js(lt(`path`)), `, `, js(lt(`fs`)), ` та інші). `),
+                        sentence(`Зарезервовані назви, наприклад `, js(lt(`node_modules`)), ` або `, js(lt(`favicon.ico`)), `. `),
+                    ]),
+                ],
+            ]),
+            paragraph(...[
+                sentence(`Задля спрощення перевірки імені модуля на коректність існує спеціальний `, link(`пакет npm`, validate_npm), `. `),
+                sentence(`З його допомогою можна перевірити чи відповідає ім'я вашого пакету усім необхідним вимогам. `),
             ]),
         ]),
         /*s.section(`Пошук. `, ...[
