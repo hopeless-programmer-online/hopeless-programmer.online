@@ -73,6 +73,7 @@ class DirectoryExplorerItem extends ExplorerItem {
 
         return [
             <label>
+                {``.padStart(this.Level, `-`)}
                 <figcaption class="hp-class-code-header">
                     <img alt={icon} src={`./media/icons/${icon}.svg`} />
                 </figcaption>
