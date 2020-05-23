@@ -37,7 +37,7 @@ const $require = js(f(`require`));
 const $module = js(c(`module`));
 const $exports_v = js(v(`exports`));
 const $exports_p = js(p(`exports`));
-// const $main_s = s.lt(`"main"`);
+const main = s.code(`json`, p(`"main"`));
 // const exports_s = s.lt(`"exports"`);
 const module_exports = js( c(`module`), `.`, p(`exports`) );
 // const module_paths = s.phrase([ s.c(`module`), s.lexeme(`.`), s.p(`paths`) ]);
@@ -52,22 +52,29 @@ const url = `https://uk.wikipedia.org/wiki/%D0%A3%D0%BD%D1%96%D1%84%D1%96%D0%BA%
 const scope = `https://docs.npmjs.com/misc/scope`;
 // const require_doc = `https://nodejs.org/api/modules.html#modules_all_together`;
 // const require_source = `https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js`;
-// const cpp_addon = `https://nodejs.org/api/addons.html`;
-// const json_doc = `https://uk.wikipedia.org/wiki/JSON`;
+const cpp_addon = `https://nodejs.org/api/addons.html`;
+const json_doc = `https://uk.wikipedia.org/wiki/JSON`;
 // const package_json_doc = `https://nodejs.org/en/knowledge/getting-started/npm/what-is-the-file-package-json/`;
 const package_json = js(lt(`package.json`));
-// const index = s.lt(`index`);
+const index = js(lt(`index`));
 const node_modules = js(lt(`node_modules`));
 // const node_modules_doc = `https://nodejs.org/api/modules.html#modules_loading_from_node_modules_folders`;
 // const global_folders_doc = `https://nodejs.org/api/modules.html#modules_loading_from_the_global_folders`;
 // const scope_doc = `https://docs.npmjs.com/misc/scope`;
 const slash = js(lt(`/`));
 const validate_npm = `https://www.npmjs.com/package/validate-npm-package-name`;
+const filename = js(v(`__filename`));
+const dirname = js(v(`__dirname`));
 
 const note_1 = note([
     sentence(`Мається на увазі те, що змінні виглядають так, наче оголошені у зовнішній області коду, а не всередині функції і, відповідно, доступні в будь-якому місці модуля. `),
     sentence(`Не зважаючи на це, ці змінні є унікальними для кожного модуля (про що згадується далі), а тому характеристика `, figurative(`глобальні`), ` може бути оманливою. `),
 ]);
+const note_2 = note([
+    sentence(`Це легко перевірити, якщо розмістити в каталозі обидва файли. `),
+    sentence(`У цьому випадку `, $require, ` проігнорує файл без розширення. `),
+]);
+{
 // const note_2 = s.note([
 //     s.sentence(`Аналізуючи код функції `, $require, ` на `, s.link(`github`, require_source), ` мені не вдалось знайти у ньому місце, де б оброблявся випадок звернення до модуля через `, s.lt(`/`), ` і без крапок. `),
 //     s.sentence(`Але оскільки в `, s.link(`офіційній документації`, require_doc), ` такий випадок вказаний - я вирішив включити його у статтю. `),
@@ -77,6 +84,7 @@ const note_1 = note([
 //     s.sentence(`В переважній більшості випакдів подібна термінологія не сильно розходиться з істиною, але повний перелік каталогів все ж не обмежується `, node_modules, ` і, окрім цього, може змінюватись. `),
 //     s.sentence(`А тому, зважаючи ще й на те, що для цього переліку каталогів існує окрема стандартизована змінна - `, module_paths, ` - я вважаю є сенс оновити термінологію. `),
 // ]);
+}
 
 const code_1 = illustration(...[
     sentence(`Приклад роботи з модулями. `),
@@ -151,6 +159,20 @@ const explorer_2 = illustration(...[
         },
     }),
 ]);
+const explorer_3 = illustration(...[
+    sentence(`Завантаження файлу `, index, ` з каталогу. `),
+    s.explorer({
+        [`script.js`] : js(
+            [ `require("./my-package"); // 5` ],
+        ),
+        [`my-package`] : {
+            [`index.js`] : js(
+                [ `exports = module.exports = 5;` ],
+            ),
+        },
+    }),
+]);
+{
 // const code_3 = s.illustration( ...[
 //     s.sentence(`Завантаження файлу використовуючи відносний шлях. `),
 //     s.code(
@@ -194,7 +216,7 @@ const explorer_2 = illustration(...[
 //         [ s.cm(` */`) ],
 //     ),
 // ]);
-
+}
 
 exports = module.exports = new h.DocumentResource({
     Document : document(sentence(`Все що я знаю про: `, $require, `. `), {},
@@ -407,7 +429,7 @@ exports = module.exports = new h.DocumentResource({
                 [
                     // [3] пояснити, що тут не мається на увазі контекст виконання
                     sentence(`Створення контексту[3]. `),
-                    sentence(`Кожен модуль має унікальний котекст зі своїми глобальними змінними. `),
+                    sentence(`Як ми знаємо, кожен модуль має унікальний котекст зі своїми глобальними змінними. `),
                     sentence(`Головне завдання цього етапу - створити цей контекст і правильно його налаштувати. `),
                 ],
                 [
@@ -423,12 +445,57 @@ exports = module.exports = new h.DocumentResource({
             paragraph(...[
                 sentence(`Серед цих етапів пошук є одним з найбільш заплутаних. `),
                 sentence(`Він сильно залежить від того, який ідентифікатор був переданий в `, $require, `: ідентифікатор вбудованого модуля, відносний шлях чи лише назва модуля. `),
-                sentence(`Вбудовані модулі завантажуються одразу ж, без будь якого додаткового пошуку, а тому ми продовжимо розглядати лише випадок з відносним шляхом та назвою. `),
+                sentence(`Вбудовані модулі завантажуються одразу ж, без будь якого додаткового пошуку, а тому ми продовжимо розглядати лише випадки з відносним шляхом та назвою. `),
                 sentence(`Єдине що варто пам'ятати - це те, що якщо ідентифікатор переданий в `, $require, ` збігається з назвою вбудованого модуля (перелік `, builtinModules, `) - то подальший аналіз і пошук не проводяться. `),
                 sentence(`Зокрема це означає те, що навіть якщо назвати власний модуль або пакет таким іменем, то алгоритм просто проігнорує його `, explorer_2, `. `),
             ]),
             explorer_2,
+        ]),
+        section(`Завантаження з використанням відносного шляху.`, ...[
             paragraph(...[
+                sentence(`Як було згадано вище, якщо ідентифікатор модуля починається зі стрічок `, js(lt(`"/"`)), `, `, js(lt(`"./"`)), ` або `, js(lt(`"../"`)), `, то завантаження буде проводитись так, наче ідентифікатор це шлях до модуля відносно того файлу, з якого проводиться виклик `, $require, `. `),
+                sentence(`Якщо ж бути точнішим, то можна сказати що завантаження відбувається відносно каталогу, в якому розміщується файл. `),
+                sentence(`Шлях до самого файлу зберігається в глобальній змінній `, filename, `, а до файлу - в `, dirname, `. `),
+            ]),
+            paragraph(...[
+                sentence(`Наприклад, якщо виклик відбувається з файлу `, js(lt(`"C:/projects/script.js"`)), `, то `, filename, ` буде рівна `, js(lt(`"C:/projects/script.js"`)), `, а `, dirname, `, відповідно, рівна `, js(lt(`"C:/projects"`)), `. `),
+                sentence(`Таким чином, якщо в цьому файлі викликати `, $require, ` і передати в нього шлях `, js(lt(`"./path/to/module"`)), `, то шлях до модуля який потрібно завантажити буде рівний `, js(lt(`"C:/projects/path/to/module"`)), `. `),
+            ]),
+            paragraph(...[
+                sentence(`Маючи повний шлях до модуля, `, $require, ` буде спочатку намагатись завантажити його як файл, а потім як каталог. `),
+                sentence(`Якщо розширення не вказане, то на етапі завантаження файлу `, $require, ` буде намагатись встановити його самотужки, перебираючи набір відомих розширень. `),
+                // sentence(`Для цього, спочатку функція послідовно перевірить, чи існують за вказаним шляхом файли з наступними розширеннями:`),
+                sentence(`Так, якщо ми звертаємось до модуля `, js(lt(`"./memes"`)), `, то алгоритм буде намагатись завантажити наступні файли:`),
+            ]),
+            list(...[
+                sentence(`Файл `, emphasis(`без розширення`), `: `, js(lt(`"./memes"`)), `, інтерпретований як JavaScript. `),
+                sentence(`Файл з розширення `, js(lt(`.js`)), `: `, js(lt(`"./memes.js"`)), `, інтерпретований як JavaScript. `),
+                sentence(`Файл з розширення `, js(lt(`.json`)), `: `, js(lt(`"./memes.json"`)), `, інтерпретований як `, link(`JSON`, json_doc), `. `),
+                sentence(`Файл з розширення `, js(lt(`.node`)), `: `, js(lt(`"./memes.node"`)), `, інтерпретований як `, link(`модуль С++`, cpp_addon), `. `),
+            ]),
+            paragraph(...[
+                sentence(`Важливо розуміти, що `, $require, ` додає розширення лише тоді, коли воно не вказано, а не просто `, figurative(`дописує`), ` його до шляху. `),
+                sentence(`Тому, у випадку якщо ми завантажуємо `, js(lt(`"./memes.json"`)), ` - `, $require, ` звернеться саме до нього, а не до файлу `, js(lt(`"./memes"`)), ` без розширення`, note_2, `. `),
+                sentence(``),
+            ]),
+            paragraph(...[
+                sentence(`Якщо потрібного файлу не знайдено - `, $require, ` перейде до завантаження каталогу. `),
+                sentence(`На цьому етапі функція використовує один особливий файл - `, package_json, `, але ми почнемо з огляду того випадку, коли цей файл відсутній. `),
+                sentence(`Отож, якщо в потрібному каталозі немає такого файлу - алгоритм спробує завантажити файл `, index, ` `, explorer_3, `. `),
+                sentence(`Майже як і у випадку з завантаженням файлу, тут `, $require, ` буде по черзі перебирати відомі розширення. `),
+                sentence(`Єдина відмінність - буде `, emphasis(`пропущений`), ` файл без розширення. `),
+            ]),
+            explorer_3,
+            paragraph(...[
+                sentence(`Якщо ж `, package_json, ` на місці - функція інтерпретує його вміст як JSON і звернеться до поля `, main, `. `),
+                sentence(`Вміст цього поля - це шлях до файлу який потрібно завантажити, вказаний відносно каталогу. `),
+                sentence(`Його бажано, хоча й не обов'язково починати зі стрічки `, js(lt(`"./"`)), ` або `, js(lt(`"../"`)), `. `),
+                sentence(`Також важливо, що це саме шлях до файлу, тому посилатись таким чином на інший каталог не вийде. `),
+                sentence(`Якщо ж поля, або файлу за вказаним шляхом не існує - то `, $require, ` почне завантажувати файл `, index, `. `),
+                sentence(`Якщо ж і його нема - буде кинута помилка. `),
+            ]),
+            paragraph(...[
+                sentence(``),
                 sentence(``),
             ]),
         ]),
