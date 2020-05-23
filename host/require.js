@@ -38,9 +38,10 @@ const $module = js(c(`module`));
 const $exports_v = js(v(`exports`));
 const $exports_p = js(p(`exports`));
 const main = s.code(`json`, p(`"main"`));
-// const exports_s = s.lt(`"exports"`);
+const exports_s = s.code(`json`, lt(`"exports"`));
+const name = s.code(`json`, lt(`"name"`));
 const module_exports = js( c(`module`), `.`, p(`exports`) );
-// const module_paths = s.phrase([ s.c(`module`), s.lexeme(`.`), s.p(`paths`) ]);
+const module_paths = js( c(`module`), `.`, p(`paths`) );
 const common_js = `http://wiki.commonjs.org/wiki/Modules/1.1.1`;
 const es_modules = `https://nodejs.org/api/esm.html`;
 const npm = `https://en.wikipedia.org/wiki/Npm_(software)`;
@@ -50,7 +51,7 @@ const builtinModules = js( f(`require`), `(`, lt(`"module"`), `).`, p(`builtinMo
 const posix = `https://uk.wikipedia.org/wiki/POSIX`;
 const url = `https://uk.wikipedia.org/wiki/%D0%A3%D0%BD%D1%96%D1%84%D1%96%D0%BA%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B9_%D0%BB%D0%BE%D0%BA%D0%B0%D1%82%D0%BE%D1%80_%D1%80%D0%B5%D1%81%D1%83%D1%80%D1%81%D1%96%D0%B2`;
 const scope = `https://docs.npmjs.com/misc/scope`;
-// const require_doc = `https://nodejs.org/api/modules.html#modules_all_together`;
+const require_doc = `https://nodejs.org/api/modules.html#modules_all_together`;
 // const require_source = `https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js`;
 const cpp_addon = `https://nodejs.org/api/addons.html`;
 const json_doc = `https://uk.wikipedia.org/wiki/JSON`;
@@ -65,6 +66,7 @@ const slash = js(lt(`/`));
 const validate_npm = `https://www.npmjs.com/package/validate-npm-package-name`;
 const filename = js(v(`__filename`));
 const dirname = js(v(`__dirname`));
+const load_self_reference = js(lt(`LOAD_SELF_REFERENCE`));
 
 const note_1 = note([
     sentence(`Мається на увазі те, що змінні виглядають так, наче оголошені у зовнішній області коду, а не всередині функції і, відповідно, доступні в будь-якому місці модуля. `),
@@ -499,6 +501,47 @@ exports = module.exports = new h.DocumentResource({
                 sentence(`Також користувачу абсолютно не потрібно знати лежить за вказаним шляхом файл, чи каталог. `),
                 sentence(`Такий підхід може здатись дивним, але його можна використати для заміни файла на каталог, або `, js(lt(`.js`)), ` файла на `, js(lt(`.json`)), ` без необхідності змінювати ідентифікатори всередині `, $require, `. `),
                 sentence(`Проте варто бути обережним, адже необачно названі або розміщені в неправильному місці файли можуть призвести до неочікуваної для користувача поведінки. `),
+            ]),
+        ]),
+        section(sentence(`Що означає `, load_self_reference, ` ?`), ...[
+            paragraph(...[
+                sentence(`В офіційній документації, а саме в `, s.link(`блоці псевдокоду`, require_doc), ` що описує алгоритм роботи `, $require, `, можна знайти цікаву функцію: `, load_self_reference, `. `),
+                sentence(`Комусь - а особливо комусь без досвіду роботи з модулями в NodeJS - вона може здатись незрозумілою і на це є вагомі причини. `),
+                sentence(`Зараз ми спробуємо краще зрозуміти її, але перед цим зробимо один важливий висновок: якщо хочете зрозуміло і однозначно описати якийсь алгоритм - не вимахуйтесь і опишіть його на JavaScript. `),
+            ]),
+            paragraph(...[
+                sentence(load_self_reference, ` є першим етапом для завантаження модулів, ідентифікатори яких записані в формі імені, а не відносного шляху. `),
+                sentence(`Цей етап створений для того, щоб ми могли завантажити наш модуль через власне ім'я всередині нього ж самого. `),
+                sentence(`Функція припускає, що файл з якого відбувається виклик `, $require, ` сам є частиною якогось модуля-каталогу. `),
+                sentence(`В першу чергу вона шукає місце де знаходиться `, package_json, `, рухаючись вгору по ієрархії каталогів. `),
+                sentence(`Якщо їй не вдається знайти такий файл, або якщо у ньому відсутнє поле `, exports_s, ` - функція передає керування далі, до алгоритму завантаження модулів з `, module_paths, ` про який ми поговоримо згодом. `),
+            ]),
+            paragraph(...[
+                sentence(`Якщо ж `, package_json, ` і `, exports_s, ` в ньому присутні - функція також перевіряє поле `, name, `. `),
+                sentence(`Це поле визначає назву пакету npm. `),
+                sentence(`Якщо вміст цього поля збігається з початком ідентифікатора що був переданий в `, $require, ` - ми на вірному шляху. `),
+                sentence(`Розглянемо кілька таких прикладів:`),
+            ]),
+            list(...[
+                [
+                    sentence(js(f(`require`), `(`, lt(`"my-module"`), `)`), ` та `, js(lt(`"name"`), ` = `, lt(`"my-module"`)), `. `),
+                ],
+                [
+                    sentence(js(f(`require`), `(`, lt(`"@my-scope/my-module"`), `)`), ` та `, js(lt(`"name"`), ` = `, lt(`"@my-scope/my-module"`)), `. `),
+                ],
+                [
+                    sentence(js(f(`require`), `(`, lt(`"@my-scope/my-module/path/to/sub-module"`), `)`), ` та `, js(lt(`"name"`), ` = `, lt(`"@my-scope/my-module"`)), `. `),
+                ],
+            ]),
+            paragraph(...[
+                sentence(`У всіх цих прикладах поле та ідентифікатор збігаються до певного місця. `),
+                sentence(`Це означає, що модуль який нам потрібен або і є цим самим модулем, або є його складовою частиною. `),
+                sentence(`Так, для випадку `, js(lt(`"@my-scope/my-module/path/to/sub-module"`)), ` нам потрібен саме під-модуль `, js(lt(`path/to/sub-module`)), `, який міститься всередині `, js(lt(`"@my-scope/my-module"`)), `. `),
+                sentence(`Тут у гру вступає поле `, exports_s, ` з `, package_json, `, яке визначає які саме під-модулі нашого модуля можна завантажувати ззовні, а які ні. `),
+            ]),
+            paragraph(...[
+                sentence(``),
+                sentence(``),
             ]),
         ]),
         /*s.section(`Пошук. `, ...[
