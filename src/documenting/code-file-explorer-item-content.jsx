@@ -34,7 +34,8 @@ class CodeFileExplorerItemContent extends FileExplorerItemContent {
      * @returns   {html.Element | Array<html.Element>}
      */
     _toHtml() {
-        const id = `hp-id-explorer-${this.Item.Explorer.Index}-item-${this.Item.Index}`;
+        const index = this.Item.Index;
+        const id = `hp-id-explorer-${this.Item.Explorer.Index}-item-${index}`;
         const header = deduceHeader(this.Item.Name, false, this.Code.Language); // @todo
 
         return [
@@ -42,6 +43,7 @@ class CodeFileExplorerItemContent extends FileExplorerItemContent {
                 id={id}
                 name={`hp-explorer-${this.Item.Explorer.Index}-selection`}
                 type="radio"
+                checked={index === 1 ? `checked` : ``}
             />,
             <label for={id}>
                 {``.padStart(this.Item.Level, `-`)}
