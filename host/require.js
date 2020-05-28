@@ -53,7 +53,7 @@ const posix = `https://uk.wikipedia.org/wiki/POSIX`;
 const url = `https://uk.wikipedia.org/wiki/%D0%A3%D0%BD%D1%96%D1%84%D1%96%D0%BA%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B9_%D0%BB%D0%BE%D0%BA%D0%B0%D1%82%D0%BE%D1%80_%D1%80%D0%B5%D1%81%D1%83%D1%80%D1%81%D1%96%D0%B2`;
 const scope = `https://docs.npmjs.com/misc/scope`;
 const require_doc = `https://nodejs.org/api/modules.html#modules_all_together`;
-// const require_source = `https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js`;
+const require_source = `https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js`;
 const cpp_addon = `https://nodejs.org/api/addons.html`;
 const json_doc = `https://uk.wikipedia.org/wiki/JSON`;
 // const package_json_doc = `https://nodejs.org/en/knowledge/getting-started/npm/what-is-the-file-package-json/`;
@@ -74,6 +74,9 @@ const $this = js(kw(`this`));
 const $arguments = js(kw(`arguments`));
 const $return = js(kw(`return`));
 const new_target = js(kw(`new`), `.`, p(`target`));
+const vm_runInThisContext = js(v(`vm`), `.`, f(`runInThisContext`));
+const vm_runInThisContext_doc = `https://nodejs.org/api/vm.html#vm_vm_runinthiscontext_code_options`;
+const $eval = js(f(`eval`));
 
 const note_1 = note([
     sentence(`Мається на увазі те, що змінні виглядають так, наче оголошені у зовнішній області коду, а не всередині функції і, відповідно, доступні в будь-якому місці модуля. `),
@@ -156,6 +159,14 @@ const code_4 = illustration( ...[
         [ `` ],
         [ `exports = module.exports = "my-module";` ],
         [ `});` ],
+    ),
+]);
+const code_5 = illustration( ...[
+    sentence(`Всередині модуля `, $this, ` посилається на той же об'єкт, що й `, module_exports, `. `),
+    js(
+        [ `console.log(this === module.exports); // true` ],
+        [ `` ],
+        [ `this.kek = "kek"; // працює` ],
     ),
 ]);
 const explorer_1 = illustration(...[
@@ -684,8 +695,13 @@ exports = module.exports = new h.DocumentResource({
                 sentence(`А тому, у разі виникнення питань, можна просто уявити що б сталось якби на місці модуля була відповідна функція. `),
             ]),
             paragraph(...[
+                sentence(`Отримана стрічка перетворюється у функцію `, link(`за допомогою`, vm_runInThisContext_doc), ` `, vm_runInThisContext, `. `),
+                sentence(`На відміну від `, $eval, ` це не дає коду можливість звернутись до локальних змінних, що забезпечує захист від можливих конфліктів з тілом функції. `),
+                sentence(`Я не знайшов про це згадок в `, link(`офіційній документації`, nodejs_modules), `, проте виходячи з `, link(`оригінального коду`, require_source), ` під час виклику тіла модуля в якості `, $this, ` передається `, module_exports, `. `),
+                sentence(`Це означає, що потенційно можливо використовувати `, $this, ` для експорту `, code_5, `, хоча це може не сподобатись деяким розробникам або середовищам. `),
                 sentence(``),
             ]),
+            code_5,
         ]),
     ),
 });
