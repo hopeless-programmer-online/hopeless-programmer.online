@@ -68,6 +68,12 @@ const validate_npm = `https://www.npmjs.com/package/validate-npm-package-name`;
 const filename = js(v(`__filename`));
 const dirname = js(v(`__dirname`));
 const load_self_reference = js(lt(`LOAD_SELF_REFERENCE`));
+const utf8 = `https://uk.wikipedia.org/wiki/UTF-8`;
+const shebang = `https://uk.wikipedia.org/wiki/%D0%A8%D0%B5%D0%B1%D0%B0%D0%BD%D0%B3_(Unix)`;
+const $this = js(kw(`this`));
+const $arguments = js(kw(`arguments`));
+const $return = js(kw(`return`));
+const new_target = js(kw(`new`), `.`, p(`target`));
 
 const note_1 = note([
     sentence(`Мається на увазі те, що змінні виглядають так, наче оголошені у зовнішній області коду, а не всередині функції і, відповідно, доступні в будь-якому місці модуля. `),
@@ -138,6 +144,18 @@ const code_3 = illustration( ...[
         [ cm(` *     "C:/Users/Hopeless Programmer/.node_libraries",`) ],
         [ cm(` * ]`) ],
         [ cm(` */`) ],
+    ),
+]);
+const code_4 = illustration( ...[
+    sentence(`Приблизно так буде виглядати код модуля перед виконанням, загорнутий в функцію-обгортку. `),
+    js(
+        [ `(function (exports, require, module, __filename, __dirname) { ` ],
+        [ `const other = require("other-module");` ],
+        [ `` ],
+        [ `console.log("my module!");` ],
+        [ `` ],
+        [ `exports = module.exports = "my-module";` ],
+        [ `});` ],
     ),
 ]);
 const explorer_1 = illustration(...[
@@ -642,6 +660,28 @@ exports = module.exports = new h.DocumentResource({
             ]),
             paragraph(...[
                 sentence(``),
+            ]),
+            paragraph(...[
+                sentence(``),
+            ]),
+        ]),
+        section(`Створення контексту модуля.`, ...[
+            paragraph(...[
+                sentence(`Маючи шлях до файлу, `, $require, ` завантажує його як стрічку з кодуванням `, link(`utf-8`, utf8), `. `),
+                sentence(`За наявності, з файлу видаляється `, link(`шебанг`, shebang), `. `),
+                sentence(`Тепер, коли код модуля завантажено, потрібно виконати його з власними глобальними змінними. `),
+                sentence(`Усього їх п'ять: `, $exports_v, `, `, $require, `, `, $module, `, `, filename, ` та `, dirname, `. `),
+                sentence(`Для цього, до стрічки завантаженої з файлу додається `, figurative(`обгортка`), `, що містить усі згадані вище змінні в якості аргументів і перетворює стрічку на код функції `, code_4, `. `),
+            ]),
+            code_4,
+            paragraph(...[
+                sentence(`Таким чином модуль це по суті одна велика функція. `),
+                sentence(`Він виконується як функція, приймає аргументи як функція, а також містить службові слова `, $this, `, `, $arguments, `, `, $return, ` та `, new_target, `. `),
+                sentence(`Це пояснює той факт, що ми не можемо перекрити змінні на кшталт `, $require, ` або `, filename, `. `),
+                sentence(`Вони, будучи аргументами, вже оголошені і можуть бути перекриті лише в окремому блоці. `),
+                sentence(`Ці нюнаси, як, наприклад, можливість передчасного закінчення виконання тіла модуля за допомогою `, $return, `, рідко експлуатують, але знати про них корисно. `),
+                sentence(`На майбутнє достатньо пам'ятати лише про те, що тіла модулів поводяться як звичайні функції. `),
+                sentence(`А тому, у разі виникнення питань, можна просто уявити що б сталось якби на місці модуля була відповідна функція. `),
             ]),
             paragraph(...[
                 sentence(``),
