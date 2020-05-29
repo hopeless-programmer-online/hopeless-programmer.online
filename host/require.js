@@ -34,7 +34,7 @@ const {
 
 
 const $require = js(f(`require`));
-const $module = js(c(`module`));
+const $module = js(v(`module`));
 const $exports_v = js(v(`exports`));
 const $exports_p = js(p(`exports`));
 const main = s.code(`json`, p(`"main"`));
@@ -77,6 +77,13 @@ const new_target = js(kw(`new`), `.`, p(`target`));
 const vm_runInThisContext = js(v(`vm`), `.`, f(`runInThisContext`));
 const vm_runInThisContext_doc = `https://nodejs.org/api/vm.html#vm_vm_runinthiscontext_code_options`;
 const $eval = js(f(`eval`));
+const module_id = js(v(`module`), `.`, p(`id`));
+const repl = `https://uk.wikipedia.org/wiki/REPL`;
+const module_filename = js(v(`module`), `.`, p(`filename`));
+const module_loaded = js(v(`module`), `.`, p(`loaded`));
+const module_parent = js(v(`module`), `.`, p(`parent`));
+const module_children = js(v(`module`), `.`, p(`children`));
+const $null = js(kw(`null`));
 
 const note_1 = note([
     sentence(`Мається на увазі те, що змінні виглядають так, наче оголошені у зовнішній області коду, а не всередині функції і, відповідно, доступні в будь-якому місці модуля. `),
@@ -254,6 +261,25 @@ const explorer_4 = illustration(...[
                 ),
             },
         },
+    }),
+]);
+const explorer_5 = illustration(...[
+    sentence(`Приклад зміни `, module_loaded, ` після виконання коду модуля. `),
+    s.explorer({
+        [`script.js`] : js(
+            [ `const f = require("./f");` ],
+            [ `` ],
+            [ `f(); // true` ],
+        ),
+        [`f.js`] : js(
+            [ `console.log(module.loaded); // false` ],
+            [ `` ],
+            [ `function f() {` ],
+            [ `    console.log(module.loaded);` ],
+            [ `}` ],
+            [ `` ],
+            [ `exports = module.exports = f;` ],
+        ),
     }),
 ]);
 {
@@ -699,9 +725,48 @@ exports = module.exports = new h.DocumentResource({
                 sentence(`На відміну від `, $eval, ` це не дає коду можливість звернутись до локальних змінних, що забезпечує захист від можливих конфліктів з тілом функції. `),
                 sentence(`Я не знайшов про це згадок в `, link(`офіційній документації`, nodejs_modules), `, проте виходячи з `, link(`оригінального коду`, require_source), ` під час виклику тіла модуля в якості `, $this, ` передається `, module_exports, `. `),
                 sentence(`Це означає, що потенційно можливо використовувати `, $this, ` для експорту `, code_5, `, хоча це може не сподобатись деяким розробникам або середовищам. `),
-                sentence(``),
             ]),
             code_5,
+        ]),
+        section(`Виконання модуля.`, ...[
+            paragraph(...[
+                sentence(`Перед виконанням коду модуля `, $require, ` заповнює відповідний йому об'єкт `, $module, ` необхідними полями. `),
+                sentence(`Окрім вже розглянутих `, module_exports, ` та `, module_paths, ` це також:`),
+            ]),
+            list(...[
+                [
+                    sentence(module_id, ` - унікальний ідентифікатор модуля. `),
+                ],
+                [
+                    sentence(module_filename, ` - шлях до файлу з кодом модуля. `),
+                ],
+                [
+                    sentence(module_loaded, ` - прапорець, який вказує чи завершено завантаження модуля. `),
+                ],
+                [
+                    sentence(module_parent, ` - посилання на модуль, який вперше завантажив відповідний модуль. `),
+                ],
+                [
+                    sentence(module_children, ` -масив посилань на модулі які були вперше завантажені відповідним модулем. `),
+                ],
+            ]),
+            paragraph(...[
+                sentence(`Поле `, module_id, ` слугує унікальним ідентифікатором модуля і в NodeJS, зазвичай, є повним шляхом до файлу з його кодом. `),
+                sentence(`В особливих випадках, наприклад, всередині `, link(`REPL`, repl), `, воно може бути стрічкою `, js(lt(`"<repl>"`)), `, а не шляхом. `),
+                sentence(`Також, це моле може бути стрічкою `, js(lt(`"."`)), ` якщо файл виконується через команду `, s.code(``, `npm start`), `. `),
+            ]),
+            paragraph(...[
+                sentence(`Варто зауважити, що використання повного шляху в якості ідентифікатора в певній мірі є особливістю саме NodeJS. `),
+                sentence(`Тому у випадках коли потрібен саме шлях до файлу є сенс працювати з полем `, module_filename, ` `),
+                sentence(`За аналогією з `, module_id, ` в частині випадків шлях до файлу просто не існує і це поле рівне `, $null, `. `),
+            ]),
+            paragraph(...[
+                sentence(`Останнє важливе для нас поле - це `, module_loaded, `. `),
+                sentence(`Перед виконанням коду воно рівне `, js(lt(`false`)), `, а після набуває значення `, js(lt(`true`)), `. `),
+                sentence(`За допомогою нього ми можемо, наприклад, визначити всередині функції чи був код модуля виконаний до кінця, чи він все ще виконується `, explorer_5, `. `),
+                sentence(``),
+            ]),
+            explorer_5,
         ]),
     ),
 });

@@ -8,6 +8,8 @@ code.hp-class-lexeme-phrase[data-hp-language=javascript] {
             color: palette.$code-macro;
 
             &[name=this],
+            &[name=new],
+            &[name=arguments],
             &[name=class],
             &[name=extends],
             &[name=using],
@@ -20,7 +22,8 @@ code.hp-class-lexeme-phrase[data-hp-language=javascript] {
         &.hp-class-identifier-lexeme {
             color: palette.$code-variable;
 
-            &[type=variable][name=exports] {
+            &[type=variable][name=exports],
+            &[type=variable][name=module] {
                 color: palette.$code-class;
             }
             &[type=function] {
@@ -39,6 +42,9 @@ code.hp-class-lexeme-phrase[data-hp-language=javascript] {
             color: palette.$code-comments;
         }
         &.hp-class-literal-lexeme {
+            &[type=boolean] {
+                color: palette.$code-keyword;
+            }
             &[type=number] {
                 color: palette.$code-number;
             }

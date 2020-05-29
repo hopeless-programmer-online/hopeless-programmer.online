@@ -304,8 +304,8 @@ function kw(string) {
  */
 function lt(string) {
     const type =
-        (string === `true` || string === false) ? LiteralLexemeType.Boolean :
-        !Number.isNaN( parseFloat(string) )     ? LiteralLexemeType.Number  :
+        (string === `true` || string === `false`) ? LiteralLexemeType.Boolean :
+        !Number.isNaN( parseFloat(string) )       ? LiteralLexemeType.Number  :
         LiteralLexemeType.String;
 
     return new LiteralLexeme({
