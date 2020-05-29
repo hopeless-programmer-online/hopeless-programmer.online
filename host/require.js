@@ -84,6 +84,13 @@ const module_loaded = js(v(`module`), `.`, p(`loaded`));
 const module_parent = js(v(`module`), `.`, p(`parent`));
 const module_children = js(v(`module`), `.`, p(`children`));
 const $null = js(kw(`null`));
+const createRequire_doc = `https://nodejs.org/api/modules.html#modules_module_createrequire_filename`;
+const require_resolve = js(f(`require`), `.`, f(`resolve`));
+const require_resolve_doc = `https://nodejs.org/api/modules.html#modules_require_resolve_request_options`;
+const require_resolve_paths = js(f(`require`), `.`, f(`resolve`), `.`, f(`paths`));
+const require_resolve_paths_doc = `https://nodejs.org/api/modules.html#modules_require_resolve_paths_request`;
+const module_createRequire = js(f(`require`), `(`, lt(`"module"`), `).`, f(`createRequire`));
+const createRequire = js(f(`createRequire`));
 
 const note_1 = note([
     sentence(`Мається на увазі те, що змінні виглядають так, наче оголошені у зовнішній області коду, а не всередині функції і, відповідно, доступні в будь-якому місці модуля. `),
@@ -699,7 +706,11 @@ exports = module.exports = new h.DocumentResource({
                 sentence(``),
             ]),
             paragraph(...[
-                sentence(``),
+                sentence(`На останок варто згадати про те, що існує легкий спосіб встановити шлях до файлу який буде завантажений `, $require, `. `),
+                sentence(`Сама `, $require, ` має `, link(`поле`, require_resolve_doc), ` `, require_resolve, ` яке є функцією. `),
+                sentence(`Ця функція приймає ідентифікатор модуля та повертає шлях до файлу який завантажила б `, $require, `, якби була викликана з таким ідентифікатором. `),
+                sentence(`Також існує `, link(`функція`, require_resolve_paths_doc), ` `, require_resolve_paths, `, яка також приймає ідентифікатор і повертає набір шляхів у яких `, $require, ` проводила б пошук для даного ідентифікатора. `),
+                sentence(`Ці функції рідко знаходять застосування, але можуть бути дуже корисними коли потрібно зрозуміти як працює сама `, $require, ` або ж коли потрібно відтворити її роботу. `),
             ]),
         ]),
         section(`Створення контексту модуля.`, ...[
@@ -764,9 +775,27 @@ exports = module.exports = new h.DocumentResource({
                 sentence(`Останнє важливе для нас поле - це `, module_loaded, `. `),
                 sentence(`Перед виконанням коду воно рівне `, js(lt(`false`)), `, а після набуває значення `, js(lt(`true`)), `. `),
                 sentence(`За допомогою нього ми можемо, наприклад, визначити всередині функції чи був код модуля виконаний до кінця, чи він все ще виконується `, explorer_5, `. `),
-                sentence(``),
             ]),
             explorer_5,
+            paragraph(...[
+                sentence(`Також, окрім `, $module, ` на цьому етапі створюються та передаються в функцію й інші змінні. `),
+                sentence(`Так, в якості `, filename, ` в функцію передається `, module_filename, ` а в якості `, dirname, ` передається щось на кшталт `, js(f(`require`), `(`, lt(`"path"`), `).`, f(`dirname`), `(`, v(`module`), `.`, p(`filename`), `)`), `. `),
+                sentence(`Функція `, $require, ` для даного модуля теж створюється тут. `),
+                sentence(`Взагалі, ми і самі можемо створити таку за допомогою `, link(`спеціальної функції`, createRequire_doc), ` `, module_createRequire, `. `),
+                sentence(`В якості аргументу вона приймає шлях, який використовується в якості опірного для завантаження локальних файлів та побудови набору `, module_paths, `. `),
+                sentence(`І хоч під капотом самого `, $require, ` використовується дещо інша функція, сама `, createRequire, ` може бути корисною якщо потрібно завантажувати модулі так, наче `, $require, ` викликається з зовсім іншого місця. `),
+                sentence(``),
+            ]),
+            paragraph(...[
+                sentence(``),
+                sentence(``),
+            ]),
+            paragraph(...[
+                sentence(`Дуже важливо розуміти, що виконання модуля це ніщо інше як виклик функції. `),
+                sentence(`У цьому процесі немає магії, він наповнений лише звичайними операціями JavaScript на кшталт присвоювання змінних та викликів інших функцій. `),
+                sentence(``),
+                sentence(``),
+            ]),
         ]),
     ),
 });
