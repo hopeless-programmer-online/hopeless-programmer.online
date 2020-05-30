@@ -8,7 +8,7 @@ class EmphasisPhrase extends TextPhrase {
      * @returns   {html.Element}
      */
     _toHtml() {
-        return <strong class="emphasis-phrase">{this.String}</strong>;
+        return <strong class="hp-class-phrase hp-class-emphasis-phrase">{this.String}</strong>;
     }
 }
 

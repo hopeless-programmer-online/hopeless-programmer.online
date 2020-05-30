@@ -131,13 +131,13 @@ class Illustration {
      * @returns {html.Element}
      */
     toHtml() {
-        const id = `illustration-${this.Index}`;
+        const id = `hp-id-illustration-${this.Index}`;
 
         return (
-            <figure id={id} class="illustration">
+            <figure id={id}>
                 {this.Content.toHtml()}
                 <figcaption>
-                    <h3 class="title">
+                    <h3>
                         {this.Title.toHtml()}
                         <a href={`#${id}`}>§</a>
                     </h3>

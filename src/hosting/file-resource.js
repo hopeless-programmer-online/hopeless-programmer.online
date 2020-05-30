@@ -1,3 +1,4 @@
+const path = require(`path`);
 const Resource = require(`./resource`);
 
 
@@ -36,7 +37,7 @@ class FileResource extends Resource {
      */
     _GetHeaders() {
         return {
-            "Content-Type" : mime_types.contentType(this.Path),
+            "Content-Type" : mime_types.contentType(path.extname(this.Path)),
         };
     }
     /**

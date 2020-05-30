@@ -1,7 +1,11 @@
 {
   "name": "hopeless-programmer.online",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Web site",
+  "exports": {
+    "./hosting": "./lib/hosting",
+    "./documenting": "./lib/documenting"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hopeless-programmer-online/hopeless-programmer.online.git"
@@ -26,7 +30,7 @@
   },
   "scripts": {
     "clean": "rimraf lib",
-    "build-typescript": "node build.js",
+    "build-typescript": "tsc",
     "build-only": "npm run build-typescript",
     "build": "npm run clean && npm run build-only",
     "test-only": "jest",

@@ -1,6 +1,14 @@
+@use "sass/palette";
 @use "sass/text";
 
 article.hp-class-document {
+    // flex
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    // size
+    height: 100%;
+
     > header {
         > h1 {
             // text
@@ -12,6 +20,7 @@ article.hp-class-document {
         }
     }
     > section {
+        // flex
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -54,6 +63,11 @@ article.hp-class-document {
                 margin-left: 16pt;
             }
         }
+        > ul {
+            // flex-item
+            order: 2;
+            flex-basis: 100%;
+        }
         > figure {
             display: flex;
             flex-direction: column;
@@ -74,6 +88,42 @@ article.hp-class-document {
                 max-width: 100%;
                 overflow-x: auto;
             }
+            > article.hp-class-explorer {
+                background-color: rosybrown;
+
+                > header {
+                    > nav {
+                        ul {
+                            list-style-type: none;
+                            padding: 0;
+
+                            > li {
+                                > label {
+                                    white-space: pre;
+
+                                    > input {
+                                        position: absolute;
+                                        opacity: 0;
+                                        cursor: pointer;
+                                        height: 0;
+                                        width: 0;
+
+                                        &:checked {
+                                            background-color: red;
+                                        }
+                                        &::after {
+                                            content: "*";
+                                        }
+                                    }
+                                    > input + .hp-class-radio {
+                                        background-color: blue;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             > figcaption {
                 > h3 {
                     // text
@@ -93,6 +143,22 @@ article.hp-class-document {
                     margin: 0;
                 }
             }
+        }
+    }
+    > footer {
+        // flex
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: stretch;
+        // flex-item
+        flex-grow: 1;
+
+        > table {
+            // border
+            border-top: 2pt dashed palette.$text-regular;
+            // size
+            width: 100%;
         }
     }
 }

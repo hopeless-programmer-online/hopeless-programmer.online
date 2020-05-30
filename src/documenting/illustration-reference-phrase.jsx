@@ -36,7 +36,7 @@ class IllustrationReferencePhrase extends ReferencePhrase {
     _toHtml() {
         const illustration = this.Illustration;
 
-        return <span class="illustration-reference-phrase">(див. <a class="link" href={`#illustration-${illustration.Index}`}>{illustration.Title.Text}</a>)</span>;
+        return <span class="illustration-reference-phrase">(див. <a class="link" href={`#hp-id-illustration-${illustration.Index}`}>{illustration.Title.Text}</a>)</span>;
     }
 }
 

@@ -115,10 +115,10 @@ class Section {
      * @returns {html.Element}
      */
     toHtml() {
-        const id = `section-${this.Index}`;
+        const id = `hp-id-section-${this.Index}`;
 
         return (
-            <section id={id} class="section">
+            <section id={id}>
                 <h2>
                     <a href={`#${id}`}>§</a>
                     {this.Title.toHtml()}

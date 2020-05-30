@@ -1,0 +1,24 @@
+const hosting = require(`hopeless-programmer.online/hosting`);
+const documenting = require(`hopeless-programmer.online/documenting`);
+
+
+const h = hosting;
+const s = documenting.shortcuts;
+
+
+exports = module.exports = new h.DocumentResource({
+    Document : s.document([ `Внутрішня помилка серверу.`, `Код помилки : 500.` ], {},
+        s.section(`У чому річ?`,
+            s.paragraph(
+                `На сайті відбулась непередбачувана помилка. `,
+                `Вона була настільки непередбачуваною, що система навіть не в змозі надати вам її детальний опис! `,
+            ),
+            s.paragraph(
+                `Але не хвилюйтесь! `,
+                `Швидше за все перед тим як надіслати вам це повідомлення система зберегла всю важливу для розслідування інформацію. `,
+                `Наш спеціальний підрозділ з розслідування аварійних ситуацій невдовзі займеться цим. `,
+                `Начувайтесь, хакери! `,
+            ),
+        ),
+    ),
+});

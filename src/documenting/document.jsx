@@ -26,6 +26,7 @@ class Document {
 
         let illustrationIndex = 1;
         let codeIndex = 1;
+        let exampleIndex = 1;
 
         Sections.forEach((section, index) => {
             if (section.__Index === null) {
@@ -35,7 +36,7 @@ class Document {
             for (const part of section.Parts) {
                 if (part instanceof IllustrationsSectionPart) {
                     for (const illustration of part.Illustrations) {
-                        if (illustration.__Index === null {
+                        if (illustration.__Index === null) {
                             illustration.__Index = illustrationIndex;
                         }
 
@@ -47,6 +48,15 @@ class Document {
                             }
 
                             ++codeIndex;
+                        }
+                        else if (content instanceof ExplorerIllustrationContent) {
+                            if (illustration.__Title === null) {
+                                illustration.__Title = shortcuts.toParagraph(`Приклад №${exampleIndex}`).Sentences;
+                            }
+
+                            content.Explorer.__Index = exampleIndex;
+
+                            ++exampleIndex;
                         }
 
                         ++illustrationIndex;
@@ -132,10 +142,10 @@ const html = require(`../html`);
 const NotePhrase = require(`./note-phrase`);
 const Sentences = require(`./sentences`);
 const Notes = require(`./notes`);
-const Section = require(`./section`);
 const Sections = require(`./sections`);
 const IllustrationsSectionPart = require(`./illustrations-section-part`);
 const CodeIllustrationContent = require(`./code-illustration-content`);
+const ExplorerIllustrationContent = require(`./explorer-illustration-content`);
 const shortcuts = require(`./shortcuts`);
 
 
