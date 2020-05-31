@@ -42,12 +42,22 @@ class Resource {
     }
     /**
      * @public
-     * @type   {Buffer}
+     * @async
+     * @type   {Promise<Stream>}
      */
     get Data() {
-        const data = this._GetData();
+        return this.__GetData();
+    }
 
-        if (data instanceof Buffer); else {
+    /**
+     * @private
+     * @async
+     * @returns {Promise<stream.Readable>}
+     */
+    async __GetData() {
+        const data = await this._GetData();
+
+        if (data instanceof stream.Readable); else {
             throw new Error; // @todo
         }
 
@@ -65,12 +75,14 @@ class Resource {
     /**
      * @protected
      * @abstract
-     * @returns   {Buffer}
+     * @returns   {Promise<stream.Readable>}
      */
-    _GetData() {
+    async _GetData() {
         throw new Error; // @todo
     }
 }
 
 
 exports = module.exports = Resource;
+
+const stream = require(`stream`);

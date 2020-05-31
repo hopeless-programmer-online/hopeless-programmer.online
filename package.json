@@ -1,10 +1,11 @@
 {
   "name": "hopeless-programmer.online",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Web site",
   "exports": {
-    "./hosting": "./lib/hosting",
-    "./documenting": "./lib/documenting"
+    "./host": "./lib/host",
+    "./hosting": "./lib/server/hosting",
+    "./documenting": "./lib/server/documenting"
   },
   "repository": {
     "type": "git",
@@ -35,7 +36,7 @@
     "build": "npm run clean && npm run build-only",
     "test-only": "jest",
     "test": "npm run build && npm run test-only",
-    "start-only": "node server.js",
+    "start-only": "node ./lib/server.js",
     "start": "npm run build && npm run start-only"
   },
   "dependencies": {

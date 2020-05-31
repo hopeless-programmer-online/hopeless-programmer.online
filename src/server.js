@@ -2,7 +2,9 @@ const fs = require(`fs`);
 const path = require(`path`);
 const http = require(`http`);
 const http_status = require(`http-status`);
-const hosting = require(`./lib/hosting`);
+const hosting = require(`hopeless-programmer.online/hosting`);
+const hostModule = `hopeless-programmer.online/host`;
+const hostPath = require.resolve(hostModule).match(/(.*)\.js$/)[1];
 
 
 const { NotFoundError } = hosting;
@@ -10,10 +12,7 @@ const { NotFoundError } = hosting;
 
 const cache = {};
 
-
-const server = http.createServer((req, res) => {
-    const hostPath = require.resolve(`./host`).match(/(.*)\.js$/)[1];
-
+function cleanCache() {
     const toClean = new Set;
 
     // remove host from cache
@@ -51,9 +50,14 @@ const server = http.createServer((req, res) => {
     for (const id of toClean) {
         delete require.cache[id];
     }
+}
+
+
+const server = http.createServer(async (req, res) => {
+    cleanCache();
 
     try {
-        const host = require(`./host`);
+        const host = require(hostModule);
 
         try {
             // handling 405
@@ -65,7 +69,10 @@ const server = http.createServer((req, res) => {
                     const resource = host.Resolve(`405`);
 
                     res.writeHead(http_status.METHOD_NOT_ALLOWED, resource.Headers);
-                    res.end(resource.Data);
+
+                    const data = await resource.Data;
+
+                    data.pipe(res);
                 }
                 // handling as 405 without proper representation
                 catch(error) {
@@ -80,7 +87,10 @@ const server = http.createServer((req, res) => {
                 const resource = host.Resolve(req.url);
 
                 res.writeHead(http_status.OK, resource.Headers);
-                res.end(resource.Data);
+
+                const data = await resource.Data;
+
+                data.pipe(res);
             }
             // handling 404
             catch(error) {
@@ -95,7 +105,10 @@ const server = http.createServer((req, res) => {
                     const resource = host.Resolve(`/404`);
 
                     res.writeHead(http_status.NOT_FOUND, resource.Headers);
-                    res.end(resource.Data);
+
+                    const data = await resource.Data;
+
+                    data.pipe(res);
                 }
                 // handling 404 without proper representation
                 catch(error) {
@@ -115,7 +128,10 @@ const server = http.createServer((req, res) => {
             const resource = host.Resolve(`/500`);
 
             res.writeHead(http_status.INTERNAL_SERVER_ERROR, resource.Headers);
-            res.end(resource.Data);
+
+            const data = await resource.Data;
+
+            data.pipe(res);
         }
     }
     // handling as 500 without proper representation
@@ -126,6 +142,5 @@ const server = http.createServer((req, res) => {
         res.end();
     }
 });
-
 
 server.listen(3000);

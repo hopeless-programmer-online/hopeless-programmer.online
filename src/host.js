@@ -11,6 +11,11 @@ const s = documenting.shortcuts;
 const home = require(`./host/home`);
 
 
+function file(localPath) {
+    return path.join(__dirname, localPath);
+}
+
+
 exports = module.exports = new h.Host({
     Routes : {
         "/" : home,
@@ -45,12 +50,15 @@ exports = module.exports = new h.Host({
         ].reduce((all, name) => ({
             ...all,
             [`/css/${name}.css`] : new h.SASSResource({
-                Path : path.join(__dirname, `./sass/${name}.scss`),
+                Path : file(`../sass/${name}.scss`),
             }),
         }), {}),
         // media
+        [`favicon.ico`] : new h.FileResource({
+            Path : file(`../media/favicon.ico`),
+        }),
         [`/favicon.ico`] : new h.FileResource({
-            Path : path.join(__dirname, `./media/favicon.ico`),
+            Path : file(`../media/favicon.ico`),
         }),
         ...[
             `favicon.ico`,
@@ -65,7 +73,7 @@ exports = module.exports = new h.Host({
         ].reduce((all, name) => ({
             ...all,
             [`/media/${name}`] : new h.FileResource({
-                Path : path.join(__dirname, `./media/${name}`),
+                Path : file(`../media/${name}`),
             }),
         }), {}),
         // icons
@@ -87,7 +95,7 @@ exports = module.exports = new h.Host({
         ].reduce((all, name) => ({
             ...all,
             [`/media/icons/${name}.svg`] : new h.FileResource({
-                Path : path.join(__dirname, `./media/icons/${name}.svg`),
+                Path : file(`../media/icons/${name}.svg`),
             }),
         }), {}),
     },
