@@ -2,7 +2,8 @@ const fs = require(`fs`);
 const path = require(`path`);
 const http = require(`http`);
 const http_status = require(`http-status`);
-const hosting = require(`./lib/hosting`);
+const hosting = require(`hopeless-programmer.online/hosting`);
+const hostModule = `hopeless-programmer.online/host`;
 
 
 const { NotFoundError } = hosting;
@@ -12,7 +13,7 @@ const cache = {};
 
 
 const server = http.createServer((req, res) => {
-    const hostPath = require.resolve(`./host`).match(/(.*)\.js$/)[1];
+    const hostPath = require.resolve(hostModule).match(/(.*)\.js$/)[1];
 
     const toClean = new Set;
 
@@ -53,7 +54,7 @@ const server = http.createServer((req, res) => {
     }
 
     try {
-        const host = require(`./host`);
+        const host = require(hostModule);
 
         try {
             // handling 405
