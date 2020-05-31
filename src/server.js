@@ -4,6 +4,7 @@ const http = require(`http`);
 const http_status = require(`http-status`);
 const hosting = require(`hopeless-programmer.online/hosting`);
 const hostModule = `hopeless-programmer.online/host`;
+const hostPath = require.resolve(hostModule).match(/(.*)\.js$/)[1];
 
 
 const { NotFoundError } = hosting;
@@ -11,10 +12,7 @@ const { NotFoundError } = hosting;
 
 const cache = {};
 
-
-const server = http.createServer((req, res) => {
-    const hostPath = require.resolve(hostModule).match(/(.*)\.js$/)[1];
-
+function cleanCache() {
     const toClean = new Set;
 
     // remove host from cache
@@ -52,6 +50,11 @@ const server = http.createServer((req, res) => {
     for (const id of toClean) {
         delete require.cache[id];
     }
+}
+
+
+const server = http.createServer((req, res) => {
+    cleanCache();
 
     try {
         const host = require(hostModule);
@@ -127,6 +130,5 @@ const server = http.createServer((req, res) => {
         res.end();
     }
 });
-
 
 server.listen(3000);
