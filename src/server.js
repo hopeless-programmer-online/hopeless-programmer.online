@@ -53,7 +53,7 @@ function cleanCache() {
 }
 
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
     cleanCache();
 
     try {
@@ -69,7 +69,10 @@ const server = http.createServer((req, res) => {
                     const resource = host.Resolve(`405`);
 
                     res.writeHead(http_status.METHOD_NOT_ALLOWED, resource.Headers);
-                    res.end(resource.Data);
+
+                    const data = await resource.Data;
+
+                    data.pipe(res);
                 }
                 // handling as 405 without proper representation
                 catch(error) {
@@ -84,7 +87,10 @@ const server = http.createServer((req, res) => {
                 const resource = host.Resolve(req.url);
 
                 res.writeHead(http_status.OK, resource.Headers);
-                res.end(resource.Data);
+
+                const data = await resource.Data;
+
+                data.pipe(res);
             }
             // handling 404
             catch(error) {
@@ -99,7 +105,10 @@ const server = http.createServer((req, res) => {
                     const resource = host.Resolve(`/404`);
 
                     res.writeHead(http_status.NOT_FOUND, resource.Headers);
-                    res.end(resource.Data);
+
+                    const data = await resource.Data;
+
+                    data.pipe(res);
                 }
                 // handling 404 without proper representation
                 catch(error) {
@@ -119,7 +128,10 @@ const server = http.createServer((req, res) => {
             const resource = host.Resolve(`/500`);
 
             res.writeHead(http_status.INTERNAL_SERVER_ERROR, resource.Headers);
-            res.end(resource.Data);
+
+            const data = await resource.Data;
+
+            data.pipe(res);
         }
     }
     // handling as 500 without proper representation

@@ -35,11 +35,19 @@ class HtmlResource extends Resource {
     }
     /**
      * @protected
+     * @async
      * @override
-     * @returns   {Buffer}
+     * @returns   {stream.Readable}
      */
-    _GetData() {
-        return Buffer.from(this.toHtml().toString());
+    async _GetData() {
+        const string = this.toHtml().toString();
+
+        return new stream.Readable({
+            read : function () {
+                this.push(string);
+                this.push(null);
+            },
+        });
     }
     /**
      * @protected
@@ -72,3 +80,4 @@ exports = module.exports = HtmlResource;
 
 const mime_types = require(`mime-types`);
 const html = require(`../html`);
+const stream = require(`stream`);
