@@ -24,6 +24,7 @@ exports = module.exports = new h.Host({
         // articles
         ...mapArticles(
             `require`,
+            `koppa`,
         ),
         // internal
         "/404" : require(`./host/404`),
