@@ -4,8 +4,8 @@ const fs = require(`fs`);
 const path = require(`path`);
 const http = require(`http`);
 const http_status = require(`http-status`);
-const hosting = require(`hopeless-programmer.online/hosting`);
-const hostModule = `hopeless-programmer.online/host`;
+const hosting = require(`./server/hosting`);
+const hostModule = `./host`;
 const hostPath = require.resolve(hostModule).match(/(.*)\.js$/)[1];
 
 
