@@ -1,6 +1,6 @@
 const path = require(`path`);
-const hosting = require(`hopeless-programmer.online/hosting`);
-const documenting = require(`hopeless-programmer.online/documenting`);
+const hosting = require(`./server/hosting`);
+const documenting = require(`./server/documenting`);
 
 
 const d = documenting;

@@ -24,6 +24,7 @@ code.hp-class-lexeme-phrase {
 figure.hp-class-code {
     @include text.code;
 
+    margin: 0;
     background-color: rgb(37, 37, 38);
 
     > code {
@@ -37,6 +38,8 @@ figure.hp-class-code {
         white-space: pre;
         // color
         background-color: palette.$code-background;
+
+        overflow-x: auto;
 
         > span:nth-child(3n+1) {
             // grid-item
@@ -73,7 +76,33 @@ figcaption.hp-class-code-header {
     justify-content: flex-start;
     align-items: center;
 
-    > img {
+    /*> img {
         height: 16pt;
+    }*/
+    > span.hp-class-icon {
+        box-sizing: border-box;
+        display: block;
+        background-size: 20pt;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 16pt;
+        height: 16pt;
+        color: transparent; // hide text stub when styles are enabled
+
+        &[data-hp-type=javascript] {
+            background-image: url(/media/icons/javascript.svg);
+        }
+        &[data-hp-type=c-sharp] {
+            background-image: url(/media/icons/c-sharp.svg);
+        }
+        &[data-hp-type=c] {
+            background-image: url(/media/icons/c.svg);
+        }
+        &[data-hp-type=cpp] {
+            background-image: url(/media/icons/cpp.svg);
+        }
+        &[data-hp-type=python] {
+            background-image: url(/media/icons/python.svg);
+        }
     }
 }

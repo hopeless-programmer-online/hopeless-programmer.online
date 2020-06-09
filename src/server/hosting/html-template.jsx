@@ -73,43 +73,43 @@ function template(title, content) {
                         <dl>
                             <dd>
                                 <a href="https://en.wikipedia.org/wiki/HTML5">
-                                    <abbr title="HTML | Hypertext Markup Language">
-                                        <img src="media/html5.svg" alt="HTML5" style="width: 1in; height: 1in" />
+                                    <abbr class="hp-class-icon" data-hp-type="html5" title="HTML | Hypertext Markup Language">
+                                        HTML5
                                     </abbr>
                                 </a>
                             </dd>
                             <dd>
                                 <a href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets">
-                                    <abbr title="CSS | Cascading Style Sheets">
-                                        <img src="media/css3.svg" alt="CSS3" style="width: 1in; height: 1in" />
+                                    <abbr class="hp-class-icon" data-hp-type="css3" title="CSS | Cascading Style Sheets">
+                                        CSS3
                                     </abbr>
                                 </a>
                             </dd>
                             <dd>
                                 <a href="https://en.wikipedia.org/wiki/ECMAScript#ES2015">
-                                    <abbr title="ES6 | ECMAScript 6">
-                                        <img src="media/es6.svg" alt="ES6" style="width: 1in; height: 1in" />
+                                    <abbr class="hp-class-icon" data-hp-type="es6" title="ES6 | ECMAScript 6">
+                                        ES6
                                     </abbr>
                                 </a>
                             </dd>
                             <dd>
                                 <a href="https://en.wikipedia.org/wiki/React_(web_framework)#JSX">
-                                    <abbr title="JSX | JavaScript XML">
-                                        <img src="media/react.svg" alt="JSX" style="width: 1in; height: 1in" />
+                                    <abbr class="hp-class-icon" data-hp-type="jsx" title="JSX | JavaScript XML">
+                                        JSX
                                     </abbr>
                                 </a>
                             </dd>
                             <dd>
                                 <a href="https://en.wikipedia.org/wiki/Node.js">
-                                    <abbr title="NodeJS">
-                                        <img src="media/nodejs.svg" alt="NodeJS" style="width: 1in; height: 1in" />
+                                    <abbr class="hp-class-icon" data-hp-type="node" title="NodeJS">
+                                        Node.js
                                     </abbr>
                                 </a>
                             </dd>
                             <dd>
                                 <a href="https://jestjs.io">
-                                    <abbr title="Jest">
-                                        <img src="media/jest.svg" alt="Jest" style="width: 1in; height: 1in" />
+                                    <abbr class="hp-class-icon" data-hp-type="jest" title="Jest">
+                                        Jest
                                     </abbr>
                                 </a>
                             </dd>

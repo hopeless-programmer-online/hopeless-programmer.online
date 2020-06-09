@@ -1,16 +1,22 @@
+const json5 = require(`json5`);
+const ts = require(`typescript`);
 const fs = require(`fs`);
 const path = require(`path`);
 const http = require(`http`);
 const http_status = require(`http-status`);
-const hosting = require(`hopeless-programmer.online/hosting`);
-const hostModule = `hopeless-programmer.online/host`;
+const hosting = require(`./server/hosting`);
+const hostModule = `./host`;
 const hostPath = require.resolve(hostModule).match(/(.*)\.js$/)[1];
 
 
 const { NotFoundError } = hosting;
 
 
+const { compilerOptions } = json5.parse(fs.readFileSync(path.join(__dirname, `../tsconfig.json`), `utf-8`));
 const cache = {};
+const dates = new Map;
+let host = require(hostModule);
+
 
 function cleanCache() {
     const toClean = new Set;
@@ -51,14 +57,65 @@ function cleanCache() {
         delete require.cache[id];
     }
 }
+function transpile(src, lib) {
+    const source = fs.readFileSync(src, `utf-8`);
+    const output = ts.transpileModule(source, {
+        compilerOptions : {
+            ...compilerOptions,
+            outDir: undefined,
+            rootDir: undefined,
+        },
+    });
+
+    fs.writeFileSync(lib, output.outputText, `utf-8`);
+}
+function watch(directorySubPath) {
+    const srcPath = path.join(__dirname, `..`, `src`, directorySubPath);
+    const libPath = path.join(__dirname, `..`, `lib`, directorySubPath);
+
+    for (const child of fs.readdirSync(srcPath)) {
+        const subPath = path.join(directorySubPath, child);
+        const fullSrcPath = path.join(srcPath, child);
+        const fullLibPath = path.join(libPath, child);
+        const stat = fs.statSync(fullSrcPath);
+
+        if (stat.isDirectory()) {
+            watch(subPath);
+        }
+        if (stat.isFile()) {
+            if (path.extname(fullSrcPath) !== `.js`) {
+                return;
+            }
+
+            fs.watch(fullSrcPath).on(`change`, () => {
+                setTimeout(() => {
+                    const stat = fs.statSync(fullSrcPath);
+
+                    // console.log(dates, stat.mtimeMs);
+
+                    // skip if file already transpiled
+                    if (dates.has(fullSrcPath) && dates.get(fullSrcPath) === stat.mtimeMs) {
+                        console.log(`skip: `, fullSrcPath, fullLibPath);
+                        return;
+                    }
+
+                    transpile(fullSrcPath, fullLibPath);
+                    cleanCache();
+                    host = require(hostModule);
+                    console.log(`transpile: `, fullSrcPath, fullLibPath);
+
+                    dates.set(fullSrcPath, stat.mtimeMs);
+                }, 10); // delay for small amount of time to prevent multiple translations
+            });
+        }
+    }
+}
+
+watch(`host`);
 
 
 const server = http.createServer(async (req, res) => {
-    cleanCache();
-
     try {
-        const host = require(hostModule);
-
         try {
             // handling 405
             if (req.method !== `GET`) {
