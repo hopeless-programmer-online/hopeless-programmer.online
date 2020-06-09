@@ -24,6 +24,7 @@ code.hp-class-lexeme-phrase {
 figure.hp-class-code {
     @include text.code;
 
+    margin: 0;
     background-color: rgb(37, 37, 38);
 
     > code {
@@ -37,6 +38,8 @@ figure.hp-class-code {
         white-space: pre;
         // color
         background-color: palette.$code-background;
+
+        overflow-x: auto;
 
         > span:nth-child(3n+1) {
             // grid-item
