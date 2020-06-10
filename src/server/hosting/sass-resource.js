@@ -16,7 +16,7 @@ class SassResource extends FileResource {
      * @protected
      * @async
      * @override
-     * @returns   {stream.Readable}
+     * @returns   {Stream}
      */
     async _GetData() {
         return new Promise((resolve, reject) => {
@@ -30,12 +30,11 @@ class SassResource extends FileResource {
                     return reject(error);
                 }
 
-                resolve(new stream.Readable({
-                    read : function () {
-                        this.push(result.css);
-                        this.push(null);
-                    },
-                }));
+                const stream = new Stream;
+
+                stream.End(result.css);
+
+                resolve(stream);
             });
         });
     }
@@ -48,4 +47,4 @@ exports = module.exports = SassResource;
 const fs = require(`fs`);
 const sass = require(`sass`);
 const mime_types = require(`mime-types`);
-const stream = require(`stream`);
+const Stream = require(`./stream`);
