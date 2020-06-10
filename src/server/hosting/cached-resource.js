@@ -40,12 +40,12 @@ class CachedResource extends Resource {
 
                     // skip if file already performed
                     if (time === stat.mtimeMs) {
-                        console.log(`skip ${Target.Path}`);
+                        // console.log(`skip ${Target.Path}`);
 
                         return;
                     }
 
-                    console.log(`update ${Target.Path}`);
+                    // console.log(`update ${Target.Path}`);
 
                     time = stat.mtimeMs;
 
@@ -92,7 +92,7 @@ class CachedResource extends Resource {
         }
     }
     async Reload() {
-        console.log(`reload`);
+        // console.log(`reload`);
 
         this.__stream = await this.Target.Data;
     }

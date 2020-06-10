@@ -123,20 +123,22 @@ function mapArticles(...names) {
                 (all, [ name, article ]) => ({ ...all, [`/${name}`] : article }),
                 {},
             ),
-        [`/articles`] : new h.IndexResource({ // @todo: cache
-            Index : new d.Index({
-                Title : s.toSentences(`Статті`),
-                Items : new d.IndexItems(
-                    ...Object.entries(articles)
-                        .map(([ name, article ]) =>
-                            new d.IndexItem({
-                                Content : new d.DocumentIndexItemContent({
-                                    Url      : `/${name}`,
-                                    Document : article.Document,
+        [`/articles`] : new h.CachedResource({
+            Target : new h.IndexResource({
+                Index : new d.Index({
+                    Title : s.toSentences(`Статті`),
+                    Items : new d.IndexItems(
+                        ...Object.entries(articles)
+                            .map(([ name, article ]) =>
+                                new d.IndexItem({
+                                    Content : new d.DocumentIndexItemContent({
+                                        Url      : `/${name}`,
+                                        Document : article.Document,
+                                    }),
                                 }),
-                            }),
-                        ),
-                ),
+                            ),
+                    ),
+                }),
             }),
         }),
     };
