@@ -52,12 +52,12 @@ class Resource {
     /**
      * @private
      * @async
-     * @returns {Promise<stream.Readable>}
+     * @returns {Promise<Stream>}
      */
     async __GetData() {
         const data = await this._GetData();
 
-        if (data instanceof stream.Readable); else {
+        if (data instanceof Stream); else {
             throw new Error; // @todo
         }
 
@@ -75,7 +75,7 @@ class Resource {
     /**
      * @protected
      * @abstract
-     * @returns   {Promise<stream.Readable>}
+     * @returns   {Promise<Stream>}
      */
     async _GetData() {
         throw new Error; // @todo
@@ -85,4 +85,5 @@ class Resource {
 
 exports = module.exports = Resource;
 
-const stream = require(`stream`);
+
+const Stream = require(`./stream`);
