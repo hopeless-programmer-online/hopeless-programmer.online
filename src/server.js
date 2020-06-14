@@ -201,4 +201,7 @@ const server = http.createServer(async (req, res) => {
     }
 });
 
-server.listen(3000);
+// integration with heroku
+const port = process.env.PORT || 3000;
+
+server.listen(port);

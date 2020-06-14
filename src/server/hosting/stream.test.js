@@ -1,4 +1,4 @@
-const Stream = require(`./accumulator`);
+const Stream = require(`./stream`);
 
 
 it(`Should work`, async () => {
@@ -26,9 +26,6 @@ it(`Should work`, async () => {
 
     const data1 = await promise1;
     const data2 = await promise2;
-
-    console.log(data1);
-    console.log(data2);
 
     expect(data1).toMatchObject([ 1, 2, 3, 4 ]);
     expect(data2).toMatchObject([ 1, 2, 3, 4 ]);
