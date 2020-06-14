@@ -73,8 +73,8 @@ it(`Should converts ho html`, () => {
         `        --></ul><!--\r\n` +
         `        --><figure id="hp-id-illustration-1"><!--\r\n` +
         `            --><figure class="hp-class-code" data-hp-language="c"><!--\r\n` +
-        `                --><figcaption><!--\r\n` +
-        `                    --><img alt="c" src="./media/icons/c.svg">example.c</figcaption><!--\r\n` +
+        `                --><figcaption class="hp-class-code-header"><!--\r\n` +
+        `                    --><span class="hp-class-icon" data-hp-type="c">c|</span>example.c</figcaption><!--\r\n` +
         `                --><code></code><!--\r\n` +
         `            --></figure><!--\r\n` +
         `            --><figcaption><!--\r\n` +
