@@ -44,10 +44,10 @@ class FileResource extends Resource {
      * @protected
      * @async
      * @override
-     * @returns   {Promise<stream.Readable>}
+     * @returns   {Promise<Stream>}
      */
     async _GetData() {
-        return fs.createReadStream(this.Path);
+        return Stream.FromFileReadStream(fs.createReadStream(this.Path));
     }
 }
 
@@ -57,4 +57,4 @@ exports = module.exports = FileResource;
 
 const fs = require(`fs`);
 const mime_types = require(`mime-types`);
-const stream = require(`stream`);
+const Stream = require(`./stream`);

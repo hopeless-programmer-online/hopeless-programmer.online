@@ -1,6 +1,6 @@
 const path = require(`path`);
-const hosting = require(`hopeless-programmer.online/hosting`);
-const documenting = require(`hopeless-programmer.online/documenting`);
+const hosting = require(`./server/hosting`);
+const documenting = require(`./server/documenting`);
 
 
 const d = documenting;
@@ -15,6 +15,11 @@ function file(localPath) {
     return path.join(__dirname, localPath);
 }
 
+const icon = new h.CachedResource({
+    Target : new h.FileResource({
+        Path : file(`../media/favicon.ico`),
+    }),
+});
 
 exports = module.exports = new h.Host({
     Routes : {
@@ -50,17 +55,15 @@ exports = module.exports = new h.Host({
             `html`,
         ].reduce((all, name) => ({
             ...all,
-            [`/css/${name}.css`] : new h.SASSResource({
-                Path : file(`../sass/${name}.scss`),
+            [`/css/${name}.css`] : new h.CachedResource({
+                Target : new h.SASSResource({
+                    Path : file(`../sass/${name}.scss`),
+                }),
             }),
         }), {}),
         // media
-        [`favicon.ico`] : new h.FileResource({
-            Path : file(`../media/favicon.ico`),
-        }),
-        [`/favicon.ico`] : new h.FileResource({
-            Path : file(`../media/favicon.ico`),
-        }),
+        [`favicon.ico`] : icon,
+        [`/favicon.ico`] : icon,
         ...[
             `favicon.ico`,
             `but_i.png`,
@@ -73,8 +76,10 @@ exports = module.exports = new h.Host({
             `jest.svg`,
         ].reduce((all, name) => ({
             ...all,
-            [`/media/${name}`] : new h.FileResource({
-                Path : file(`../media/${name}`),
+            [`/media/${name}`] : new h.CachedResource({
+                Target : new h.FileResource({
+                    Path : file(`../media/${name}`),
+                }),
             }),
         }), {}),
         // icons
@@ -89,14 +94,15 @@ exports = module.exports = new h.Host({
             `php`,
             `python`,
             `sass`,
-            `scss`,
             `xml`,
             `folder`,
             `default`,
         ].reduce((all, name) => ({
             ...all,
-            [`/media/icons/${name}.svg`] : new h.FileResource({
-                Path : file(`../media/icons/${name}.svg`),
+            [`/media/icons/${name}.svg`] : new h.CachedResource({
+                Target : new h.FileResource({
+                    Path : file(`../media/icons/${name}.svg`),
+                }),
             }),
         }), {}),
     },
@@ -118,20 +124,22 @@ function mapArticles(...names) {
                 (all, [ name, article ]) => ({ ...all, [`/${name}`] : article }),
                 {},
             ),
-        [`/articles`] : new h.IndexResource({
-            Index : new d.Index({
-                Title : s.toSentences(`Статті`),
-                Items : new d.IndexItems(
-                    ...Object.entries(articles)
-                        .map(([ name, article ]) =>
-                            new d.IndexItem({
-                                Content : new d.DocumentIndexItemContent({
-                                    Url      : `/${name}`,
-                                    Document : article.Document,
+        [`/articles`] : new h.CachedResource({
+            Target : new h.IndexResource({
+                Index : new d.Index({
+                    Title : s.toSentences(`Статті`),
+                    Items : new d.IndexItems(
+                        ...Object.entries(articles)
+                            .map(([ name, article ]) =>
+                                new d.IndexItem({
+                                    Content : new d.DocumentIndexItemContent({
+                                        Url      : `/${name}`,
+                                        Document : article.Document,
+                                    }),
                                 }),
-                            }),
-                        ),
-                ),
+                            ),
+                    ),
+                }),
             }),
         }),
     };

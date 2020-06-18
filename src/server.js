@@ -4,8 +4,8 @@ const fs = require(`fs`);
 const path = require(`path`);
 const http = require(`http`);
 const http_status = require(`http-status`);
-const hosting = require(`hopeless-programmer.online/hosting`);
-const hostModule = `hopeless-programmer.online/host`;
+const hosting = require(`./server/hosting`);
+const hostModule = `./host`;
 const hostPath = require.resolve(hostModule).match(/(.*)\.js$/)[1];
 
 
@@ -15,6 +15,7 @@ const { NotFoundError } = hosting;
 const { compilerOptions } = json5.parse(fs.readFileSync(path.join(__dirname, `../tsconfig.json`), `utf-8`));
 const cache = {};
 const dates = new Map;
+/** @type {hosting.Host} */
 let host = require(hostModule);
 
 
@@ -129,7 +130,7 @@ const server = http.createServer(async (req, res) => {
 
                     const data = await resource.Data;
 
-                    data.pipe(res);
+                    await data.Pipe(res);
                 }
                 // handling as 405 without proper representation
                 catch(error) {
@@ -147,7 +148,7 @@ const server = http.createServer(async (req, res) => {
 
                 const data = await resource.Data;
 
-                data.pipe(res);
+                await data.Pipe(res);
             }
             // handling 404
             catch(error) {
@@ -165,7 +166,7 @@ const server = http.createServer(async (req, res) => {
 
                     const data = await resource.Data;
 
-                    data.pipe(res);
+                    await data.Pipe(res);
                 }
                 // handling 404 without proper representation
                 catch(error) {
@@ -188,7 +189,7 @@ const server = http.createServer(async (req, res) => {
 
             const data = await resource.Data;
 
-            data.pipe(res);
+            await data.Pipe(res);
         }
     }
     // handling as 500 without proper representation
@@ -200,4 +201,7 @@ const server = http.createServer(async (req, res) => {
     }
 });
 
-server.listen(3000);
+// integration with heroku
+const port = process.env.PORT || 3000;
+
+server.listen(port);

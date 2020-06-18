@@ -1,6 +1,45 @@
-body {
-    margin: 0;
-}
 body, html {
     height: 100%;
+}
+body {
+    margin: 0;
+
+    > footer {
+        > figure {
+            > dl > dd > a > abbr.hp-class-icon {
+                box-sizing: border-box;
+                display: block;
+                background-size: 0.75in;
+                background-position: center;
+                background-repeat: no-repeat;
+                width: 1.2in;
+                height: 1.2in;
+                color: transparent; // hide text stub when styles are enabled
+                filter: grayscale(1.0);
+
+                &:hover {
+                    filter: none;
+                }
+
+                &[data-hp-type=html5] {
+                    background-image: url(/media/html5.svg);
+                }
+                &[data-hp-type=css3] {
+                    background-image: url(/media/css3.svg);
+                }
+                &[data-hp-type=es6] {
+                    background-image: url(/media/es6.svg);
+                }
+                &[data-hp-type=jsx] {
+                    background-image: url(/media/react.svg);
+                }
+                &[data-hp-type=node] {
+                    background-image: url(/media/nodejs.svg);
+                }
+                &[data-hp-type=jest] {
+                    background-image: url(/media/jest.svg);
+                }
+            }
+        }
+    }
 }
