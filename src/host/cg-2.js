@@ -16,18 +16,24 @@ const {
     // link,
     note,
     // illustration,
+    code,
     // js,
     // kw,
     // v,
     // f,
     // c,
     // p,
-    // lt,
+    lt,
     // cm,
 } = s;
 
+const cpp = (...x) => code(`c++`, ...x);
+
 
 const mesa = `https://en.wikipedia.org/wiki/Mesa_(computer_graphics)`;
+const glh = cpp(lt(`gl.h`));
+const glew = cpp(lt(`glew`));
+const glfw = cpp(lt(`glfw`));
 
 
 exports = module.exports = new h.DocumentResource({
@@ -79,9 +85,9 @@ exports = module.exports = new h.DocumentResource({
                 ],
             ]),
             paragraph(...[
-                sentence(``),
-                sentence(``),
-                sentence(``),
+                sentence(`Головним героєм цієї серії статей буде реалізація OpenGL для С/С++ та Windows - бібліотека `, glh, `. `),
+                sentence(`Також, для спрощення подальшої роботи, ми будемо використовувати бібліотеки `, glew, ` та `, glfw, `. `),
+                sentence(`Вони допоможуть нам працювати з контекстом OpenGL (що особливо важливо при роботі з Windows), а також з вікнами та користувацьким вводом. `),
             ]),
         ]),
         section(``, ...[
