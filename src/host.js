@@ -29,6 +29,7 @@ exports = module.exports = new h.Host({
         // articles
         ...mapArticles(
             `require`,
+            `cg-1`,
         ),
         // internal
         "/404" : require(`./host/404`),
