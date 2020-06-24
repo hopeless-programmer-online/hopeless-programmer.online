@@ -1,0 +1,161 @@
+<svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    width="600px"
+    height="300px"
+    style="background-color: whitesmoke"
+>
+    <svg
+        name="vector"
+        x="0"
+        y="0"
+        width="50%"
+        height="100%"
+    >
+        <!-- vertical lines -->
+        <line class="hp-class-delimiter" x1="10%" y1="0%" x2="10%" y2="100%" />
+        <line class="hp-class-delimiter" x1="20%" y1="0%" x2="20%" y2="100%" />
+        <line class="hp-class-delimiter" x1="30%" y1="0%" x2="30%" y2="100%" />
+        <line class="hp-class-delimiter" x1="40%" y1="0%" x2="40%" y2="100%" />
+        <line class="hp-class-delimiter" x1="50%" y1="0%" x2="50%" y2="100%" />
+        <line class="hp-class-delimiter" x1="60%" y1="0%" x2="60%" y2="100%" />
+        <line class="hp-class-delimiter" x1="70%" y1="0%" x2="70%" y2="100%" />
+        <line class="hp-class-delimiter" x1="80%" y1="0%" x2="80%" y2="100%" />
+        <line class="hp-class-delimiter" x1="90%" y1="0%" x2="90%" y2="100%" />
+        <!-- horizontal lines -->
+        <line class="hp-class-delimiter" y1="10%" x1="0%" y2="10%" x2="100%" />
+        <line class="hp-class-delimiter" y1="20%" x1="0%" y2="20%" x2="100%" />
+        <line class="hp-class-delimiter" y1="30%" x1="0%" y2="30%" x2="100%" />
+        <line class="hp-class-delimiter" y1="40%" x1="0%" y2="40%" x2="100%" />
+        <line class="hp-class-delimiter" y1="50%" x1="0%" y2="50%" x2="100%" />
+        <line class="hp-class-delimiter" y1="60%" x1="0%" y2="60%" x2="100%" />
+        <line class="hp-class-delimiter" y1="70%" x1="0%" y2="70%" x2="100%" />
+        <line class="hp-class-delimiter" y1="80%" x1="0%" y2="80%" x2="100%" />
+        <line class="hp-class-delimiter" y1="90%" x1="0%" y2="90%" x2="100%" />
+
+        <circle class="hp-class-point" cx="45" cy="45" r="5" />
+        <circle class="hp-class-point" cx="255" cy="195" r="5" />
+    </svg>
+    <svg
+        name="raster"
+        x="50%"
+        y="0"
+        width="50%"
+        height="100%"
+    >
+    </svg>
+    <style>
+        line.hp-class-delimiter {
+            stroke : rgba(0,0,0,0.25);
+            stroke-width : 1;
+            stroke-dasharray : 5,5;
+        }
+        rect.hp-class-pixel {
+            fill: black;
+            stroke : gray;
+            stroke-width : 1;
+        }
+        circle.hp-class-point {
+            fill: red;
+            stroke: black;
+            stroke-width: 2;
+        }
+        circle.hp-class-point:hover {
+            fill: black;
+            stroke: orange;
+            stroke-width: 2;
+        }
+    </style>
+    <script>
+        (() => {
+            const svg = document.currentScript.parentNode;
+            const vector = svg.querySelector(`svg[name="vector"]`);
+            const raster = svg.querySelector(`svg[name="raster"]`);
+            const points = vector.querySelectorAll(`circle[class="hp-class-point"]`);
+
+            let picked = null;
+
+            for (const point of points) {
+                function ondown() {
+                    point.removeEventListener(`mousedown`, ondown);
+
+                    function onup() {
+                        document.removeEventListener(`mouseup`, onup);
+                        document.removeEventListener(`mousemove`, onmove);
+                        point.addEventListener(`mousedown`, ondown);
+
+                        // console.log(`kek`);
+                    }
+                    function onmove(e) {
+                        const rect = vector.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+
+                        point.attributes.cx.value = x;
+                        point.attributes.cy.value = y;
+
+                        rasterize();
+
+                        // console.log(point.cx);
+                        // console.log(x);
+                    }
+
+                    document.addEventListener(`mouseup`, onup);
+                    document.addEventListener(`mousemove`, onmove);
+
+                    // console.log(`lol`);
+                }
+
+                point.addEventListener(`mousedown`, ondown);
+            }
+
+            // console.log(...points);
+
+            const pixels = [];
+            const pixelsX = 10;
+            const pixelsY = 10;
+            const sizeX = 300;
+            const sizeY = 300;
+
+            for (let x = 0; x &lt; pixelsX; ++x) {
+                pixels[x] = [];
+
+                for (let y = 0; y &lt; pixelsY; ++y) {
+                    const pixel = document.createElementNS(`http://www.w3.org/2000/svg`, `rect`);
+
+                    pixel.classList.add(`hp-class-pixel`);
+                    pixel.setAttribute(`x`, (x / pixelsX) * sizeX);
+                    pixel.setAttribute(`y`, (y / pixelsY) * sizeY);
+                    pixel.setAttribute(`width`, sizeX / pixelsX);
+                    pixel.setAttribute(`height`, sizeY / pixelsY);
+
+                    raster.appendChild(pixel);
+
+                    pixels[x][y] = pixel;
+                }
+            }
+
+            function rasterize() {
+                for (const row of pixels)
+                for (const pixel of row) {
+                    pixel.setAttribute(`style`, ``);
+                }
+
+                for (const point of points) {
+                    const x = point.attributes.cx.value;
+                    const y = point.attributes.cy.value;
+
+                    if (x &gt;= 0 &amp;&amp; x &lt; sizeX)
+                    if (y &gt;= 0 &amp;&amp; y &lt; sizeY) {
+                        const ix = Math.floor(x / (sizeX / pixelsX));
+                        const iy = Math.floor(y / (sizeY / pixelsY));
+
+                        pixels[ix][iy].setAttribute(`style`, `fill: white`);
+                    }
+                }
+            }
+
+            rasterize();
+        })()
+    </script>
+</svg>
