@@ -175,6 +175,55 @@ class Line {
         });
     }
 }
+class Triangle {
+    constructor({ X1 = 0, Y1 = 0, X2 = 0, Y2 = 0, X3 = 0, Y3 = 0 } = {}) {
+        const ab = line(X1, Y1, X2, Y2);
+        const bc = line(X2, Y2, X3, Y3);
+        const ca = line(X3, Y3, X1, Y1);
+        const a = new Point({ X : X1, Y : Y1 });
+        const b = new Point({ X : X2, Y : Y2 });
+        const c = new Point({ X : X3, Y : Y3 });
+        const change = new Subscription;
+
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.ab = ab;
+        this.bc = bc;
+        this.ca = ca;
+        this.A = { X : X1, Y : Y1 };
+        this.B = { X : X2, Y : Y2 };
+        this.C = { X : X3, Y : Y3 };
+
+        a.Move.Subscribe(({ X, Y }) =&gt; {
+            this.A = { X, Y };
+
+            ab.setAttribute(`x1`, X);
+            ab.setAttribute(`y1`, Y);
+            ca.setAttribute(`x2`, X);
+            ca.setAttribute(`y2`, Y);
+            change.Notify(this);
+        });
+        b.Move.Subscribe(({ X, Y }) =&gt; {
+            this.B = { X, Y };
+
+            bc.setAttribute(`x1`, X);
+            bc.setAttribute(`y1`, Y);
+            ab.setAttribute(`x2`, X);
+            ab.setAttribute(`y2`, Y);
+            change.Notify(this);
+        });
+        c.Move.Subscribe(({ X, Y }) =&gt; {
+            this.C = { X, Y };
+
+            ca.setAttribute(`x1`, X);
+            ca.setAttribute(`y1`, Y);
+            bc.setAttribute(`x2`, X);
+            bc.setAttribute(`y2`, Y);
+            change.Notify(this);
+        });
+    }
+}
 
 const points = [
     new Point({ X : 50, Y : 50 }),
@@ -182,6 +231,10 @@ const points = [
 ];
 const lines = [
     new Line({ X1 : 10, Y1 : 10, X2 : 70, Y2 : 180 }),
+    new Line({ X1 : 20, Y1 : 10, X2 : 110, Y2 : 180 }),
+];
+const triangles = [
+    new Triangle({ X1 : 50, Y1 : 150, X2 : 20, Y2 : 250, X3 : 250, Y3 : 250 }),
 ];
 
 for (const point of points) point.Move.Subscribe(rasterize);
