@@ -195,25 +195,25 @@ const pixelsY = 20;
 const sizeX = 300;
 const sizeY = 300;
 
-for (let x = 0; x &lt; pixelsX - 1; ++x) {
+for (let x = 1; x &lt; pixelsX - 1; ++x) {
     const element = document.createElementNS(`http://www.w3.org/2000/svg`, `line`);
 
     element.classList.add(`hp-class-delimiter`);
-    element.setAttribute(`x1`, `${(x + 0.5) / (pixelsX - 1) * 100}%`);
+    element.setAttribute(`x1`, `${x / (pixelsX - 1) * 100}%`);
     element.setAttribute(`y1`, `0%`);
-    element.setAttribute(`x2`, `${(x + 0.5) / (pixelsX - 1) * 100}%`);
+    element.setAttribute(`x2`, `${x / (pixelsX - 1) * 100}%`);
     element.setAttribute(`y2`, `100%`);
 
     vector.appendChild(element);
 }
-for (let y = 0; y &lt; pixelsY - 1; ++y) {
+for (let y = 1; y &lt; pixelsY - 1; ++y) {
     const element = document.createElementNS(`http://www.w3.org/2000/svg`, `line`);
 
     element.classList.add(`hp-class-delimiter`);
     element.setAttribute(`x1`, `0%`);
-    element.setAttribute(`y1`, `${(y + 0.5) / (pixelsY - 1) * 100}%`);
+    element.setAttribute(`y1`, `${y / (pixelsY - 1) * 100}%`);
     element.setAttribute(`x2`, `100%`);
-    element.setAttribute(`y2`, `${(y + 0.5) / (pixelsY - 1) * 100}%`);
+    element.setAttribute(`y2`, `${y / (pixelsY - 1) * 100}%`);
 
     vector.appendChild(element);
 }
