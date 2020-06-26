@@ -70,8 +70,6 @@
     </style>
     <script>
         (() => {
-            let picked = null;
-
             const svg = document.currentScript.parentNode;
             const vector = svg.querySelector(`svg[name="vector"]`);
             const raster = svg.querySelector(`svg[name="raster"]`);
@@ -102,6 +100,26 @@
                 return element;
             }
 
+            class Subscription {
+                constructor() {
+                    this.__subscribers = [];
+                }
+
+                Subscribe(subscriber) {
+                    this.__subscribers.push(subscriber);
+                }
+                Unsubscribe(subscriber) {
+                    const subscribers = this.__subscribers;
+                    const index = subscribers.indexOf(subscriber);
+
+                    if (index === -1) throw new Error; // @todo
+
+                    subscribers.splice(index, 1);
+                }
+                Notify(...values) {
+                    for (const subscriber of this.__subscribers) subscriber(...values);
+                }
+            }
             class Point {
                 constructor({ X = 0, Y = 0 } = {}) {
                     this.X = X;
@@ -110,6 +128,7 @@
                     const element = circle(X, Y);
 
                     this.element = element;
+                    this.Move = new Subscription;
 
                     this.onMouseDown = this.OnMouseDown.bind(this);
                     this.onMouseUp   = this.OnMouseUp.bind(this);
@@ -133,28 +152,47 @@
                     this.Y = clientY;
 
                     const rect = vector.getBoundingClientRect();
-                    const x = clientX - rect.left;
-                    const y = clientY - rect.top;
 
-                    this.element.attributes.cx.value = x;
-                    this.element.attributes.cy.value = y;
+                    this.element.attributes.cx.value = clientX - rect.left;
+                    this.element.attributes.cy.value = clientY - rect.top;
 
-                    rasterize();
+                    this.Move.Notify(this);
                 }
             }
             class Line {
                 constructor({ X1 = 0, Y1 = 0, X2 = 0, Y2 = 0 } = {}) {
                     const l = line(X1, Y1, X2, Y2);
-                    const a = circle(X1, Y1);
-                    const b = circle(X2, Y2);
+                    const a = new Point({ X : X1, Y : Y1 });
+                    const b = new Point({ X : X2, Y : Y2 });
+                    const change = new Subscription;
 
+                    this.a = a;
+                    this.b = b;
+                    this.l = l;
                     this.begin = { X : X1, Y : Y1 };
-                    this.end   = { X : X2, Y : Y2 };
+                    this.end = { X : X2, Y : Y2 };
+                    this.X1 = X1;
+                    this.Y1 = Y1;
+                    this.X2 = X2;
+                    this.Y2 = Y2;
+                    this.Change = change;
 
-                    //  this.onMouseDown =
-                }
+                    a.Move.Subscribe(({ X, Y }) =&gt; {
+                        this.X1 = X;
+                        this.Y1 = Y;
 
-                OnMouseDown() {
+                        l.setAttribute(`x1`, X);
+                        l.setAttribute(`y1`, Y);
+                        change.Notify(this);
+                    });
+                    b.Move.Subscribe(({ X, Y }) =&gt; {
+                        this.X2 = X;
+                        this.Y2 = Y;
+
+                        l.setAttribute(`x2`, X);
+                        l.setAttribute(`y2`, Y);
+                        change.Notify(this);
+                    });
                 }
             }
 
@@ -165,6 +203,9 @@
             const lines = [
                 new Line({ X1 : 10, Y1 : 10, X2 : 70, Y2 : 180 }),
             ];
+
+            for (const point of points) point.Move.Subscribe(rasterize);
+            for (const line of lines) line.Change.Subscribe(rasterize);
 
             // console.log(...points);
 
@@ -208,6 +249,23 @@
                         const iy = Math.floor(y / (sizeY / pixelsY));
 
                         pixels[ix][iy].setAttribute(`style`, `fill: white`);
+                    }
+                }
+                for (const line of lines) {
+                    const steps = Math.ceil(Math.max(
+                        Math.abs((line.X1 - line.X2) / (sizeX / pixelsX)),
+                        Math.abs((line.Y1 - line.Y2) / (sizeY / pixelsY)),
+                    ));
+
+                    for (let i = 0; i &lt;= steps; ++i) {
+                        const di = i / steps;
+                        const ix = Math.floor((line.X1 + (line.X2 - line.X1) * di) / (sizeX / pixelsX));
+                        const iy = Math.floor((line.Y1 + (line.Y2 - line.Y1) * di) / (sizeY / pixelsY));
+
+                        if (ix &gt;= 0 &amp;&amp; ix &lt; pixelsX)
+                        if (iy &gt;= 0 &amp;&amp; iy &lt; pixelsY) {
+                            pixels[ix][iy].setAttribute(`style`, `fill: white`);
+                        }
                     }
                 }
             }
