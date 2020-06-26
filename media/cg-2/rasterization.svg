@@ -194,6 +194,7 @@ class Triangle {
         this.A = { X : X1, Y : Y1 };
         this.B = { X : X2, Y : Y2 };
         this.C = { X : X3, Y : Y3 };
+        this.Change = change;
 
         a.Move.Subscribe(({ X, Y }) =&gt; {
             this.A = { X, Y };
@@ -223,6 +224,29 @@ class Triangle {
             change.Notify(this);
         });
     }
+
+    In(t) {
+        function distance(a, b) {
+            return Math.sqrt(Math.pow(a.X - b.X, 2) + Math.pow(a.Y - b.Y, 2));
+        }
+        function square(a, b, c) {
+            // Herone's formula
+            const s = (a + b + c) / 2;
+
+            return Math.sqrt(s * (s - a) * (s - b) * (s - c));
+        }
+
+        const a = distance(this.B, this.C);
+        const b = distance(this.A, this.C);
+        const c = distance(this.A, this.B);
+        const s = square(a, b, c);
+        const at = distance(this.A, t);
+        const bt = distance(this.B, t);
+        const ct = distance(this.C, t);
+        const q = square(a, bt, ct) + square(at, b, ct) + square(at, bt, c);
+
+        return Math.abs(s - q) &lt; 0.01;
+    }
 }
 
 const points = [
@@ -239,6 +263,7 @@ const triangles = [
 
 for (const point of points) point.Move.Subscribe(rasterize);
 for (const line of lines) line.Change.Subscribe(rasterize);
+for (const triangle of triangles) triangle.Change.Subscribe(rasterize);
 
 // console.log(...points);
 
@@ -247,6 +272,8 @@ const pixelsX = 20;
 const pixelsY = 20;
 const sizeX = 300;
 const sizeY = 300;
+const pixelX = sizeX / pixelsX;
+const pixelY = sizeY / pixelsY;
 
 for (let x = 1; x &lt; pixelsX - 1; ++x) {
     const element = document.createElementNS(`http://www.w3.org/2000/svg`, `line`);
@@ -320,6 +347,23 @@ function rasterize() {
             if (ix &gt;= 0 &amp;&amp; ix &lt; pixelsX)
             if (iy &gt;= 0 &amp;&amp; iy &lt; pixelsY) {
                 pixels[ix][iy].setAttribute(`style`, `fill: white`);
+            }
+        }
+    }
+    for (const triangle of triangles) {
+        const { min, max, floor, ceil } = Math;
+        const { A, B, C } = triangle;
+        const left   = floor(min(A.X, B.X, C.X) / pixelX);
+        const right  = ceil(max(A.X, B.X, C.X) / pixelX);
+        const top    = floor(min(A.Y, B.Y, C.Y) / pixelY);
+        const bottom = ceil(max(A.Y, B.Y, C.Y) / pixelY);
+
+        for (let x = left; x &lt; right; ++x)
+        for (let y = top; y &lt; bottom; ++y) {
+            if (x &gt;= 0 &amp;&amp; x &lt; pixelsX)
+            if (y &gt;= 0 &amp;&amp; y &lt; pixelsY)
+            if (triangle.In({ X : (x + 0.5) * pixelX, Y : (y + 0.5) * pixelY })) {
+                pixels[x][y].setAttribute(`style`, `fill: white`);
             }
         }
     }
