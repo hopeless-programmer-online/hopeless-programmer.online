@@ -1,3 +1,4 @@
+<?xml-stylesheet type="text/css" href="./rasterization.css" ?>
 <svg
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
@@ -32,9 +33,6 @@
         <line class="hp-class-delimiter" y1="70%" x1="0%" y2="70%" x2="100%" />
         <line class="hp-class-delimiter" y1="80%" x1="0%" y2="80%" x2="100%" />
         <line class="hp-class-delimiter" y1="90%" x1="0%" y2="90%" x2="100%" />
-
-        <circle class="hp-class-point" cx="45" cy="45" r="5" />
-        <circle class="hp-class-point" cx="255" cy="195" r="5" />
     </svg>
     <svg
         name="raster"
@@ -65,49 +63,108 @@
             stroke: orange;
             stroke-width: 2;
         }
+        line.hp-class-line {
+            stroke : orange;
+            stroke-width : 1;
+        }
     </style>
     <script>
         (() => {
+            let picked = null;
+
             const svg = document.currentScript.parentNode;
             const vector = svg.querySelector(`svg[name="vector"]`);
             const raster = svg.querySelector(`svg[name="raster"]`);
-            const points = vector.querySelectorAll(`circle[class="hp-class-point"]`);
 
-            let picked = null;
+            function circle(x, y) {
+                const element = document.createElementNS(`http://www.w3.org/2000/svg`, `circle`);
 
-            for (const point of points) {
-                function ondown() {
-                    point.removeEventListener(`mousedown`, ondown);
+                element.classList.add(`hp-class-point`);
+                element.setAttribute(`cx`, x);
+                element.setAttribute(`cy`, y);
+                element.setAttribute(`r`, 5);
 
-                    function onup() {
-                        document.removeEventListener(`mouseup`, onup);
-                        document.removeEventListener(`mousemove`, onmove);
-                        point.addEventListener(`mousedown`, ondown);
+                vector.appendChild(element);
 
-                        // console.log(`kek`);
-                    }
-                    function onmove(e) {
-                        const rect = vector.getBoundingClientRect();
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
+                return element;
+            }
+            function line(x1, y1, x2, y2) {
+                const element = document.createElementNS(`http://www.w3.org/2000/svg`, `line`);
 
-                        point.attributes.cx.value = x;
-                        point.attributes.cy.value = y;
+                element.classList.add(`hp-class-line`);
+                element.setAttribute(`x1`, x1);
+                element.setAttribute(`y1`, y1);
+                element.setAttribute(`x2`, x2);
+                element.setAttribute(`y2`, y2);
 
-                        rasterize();
+                vector.appendChild(element);
 
-                        // console.log(point.cx);
-                        // console.log(x);
-                    }
+                return element;
+            }
 
-                    document.addEventListener(`mouseup`, onup);
-                    document.addEventListener(`mousemove`, onmove);
+            class Point {
+                constructor({ X = 0, Y = 0 } = {}) {
+                    this.X = X;
+                    this.Y = Y;
 
-                    // console.log(`lol`);
+                    const element = circle(X, Y);
+
+                    this.element = element;
+
+                    this.onMouseDown = this.OnMouseDown.bind(this);
+                    this.onMouseUp   = this.OnMouseUp.bind(this);
+                    this.onMouseMove = this.OnMouseMove.bind(this);
+
+                    element.addEventListener(`mousedown`, this.onMouseDown);
                 }
 
-                point.addEventListener(`mousedown`, ondown);
+                OnMouseDown() {
+                    this.element.removeEventListener(`mousedown`, this.onMouseDown);
+                    document.addEventListener(`mouseup`, this.onMouseUp);
+                    document.addEventListener(`mousemove`, this.onMouseMove);
+                }
+                OnMouseUp() {
+                    document.removeEventListener(`mouseup`, this.onMouseUp);
+                    document.removeEventListener(`mousemove`, this.onMouseMove);
+                    this.element.addEventListener(`mousedown`, this.onMouseDown);
+                }
+                OnMouseMove({ clientX, clientY }) {
+                    this.X = clientX;
+                    this.Y = clientY;
+
+                    const rect = vector.getBoundingClientRect();
+                    const x = clientX - rect.left;
+                    const y = clientY - rect.top;
+
+                    this.element.attributes.cx.value = x;
+                    this.element.attributes.cy.value = y;
+
+                    rasterize();
+                }
             }
+            class Line {
+                constructor({ X1 = 0, Y1 = 0, X2 = 0, Y2 = 0 } = {}) {
+                    const l = line(X1, Y1, X2, Y2);
+                    const a = circle(X1, Y1);
+                    const b = circle(X2, Y2);
+
+                    this.begin = { X : X1, Y : Y1 };
+                    this.end   = { X : X2, Y : Y2 };
+
+                    //  this.onMouseDown =
+                }
+
+                OnMouseDown() {
+                }
+            }
+
+            const points = [
+                new Point({ X : 50, Y : 50 }),
+                new Point({ X : 100, Y : 150 }),
+            ];
+            const lines = [
+                new Line({ X1 : 10, Y1 : 10, X2 : 70, Y2 : 180 }),
+            ];
 
             // console.log(...points);
 
@@ -142,8 +199,8 @@
                 }
 
                 for (const point of points) {
-                    const x = point.attributes.cx.value;
-                    const y = point.attributes.cy.value;
+                    const x = point.X;
+                    const y = point.Y;
 
                     if (x &gt;= 0 &amp;&amp; x &lt; sizeX)
                     if (y &gt;= 0 &amp;&amp; y &lt; sizeY) {
