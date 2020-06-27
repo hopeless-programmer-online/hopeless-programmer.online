@@ -41,7 +41,7 @@ class ParagraphSectionPart extends SectionPart {
      * @override
      * @returns   {html.Element}
      */
-    _toHtml() {
+    async _toHtml() {
         return this.Paragraph.toHtml();
     }
 }

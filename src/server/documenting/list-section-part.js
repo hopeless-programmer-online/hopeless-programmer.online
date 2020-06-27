@@ -33,7 +33,7 @@ class ListSectionPart extends SectionPart {
      * @override
      * @returns   {html.Element}
      */
-    _toHtml() {
+    async _toHtml() {
         return this.List.toHtml();
     }
 }

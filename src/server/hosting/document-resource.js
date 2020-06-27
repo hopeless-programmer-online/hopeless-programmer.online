@@ -41,8 +41,8 @@ class DocumentResource extends TemplateHtmlResource {
      * @override
      * @returns   {html.Element}
      */
-    _GetContent() {
-        return this.Document.toHtml();
+    async _GetContent() {
+        return await this.Document.toHtml();
     }
 }
 
