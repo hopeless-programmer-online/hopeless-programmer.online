@@ -75,6 +75,10 @@ exports = module.exports = new h.Host({
             `nodejs.svg`,
             `sass.svg`,
             `jest.svg`,
+            `cg-2/rasterization.svg`,
+            `cg-2/rasterization.css`,
+            `cg-2/rgb.svg`,
+            `cg-2/cmy.svg`,
         ].reduce((all, name) => ({
             ...all,
             [`/media/${name}`] : new h.CachedResource({

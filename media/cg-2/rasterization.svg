@@ -22,32 +22,6 @@
         height="100%"
     >
     </svg>
-    <style>
-        line.hp-class-delimiter {
-            stroke : rgba(0,0,0,0.25);
-            stroke-width : 1;
-            stroke-dasharray : 2,2;
-        }
-        rect.hp-class-pixel {
-            fill: black;
-            stroke : gray;
-            stroke-width : 1;
-        }
-        circle.hp-class-point {
-            fill: red;
-            stroke: black;
-            stroke-width: 2;
-        }
-        circle.hp-class-point:hover {
-            fill: black;
-            stroke: orange;
-            stroke-width: 2;
-        }
-        line.hp-class-line {
-            stroke : orange;
-            stroke-width : 1;
-        }
-    </style>
     <script>
         (() => {
 const svg = document.currentScript.parentNode;
@@ -268,8 +242,8 @@ for (const triangle of triangles) triangle.Change.Subscribe(rasterize);
 // console.log(...points);
 
 const pixels = [];
-const pixelsX = 20;
-const pixelsY = 20;
+const pixelsX = 40;
+const pixelsY = 40;
 const sizeX = 300;
 const sizeY = 300;
 const pixelX = sizeX / pixelsX;
