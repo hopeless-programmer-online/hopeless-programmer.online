@@ -61,6 +61,12 @@ const code_2 = illustration(``, cpp(...[
 const image_1 = illustration(`Растеризація векторних фігур.`,
     new documenting.ImageIllustrationContent({ Url : `/media/cg-2/rasterization.svg` }),
 );
+const rgb = illustration(`Модель змішування кольорів RGB.`,
+    new documenting.ImageIllustrationContent({ Url : `/media/cg-2/rgb.svg` }),
+);
+const cmy = illustration(`Модель змішування кольорів CMY.`,
+    new documenting.ImageIllustrationContent({ Url : `/media/cg-2/cmy.svg` }),
+);
 
 
 exports = module.exports = new h.DocumentResource({
@@ -125,6 +131,10 @@ exports = module.exports = new h.DocumentResource({
                 sentence(`Основною моделлю для роботи з виводом кольору на монітор є RGB або RGBA (Red - червоний, Green - зелений, Blue - синій та Alpha - альфа), у той час як, наприклад, при друці використовується CMY (Cyan - блакитний, Magenta - пурпурний, Yellow - жовтий). `),
             ]),
             // тут моделі RGB та CMY
+            [
+                rgb,
+                cmy,
+            ],
             paragraph(...[
                 sentence(`Модель RGB передбачає, що колір виводиться на чорній поверхні за допомогою додатнього змішування трьох окремих каналів з різною інтенсивністю: червоного, зеленого та синього. `),
                 sentence(`Наприклад, якщо інтенсивність червоного каналу рівна одиниці, а решти - нулю, то ми бачимо насичений червоний колір. `),
