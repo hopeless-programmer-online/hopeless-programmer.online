@@ -77,6 +77,7 @@ exports = module.exports = new h.Host({
             `jest.svg`,
             `cg-2/rasterization.svg`,
             `cg-2/rasterization.css`,
+            `cg-2/rasterization.js`,
             `cg-2/rgb.svg`,
             `cg-2/cmy.svg`,
         ].reduce((all, name) => ({
