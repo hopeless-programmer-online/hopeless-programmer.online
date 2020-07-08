@@ -15,6 +15,9 @@ class IllustrationContent {
         if (this._toHtml === IllustrationContent.prototype._toHtml) {
             throw new Error; // @todo
         }
+        if (this._toHtml instanceof AsyncFunction); else {
+            throw new Error(`${new.target.name} does not override the IllustrationContent.prototype._toHtml method as async.`);
+        }
     }
 
     /**
@@ -22,7 +25,7 @@ class IllustrationContent {
      * @abstract
      * @returns   {html.Element}
      */
-    _toHtml() {
+    async _toHtml() {
         throw new Error; // @todo
     }
 
@@ -31,8 +34,14 @@ class IllustrationContent {
      * @returns {html.Element}
      * @throws  {Error}
      */
-    toHtml() {
-        const element = this._toHtml();
+    async toHtml() {
+        const promise = this._toHtml();
+
+        if (promise instanceof Promise); else {
+            throw new Error; // @todo
+        }
+
+        const element = await promise;
 
         if (element instanceof html.Element); else {
             throw new Error; // @todo
@@ -47,3 +56,6 @@ exports = module.exports = IllustrationContent;
 
 
 const html = require(`../html`);
+
+
+const AsyncFunction = (async () => {}).constructor;

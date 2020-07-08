@@ -33,7 +33,7 @@ class CodeIllustrationContent extends IllustrationContent {
      * @override
      * @returns   {html.Element}
      */
-    _toHtml() {
+    async _toHtml() {
         return (
             <figure class="hp-class-code" data-hp-language={deduceAttribute(this.Code.Language)}>
                 {deduceHeader(`example`, null, this.Code.Language)}

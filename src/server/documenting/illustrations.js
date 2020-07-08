@@ -23,8 +23,8 @@ class Sentences extends Array {
      * @public
      * @returns {Array<html.Element>}
      */
-    toHtml() {
-        return this.map(illustration => illustration.toHtml());
+    async toHtml() {
+        return await Promise.all(this.map(async illustration => await illustration.toHtml()));
     }
 }
 

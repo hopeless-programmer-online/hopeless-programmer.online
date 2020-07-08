@@ -27,6 +27,7 @@ class Document {
         let illustrationIndex = 1;
         let codeIndex = 1;
         let exampleIndex = 1;
+        let imageIndex = 1;
 
         Sections.forEach((section, index) => {
             if (section.__Index === null) {
@@ -57,6 +58,13 @@ class Document {
                             content.Explorer.__Index = exampleIndex;
 
                             ++exampleIndex;
+                        }
+                        else if (content instanceof ImageIllustrationContent) {
+                            if (illustration.__Title === null) {
+                                illustration.__Title = shortcuts.toParagraph(`Зображення №${imageIndex}`).Sentences;
+                            }
+
+                            ++imageIndex;
                         }
 
                         ++illustrationIndex;
@@ -113,7 +121,7 @@ class Document {
      * @public
      * @returns {html.Element}
      */
-    toHtml() {
+    async toHtml() {
         return (
             <article class="hp-class-document">
                 <header>
@@ -121,7 +129,7 @@ class Document {
                         {this.Title.toHtml()}
                     </h1>
                 </header>
-                {this.Sections.map(section => section.toHtml())}
+                {await this.Sections.toHtml()}
                 <footer>
                     <table>
                         <tbody>
@@ -146,6 +154,7 @@ const Sections = require(`./sections`);
 const IllustrationsSectionPart = require(`./illustrations-section-part`);
 const CodeIllustrationContent = require(`./code-illustration-content`);
 const ExplorerIllustrationContent = require(`./explorer-illustration-content`);
+const ImageIllustrationContent = require(`./image-illustration-content`);
 const shortcuts = require(`./shortcuts`);
 
 

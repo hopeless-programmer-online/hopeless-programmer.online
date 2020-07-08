@@ -33,7 +33,8 @@
     "@types/express": "^4.17.6",
     "@types/jest": "^25.2.1",
     "eslint": "^6.8.0",
-    "jest": "^25.3.0"
+    "jest": "^25.3.0",
+    "svgson": "^4.1.0"
   },
   "scripts": {
     "clean": "rimraf lib",

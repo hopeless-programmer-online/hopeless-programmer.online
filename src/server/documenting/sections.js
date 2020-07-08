@@ -34,8 +34,8 @@ class Sections extends Array {
      * @public
      * @returns {Array<html.Element>}
      */
-    toHtml() {
-        return this.map(section => section.toHtml());
+    async toHtml() {
+        return await Promise.all(this.map(async section => await section.toHtml()));
     }
 }
 

@@ -41,7 +41,7 @@ class IndexResource extends TemplateHtmlResource {
      * @override
      * @returns   {html.Element}
      */
-    _GetContent() {
+    async _GetContent() {
         return this.Index.toHtml();
     }
 }

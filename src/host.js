@@ -30,6 +30,7 @@ exports = module.exports = new h.Host({
         ...mapArticles(
             `require`,
             `cg-1`,
+            `cg-2`,
         ),
         // internal
         "/404" : require(`./host/404`),
@@ -74,6 +75,17 @@ exports = module.exports = new h.Host({
             `nodejs.svg`,
             `sass.svg`,
             `jest.svg`,
+            `cg-2/pipeline.svg`,
+            `cg-2/pipeline.css`,
+            `cg-2/pipeline.js`,
+            `cg-2/rasterization.svg`,
+            `cg-2/rasterization.css`,
+            `cg-2/rasterization.js`,
+            `cg-2/viewport.svg`,
+            `cg-2/screen.svg`,
+            `cg-2/screen.js`,
+            `cg-2/rgb.svg`,
+            `cg-2/cmy.svg`,
         ].reduce((all, name) => ({
             ...all,
             [`/media/${name}`] : new h.CachedResource({

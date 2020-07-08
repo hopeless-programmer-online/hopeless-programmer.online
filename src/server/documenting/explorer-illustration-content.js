@@ -33,7 +33,7 @@ class ExplorerIllustrationContent extends IllustrationContent {
      * @override
      * @returns   {html.Element}
      */
-    _toHtml() {
+    async _toHtml() {
         return this.Explorer.toHtml();
     }
 }

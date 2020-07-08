@@ -114,7 +114,7 @@ class Section {
      * @public
      * @returns {html.Element}
      */
-    toHtml() {
+    async toHtml() {
         const id = `hp-id-section-${this.Index}`;
 
         return (
@@ -123,7 +123,7 @@ class Section {
                     <a href={`#${id}`}>§</a>
                     {this.Title.toHtml()}
                 </h2>
-                {this.Parts.map(part => part.toHtml())}
+                {await Promise.all(this.Parts.map(async part => await part.toHtml()))}
             </section>
         );
     }

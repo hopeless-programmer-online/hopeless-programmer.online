@@ -34,8 +34,8 @@ class IllustrationsSectionPart extends SectionPart {
      * @override
      * @returns   {Array<html.Element>}
      */
-    _toHtml() {
-        return this.Illustrations.toHtml();
+    async _toHtml() {
+        return await this.Illustrations.toHtml();
     }
 }
 
