@@ -58,6 +58,9 @@ const code_2 = illustration(``, cpp(...[
     [ `    { +0.0f, +0.5f },` ],
     [ `};` ],
 ]));
+const pipeline = illustration(``,
+    new documenting.ImageIllustrationContent({ Url : `/media/cg-2/pipeline.svg` }),
+);
 const viewport = illustration(`Область виводу.`,
     new documenting.ImageIllustrationContent({ Url : `/media/cg-2/viewport.svg` }),
 );
@@ -95,6 +98,7 @@ exports = module.exports = new h.DocumentResource({
                 sentence(`В решті-решт, графічні примітиви перетворюються в набори пікселів на екрані, розраховується їх кінцевий колір і відбувається оновлення екрану. `),
                 sentence(`Лише після цього користувач може на власні очі побачити результат роботи конвеєра. `),
             ]),
+            pipeline,
         ]),
         section(`Графічні примітиви.`, ...[
             paragraph(...[

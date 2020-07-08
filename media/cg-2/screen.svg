@@ -4,7 +4,6 @@
     xmlns:xlink="http://www.w3.org/1999/xlink"
     width="300px"
     height="200px"
-    style="background-color: whitesmoke"
     viewBox="0 0 300 200"
 >
     <script xlink:href="./screen.js"></script>
