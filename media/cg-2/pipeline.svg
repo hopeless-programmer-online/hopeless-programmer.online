@@ -3,10 +3,8 @@
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="650px"
-    height="540px"
-    style="background-color: whitesmoke"
-    viewBox="0 0 650 540"
+    width="310px"
+    height="580px"
 >
     <script xlink:href="./pipeline.js" />
 </svg>

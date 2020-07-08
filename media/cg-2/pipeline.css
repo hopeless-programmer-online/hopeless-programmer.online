@@ -1,6 +1,12 @@
-rect {
-    fill: white;
+rect.hp-class-stage {
+    fill: antiquewhite;
     stroke: black;
+}
+rect.hp-class-group {
+    fill: transparent;
+    stroke: orangered;
+    stroke-dasharray: 8 4;
+    stroke-width: 3px;
 }
 text {
     text-anchor: middle;
