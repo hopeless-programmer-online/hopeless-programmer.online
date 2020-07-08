@@ -21,6 +21,9 @@ class HtmlResource extends Resource {
         if (this._toHtml === HtmlResource.prototype._toHtml) {
             throw new Error; // @todo
         }
+        if (this._GetContent instanceof AsyncFunction); else {
+            throw new Error(`${new.target.name} does not override the HtmlResource.prototype._toHtml method as async.`);
+        }
     }
 
     /**
@@ -40,7 +43,7 @@ class HtmlResource extends Resource {
      * @returns   {stream.Readable}
      */
     async _GetData() {
-        const string = this.toHtml().toString();
+        const string = (await this.toHtml()).toString();
         const stream = new Stream;
 
         stream.End(string);
@@ -52,7 +55,7 @@ class HtmlResource extends Resource {
      * @abstract
      * @returns   {html.Root}
      */
-    _toHtml() {
+    async _toHtml() {
         throw new Error; // @todo
     }
 
@@ -61,8 +64,14 @@ class HtmlResource extends Resource {
      * @returns {html.Root}
      * @throws  {Error}
      */
-    toHtml() {
-        const element = this._toHtml();
+    async toHtml() {
+        const promise = this._toHtml();
+
+        if (promise instanceof Promise); else {
+            throw new Error; // @todo
+        }
+
+        const element = await promise;
 
         if (element instanceof html.Root); else {
             throw new Error; // @todo
@@ -79,3 +88,6 @@ exports = module.exports = HtmlResource;
 const mime_types = require(`mime-types`);
 const html = require(`../html`);
 const Stream = require(`./stream`);
+
+
+const AsyncFunction = (async () => {}).constructor;

@@ -130,12 +130,12 @@ class Illustration {
      * @public
      * @returns {html.Element}
      */
-    toHtml() {
+    async toHtml() {
         const id = `hp-id-illustration-${this.Index}`;
 
         return (
             <figure id={id}>
-                {this.Content.toHtml()}
+                {await this.Content.toHtml()}
                 <figcaption>
                     <h3>
                         {this.Title.toHtml()}

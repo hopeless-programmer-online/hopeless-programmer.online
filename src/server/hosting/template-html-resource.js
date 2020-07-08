@@ -20,20 +20,18 @@ class TemplateHtmlResource extends HtmlResource {
         if (this._GetContent === TemplateHtmlResource.prototype._GetContent) {
             throw new Error; // @todo
         }
+        if (this._GetContent instanceof AsyncFunction); else {
+            throw new Error(`${new.target.name} does not override the TemplateHtmlResource.prototype._toHtml method as async.`);
+        }
     }
 
     /**
      * @public
-     * @type   {html.Element}
+     * @async
+     * @type   {Promise<html.Element>}
      */
     get Content() {
-        const element = this._GetContent();
-
-        if (element instanceof html.Element); else {
-            throw new Error; // @todo
-        }
-
-        return element;
+        return this.__GetContent();
     }
     /**
      * @public
@@ -52,6 +50,27 @@ class TemplateHtmlResource extends HtmlResource {
     /**
      * @protected
      * @abstract
+     * @returns   {html.Element}
+     */
+    async __GetContent() {
+        const promise = this._GetContent();
+
+        if (promise instanceof Promise); else {
+            throw new Error; // @todo
+        }
+
+        const element = await promise;
+
+        if (element instanceof html.Element); else {
+            throw new Error; // @todo
+        }
+
+        return element;
+    }
+
+    /**
+     * @protected
+     * @abstract
      * @returns   {string}
      */
     _GetTitle() {
@@ -62,7 +81,7 @@ class TemplateHtmlResource extends HtmlResource {
      * @abstract
      * @returns   {html.Element}
      */
-    _GetContent() {
+    async _GetContent() {
         throw new Error; // @todo
     }
     /**
@@ -70,8 +89,8 @@ class TemplateHtmlResource extends HtmlResource {
      * @override
      * @returns   {html.Root}
      */
-    _toHtml() {
-        return template(this.Title, this.Content).Html5;
+    async _toHtml() {
+        return template(this.Title, await this.Content).Html5;
     }
 }
 
@@ -81,3 +100,6 @@ exports = module.exports = TemplateHtmlResource;
 
 const html = require(`../html`);
 const template = require(`./html-template`);
+
+
+const AsyncFunction = (async () => {}).constructor;
