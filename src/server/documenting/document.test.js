@@ -5,7 +5,7 @@ const shortcuts = require(`./shortcuts`);
 it(`Should be function`, () => {
     expect(Document).toBeInstanceOf(Function);
 });
-it(`Should converts ho html`, () => {
+it(`Should converts ho html`, async () => {
     const document = shortcuts.document(
         [ `Document`, `title` ], {},
         shortcuts.section(
@@ -27,7 +27,7 @@ it(`Should converts ho html`, () => {
         ),
     );
 
-    expect(document.toHtml().toString()).toBe(
+    expect((await document.toHtml()).toString()).toBe(
         `<article class="hp-class-document"><!--\r\n` +
         `    --><header><!--\r\n` +
         `        --><h1><!--\r\n` +
