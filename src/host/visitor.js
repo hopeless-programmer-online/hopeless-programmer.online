@@ -1,5 +1,5 @@
-const hosting = require(`../hosting`);
-const documenting = require(`../documenting`);
+const hosting = require(`../server/hosting`);
+const documenting = require(`../server/documenting`);
 
 
 const h = hosting;
@@ -9,7 +9,6 @@ const {
     section,
     paragraph,
     sentence,
-    phrase,
     note,
     list,
     figurative,
@@ -22,23 +21,23 @@ const {
 } = s;
 
 
-const code_1 = require(`./article-4/code-1`);
-const code_2 = require(`./article-4/code-2`);
-const code_3 = require(`./article-4/code-3`);
-const code_4 = require(`./article-4/code-4`);
-const code_5 = require(`./article-4/code-5`);
-const code_6 = require(`./article-4/code-6`);
-const code_7 = require(`./article-4/code-7`);
-const code_8 = require(`./article-4/code-8`);
-const code_9 = require(`./article-4/code-9`);
-const code_10 = require(`./article-4/code-10`);
-const code_11 = require(`./article-4/code-11`);
-const code_12 = require(`./article-4/code-12`);
-const code_13 = require(`./article-4/code-13`);
-const code_14 = require(`./article-4/code-14`);
-const code_15 = require(`./article-4/code-15`);
-const code_16 = require(`./article-4/code-16`);
-const code_17 = require(`./article-4/code-17`);
+const code_1 = require(`./visitor/code-1`);
+const code_2 = require(`./visitor/code-2`);
+const code_3 = require(`./visitor/code-3`);
+const code_4 = require(`./visitor/code-4`);
+const code_5 = require(`./visitor/code-5`);
+const code_6 = require(`./visitor/code-6`);
+const code_7 = require(`./visitor/code-7`);
+const code_8 = require(`./visitor/code-8`);
+const code_9 = require(`./visitor/code-9`);
+const code_10 = require(`./visitor/code-10`);
+const code_11 = require(`./visitor/code-11`);
+const code_12 = require(`./visitor/code-12`);
+const code_13 = require(`./visitor/code-13`);
+const code_14 = require(`./visitor/code-14`);
+const code_15 = require(`./visitor/code-15`);
+const code_16 = require(`./visitor/code-16`);
+const code_17 = require(`./visitor/code-17`);
 
 const note_1    = note(`Насправді мені просто було ліньки шукати матеріал по темі. `);
 const note_2    = note(sentence(`А це нам точно знадобиться, `, link(`Мерфі гарантує`, `https://uk.wikipedia.org/wiki/%D0%97%D0%B0%D0%BA%D0%BE%D0%BD_%D0%9C%D0%B5%D1%80%D1%84%D1%96`), `!.`));
@@ -71,7 +70,7 @@ exports = module.exports = new h.DocumentResource({
         },
         section(`Передмова`, ...[
             paragraph(...[
-                sentence(link(`Відвідувач`, `https://uk.wikipedia.org/wiki/%D0%92%D1%96%D0%B4%D0%B2%D1%96%D0%B4%D1%83%D0%B2%D0%B0%D1%87_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F)`), ` (`, /*translation(), ` `, term(`visitor`),*/ `) - один з класичних `, link(`шаблонів проектування`, `https://uk.wikipedia.org/wiki/%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D0%B8_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE_%D0%B7%D0%B0%D0%B1%D0%B5%D0%B7%D0%BF%D0%B5%D1%87%D0%B5%D0%BD%D0%BD%D1%8F`), `. `),
+                sentence(link(`Відвідувач`, `https://uk.wikipedia.org/wiki/%D0%92%D1%96%D0%B4%D0%B2%D1%96%D0%B4%D1%83%D0%B2%D0%B0%D1%87_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F)`), ` (англ. visitor) - один з класичних `, link(`шаблонів проектування`, `https://uk.wikipedia.org/wiki/%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D0%B8_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE_%D0%B7%D0%B0%D0%B1%D0%B5%D0%B7%D0%BF%D0%B5%D1%87%D0%B5%D0%BD%D0%BD%D1%8F`), `. `),
                 sentence(`Про нього часто розказують як у навчальних закладах, так і на різноманітних курсах з програмування. `),
                 sentence(`Він не зав'язаний на особливості якоїсь конкретної мови, а тому (в теорії) застосувати його можна будь де. `),
             ]),

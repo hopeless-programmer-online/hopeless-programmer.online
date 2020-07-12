@@ -1,4 +1,4 @@
-const s = require(`../../documenting`).shortcuts;
+const s = require(`../../server/documenting`).shortcuts;
 
 
 exports = module.exports = s.illustration( ...[
