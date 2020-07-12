@@ -1,4 +1,4 @@
-const s = require(`../../documenting`).shortcuts;
+const s = require(`../../server/documenting`).shortcuts;
 const { lt, v, cm, c } = s;
 
 

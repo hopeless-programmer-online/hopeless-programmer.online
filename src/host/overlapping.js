@@ -1,5 +1,5 @@
-const hosting = require(`../hosting`);
-const documenting = require(`../documenting`);
+const hosting = require(`../server/hosting`);
+const documenting = require(`../server/documenting`);
 
 
 const h = hosting;
@@ -28,19 +28,19 @@ const note_5 = note(`Варто зауважити і відсутність є�
 const note_6 = note(`Це працює лише для впорядкованих областей, по типу блоків чи тіла функції. `, `Для просторів імен або класів цей підхід незастосовний. `);
 
 
-const code_1 = require(`./article-1/code-1`);
-const code_2 = require(`./article-1/code-2`);
-const code_3 = require(`./article-1/code-3`);
-const code_4 = require(`./article-1/code-4`);
-const code_5 = require(`./article-1/code-5`);
-const code_6 = require(`./article-1/code-6`);
-const code_7 = require(`./article-1/code-7`);
-const code_8 = require(`./article-1/code-8`);
-const code_9 = require(`./article-1/code-9`);
-const code_10 = require(`./article-1/code-10`);
-const code_11 = require(`./article-1/code-11`);
-const code_12 = require(`./article-1/code-12`);
-const code_13 = require(`./article-1/code-13`);
+const code_1 = require(`./overlapping/code-1`);
+const code_2 = require(`./overlapping/code-2`);
+const code_3 = require(`./overlapping/code-3`);
+const code_4 = require(`./overlapping/code-4`);
+const code_5 = require(`./overlapping/code-5`);
+const code_6 = require(`./overlapping/code-6`);
+const code_7 = require(`./overlapping/code-7`);
+const code_8 = require(`./overlapping/code-8`);
+const code_9 = require(`./overlapping/code-9`);
+const code_10 = require(`./overlapping/code-10`);
+const code_11 = require(`./overlapping/code-11`);
+const code_12 = require(`./overlapping/code-12`);
+const code_13 = require(`./overlapping/code-13`);
 
 
 exports = module.exports = new h.DocumentResource({

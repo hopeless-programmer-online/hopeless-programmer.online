@@ -29,6 +29,7 @@ exports = module.exports = new h.Host({
         // articles
         ...mapArticles(
             `overloading`,
+            `overlapping`,
             `require`,
             `cg-1`,
             `cg-2`,

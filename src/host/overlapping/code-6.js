@@ -1,5 +1,5 @@
-const s = require(`../../documenting`).shortcuts;
-const { kw, lt, v, f, a, cm, p } = s;
+const s = require(`../../server/documenting`).shortcuts;
+const { kw, lt, v, f, cm, p } = s;
 
 
 exports = module.exports = s.illustration( ...[
