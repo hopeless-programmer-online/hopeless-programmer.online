@@ -28,6 +28,10 @@ exports = module.exports = new h.Host({
         "/about" : require(`./host/about`),
         // articles
         ...mapArticles(
+            `overloading`,
+            `overlapping`,
+            `keywords`,
+            `visitor`,
             `require`,
             `cg-1`,
             `cg-2`,

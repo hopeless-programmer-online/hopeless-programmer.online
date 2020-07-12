@@ -1,0 +1,35 @@
+const s = require(`../../server/documenting`).shortcuts;
+
+
+exports = module.exports = s.illustration( ...[
+    s.sentence(`Використовуючи динамічну типізацію можна передавати в методи додаткові аргументи.`),
+    s.js(
+        [ s.kw(`class`), ` `, s.c(`Visitor`), ` {` ],
+        [ `    `, s.f(`Visit`), `(`, s.v(`object`), `, ...`, s.v(`others`), `) {` ],
+        [ `        `, s.kw(`return`), ` `, s.a(`object`), `.`, s.f(`Accept`), `(`, s.kw(`this`), `, ...`, s.a(`others`), `);` ],
+        [ `    }` ],
+        [ `    ...` ],
+        [ `}` ],
+        [ `...` ],
+        [ s.kw(`class`), ` `, s.c(`Number`), ` `, s.kw(`extends`), ` `, s.c(`Object`), ` {` ],
+        [ `    `, s.f(`Accept`), `(`, s.v(`visitor`), `, ...`, s.v(`others`), `) {` ],
+        [ `        `, s.kw(`return`), ` `, s.a(`visitor`), `.`, s.f(`VisitNumber`), `(`, s.kw(`this`), `, ...`, s.a(`others`), `);` ],
+        [ `    }` ],
+        [ `}` ],
+        [ `...` ],
+        [ s.kw(`class`), ` `, s.c(`JSON`), ` `, s.kw(`extends`), ` `, s.c(`Visitor`), ` {` ],
+        [ `    `, s.f(`VisitNumber`), `(`, s.v(`number`), `, `, s.v(`x`), `, `, s.v(`y`), `, `, s.v(`z`), `) { `, s.cm(`// заміщений`) ],
+        [ `        `, s.kw(`return`), ` `, s.lt(`\`number: `), /*ltc*/s.lt(`\${`), s.a(`x`), /*ltc*/s.lt(`}`), s.lt(`, `), /*ltc*/s.lt(`\${`), s.a(`y`), /*ltc*/s.lt(`}`), s.lt(`, `), /*ltc*/s.lt(`\${`), s.a(`z`), /*ltc*/s.lt(`}`), s.lt(`\``), `;` ],
+        [ `    }` ],
+        [ `    `, s.f(`VisitString`), `(`, s.v(`string`), `, `, s.v(`x`), `) {       `, s.cm(`// заміщений`) ],
+        [ `        `, s.kw(`return`), ` `, s.lt(`\`string: `), /*ltc*/s.lt(`\${`), s.a(`x`), /*ltc*/s.lt(`}`), s.lt(`\``), `;` ],
+        [ `    }` ],
+        [ `    ...` ],
+        [ `}` ],
+        [ `...` ],
+        [ s.kw(`let`), ` `, s.v(`json`), `   = `, s.kw(`new`), ` `, s.c(`JSON`), `();` ],
+        [ s.kw(`let`), ` `, s.v(`object`), ` = `, s.kw(`new`), ` `, s.c(`Number`), `();` ],
+        [ `` ],
+        [ s.kw(`let`), ` `, s.v(`result`), ` = `, s.a(`json`), `.`, s.f(`Visit`), `(`, s.v(`object`), `, `, s.lt(`1`), `, `, s.lt(`2`), `, `, s.lt(`3`), `); `, s.cm(`// \`number: 1, 2, 3\``) ],
+    ),
+]);
