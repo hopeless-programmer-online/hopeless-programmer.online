@@ -30,6 +30,7 @@ exports = module.exports = new h.Host({
         ...mapArticles(
             `overloading`,
             `overlapping`,
+            `keywords`,
             `require`,
             `cg-1`,
             `cg-2`,

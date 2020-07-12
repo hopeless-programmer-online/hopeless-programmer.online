@@ -1,5 +1,5 @@
-const hosting = require(`../hosting`);
-const documenting = require(`../documenting`);
+const hosting = require(`../server/hosting`);
+const documenting = require(`../server/documenting`);
 
 
 const h = hosting;
@@ -19,25 +19,25 @@ const {
 } = s;
 
 
-const code_1 = require(`./article-2/code-1`);
-const code_2 = require(`./article-2/code-2`);
-const code_3 = require(`./article-2/code-3`);
-const code_4 = require(`./article-2/code-4`);
-const code_5 = require(`./article-2/code-5`);
-const code_6 = require(`./article-2/code-6`);
-const code_7 = require(`./article-2/code-7`);
-const code_8 = require(`./article-2/code-8`);
-const code_9 = require(`./article-2/code-9`);
-const code_10 = require(`./article-2/code-10`);
-const code_11 = require(`./article-2/code-11`);
-const code_12 = require(`./article-2/code-12`);
-const code_13 = require(`./article-2/code-13`);
+const code_1 = require(`./keywords/code-1`);
+const code_2 = require(`./keywords/code-2`);
+const code_3 = require(`./keywords/code-3`);
+const code_4 = require(`./keywords/code-4`);
+const code_5 = require(`./keywords/code-5`);
+const code_6 = require(`./keywords/code-6`);
+const code_7 = require(`./keywords/code-7`);
+const code_8 = require(`./keywords/code-8`);
+const code_9 = require(`./keywords/code-9`);
+const code_10 = require(`./keywords/code-10`);
+const code_11 = require(`./keywords/code-11`);
+const code_12 = require(`./keywords/code-12`);
+const code_13 = require(`./keywords/code-13`);
 
 
 exports = module.exports = new h.DocumentResource({
     Document : document([ `Думки вголос. `, `Зарезервовані слова. ` ],
         {
-            Date : new Date(`2019-01-22T00:00:00.000Z`),
+            Date : new Date(`2019-02-24T00:00:00.000Z`),
         },
         section(``, ...[
             paragraph(...[
