@@ -1,5 +1,5 @@
-const hosting = require(`../hosting`);
-const documenting = require(`../documenting`);
+const hosting = require(`../server/hosting`);
+const documenting = require(`../server/documenting`);
 
 
 const h = hosting;
@@ -20,13 +20,13 @@ const {
 } = s;
 
 
-const code_1 = require(`./article-3/code-1`);
-const code_2 = require(`./article-3/code-2`);
-const code_3 = require(`./article-3/code-3`);
-const code_4 = require(`./article-3/code-4`);
-const code_5 = require(`./article-3/code-5`);
-const code_6 = require(`./article-3/code-6`);
-const code_7 = require(`./article-3/code-7`);
+const code_1 = require(`./overloading/code-1`);
+const code_2 = require(`./overloading/code-2`);
+const code_3 = require(`./overloading/code-3`);
+const code_4 = require(`./overloading/code-4`);
+const code_5 = require(`./overloading/code-5`);
+const code_6 = require(`./overloading/code-6`);
+const code_7 = require(`./overloading/code-7`);
 
 const note_1 = note(sentence(`Я буду використовувати терміни `, /*term*/(`перевантаження`), ` або `, /*term*/(`перевантаження функцій`), ` маючи на увазі загальний підхід, який також включає перевантаження методів, `, link(`операторів`, `https://uk.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%B2%D0%B0%D0%BD%D1%82%D0%B0%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F_%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%96%D0%B2`), `, функторів, etc.. `));
 
