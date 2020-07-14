@@ -3,7 +3,7 @@ const s = require(`../../server/documenting`).shortcuts;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Явна вказівка на те, що метод потрібно перекрити, а не замістити.`),
-    s.js(
+    s.cpp(
         [ `class CinnamonBaker:` ],
         [ `    public Baker` ],
         [ `{` ],

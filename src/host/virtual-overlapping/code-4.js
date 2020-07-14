@@ -3,7 +3,7 @@ const s = require(`../../server/documenting`).shortcuts;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Кориця.`),
-    s.js(
+    s.cpp(
         [ `// пиріг з корицею` ],
         [ `class CinnamonPie:` ],
         [ `    public Pie` ],

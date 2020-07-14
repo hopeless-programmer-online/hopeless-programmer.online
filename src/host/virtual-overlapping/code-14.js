@@ -3,7 +3,7 @@ const s = require(`../../server/documenting`).shortcuts;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Перша стратегія обходу даної вади - назвати методи довгими і надмірними іменами.`),
-    s.js(
+    s.cpp(
         [ `class Pie` ],
         [ `{` ],
         [ `};` ],

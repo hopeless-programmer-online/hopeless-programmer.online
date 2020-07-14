@@ -3,7 +3,7 @@ const s = require(`../../server/documenting`).shortcuts;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Звичайни метод викликає віртуальний, який в свою чергу забезпечує поліморфізм.`),
-    s.js(
+    s.cpp(
         [ `class Pie` ],
         [ `{` ],
         [ `};` ],

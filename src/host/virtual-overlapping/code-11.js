@@ -3,7 +3,7 @@ const s = require(`../../server/documenting`).shortcuts;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Ось як це могло б працювати.`),
-    s.js(
+    s.cpp(
         [ `void process_interface(Baker* baker)` ],
         [ `{` ],
         [ `    // тут ми отримуємо Pie` ],

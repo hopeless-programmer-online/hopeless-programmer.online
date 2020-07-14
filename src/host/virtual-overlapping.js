@@ -16,6 +16,7 @@ const {
     c,
     v,
     kw,
+    cs,
 } = s;
 
 
@@ -58,6 +59,9 @@ const CinnamonPie                = cpp(c(`CinnamonPie`));
 const CinnamonPieP               = cpp(c(`CinnamonPie`), `*`);
 const std_shared_ptr_Pie         = cpp(v(`std`), `::`, c(`shared_ptr`), `<`, c(`Pie`), `>`);
 const std_shared_ptr_CinnamonPie = cpp(v(`std`), `::`, c(`shared_ptr`), `<`, c(`CinnamonPie`), `>`);
+const shared_ptr                 = cs(c(`shared_ptr`));
+const IType                      = cs(c(`IType`));
+const IVariable                  = cs(c(`IVariable`));
 
 
 exports = module.exports = new h.DocumentResource({
@@ -152,7 +156,7 @@ exports = module.exports = new h.DocumentResource({
                 sentence(`Справа в тому що класи `, std_shared_ptr_Pie, ` та `, std_shared_ptr_CinnamonPie, ` не є коваріантними. `),
                 sentence(`Це природно, адже вони навіть не зв'язані ієрархією. `),
                 sentence(`Такий зв'язок мають лише аргументи цих шаблонів, що, в принципі, погоду не змінює. `),
-                sentence(`Привести шаблони до такої ж ієрархії теж не варіант`, /*note_2,*/ `... що ж робити? `),
+                sentence(`Привести шаблони до такої ж ієрархії теж не варіант`, note(`Тих засобів, якими оперують шаблони в С++, в загальному випадку може бути недостатньо.`), `... що ж робити? `),
             ),
             paragraph(
                 sentence(`Можна було б провернути хитрий трюк `, code_10, `. `),
@@ -184,7 +188,7 @@ exports = module.exports = new h.DocumentResource({
                 sentence(`Окрім цього, такий стан справ не дуже виправданий. `),
                 sentence(`Наприклад, в мові програмування `, link(`C#`, csharp), ` подібної проблеми не існує. `),
                 sentence(`Ми вільні як заміщувати віртуальні методи, так і перекривати їх. `),
-                sentence(`Єдиний недолік - не вийде зробити це одночасно, в тілі одного класу`, /*note_3,*/ ` `, code_12, `. `),
+                sentence(`Єдиний недолік - не вийде зробити це одночасно, в тілі одного класу`, note([ `В C# дану задачу можна було б вирішити і набагато простіше. `, `Але задля коректності порівняння механізмів мови C# та С++ я наклав додаткові умови. `, sentence(`Зокрема я використав шаблонний клас для `, shared_ptr, ` замість вбудованих посилань та оголосив `, IType, ` і `, IVariable, ` як абстрактні класи, а не як інтерфейси. `), `Таким чином порівняння є більш справедливим, оскільки ми вирішуємо одну і ту ж задачу одними і тими ж методами. ` ]), ` `, code_12, `. `),
             ),
             [
                 code_12,

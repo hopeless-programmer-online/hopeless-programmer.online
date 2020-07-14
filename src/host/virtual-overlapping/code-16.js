@@ -3,7 +3,7 @@ const s = require(`../../server/documenting`).shortcuts;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Тепер похідний клас може в деякому розумінні і перекрити і замістити необхідний метод.`),
-    s.js(
+    s.cpp(
         [ `class CinnamonPie: public Pie` ],
         [ `{` ],
         [ `};` ],

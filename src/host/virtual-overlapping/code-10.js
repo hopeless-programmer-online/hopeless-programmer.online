@@ -3,7 +3,7 @@ const s = require(`../../server/documenting`).shortcuts;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Спроба одночасно і замістити, і перекрити віртуальний метод.`),
-    s.js(
+    s.cpp(
         [ `// "корицевий" пекар` ],
         [ `class CinnamonBaker:` ],
         [ `    public Baker` ],

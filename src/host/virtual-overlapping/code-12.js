@@ -3,7 +3,7 @@ const s = require(`../../server/documenting`).shortcuts;
 
 exports = module.exports = s.illustration( ...[
     s.sentence(`Ось що про нашу проблему думає C#.`),
-    s.js(
+    s.cs(
         [ `// шаблон для імітації розумних вказівників` ],
         [ `class shared_ptr<T> {}` ],
         [ `` ],
