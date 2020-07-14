@@ -19,22 +19,22 @@ const {
 } = s;
 
 
-// const code_1 = require(`./article-4/code-1`);
-// const code_2 = require(`./article-4/code-2`);
-// const code_3 = require(`./article-4/code-3`);
-// const code_4 = require(`./article-4/code-4`);
-// const code_5 = require(`./article-4/code-5`);
-// const code_6 = require(`./article-4/code-6`);
-// const code_7 = require(`./article-4/code-7`);
-// const code_8 = require(`./article-4/code-8`);
-// const code_9 = require(`./article-4/code-9`);
-// const code_10 = require(`./article-4/code-10`);
-// const code_11 = require(`./article-4/code-11`);
-// const code_12 = require(`./article-4/code-12`);
-// const code_13 = require(`./article-4/code-13`);
-// const code_14 = require(`./article-4/code-14`);
-// const code_15 = require(`./article-4/code-15`);
-// const code_16 = require(`./article-4/code-16`);
+const code_1 = require(`./virtual-overlapping/code-1`);
+const code_2 = require(`./virtual-overlapping/code-2`);
+const code_3 = require(`./virtual-overlapping/code-3`);
+const code_4 = require(`./virtual-overlapping/code-4`);
+const code_5 = require(`./virtual-overlapping/code-5`);
+const code_6 = require(`./virtual-overlapping/code-6`);
+const code_7 = require(`./virtual-overlapping/code-7`);
+const code_8 = require(`./virtual-overlapping/code-8`);
+const code_9 = require(`./virtual-overlapping/code-9`);
+const code_10 = require(`./virtual-overlapping/code-10`);
+const code_11 = require(`./virtual-overlapping/code-11`);
+const code_12 = require(`./virtual-overlapping/code-12`);
+const code_13 = require(`./virtual-overlapping/code-13`);
+const code_14 = require(`./virtual-overlapping/code-14`);
+const code_15 = require(`./virtual-overlapping/code-15`);
+const code_16 = require(`./virtual-overlapping/code-16`);
 
 const abstract_class_wiki = `https://uk.wikipedia.org/wiki/%D0%90%D0%B1%D1%81%D1%82%D1%80%D0%B0%D0%BA%D1%82%D0%BD%D0%B8%D0%B9_%D0%BA%D0%BB%D0%B0%D1%81`;
 const covariance_wiki = `https://uk.wikipedia.org/wiki/%D0%9A%D0%BE%D0%B2%D0%B0%D1%80%D1%96%D0%B0%D0%BD%D1%82%D0%BD%D1%96%D1%81%D1%82%D1%8C_%D1%96_%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%B0%D0%B2%D0%B0%D1%80%D1%96%D0%B0%D0%BD%D1%82%D0%BD%D1%96%D1%81%D1%82%D1%8C_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F)`;
@@ -83,14 +83,14 @@ exports = module.exports = new h.DocumentResource({
         section(`Мета?`, ...[
             paragraph(...[
                 sentence(`Розглянемо шаблон проектування `, s.link(`фабричний метод`, factory_method_wiki), `. `),
-                sentence(`Його ідея полягає в тому, що ми делегуємо деякому об'єкту - фабриці - створення інших об'єктів (див. `, /*reference(require(`./code_1.js`)),*/ `). `),
+                sentence(`Його ідея полягає в тому, що ми делегуємо деякому об'єкту - фабриці - створення інших об'єктів `, code_1, `. `),
                 sentence(`При цьому і продукт який повертає фабрика, і метод його створення є поліморфними. `),
-                sentence(`Такий підхід дозволяє розширювати продукт та змінювати алгоритм його попередньої обробки, не втручаючись в код який цей продукт використовує (див. `, /*reference(require(`./code_2.js`)),*/ `). `),
+                sentence(`Такий підхід дозволяє розширювати продукт та змінювати алгоритм його попередньої обробки, не втручаючись в код який цей продукт використовує `, code_2, `. `),
             ]),
-            // [
-            //     require(`./code_1.js`),
-            //     require(`./code_2.js`),
-            // ],
+            [
+                code_1,
+                code_2,
+            ],
             paragraph(...[
                 sentence(`Шаблон фабричний метод є дуже популярним, оскільки він дає змогу системі `, s.link(`розширюватись`, open_close_wiki), ` і робить користувачів залежними не від реалізацій, а `, s.link(`від абстракцій`, dependency_inversion_wiki), `. `),
                 sentence(`Проте реалізація цього шаблону в С++ може зіштовхнутись з проблемами. `),
@@ -105,32 +105,32 @@ exports = module.exports = new h.DocumentResource({
             paragraph(...[
                 sentence(`В якості прикладу ми розглянемо кондитерські вироби. `),
                 sentence(`Зокрема, пироги. `),
-                sentence(`Нам потрібен пекар який здатен їх пекти (див. `, /*reference(require(`./code_3.js`)),*/ `). `),
-                sentence(`Причому пекарі та пироги розділені на два конкуруючі табори: пекарі які печуть пироги з корицею (див. `, /*reference(require(`./code_4.js`)),*/ `) та пекарі які печуть пироги з ірисом (див. `, /*reference(require(`./code_5.js`)),*/ `). `),
+                sentence(`Нам потрібен пекар який здатен їх пекти `, code_3, `. `),
+                sentence(`Причому пекарі та пироги розділені на два конкуруючі табори: пекарі які печуть пироги з корицею `, code_4, ` та пекарі які печуть пироги з ірисом `, code_5, `. `),
                 sentence(`В даному випадку пекар виступає фабрикою, а пиріг - продуктом цієї фабрики. `),
             ]),
-            // [
-            //     require(`./code_3.js`),
-            //     require(`./code_4.js`),
-            //     require(`./code_5.js`),
-            // ],
+            [
+                code_3,
+                code_4,
+                code_5,
+            ],
         ]),
         section(`Час покращувати код!`, ...[
             paragraph(...[
                 sentence(`Можна звернути увагу на те, що метод `, CinnamonBaker_Bake, ` завжди повертає екземпляр класу `, CinnamonPie, `. `),
                 sentence(`Це важливо, адже можуть існувати користувачі які працює з класом `, CinnamonBaker, ` безпосередньо`, note(`Насправді мені просто було ліньки шукати матеріал по темі. `), `. `),
                 sentence(`В такому випадку вони могли б працювати з класом `, CinnamonPie, ` замість `, Pie, `. `),
-                sentence(`Але через те що `, CinnamonBaker_Bake, ` повертає `, PieP, ` а не `, CinnamonPieP, ` їм доведеться виконувати зайве приведення, та ще й вручну (див. `, /*reference(require(`./code_6.js`)),*/ `). `),
+                sentence(`Але через те що `, CinnamonBaker_Bake, ` повертає `, PieP, ` а не `, CinnamonPieP, ` їм доведеться виконувати зайве приведення, та ще й вручну `, code_6, `. `),
             ]),
             paragraph(...[
                 sentence(`Аби запобігти цьому ми можемо використати той факт що класи `, Pie, ` та `, CinnamonPie, ` `, link(`коваріанті`, covariance_wiki), `. `),
-                sentence(`Це дозволяє нам замінити тип результату методу `, CinnamonBaker_Bake, ` при `, link(`заміщенні`, method_override), ` та повертати `, CinnamonPieP, ` замість `, PieP, ` (див. `, /*reference(require(`./code_7.js`)),*/ `). `),
+                sentence(`Це дозволяє нам замінити тип результату методу `, CinnamonBaker_Bake, ` при `, link(`заміщенні`, method_override), ` та повертати `, CinnamonPieP, ` замість `, PieP, ` `, code_7, `. `),
                 sentence(`Аналогічно можна вчинити і з `, figurative(`ірисовими`), ` класами. `),
             ]),
-            // [
-            //     require(`./code_6.js`),
-            //     require(`./code_7.js`),
-            // ],
+            [
+                code_6,
+                code_7,
+            ],
         ]),
         section(`Розумні вказівники?`,
             paragraph(
@@ -140,14 +140,14 @@ exports = module.exports = new h.DocumentResource({
             ),
             paragraph(
                 sentence(`Було б просто чудово якби ми могли усього лише замінити `, figurative(`зірочки`), ` на `, std_shared_ptr, ` і не докладати зайвих зусиль. `),
-                sentence(`Але С++ не дозволить зробити це так просто (див. `, /*reference(require(`./code_8.js`)),*/ ` та `, /*reference(require(`./code_9.js`)),*/ `). `),
+                sentence(`Але С++ не дозволить зробити це так просто `, code_8, code_9, `. `),
                 sentence(`З інтерфейсом - абстрактними класами `, Pie, ` та `, Baker, ` - жодних проблем, на нього подібна заміна ніяк не вплине. `),
                 sentence(`А от реалізація зіштовхнеться з труднощами... `),
             ),
-            // [
-            //     require(`./code_8.js`),
-            //     require(`./code_9.js`),
-            // ],
+            [
+                code_8,
+                code_9,
+            ],
             paragraph(
                 sentence(`Справа в тому що класи `, std_shared_ptr_Pie, ` та `, std_shared_ptr_CinnamonPie, ` не є коваріантними. `),
                 sentence(`Це природно, адже вони навіть не зв'язані ієрархією. `),
@@ -155,22 +155,22 @@ exports = module.exports = new h.DocumentResource({
                 sentence(`Привести шаблони до такої ж ієрархії теж не варіант`, /*note_2,*/ `... що ж робити? `),
             ),
             paragraph(
-                sentence(`Можна було б провернути хитрий трюк (див. `, /*reference(require(`./code_10.js`)),*/ `). `),
+                sentence(`Можна було б провернути хитрий трюк `, code_10, `. `),
                 sentence(`По-перше, потрібно замістити віртуальний метод `, Bake, ` з класу `, Baker, `, тобто реалізувати його. `),
                 sentence(`По-друге, треба оголосити в класі `, CinnamonBaker, ` новий метод і перекрити попередній, той що оголошено в базовому класі `, Baker, `. `),
                 sentence(`Цей новий метод повертатиме `, std_shared_ptr_CinnamonPie, ` і може взагалі бути не віртуальним. `),
             ),
-            // [
-            //     require(`./code_10.js`),
-            // ],
+            [
+                code_10,
+            ],
             paragraph(
-                sentence(`Таким чином ми могли б вбити двох зайців одним пострілом (див. `, /*reference(require(`./code_11.js`)),*/ `)! `),
+                sentence(`Таким чином ми могли б вбити двох зайців одним пострілом `, code_11, `! `),
                 sentence(`Користувач, що буде працювати з `, CinnamonBaker, ` через `, Baker, ` буде звертатись до заміщеного методу `, Bake, `, який повертає `, std_shared_ptr_Pie, `. `),
                 sentence(`Якщо ж працювати з об'єктом через основний клас - `, CinnamonBaker, ` - ми будемо звертатись до перекритого методу `, Bake, ` і отримувати `, std_shared_ptr_CinnamonPie, `. `),
             ),
-            // [
-            //     require(`./code_11.js`),
-            // ],
+            [
+                code_11,
+            ],
         ),
         section(`Зруйновані надії, розбиті серця...`,
             paragraph(
@@ -184,19 +184,19 @@ exports = module.exports = new h.DocumentResource({
                 sentence(`Окрім цього, такий стан справ не дуже виправданий. `),
                 sentence(`Наприклад, в мові програмування `, link(`C#`, csharp), ` подібної проблеми не існує. `),
                 sentence(`Ми вільні як заміщувати віртуальні методи, так і перекривати їх. `),
-                sentence(`Єдиний недолік - не вийде зробити це одночасно, в тілі одного класу`, /*note_3,*/ ` (див. `, /*reference(require(`./code_12.js`)),*/ `). `),
+                sentence(`Єдиний недолік - не вийде зробити це одночасно, в тілі одного класу`, /*note_3,*/ ` `, code_12, `. `),
             ),
-            // [
-            //     require(`./code_12.js`),
-            // ],
+            [
+                code_12,
+            ],
             paragraph(
                 sentence(`Цікаво, що заважало реалізувати подібне в С++? `),
                 sentence(`Як на мене, то мові явно не вистачає службового слова яке б вказувало що даний віртуальний метод потрібно перекрити а не замістити. `),
-                sentence(`Можливо таким службовим словом міг би стати `, cpp(kw(`overlap`, `%special-1%`)), ` (див. `, /*reference(require(`./code_13.js`)),*/ `). `),
+                sentence(`Можливо таким службовим словом міг би стати `, cpp(kw(`overlap`, `%special-1%`)), ` `, code_13, `. `),
             ),
-            // [
-            //     require(`./code_13.js`),
-            // ],
+            [
+                code_13,
+            ],
         ),
         section(`Милиці та ве́лики!`,
             paragraph(
@@ -206,29 +206,29 @@ exports = module.exports = new h.DocumentResource({
             paragraph(
                 sentence(`Перша стратегія банальна і проста - ми просто дамо другому методу інше ім'я. `),
                 sentence(`Так, це не дуже гарно, але принаймні це працює. `),
-                sentence(`Якщо ми маємо можливість змінювати базовий клас то є сенс обізвати методи відповідно до назви класів які вони повертають (див. `, /*reference(require(`./code_14.js`)),*/ `). `),
+                sentence(`Якщо ми маємо можливість змінювати базовий клас то є сенс обізвати методи відповідно до назви класів які вони повертають `, code_14, `. `),
             ),
-            // [
-            //     require(`./code_14.js`),
-            // ],
+            [
+                code_14,
+            ],
             paragraph(
                 sentence(`Але є і інша стратегія, причому вона дозволяє зберегти однакові назви публічних методів. `),
                 sentence(`Оскільки віртуальні методи перекривати не можна - ми будемо перекривати звичайні. `),
-                sentence(`Але щоб забезпечити поліморфізм ми введемо додатковий віртуальний метод який і буде надавати змогу змінити поведінку в похідних класах (див. `, /*reference(require(`./code_15.js`)),*/ `). `),
+                sentence(`Але щоб забезпечити поліморфізм ми введемо додатковий віртуальний метод який і буде надавати змогу змінити поведінку в похідних класах `, code_15, `. `),
                 sentence(`В даному випадку метод `, Bake, ` не віртуальний, його можна перекрити. `),
                 sentence(`Але доки його викликають через посилання на базовий клас `, Baker, ` він завжди буде повертати `, std_shared_ptr_Pie, `. `),
             ),
-            // [
-            //     require(`./code_15.js`),
-            // ],
+            [
+                code_15,
+            ],
             paragraph(
                 sentence(`При реалізації похідного класу нам необхідно замістити `, cpp(f(`BakePie`), `()`), `. `),
                 sentence(`Тут ми зможемо проводити ручне приведення типів, перетворювати `, std_shared_ptr_CinnamonPie, ` в `, std_shared_ptr_Pie, `. `),
-                sentence(`Але з іншого боку у нас зберігається можливість перекрити `, Bake, ` і повертати саме той клас, який є актуальним при роботі з `, CinnamonBaker, ` (див. `, /*reference(require(`./code_16.js`)),*/ `). `),
+                sentence(`Але з іншого боку у нас зберігається можливість перекрити `, Bake, ` і повертати саме той клас, який є актуальним при роботі з `, CinnamonBaker, ` `, code_16, `. `),
             ),
-            // [
-            //     require(`./code_16.js`),
-            // ],
+            [
+                code_16,
+            ],
         ),
         section(`Підсумки`,
             paragraph(
