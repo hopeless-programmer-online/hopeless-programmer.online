@@ -33,6 +33,7 @@ exports = module.exports = new h.Host({
             `keywords`,
             `visitor`,
             `virtual-overlapping`,
+            `segregation`,
             `require`,
             `cg-1`,
             `cg-2`,
