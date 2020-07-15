@@ -1,5 +1,6 @@
 const hosting = require(`../server/hosting`);
 const documenting = require(`../server/documenting`);
+const { illustration } = require("../server/documenting/shortcuts");
 
 
 const h = hosting;
@@ -21,7 +22,166 @@ const {
 } = s;
 
 
-// const code_1 = require(`./visitor/code-1`);
+const code_1 = illustration(`...`, ...[
+    js(...[
+        [ `const BaseVisitor = CreateVisitor(Boolean, Number, String);` ],
+        [ `` ],
+        [ `class MyVisitor extends BaseVisitor {` ],
+        [ `    VisitBoolean(boolean) {` ],
+        [ `        return \`this is boolean: \${boolean}\`;` ],
+        [ `    }` ],
+        [ `    VisitNumber(number) {` ],
+        [ `        return \`this is number: \${number}\`;` ],
+        [ `    }` ],
+        [ `    VisitString(string) {` ],
+        [ `        return \`this is string: \${string}\`;` ],
+        [ `    }` ],
+        [ `}` ],
+        [ `const myVisitor = new MyVisitor();` ],
+        [ `` ],
+        [ `console.log(myVisitor.Visit(5)); // this is number: 5` ],
+    ]),
+]);
+const code_2 = illustration(`...`, ...[
+    js(...[
+        [ `const BaseVisitor = CreateVisitor(Boolean, Number, String);` ],
+        [ `` ],
+        [ `class DerivedVisitor extends BaseVisitor {` ],
+        [ `    [BaseVisitor.GetVisitKey(Boolean)](boolean) {` ],
+        [ `        return \`this is boolean: \${boolean}\`;` ],
+        [ `    }` ],
+        [ `    [BaseVisitor.GetVisitKey(Number)](number) {` ],
+        [ `        return \`this is number: \${number}\`;` ],
+        [ `    }` ],
+        [ `    [BaseVisitor.GetVisitKey(String)](string) {` ],
+        [ `        return \`this is string: \${string}\`;` ],
+        [ `    }` ],
+        [ `}` ],
+        [ `` ],
+        [ `const visitor = new DerivedVisitor();` ],
+        [ `` ],
+        [ `console.log(visitor.Visit(5)); // "this is number: 5"` ],
+    ]),
+]);
+const code_3 = illustration(`...`, ...[
+    js(...[
+        [ `function CreateVisitor(...targets) {` ],
+        [ `    // створюємо кляч для методу який відіграватиме роль accept` ],
+        [ `    const accept = Symbol();` ],
+        [ `    // створюємо ключ для кожного класу який ми збираємось відвідувати` ],
+        [ `    const targetsKeys = new Map(targets.map(target => [ target, Symbol() ]));` ],
+        [ `` ],
+        [ `    // створюємо базовий клас відвідувач який буде перевантажено в майбутньому` ],
+        [ `    class BaseVisitor {` ],
+        [ `        static GetVisitKey(target) {` ],
+        [ `            return targetKeys.get(target);` ],
+        [ `        }` ],
+        [ `` ],
+        [ `        Visit(something) {` ],
+        [ `            // метод something[accept] перенаправить виклик у інший метод цього класу` ],
+        [ `            return something[accept](this);` ],
+        [ `        }` ],
+        [ `    }` ],
+        [ `` ],
+        [ `    for (const [ target, key ] of targetsKeys) {` ],
+        [ `        // додаємо до відвідуваних класів метод для перенаправлення` ],
+        [ `        target.prototype[accept] = function (visitor) {` ],
+        [ `            // тут викликається той метод з BaseVisitor який відповідає типу target` ],
+        [ `            return visitor[key](this);` ],
+        [ `        }` ],
+        [ `` ],
+        [ `        // додаємо порожній метод до якого буде перенаправлено виклик з BaseVisitor.Visit` ],
+        [ `        BaseVisitor.prototype[key] = function() {` ],
+        [ `        }` ],
+        [ `    }` ],
+        [ `` ],
+        [ `    return BaseVisitor;` ],
+        [ `}` ],
+    ]),
+]);
+const code_4 = illustration(`...`, ...[
+    js(...[
+        [ `function CreateVisitor(...targets) {` ],
+        [ `    // створюємо кляч для методу який відіграватиме роль accept` ],
+        [ `    const accept = Symbol();` ],
+        [ `    // створюємо ключ для кожного класу який ми збираємось відвідувати` ],
+        [ `    const targetsKeys = new Map(targets.map(target => [ target, Symbol() ]));` ],
+        [ `    const visitOtherKey = Symbol();` ],
+        [ `    const visitUnspecifiedKey = Symbol();` ],
+        [ `` ],
+        [ `    // створюємо базовий клас відвідувач який буде перевантажено в майбутньому` ],
+        [ `    class BaseVisitor {` ],
+        [ `        static get VisitOtherKey() {` ],
+        [ `            return visitOtherKey;` ],
+        [ `        }` ],
+        [ `        static get VisitUnspecifiedKey() {` ],
+        [ `            return visitUnspecifiedKey;` ],
+        [ `        }` ],
+        [ `` ],
+        [ `        static GetVisitKey(target) {` ],
+        [ `            return targetKeys.get(target);` ],
+        [ `        }` ],
+        [ `` ],
+        [ `        Visit(something, ...other) {` ],
+        [ `            // метод something[accept] перенаправить виклик у інший метод цього класу` ],
+        [ `            return something[accept](this, ...other);` ],
+        [ `        }` ],
+        [ `    }` ],
+        [ `` ],
+        [ `    for (const [ target, key ] of targetsKeys) {` ],
+        [ `        // додаємо до відвідуваних класів метод для перенаправлення` ],
+        [ `        target.prototype[accept] = function (visitor, ...other) {` ],
+        [ `            // тут викликається той метод з BaseVisitor який відповідає типу target` ],
+        [ `            return visitor[key](this, ...other);` ],
+        [ `        }` ],
+        [ `` ],
+        [ `        // додаємо порожній метод до якого буде перенаправлено виклик з BaseVisitor.Visit` ],
+        [ `        BaseVisitor.prototype[key] = function() {` ],
+        [ `            // якщо метод не заміщено то виклик скеровується в visitOtherKey` ],
+        [ `            return this[visitOtherKey]();` ],
+        [ `        }` ],
+        [ `    }` ],
+        [ `` ],
+        [ `    // об'єкти які не вказані в targets будуть спрямовувати виклик в visitUnspecifiedKey` ],
+        [ `    Object.prototype[accept] = function(visitor, ...other) {` ],
+        [ `        return visitor[visitUnspecifiedKey](this, ...other);` ],
+        [ `    }` ],
+        [ `` ],
+        [ `    return BaseVisitor;` ],
+        [ `}` ],
+    ]),
+]);
+const code_5 = illustration(`...`, ...[
+    js(...[
+        [ `const ObjectsVisitor = Visitor(Boolean, Number, String, Object, Array);` ],
+        [ `` ],
+        [ `class XMLSerializer extends ObjectsVisitor {` ],
+        [ `    Serialize(object) {` ],
+        [ `        return this.Visit(object);` ],
+        [ `    }` ],
+        [ `` ],
+        [ `    [ObjectsVisitor.Visit(Boolean)](boolean) {` ],
+        [ `        return \`<boolean>\${boolean}</boolean>\`;` ],
+        [ `    }` ],
+        [ `    [ObjectsVisitor.Visit(Number)](number) {` ],
+        [ `        return \`<number>\${number}</number>\`;` ],
+        [ `    }` ],
+        [ `    [ObjectsVisitor.Visit(String)](string) {` ],
+        [ `        return \`<string>\${string}</string>\`;` ],
+        [ `    }` ],
+        [ `    [ObjectsVisitor.Visit.Other](object) {` ],
+        [ `        return \`<object/>\`;` ],
+        [ `    }` ],
+        [ `    [ObjectsVisitor.Visit.Unspecified](unspecified) {` ],
+        [ `        return \`<unspecified/>\`;` ],
+        [ `    }` ],
+        [ `}` ],
+        [ `` ],
+        [ `const serializer = new XMLSerializer();` ],
+        [ `` ],
+        [ `console.log(serializer.Serialize(5)); // "<number>5</number>"` ],
+    ]),
+]);
 
 
 exports = module.exports = new h.DocumentResource({
@@ -48,24 +208,27 @@ exports = module.exports = new h.DocumentResource({
         section(`Ідея.`, ...[
             paragraph(...[
                 sentence(`Аби щоразу не створювати клас Visitor а також десятки методів Visit* вручну - ми вдамось до функції яка виконає за нас усю роботу. `),
-                sentence(`Результат буде схожий на використання шаблонів у інших високорівневих мовах: ми передамо в нашу функцію класи які збираємось відвідувати, а вона поверне нам базовий клас BaseVisitor який ми будемо наслідувати. `),
+                sentence(`Результат буде схожий на використання шаблонів у інших високорівневих мовах: ми передамо в нашу функцію класи які збираємось відвідувати, а вона поверне нам базовий клас BaseVisitor який ми будемо наслідувати `, code_1, `. `),
             ]),
+            code_1,
             paragraph(...[
                 sentence(`Перша проблема з якою ми зіткнемось це іменування методів. `),
                 sentence(`Вона полягає у тому що деякі класи можуть мати однакові імена і при цьому бути розташовані в різних модулях. `),
                 sentence(`За таких умов нам не вдасться створити для них різні методи Visit*. `),
                 sentence(`Можна усунути цю проблему за рахунок використання символів в якості ключів. `),
-                sentence(`Символи будуть створюватись функцією CreateVisitor а доступ до них буде надаватись через статичний метод BaseVisitor.GetVisitKey. `),
+                sentence(`Символи будуть створюватись функцією CreateVisitor а доступ до них буде надаватись через статичний метод BaseVisitor.GetVisitKey `, code_2, `. `),
                 sentence(`Таким чином щоб оголосити в похідному класі метод для відвідування класу Number нам необхідно звернутись до відповідного символу через BaseVisitor.GetVisitKey(Number). `),
             ]),
+            code_2,
         ]),
         section(`Реалізація.`, ...[
             paragraph(...[
                 sentence(`Для того, щоб усе це працювало як слід, функція CreateVisitor повинна створювати клас BaseVisitor з методом Visit, а також методами [BaseVisitor.GetVisitKey(*)], які ми будемо перевантажувати в похідному класі. `),
-                sentence(`Окрім цього вона також повинна розширювати прототипи відвідуваних класів таким чином, щоб вони скеровували виклик BaseVisitor.Visit до методу що відповідає їхньому класу. `),
+                sentence(`Окрім цього вона також повинна розширювати прототипи відвідуваних класів таким чином, щоб вони скеровували виклик BaseVisitor.Visit до методу що відповідає їхньому класу `, code_3, `. `),
                 sentence(`За аналогією з методами [BaseVisitor.GetVisitKey(*)] можна замінити на символ й характерний для цього шаблону метод Accept. `),
                 sentence(`Це робиться для того щоб відвідувані класи не ризикували втратити його через перекриття. `),
             ]),
+            code_3,
             paragraph(...[
                 sentence(`Visit під час виклику буде передавати керування методу під ключем-символом accept який реалізований в кожному з класів targets. `),
                 sentence(`Той, в свою чергу, буде передавати керування назад в BaseVisitor, одному з методів під ключем-символом з колекції targetsKeys. `),
@@ -76,8 +239,9 @@ exports = module.exports = new h.DocumentResource({
             paragraph(...[
                 sentence(`Тепер, коли CreateVisitor створює за нас базовий клас та допоміжні методи - можна подумати і про зручність. `),
                 sentence(`Зокрема, продовжуючи ідеї з попередньої статті можна додати додаткові аргументи в BaseVisitor.Visit. `),
-                sentence(`Також знадобляться методи BaseVisitor.VisitOther та BaseVisitor.VisitUnspecified для роботи з класами що не згадані в похідному відвідувачі або взагалі відсутні у списку відвідуваних відповідно. `),
+                sentence(`Також знадобляться методи BaseVisitor.VisitOther та BaseVisitor.VisitUnspecified для роботи з класами що не згадані в похідному відвідувачі або взагалі відсутні у списку відвідуваних відповідно `, code_4, `. `),
             ]),
+            code_4,
         ]),
         section(`Прибирання зайвого.`, ...[
             paragraph(...[
@@ -93,6 +257,7 @@ exports = module.exports = new h.DocumentResource({
             paragraph(...[
                 sentence(`Таким чином кінцевий приклад використання функції Visitor може виглядати наступним чином: `),
             ]),
+            code_5,
         ]),
         section(`Підсумок.`, ...[
             paragraph(...[
