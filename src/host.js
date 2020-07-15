@@ -72,6 +72,7 @@ exports = module.exports = new h.Host({
         [`favicon.ico`] : icon,
         [`/favicon.ico`] : icon,
         ...[
+            `fonts/berton_roman.ttf`,
             `favicon.ico`,
             `but_i.png`,
             `html5.svg`,
