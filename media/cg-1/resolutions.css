@@ -1,0 +1,35 @@
+svg > rect.hp-class-screen {
+    fill: red;
+    stroke: none;
+}
+svg > rect.hp-class-border {
+    fill: transparent;
+    stroke: black;
+}
+svg > text {
+    font-family           : Source Sans Pro, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-style            : normal;
+    font-weight           : bold;
+    font-feature-settings : 'dlig' 1,'liga' 1,'lnum' 1,'kern' 1;
+}
+svg > text.hp-class-caption {
+    text-anchor           : end;
+    dominant-baseline     : text-after-edge;
+}
+svg > text.hp-class-aspect {
+    text-anchor           : start;
+    dominant-baseline     : text-after-edge;
+}
+svg > text.hp-class-width {
+    text-anchor           : middle;
+    dominant-baseline     : central;
+}
+svg > text.hp-class-height {
+    text-anchor       : middle;
+    dominant-baseline : text-before-edge;
+    writing-mode      : vertical-rl;
+}
+svg > text.hp-class-megapixels {
+    text-anchor           : end;
+    dominant-baseline     : text-before-edge;
+}
