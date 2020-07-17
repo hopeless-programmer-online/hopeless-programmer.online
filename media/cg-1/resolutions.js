@@ -120,6 +120,11 @@ function main() {
             height : 480,
         },
         {
+            name   : `QVGA`,
+            width  : 320,
+            height : 240,
+        },
+        {
             name   : `SVGA`,
             width  : 800,
             height : 600,
@@ -166,7 +171,7 @@ function main() {
         rect.setAttribute(`y`,      0);
         rect.setAttribute(`width`,  width);
         rect.setAttribute(`height`, height);
-        rect.style.fill = `rgba(${hslToRgb(hue, 1, 0.5)}, 0.4)`;
+        rect.style.fill = `rgba(${hslToRgb(hue, 1, 0.5)}, 0.5)`;
 
         hue = (hue + 0.5678) % 1;
 
@@ -200,7 +205,7 @@ function main() {
 
         aspectText.appendChild(document.createTextNode(aspect));
         aspectText.classList.add(`hp-class-aspect`);
-        aspectText.setAttribute(`x`, padding);
+        aspectText.setAttribute(`x`, size * 0.1);
         aspectText.setAttribute(`y`, height);
         aspectText.style.fontSize = `${size}px`;
 
@@ -312,7 +317,7 @@ function main() {
     }
 
     let time = new Date;
-    let value = 0.5;
+    let value = 0;
 
     const min = Math.min(...resolutions.map(({ height }) => height));
     const max = Math.max(...resolutions.map(({ height }) => height));
@@ -325,7 +330,7 @@ function main() {
             time = date;
 
             const period = 20; // sec
-            const wait = 1; // sec
+            const wait = 2; // sec
             const transition = (period - wait * 2) / 2;
 
             value += (delta / 1000);
