@@ -3,8 +3,8 @@ svg > rect.hp-class-screen {
     stroke: none;
 }
 svg > rect.hp-class-border {
-    fill: black;
-    stroke: none;
+    fill: transparent;
+    stroke: black;
 }
 svg > text {
     font-family           : Source Sans Pro, Helvetica Neue, Helvetica, Arial, sans-serif;

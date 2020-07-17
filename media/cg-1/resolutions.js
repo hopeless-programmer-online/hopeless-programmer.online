@@ -32,6 +32,42 @@ function getRect({ x, y, width, height }) {
         horizontal : y + height / 2,
     };
 }
+function hue2rgb(p, q, t) {
+    if (t < 0) t += 1;
+    if (t > 1) t -= 1;
+    if (t < 1/6) return p + (q - p) * 6 * t;
+    if (t < 1/2) return q;
+    if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+    return p;
+}
+/**
+ * Converts an HSL color value to RGB. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+ * Assumes h, s, and l are contained in the set [0, 1] and
+ * returns r, g, and b in the set [0, 255].
+ *
+ * @param   {number}  h       The hue
+ * @param   {number}  s       The saturation
+ * @param   {number}  l       The lightness
+ * @return  {Array}           The RGB representation
+ */
+function hslToRgb(h, s, l) {
+    let r, g, b;
+
+    if (s == 0) {
+        r = g = b = l; // achromatic
+    }
+    else {
+        let q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        let p = 2 * l - q;
+
+        r = hue2rgb(p, q, h + 1/3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1/3);
+    }
+
+    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+}
 
 function main() {
     const resolutions = [
@@ -39,6 +75,11 @@ function main() {
             name   : `8K UHD`,
             width  : 7680,
             height : 4320,
+        },
+        {
+            name   : `5K`,
+            width  : 5120,
+            height : 2880,
         },
         {
             name   : `4K UHD`,
@@ -49,6 +90,11 @@ function main() {
             name   : `QHD`,
             width  : 2560,
             height : 1440,
+        },
+        {
+            name   : `QHD+`,
+            width  : 3200,
+            height : 1800,
         },
         {
             name   : `Full HD`,
@@ -65,13 +111,38 @@ function main() {
             width  : 720,
             height : 480,
         },
+        {
+            name   : `VGA`,
+            width  : 640,
+            height : 480,
+        },
+        {
+            name   : `SVGA`,
+            width  : 800,
+            height : 600,
+        },
+        {
+            name   : `XGA`,
+            width  : 1024,
+            height : 768,
+        },
+        {
+            name   : `WXGA`,
+            width  : 1366,
+            height : 768,
+        },
+        {
+            name   : `UGA`,
+            width  : 1600,
+            height : 1200,
+        },
     ]
         .map(resolution => ({
             ...resolution,
             pixels : resolution.width * resolution.height,
             aspect : aspect(resolution),
         }))
-        .sort((a, b) => a.mp - b.mp)
+        .sort((a, b) => b.mp - a.mp)
         ;
 
     const padding = 20;
@@ -82,14 +153,18 @@ function main() {
         height : Math.max(...resolutions.map(({ height }) => height)) + padding * 2,
     };
 
+    let hue = 0;
+
     for (const { name, width, height, pixels, aspect } of resolutions) {
         const border = document.createElementNS(`http://www.w3.org/2000/svg`, `rect`);
 
         border.classList.add(`hp-class-border`);
-        border.setAttribute(`x`,      -padding);
-        border.setAttribute(`y`,      -padding);
-        border.setAttribute(`width`,  width + padding * 2);
-        border.setAttribute(`height`, height + padding * 2);
+        border.setAttribute(`x`,      -padding/2);
+        border.setAttribute(`y`,      -padding/2);
+        border.setAttribute(`width`,  width + padding);
+        border.setAttribute(`height`, height + padding);
+        border.style.strokeWidth = padding;
+        border.style.strokeDasharray = `${padding * 2} ${padding}`;
 
         svg.appendChild(border);
 
@@ -100,6 +175,9 @@ function main() {
         rect.setAttribute(`y`,      0);
         rect.setAttribute(`width`,  width);
         rect.setAttribute(`height`, height);
+        rect.style.fill = `rgba(${hslToRgb(hue, 1, 0.5)}, 0.6)`;
+
+        hue = (hue + 0.5678) % 1;
 
         svg.appendChild(rect);
 
