@@ -68,6 +68,9 @@ function hslToRgb(h, s, l) {
 
     return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
 }
+function clamp(value, min = 0, max = 1) {
+    return Math.min(Math.max(value, min), max);
+}
 
 function main() {
     const resolutions = [
@@ -106,11 +109,11 @@ function main() {
             width  : 1280,
             height : 720,
         },
-        {
-            name   : `480p`,
-            width  : 720,
-            height : 480,
-        },
+        // {
+        //     name   : `480p`,
+        //     width  : 720,
+        //     height : 480,
+        // },
         {
             name   : `VGA`,
             width  : 640,
@@ -121,16 +124,16 @@ function main() {
             width  : 800,
             height : 600,
         },
-        {
-            name   : `XGA`,
-            width  : 1024,
-            height : 768,
-        },
-        {
-            name   : `WXGA`,
-            width  : 1366,
-            height : 768,
-        },
+        // {
+        //     name   : `XGA`,
+        //     width  : 1024,
+        //     height : 768,
+        // },
+        // {
+        //     name   : `WXGA`,
+        //     width  : 1366,
+        //     height : 768,
+        // },
         {
             name   : `UGA`,
             width  : 1600,
@@ -142,10 +145,10 @@ function main() {
             pixels : resolution.width * resolution.height,
             aspect : aspect(resolution),
         }))
-        .sort((a, b) => b.mp - a.mp)
+        .sort((a, b) => b.height - a.height)
         ;
 
-    const padding = 20;
+    const padding = 50;
     const viewBox = {
         x      : -padding,
         y      : -padding,
@@ -156,18 +159,6 @@ function main() {
     let hue = 0;
 
     for (const { name, width, height, pixels, aspect } of resolutions) {
-        const border = document.createElementNS(`http://www.w3.org/2000/svg`, `rect`);
-
-        border.classList.add(`hp-class-border`);
-        border.setAttribute(`x`,      -padding/2);
-        border.setAttribute(`y`,      -padding/2);
-        border.setAttribute(`width`,  width + padding);
-        border.setAttribute(`height`, height + padding);
-        border.style.strokeWidth = padding;
-        border.style.strokeDasharray = `${padding * 2} ${padding}`;
-
-        svg.appendChild(border);
-
         const rect = document.createElementNS(`http://www.w3.org/2000/svg`, `rect`);
 
         rect.classList.add(`hp-class-screen`);
@@ -175,19 +166,30 @@ function main() {
         rect.setAttribute(`y`,      0);
         rect.setAttribute(`width`,  width);
         rect.setAttribute(`height`, height);
-        rect.style.fill = `rgba(${hslToRgb(hue, 1, 0.5)}, 0.6)`;
+        rect.style.fill = `rgba(${hslToRgb(hue, 1, 0.5)}, 0.4)`;
 
         hue = (hue + 0.5678) % 1;
 
         svg.appendChild(rect);
 
         const size = rect.getBBox().height * 0.1;
+        const border = document.createElementNS(`http://www.w3.org/2000/svg`, `rect`);
+
+        border.classList.add(`hp-class-border`);
+        border.setAttribute(`x`,      -size*0.05);
+        border.setAttribute(`y`,      -size*0.05);
+        border.setAttribute(`width`,  width + size*0.05);
+        border.setAttribute(`height`, height + size*0.05);
+        border.style.strokeWidth = size * 0.1;
+        // border.style.strokeDasharray = `${size * 0.1 * 2} ${size * 0.1}`;
+
+        svg.appendChild(border);
 
         const caption = document.createElementNS(`http://www.w3.org/2000/svg`, `text`);
 
         caption.appendChild(document.createTextNode(name));
         caption.classList.add(`hp-class-caption`);
-        caption.setAttribute(`x`, width - padding);
+        caption.setAttribute(`x`, width - size * 0.1);
         caption.setAttribute(`y`, height);
         caption.style.fontSize = `${size}px`;
 
@@ -208,7 +210,7 @@ function main() {
 
         megapixels.appendChild(document.createTextNode((pixels / 1e6).toFixed(2)));
         megapixels.classList.add(`hp-class-megapixels`);
-        megapixels.setAttribute(`x`, width - padding);
+        megapixels.setAttribute(`x`, width - size * 0.1);
         megapixels.setAttribute(`y`, 0);
         megapixels.style.fontSize = `${size}px`;
 
@@ -219,7 +221,7 @@ function main() {
 
         megapixelsText.appendChild(document.createTextNode(`megapixels`));
         megapixelsText.classList.add(`hp-class-megapixels`);
-        megapixelsText.setAttribute(`x`, width - padding);
+        megapixelsText.setAttribute(`x`, width - size * 0.1);
         megapixelsText.setAttribute(`y`, m.bottom);
         megapixelsText.style.fontSize = `${size}px`;
 
@@ -308,6 +310,46 @@ function main() {
 
         svg.appendChild(topArrow);
     }
+
+    let time = new Date;
+    let value = 0.5;
+
+    const min = Math.min(...resolutions.map(({ height }) => height));
+    const max = Math.max(...resolutions.map(({ height }) => height));
+
+    function update() {
+        const date = new Date;
+        const delta = 10; // time - date;
+
+        if (delta > 1) {
+            time = date;
+
+            const period = 20; // sec
+            const wait = 1; // sec
+            const transition = (period - wait * 2) / 2;
+
+            value += (delta / 1000);
+
+            const t = value % period;
+            const a = wait;
+            const b = transition;
+            const zoom = Math.sin((1 - clamp((Math.abs(t - 1.5*a - b) - a / 2) / b)) * Math.PI / 2) ** 4;
+
+            const height = min + (max - min) * zoom;
+            const width = height / ((viewBox.height - padding * 2) / (viewBox.width - padding * 2));
+
+            svg.setAttribute(`viewBox`, `
+                ${viewBox.x}
+                ${viewBox.y}
+                ${padding * 2 + width}
+                ${padding * 2 + height}
+            `);
+        }
+
+        requestAnimationFrame(update);
+    }
+
+    requestAnimationFrame(update);
 
     svg.setAttribute(`viewBox`, `${viewBox.x} ${viewBox.y} ${viewBox.width} ${viewBox.height}`);
 }
