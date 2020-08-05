@@ -155,10 +155,10 @@ function main() {
 
     const padding = 50;
     const viewBox = {
-        x      : -padding,
-        y      : -padding,
-        width  : Math.max(...resolutions.map(({ width }) => width)) + padding * 2,
-        height : Math.max(...resolutions.map(({ height }) => height)) + padding * 2,
+        x      : 0,
+        y      : 0,
+        width  : Math.max(...resolutions.map(({ width }) => width)),
+        height : Math.max(...resolutions.map(({ height }) => height)),
     };
 
     let hue = 0;
@@ -340,14 +340,17 @@ function main() {
             const b = transition;
             const zoom = Math.sin((1 - clamp((Math.abs(t - 1.5*a - b) - a / 2) / b)) * Math.PI / 2) ** 4;
 
+            const aspect = viewBox.width / viewBox.height;
             const height = min + (max - min) * zoom;
-            const width = height / ((viewBox.height - padding * 2) / (viewBox.width - padding * 2));
+            const width = height * aspect;
+
+            console.log(aspect, height, height * aspect, width / height);
 
             svg.setAttribute(`viewBox`, `
-                ${viewBox.x}
-                ${viewBox.y}
-                ${padding * 2 + width}
-                ${padding * 2 + height}
+                ${-padding}
+                ${-padding}
+                ${width + padding * 2}
+                ${height + padding * 2}
             `);
         }
 
@@ -356,5 +359,5 @@ function main() {
 
     requestAnimationFrame(update);
 
-    svg.setAttribute(`viewBox`, `${viewBox.x} ${viewBox.y} ${viewBox.width} ${viewBox.height}`);
+    // svg.setAttribute(`viewBox`, `${viewBox.x} ${viewBox.y} ${viewBox.width} ${viewBox.height}`);
 }

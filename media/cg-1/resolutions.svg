@@ -3,7 +3,8 @@
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="700px"
+    width="600px"
+    height="400px"
 >
     <script xlink:href="./resolutions.js" />
 </svg>
