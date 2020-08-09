@@ -197,7 +197,34 @@ exports = module.exports = new h.DocumentResource({
         ]),
         section(`Налаштовуємо express.`, ...[
             paragraph(...[
-                sentence(`Для написання серверу ми використаємо express - популярний пакет npm. `),
+                sentence(`Для роботи сервера ми використаємо express - популярний пакет npm. `),
+                sentence(`Встановити його можна за допомогою команди npm i -D express. `),
+                sentence(`Оскільки цей пакет в першу чергу призначений для JavaScript, він не містить файлів d.ts, які необхідні TypeScript для проведення контролю типів. `),
+                sentence(`Аби працювати з ним, ми встановимо ще один пакет-адаптер, набравши в консолі npm i -D @types/express. `),
+            ]),
+            paragraph(...[
+                sentence(`З цього моменту ми вже можемо завантажити express всередині server.ts. `),
+                sentence(`Ми не будемо особливо розбирати сам express і принципи його роботи, оскільки це виходить за межі даної статті. `),
+                sentence(`Єдине що нам потрібно від нього - це запустити сервер, який би роздавав клієнтам необхідні ресурси: html та js файли, зображення, моделі та інше. `),
+                sentence(`Для цього ми вкажемо express шлях до каталогу в якому знаходяться усі "публічні" файли, до яких може вільно звертатись корситувач. `),
+            ]),
+            illustration(``, js(...[
+                [ `import path from "path";` ],
+                [ `import express from "express";` ],
+                [ `` ],
+                [ `const app = express();` ],
+                [ `` ],
+                [ `app.use(express.static(path.join(__dirname, "../../public")));` ],
+                [ `app.listen(8080);` ],
+            ])),
+            paragraph(...[
+                sentence(`Якщо коротко, комбінація app.use(express.static(...)) вкаже express де шукати файли при зверненні до сервера, а app.listen(8080) запустить сервер, який буде прослуховувати localhost:8080. `),
+                sentence(`Тепер можна зібрати проект за допомогою npx tsc -p src/server та запустити сервер через node dist/server/server.js. `),
+                sentence(`Коли сервер працює, за адресою localhost:8080 в браузері можна звертатись до усіх файлів що розміщені в каталозі public. `),
+                sentence(`Але у нас досі немає файлів до яких можна звератись... `),
+            ]),
+            paragraph(...[
+                sentence(``),
                 sentence(``),
                 sentence(``),
             ]),
