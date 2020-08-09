@@ -38,6 +38,7 @@ exports = module.exports = new h.Host({
             `require`,
             `cg-1`,
             // `cg-2`,
+            `ammojs`,
         ),
         // internal
         "/404" : require(`./host/404`),
