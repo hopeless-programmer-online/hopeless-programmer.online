@@ -296,13 +296,41 @@ exports = module.exports = new h.DocumentResource({
                 sentence(`Таким чином, ми отримаємо наступну стрічку: tsc -p src/server && tsc -p src/client && browserify dist/client/client.js -o public/bundle.js. `),
                 sentence(`Ще варто зазначити, що оскільки build не є стандартним сценарієм npm, його запуск повинен відбуватись з використанням команди run, тобто як npm run build. `),
             ]),
+            paragraph(...[
+                sentence(`Таким чином, для повторної збірки проекту нам достатньо виконати npm run build, а для запуску сервера - npm start. `),
+                sentence(`При цьому, якщо ми не змінювали код сервера - нам не потрібно його зупиняти і повторного стартувати. `),
+            ]),
         ]),
         section(`Налаштовуємо three.js.`, ...[
             paragraph(...[
                 sentence(`На цьому етапі легка частина роботи подолана. `),
-                sentence(`У нас вже є робочий сервер, `),
+                sentence(`Саме час додати three.js - пакет npm для виводу графіки. `),
+                sentence(`Зробити це можна за допомогою команди npm i -D three. `),
+                sentence(`Далі потрібно завантажити пакет на стороні клієнта та створити WebGLRenderer - компонент, який буде виводити зображення. `),
+                sentence(`Цей вивід буде відбуватись в елемент <canvas>, який ми додамо в тіло сторінки. `),
+                sentence(`Також потрібно зробити деякі налаштування, зокрема, налаштувати розміри виводу та кодування кольору. `),
+            ]),
+            illustration(``, js(...[
+                [ `const renderer = new three.WebGLRenderer;` ],
+                [ `const canvas = renderer.domElement;` ],
+                [ `` ],
+                [ `document.body.appendChild(canvas);` ],
+                [ `` ],
+                [ `const { width, height } = canvas.getBoundingClientRect();` ],
+                [ `` ],
+                [ `renderer.setPixelRatio(window.devicePixelRatio);` ],
+                [ `renderer.outputEncoding = three.sRGBEncoding;` ],
+                [ `renderer.setSize(width, height);` ],
+            ])),
+        ]),
+        section(`Створюємо сцену.`, ...[
+            paragraph(...[
+                sentence(``),
+                sentence(``),
                 sentence(``),
             ]),
+        ]),
+        section(``, ...[
             paragraph(...[
                 sentence(``),
                 sentence(``),
