@@ -379,6 +379,25 @@ exports = module.exports = new h.DocumentResource({
                 sentence(`В майнутньому ми ще повернемось до неї, аби внести незначні правки, а зараз можна зайнятись фізикою. `),
             ]),
         ]),
+        section(`Налаштовуємо ammojs-typed.`, ...[
+            paragraph(...[
+                sentence(`Для симуляції фізики твердих тіл ми будемо викорситовувати відкритий фізичний рушій Bullet Physics. `),
+                sentence(`Хоча сам він написаний на С++, існує його версія для JavaScript, згенерована за допомогою emscripten - бібліотека ammo.js. `),
+                sentence(`Але як і у випадку з express, ammo.js в першу чергу призначений для JavaScript і не містить опису типів, потрібних для TypeScript. `),
+            ]),
+            paragraph(...[
+                sentence(`Взагалі, це дуже поширена проблема, коли відповідного TypeScript аналога для потрібної JavaScript бібліотеки не існує. `),
+                sentence(`Але нам пощастило. `),
+                sentence(`Добрий дядько `, link(`giniedp`, `https://github.com/giniedp`), ` створив `, link(`ammojs-typed`, `https://www.npmjs.com/package/ammojs-typed`), ` - пакет для npm який уже містить усі потрібні файли аннотацій d.ts. `),
+                sentence(`Якщо ви не гівнюк - перейдіть до його `, link(`github репозиторію`, `https://github.com/giniedp/ammojs-typed`), ` і поставте зірочку. `),
+            ]),
+            paragraph(...[
+                sentence(`Ми додамо цей пакет, виконавши команду npm i -D ammojs-typed в терміналі. `),
+                sentence(`Далі, необхідно також завантажити його на стороні клієнта та виконати завантаження ammojs. `),
+                sentence(`Функція Ammo що експортується з ammojs-typed повертає Promise. `),
+                sentence(`Дочекавшись його через await ми отримаємо робочий екземпляр бібліотеки, за допомогою якого і будемо створювати тіла для симуляції. `),
+            ]),
+        ]),
         section(``, ...[
             paragraph(...[
                 sentence(``),
