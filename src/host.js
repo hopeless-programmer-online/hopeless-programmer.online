@@ -36,6 +36,7 @@ exports = module.exports = new h.Host({
             `segregation`,
             `auto-visitor`,
             `require`,
+            `symmetry`,
             `cg-1`,
             // `cg-2`,
         ),
