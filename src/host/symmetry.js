@@ -17,6 +17,7 @@ const {
     lexeme,
     code,
     js,
+    cpp,
     cs,
 } = s;
 
@@ -41,6 +42,16 @@ const code_1 = illustration(`Різниця між поверненням баг
     [ `` ],
     [ `// деструктуризація` ],
     [ `const [ x, y, z ] = returnThree();` ],
+]));
+const code_2 = illustration(``, cpp(...[
+    [ `VkInstance instance;` ],
+    [ `` ],
+    [ `VkResult result = vkCreateInstance(info, nullptr, &instance);` ],
+    [ `` ],
+    [ `if (result != VkResult::VK_SUCCESS)` ],
+    [ `{` ],
+    [ `    throw std::exception();` ],
+    [ `}` ],
 ]));
 
 
@@ -126,7 +137,14 @@ exports = module.exports = new h.DocumentResource({
         ]),
         section(`Output-аргументи. `, ...[
             paragraph(...[
-                sentence(`Друга стратегія - це  `),
+                sentence(`Друга стратегія - це передача в функцію посилань на об'єкти, які виступатимуть `, figurative(`додатковими`), ` результатами. `),
+                sentence(`Створювати такі об'єкти доводиться самостійно, перед викликом функції, а от їх ініціалізація може відбувати по-різному: деколи цим займається функція, а деколи той, хто її викликає. `),
+                sentence(`Такий підхід часто використовується мові С і там, де використовуються написані на ній бібліотеки. `),
+                sentence(`Класичним прикладом може виступати функція для створення об'єкту, результат якої говорить про статус виконання, а output-аргумент виступає посиланням на сам об'єкт `, code_2, `. `),
+            ]),
+            code_2,
+            paragraph(...[
+                sentence(``),
                 sentence(``),
                 sentence(``),
             ]),
