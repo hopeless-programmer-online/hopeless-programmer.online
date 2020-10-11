@@ -29,6 +29,11 @@ const esoteric = `https://uk.wikipedia.org/wiki/%D0%95%D0%B7%D0%BE%D1%82%D0%B5%D
 const python = `https://uk.wikipedia.org/wiki/Python`;
 const lua = `https://uk.wikipedia.org/wiki/Lua`;
 const cdecl = `https://en.wikipedia.org/wiki/X86_calling_conventions#cdecl`;
+const optlink = `https://en.wikipedia.org/wiki/X86_calling_conventions#optlink`;
+const fastcall = `https://en.wikipedia.org/wiki/X86_calling_conventions#Microsoft_fastcall`;
+const vectorcall = `https://en.wikipedia.org/wiki/X86_calling_conventions#Microsoft_vectorcall`;
+const mmx = `https://en.wikipedia.org/wiki/MMX_%28instruction_set%29`;
+const sse = `https://en.wikipedia.org/wiki/Streaming_SIMD_Extensions`;
 const fsincos = `https://en.wikibooks.org/wiki/X86_Assembly/Floating_Point#Added_with_80387`;
 const asm = `https://uk.wikipedia.org/wiki/%D0%9C%D0%BE%D0%B2%D0%B0_%D0%B0%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0`;
 
@@ -219,19 +224,22 @@ exports = module.exports = new h.DocumentResource({
         ]),
         section(`У всьому винні регістри? `, ...[
             paragraph(...[
-                sentence(`Одним з небагатьох реальних аргументів повертати з функції лише одне значення є домовленість про порядок виклику `, link(`cdecl`, cdecl), `, який є стандартним для багатьох компіляторів С х86. `),
+                sentence(`Одним з небагатьох реальних аргументів повертати з функції лише одне значення є домовленість про порядок виклику `, link(`cdecl`, cdecl), `, яка є стандартною для багатьох компіляторів С х86. `),
                 sentence(`Зокрема, ця домовленість передбачає те, що аргументи функції передаються через стек, а результат повертається через регістри: EAX для цілих чисел і ST0 для чисел з плавучою точкою. `),
                 sentence(`Дотримання цієї домовленості важливе, оскільки її порушення може зробити код несумісним з тими функціями та програмами, які використовують cdecl. `),
             ]),
             paragraph(...[
-                sentence(``),
-                sentence(``),
-                sentence(``),
+                sentence(`Але cdecl далеко не єдина домовленість про порядок виклику. `),
+                sentence(`І хоча деякі з альтернатив відрізняються лише деталями - порядком розміщення аргументів в стеці чи збереженням регістрів - існують й цікавіші варіанти. `),
+                sentence(`Наприклад, `, link(`optlink`, optlink), ` використовує регістри також і для передачі кількох перших аргументів: EAX,ECX та EDX для цілих чисел і ST0-ST3 для чисел з плавучою комою. `),
+                sentence(`Також існує `, link(`__fastcall`, fastcall), ` який використовує для аргументів ECX/EDX. `),
+                sentence(`Це далеко не межа, оскільки за останні десятиліття кількість доступних регістрів зросла. `),
+                sentence(`Наприклад, `, link(`__vectorcall`, vectorcall), ` дозволяє використовувати для передачі перших аргументів регістри `, link(`MMX`, mmx), `/`, link(`SSE`, sse), `. `),
             ]),
             paragraph(...[
-                sentence(``),
-                sentence(``),
-                sentence(``),
+                sentence(`Отож, існує безліч способів передати велику (більшу за один) кількість аргументів в функцію за допомогою регістрів. `),
+                sentence(`Навіть якщо забути про регістри - є стек, ніхто не заважає користуватись ним. `),
+                sentence(`Виходить, технічної складності повертати багато значень з функції немає, а навіть якби була - її ж можна перенести і на передачу аргументів. `),
             ]),
         ]),
         section(`Приклади функцій з кількома результатами. `, ...[
