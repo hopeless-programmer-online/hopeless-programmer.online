@@ -36,6 +36,7 @@ const mmx = `https://en.wikipedia.org/wiki/MMX_%28instruction_set%29`;
 const sse = `https://en.wikipedia.org/wiki/Streaming_SIMD_Extensions`;
 const fsincos = `https://en.wikibooks.org/wiki/X86_Assembly/Floating_Point#Added_with_80387`;
 const asm = `https://uk.wikipedia.org/wiki/%D0%9C%D0%BE%D0%B2%D0%B0_%D0%B0%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0`;
+const c_errors = `https://en.wikibooks.org/wiki/C_Programming/Error_handling`;
 
 const code_1 = illustration(`Різниця між поверненням багатьох результатів та поверненням масиву в JavaScript. `, js(...[
     [ `function returnThree() {` ],
@@ -244,9 +245,13 @@ exports = module.exports = new h.DocumentResource({
         ]),
         section(`Приклади функцій з кількома результатами. `, ...[
             paragraph(...[
-                sentence(`... тут про ділення, яке повертає частку та остачу ...`),
-                sentence(`... а тут про SINCOS ...`),
-                sentence(``),
+                sentence(`В решті-решт, хтось може сказати, що просто не існує таких функцій, які могли б повертати кілька значень, але і це не правда. `),
+                sentence(`Наприклад, при діленні цілих чисел час від часу виникає потреба одразу отримати і частку, і остачу. `),
+                sentence(`Власне, `, link(`асемблер`, asm), ` так і працює: команда SUB заносить обидва результати в два різних регістри. `),
+                sentence(`Також, при розрахунку синуса часто розраховується ще й косинус і навпаки. `),
+                sentence(`І знову можна знайти приклад в асемблері: інструкція `, link(`FSINCOS`, fsincos), `. `),
+                sentence(`А ще є ціла низка функцій (і навіть мов), які замість виключень повертають `, link(`коди помилок`, c_errors), `. `),
+                sentence(`Та і навряд таких функцій немає, якщо новачки про них питають, а досвідчені користувачі пропонують готові рішення. `),
             ]),
         ]),
         section(`Наслідки. `, ...[
