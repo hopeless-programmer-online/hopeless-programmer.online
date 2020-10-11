@@ -25,7 +25,12 @@ const {
 const antimatter = `https://uk.wikipedia.org/wiki/%D0%90%D0%BD%D1%82%D0%B8%D0%BC%D0%B0%D1%82%D0%B5%D1%80%D1%96%D1%8F#%D0%A1%D0%B8%D0%BC%D0%B5%D1%82%D1%80%D1%96%D1%8F_%D0%BC%D0%B0%D1%82%D0%B5%D1%80%D1%96%D1%97_%D1%96_%D0%B0%D0%BD%D1%82%D0%B8%D0%BC%D0%B0%D1%82%D0%B5%D1%80%D1%96%D1%97`;
 const argumentum_ad_antiquitatem = `https://uk.wikipedia.org/wiki/Argumentum_ad_antiquitatem`;
 const scotsman = `https://uk.wikipedia.org/wiki/%D0%96%D0%BE%D0%B4%D0%B5%D0%BD_%D1%81%D0%BF%D1%80%D0%B0%D0%B2%D0%B6%D0%BD%D1%96%D0%B9_%D1%88%D0%BE%D1%82%D0%BB%D0%B0%D0%BD%D0%B4%D0%B5%D1%86%D1%8C`;
+const esoteric = `https://uk.wikipedia.org/wiki/%D0%95%D0%B7%D0%BE%D1%82%D0%B5%D1%80%D0%B8%D1%87%D0%BD%D1%96_%D0%BC%D0%BE%D0%B2%D0%B8_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F`;
+const python = `https://uk.wikipedia.org/wiki/Python`;
+const lua = `https://uk.wikipedia.org/wiki/Lua`;
 const cdecl = `https://en.wikipedia.org/wiki/X86_calling_conventions#cdecl`;
+const fsincos = `https://en.wikibooks.org/wiki/X86_Assembly/Floating_Point#Added_with_80387`;
+const asm = `https://uk.wikipedia.org/wiki/%D0%9C%D0%BE%D0%B2%D0%B0_%D0%B0%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0`;
 
 const code_1 = illustration(`Різниця між поверненням багатьох результатів та поверненням масиву в JavaScript. `, js(...[
     [ `function returnThree() {` ],
@@ -183,16 +188,9 @@ exports = module.exports = new h.DocumentResource({
                 sentence(`Таким чином ми втрачаємо можливість використати один з дієвих методів захисту від помилок - const. `),
             ]),
         ]),
-        section(`Регістри для повернення результату. `, ...[
-            paragraph(...[
-                sentence(``),
-                sentence(``),
-                sentence(``),
-            ]),
-        ]),
         section(`Популярні мови повертають лише одне значення. `, ...[
             paragraph(...[
-                sentence(`Цей аргумент - `, link(`argumentum ad antiquitatem`, argumentum_ad_antiquitatem), ` - теж можна почути час від часу. `),
+                sentence(`Цей `, link(`argumentum ad antiquitatem`, argumentum_ad_antiquitatem), ` теж можна почути час від часу. `),
                 sentence(`Мовля, якби повернення кількох значень і справді було б необхідним, то популярні мови давно б почали його підтримувати. `),
                 sentence(`А оскільки це не так, то й множинне повернення не потрібне. `),
                 sentence(`У такої аргументації є щонайменше дві проблеми: `),
@@ -205,7 +203,7 @@ exports = module.exports = new h.DocumentResource({
                 [
                     `По-друге, це банально не відповідає дійсності. `,
                     `Існують мови, які здатні повертати декілька значень. `,
-                    `Причому, це далено не якісь трансценденті мови, вигадані винятково для цього, а досить популярні Python та Lua. `,
+                    `Причому, це далено не якісь `, link(`езотеричні мови`, esoteric), `, вигадані винятково для цього, а досить популярні `, link(`Python`, python), ` та `, link(`Lua`, lua), `. `,
                 ],
             ]),
             paragraph(...[
@@ -219,10 +217,27 @@ exports = module.exports = new h.DocumentResource({
                 sentence(``),
             ]),
         ]),
-        section(`Приклади функцій з кількома результатами. `, ...[
+        section(`У всьому винні регістри? `, ...[
+            paragraph(...[
+                sentence(`Одним з небагатьох реальних аргументів повертати з функції лише одне значення є домовленість про порядок виклику `, link(`cdecl`, cdecl), `, який є стандартним для багатьох компіляторів С х86. `),
+                sentence(`Зокрема, ця домовленість передбачає те, що аргументи функції передаються через стек, а результат повертається через регістри: EAX для цілих чисел і ST0 для чисел з плавучою точкою. `),
+                sentence(`Дотримання цієї домовленості важливе, оскільки її порушення може зробити код несумісним з тими функціями та програмами, які використовують cdecl. `),
+            ]),
             paragraph(...[
                 sentence(``),
                 sentence(``),
+                sentence(``),
+            ]),
+            paragraph(...[
+                sentence(``),
+                sentence(``),
+                sentence(``),
+            ]),
+        ]),
+        section(`Приклади функцій з кількома результатами. `, ...[
+            paragraph(...[
+                sentence(`... тут про ділення, яке повертає частку та остачу ...`),
+                sentence(`... а тут про SINCOS ...`),
                 sentence(``),
             ]),
         ]),
