@@ -15,7 +15,7 @@ function deduce(title, ext, language) {
         language === Language.TeX        ? [ `tex`,        `tex`,  `.tex`  ] :
         language === Language.LLVM       ? [ `default`,    `llvm`, `.llvm` ] :
         language === Language.QBasic     ? [ `default`,    `qb`,   `.qb`   ] :
-        language === Language.Lua        ? [ `default`,    `lua`,  `.lua`  ] :
+        language === Language.Lua        ? [ `lua`,        `lua`,  `.lua`  ] :
         [ `default`, `plain text`, `.txt` ];
 
     return (

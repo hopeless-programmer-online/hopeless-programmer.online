@@ -119,6 +119,7 @@ exports = module.exports = new h.Host({
             `python`,
             `sass`,
             `xml`,
+            `lua`,
             `folder`,
             `default`,
         ].reduce((all, name) => ({
