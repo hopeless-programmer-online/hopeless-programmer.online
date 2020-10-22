@@ -1,6 +1,5 @@
 const hosting = require(`../server/hosting`);
 const documenting = require(`../server/documenting`);
-const { illustration } = require("../server/documenting/shortcuts");
 
 
 const h = hosting;
@@ -15,9 +14,7 @@ const {
     list,
     link,
     note,
-    js,
     cpp,
-    cs,
     kw,
     c,
     py,
