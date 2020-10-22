@@ -62,6 +62,7 @@ exports = module.exports = new h.Host({
             `qbasic`,
             `llvm`,
             `html`,
+            `lua`,
         ].reduce((all, name) => ({
             ...all,
             [`/css/${name}.css`] : new h.CachedResource({
