@@ -7,6 +7,9 @@ code.hp-class-lexeme-phrase[data-hp-language=csharp] {
         &.hp-class-keyword-lexeme {
             color: palette.$code-macro;
 
+            &[name=public],
+            &[name=static],
+            &[name=out],
             &[name=var],
             &[name=class],
             &[name=namespace] {

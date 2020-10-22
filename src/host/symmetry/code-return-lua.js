@@ -4,6 +4,7 @@ const {
     f,
     lt,
     cm,
+    v,
 } = s;
 
 exports = module.exports = s.illustration(``, s.lua(...[
@@ -11,8 +12,8 @@ exports = module.exports = s.illustration(``, s.lua(...[
     [ `    `, kw(`return`), ` `, lt(`1`), `, `, lt(`2`), `` ],
     [ kw(`end`) ],
     [ `` ],
-    [ `x, y, z = `, f(`f`), `()` ],
+    [ v(`x`), `, `, v(`y`), `, `, v(`z`), ` = `, f(`f`), `()` ],
     [ `` ],
     [ cm(`-- 1, 2, nil`) ],
-    [ f(`print`), `(x, y, z)` ],
+    [ f(`print`), `(`, v(`x`), `, `, v(`y`), `, `, v(`z`), `)` ],
 ]));
