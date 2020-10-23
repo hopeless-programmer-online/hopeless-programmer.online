@@ -7,7 +7,7 @@ const {
     v,
 } = s;
 
-exports = module.exports = s.illustration(``, s.lua(...[
+exports = module.exports = s.illustration(`Повернення багатьох значень з функції в Lua. `, s.lua(...[
     [ kw(`function`), ` `, f(`f`), `()` ],
     [ `    `, kw(`return`), ` `, lt(`1`), `, `, lt(`2`), `` ],
     [ kw(`end`) ],

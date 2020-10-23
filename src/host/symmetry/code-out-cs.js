@@ -1,5 +1,6 @@
 const s = require(`../../server/documenting`).shortcuts;
 const {
+    cs,
     kw,
     f,
     lt,
@@ -7,7 +8,7 @@ const {
     v,
 } = s;
 
-exports = module.exports = s.illustration(`Різниця між поверненням багатьох результатів та поверненням масиву в JavaScript. `, s.cs(...[
+exports = module.exports = s.illustration(s.sentence(cs(kw(`out`)), ` аргументи в C#. `), cs(...[
     [ kw(`public`), ` `, kw(`class`), ` `, c(`Program`) ],
     [ `{` ],
     [ `    `, kw(`public`), ` `, kw(`static`), ` `, c(`void`), ` `, f(`f`), `(`, kw(`out`), ` `, c(`int`), ` `, v(`x`), `) {` ],
