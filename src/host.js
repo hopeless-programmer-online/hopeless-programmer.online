@@ -37,7 +37,7 @@ exports = module.exports = new h.Host({
             `auto-visitor`,
             `require`,
             `symmetry`,
-            `cg-1`,
+            // `cg-1`,
             // `cg-2`,
         ),
         // internal
