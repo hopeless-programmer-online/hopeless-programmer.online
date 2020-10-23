@@ -18,6 +18,7 @@ const Language = Object.freeze({
     LLVM       : Symbol(), // @todo
     QBasic     : Symbol(), // @todo
     TeX        : Symbol(), // @todo
+    Lua        : Symbol(), // @todo
 });
 
 

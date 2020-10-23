@@ -104,5 +104,8 @@ figcaption.hp-class-code-header {
         &[data-hp-type=python] {
             background-image: url(/media/icons/python.svg);
         }
+        &[data-hp-type=lua] {
+            background-image: url(/media/icons/lua.svg);
+        }
     }
 }

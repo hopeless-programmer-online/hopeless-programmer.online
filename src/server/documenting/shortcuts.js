@@ -501,6 +501,30 @@ function cpp(...somethings) {
         Lines    : lines,
     });
 }
+/**
+ * @param   {...CodeLineLike} somethings
+ * @returns {Code}
+ */
+function py(...somethings) {
+    const lines = toCodeLines(somethings);
+
+    return new Code({
+        Language : CodeLanguage.Python,
+        Lines    : lines,
+    });
+}
+/**
+ * @param   {...CodeLineLike} somethings
+ * @returns {Code}
+ */
+function lua(...somethings) {
+    const lines = toCodeLines(somethings);
+
+    return new Code({
+        Language : CodeLanguage.Lua,
+        Lines    : lines,
+    });
+}
 
 function toFileExplorerItemContent(something) {
     if (something instanceof Code) {
@@ -705,6 +729,8 @@ exports.explorer = explorer;
 exports.js = js;
 exports.cs = cs;
 exports.cpp = cpp;
+exports.py = py;
+exports.lua = lua;
 exports.toCodeLine = toCodeLine;
 exports.toCodeLines = toCodeLines;
 exports.toIllustrationContent = toIllustrationContent;

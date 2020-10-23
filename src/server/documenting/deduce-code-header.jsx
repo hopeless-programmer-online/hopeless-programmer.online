@@ -15,7 +15,8 @@ function deduce(title, ext, language) {
         language === Language.TeX        ? [ `tex`,        `tex`,  `.tex`  ] :
         language === Language.LLVM       ? [ `default`,    `llvm`, `.llvm` ] :
         language === Language.QBasic     ? [ `default`,    `qb`,   `.qb`   ] :
-        [ `default`, `.txt` ];
+        language === Language.Lua        ? [ `lua`,        `lua`,  `.lua`  ] :
+        [ `default`, `plain text`, `.txt` ];
 
     return (
         <figcaption class="hp-class-code-header">

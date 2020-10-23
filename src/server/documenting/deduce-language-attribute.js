@@ -40,4 +40,5 @@ const lookup = {
     [Language.LLVM]       : `llvm`,
     [Language.QBasic]     : `qbasic`,
     [Language.TeX]        : `tex`,
+    [Language.Lua]        : `lua`,
 };
