@@ -7,7 +7,7 @@ const {
     cm,
 } = s;
 
-exports = module.exports = s.illustration(``, s.py(...[
+exports = module.exports = s.illustration(`Повернення багатьох значень з функції в Python. `, s.py(...[
     [ kw(`def`), ` `, f(`f`), `():` ],
     [ `    `, kw(`return`), ` `, lt(`1`), `, `, lt(`2`), `, `, lt(`3`), `` ],
     [ `` ],

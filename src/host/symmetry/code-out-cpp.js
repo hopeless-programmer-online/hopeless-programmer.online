@@ -6,7 +6,7 @@ const {
     v,
 } = s;
 
-exports = module.exports = s.illustration(``, s.cpp(...[
+exports = module.exports = s.illustration(`Використання посилань в С++ для отримання додаткових результатів. `, s.cpp(...[
     [ c(`VkInstance`), ` `, v(`instance`), `;` ],
     [ `` ],
     [ c(`VkResult`), ` `, v(`result`), ` = `, f(`vkCreateInstance`), `(`, v(`info`), `, `, kw(`nullptr`), `, &`, v(`instance`), `);` ],
