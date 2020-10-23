@@ -36,7 +36,8 @@ exports = module.exports = new h.Host({
             `segregation`,
             `auto-visitor`,
             `require`,
-            `cg-1`,
+            `symmetry`,
+            // `cg-1`,
             // `cg-2`,
         ),
         // internal
@@ -61,6 +62,7 @@ exports = module.exports = new h.Host({
             `qbasic`,
             `llvm`,
             `html`,
+            `lua`,
         ].reduce((all, name) => ({
             ...all,
             [`/css/${name}.css`] : new h.CachedResource({
@@ -117,6 +119,7 @@ exports = module.exports = new h.Host({
             `python`,
             `sass`,
             `xml`,
+            `lua`,
             `folder`,
             `default`,
         ].reduce((all, name) => ({

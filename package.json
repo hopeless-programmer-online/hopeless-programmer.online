@@ -1,6 +1,6 @@
 {
   "name": "hopeless-programmer.online",
-  "version": "0.4.6",
+  "version": "0.5.0",
   "description": "Web site",
   "exports": {
     "./host": "./lib/host",
