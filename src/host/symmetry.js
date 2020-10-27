@@ -68,6 +68,7 @@ const note_void_res = note([
 exports = module.exports = new h.DocumentResource({
     Document : document([ `Думки вголос. `, `Асиметрія аргументів та результатів функції. ` ],
         {
+            Date : new Date(`2020-10-23T00:00:00.000Z`),
         },
         section(`Асиметрія.`, ...[
             paragraph(...[
