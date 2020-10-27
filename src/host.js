@@ -37,6 +37,7 @@ exports = module.exports = new h.Host({
             `auto-visitor`,
             `require`,
             `symmetry`,
+            `comments`,
             // `cg-1`,
             // `cg-2`,
         ),
