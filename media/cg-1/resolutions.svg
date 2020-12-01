@@ -1,9 +1,0 @@
-<?xml-stylesheet type="text/css" href="./resolutions.css" ?>
-<svg
-    version="1.1"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="700px"
->
-    <script xlink:href="./resolutions.js" />
-</svg>
