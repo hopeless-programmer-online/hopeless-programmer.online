@@ -1,0 +1,25 @@
+.article {
+    max-width: 8.5in;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    // grid
+    display: grid;
+    grid-template-rows: [header] auto [main] auto [footer] auto;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+
+    > header {
+        grid-area: header;
+        align-self: start;
+    }
+    > main {
+        grid-area: main;
+    }
+    > footer {
+        grid-area: footer;
+        align-self: end;
+    }
+}
