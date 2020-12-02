@@ -1,10 +1,11 @@
 import React from 'react'
-import CSS3Badge from './css3-badge'
-import styles from './footer.module.scss'
-import HTML5Badge from './html5-badge'
-import NextJSBadge from './nextjs-badge'
-import ReactBadge from './react-badge'
+import CSS3Badge from './badges/css3-badge'
+import HTML5Badge from './badges/html5-badge'
+import NextJSBadge from './badges/nextjs-badge'
+import ReactBadge from './badges/react-badge'
+import SASSBadge from './badges/sass-badge'
 import Year from './year'
+import styles from './footer.module.scss'
 
 export default class Footer extends React.Component {
     public render() {
@@ -39,6 +40,20 @@ export default class Footer extends React.Component {
                                 <li><ReactBadge/></li>
                                 <li><HTML5Badge/></li>
                                 <li><CSS3Badge/></li>
+                                <li><SASSBadge/></li>
+                            </ul>
+                        </nav>
+                    </dd>
+                    <dt>Контакти</dt>
+                    <dd>
+                        <nav>
+                            <ul>
+                                <li>Mail</li>
+                                <li>GitHub</li>
+                                <li>Facebook</li>
+                                <li>Twitter</li>
+                                <li>Instagram</li>
+                                <li>Telegram</li>
                             </ul>
                         </nav>
                     </dd>
