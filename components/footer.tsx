@@ -30,15 +30,20 @@ export default class Footer extends React.Component {
                     за авторством <a href='mailto:me@hopeless-programmer.online'>hopeless programmer</a>
                 </address>
                 <dl>
-                    <dt>Ресурс</dt>
+                    <dt>
+                        <h3>Ресурс</h3>
+                    </dt>
                     <dd>
                         <nav>
                             <ul>
                                 <li><a href="">Про цей сайт</a></li>
+                                <li><a href="">Про автора</a></li>
                             </ul>
                         </nav>
                     </dd>
-                    <dt>Технології</dt>
+                    <dt>
+                        <h3>Технології</h3>
+                    </dt>
                     <dd>
                         <nav>
                             <ul>
@@ -50,7 +55,9 @@ export default class Footer extends React.Component {
                             </ul>
                         </nav>
                     </dd>
-                    <dt>Контакти</dt>
+                    <dt>
+                        <h3>Контакти</h3>
+                    </dt>
                     <dd>
                         <nav>
                             <ul>

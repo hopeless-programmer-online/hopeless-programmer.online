@@ -1,8 +1,40 @@
 .footer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+
     > address {
         text-align: center;
     }
-    > dl > dd > nav > ul {
-        list-style-type: none;
+    > dl {
+        display: grid;
+        grid-template-rows: [header] auto [content] auto;
+
+        > dt {
+            grid-row: header;
+            border-bottom: 4pt solid lightgrey;
+            margin: 8pt;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+
+            > h3 {
+                color: crimson;
+                margin: 0;
+                border-bottom: 4pt solid crimson; // @todo: fix borders overlap
+                margin-bottom: -4pt;
+            }
+        }
+        > dd {
+            grid-row: content;
+            margin: 8pt;
+
+            > nav > ul {
+                list-style-type: none;
+                padding: 0;
+            }
+        }
     }
 }
