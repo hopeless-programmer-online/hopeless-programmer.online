@@ -6,6 +6,12 @@ import ReactBadge from './badges/react-badge'
 import SASSBadge from './badges/sass-badge'
 import Year from './year'
 import styles from './footer.module.scss'
+import GMailBadge from './badges/gmail-badge'
+import GithubBadge from './badges/github-badge'
+import FacebookBadge from './badges/facebook-badge'
+import TwitterBadge from './badges/twitter-badge'
+import InstagramBadge from './badges/instagram-badge'
+import TelegramBadge from './badges/telegram-badge'
 
 export default class Footer extends React.Component {
     public render() {
@@ -48,12 +54,12 @@ export default class Footer extends React.Component {
                     <dd>
                         <nav>
                             <ul>
-                                <li>Mail</li>
-                                <li>GitHub</li>
-                                <li>Facebook</li>
-                                <li>Twitter</li>
-                                <li>Instagram</li>
-                                <li>Telegram</li>
+                                <li><GMailBadge/></li>
+                                <li><GithubBadge/></li>
+                                <li><FacebookBadge/></li>
+                                <li><TwitterBadge/></li>
+                                <li><InstagramBadge/></li>
+                                <li><TelegramBadge/></li>
                             </ul>
                         </nav>
                     </dd>
