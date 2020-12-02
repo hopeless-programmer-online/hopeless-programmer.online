@@ -1,8 +1,5 @@
 .article {
-    max-width: 8.5in;
     height: 100%;
-    margin-left: auto;
-    margin-right: auto;
     // grid
     display: grid;
     grid-template-rows: [header] max-content [main] auto [footer] max-content;
@@ -13,10 +10,6 @@
 
     > header {
         grid-area: header;
-    }
-    > main {
-        grid-area: main;
-        align-self: stretch;
     }
     > footer {
         grid-area: footer;

@@ -14,7 +14,7 @@ export default class Page extends React.Component {
                 <article className={styles.article}>
                     <Header/>
                     <main>
-                        {/*  */}
+                        {this.props.children}
                     </main>
                     <Footer/>
                 </article>
