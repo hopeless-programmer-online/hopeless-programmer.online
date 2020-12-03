@@ -1,6 +1,9 @@
 import React from 'react'
+import Illustration from '../classes/illustration'
+import Paragraph from '../classes/paragraph'
 import Section from '../classes/section'
-import Paragraph from './paragraph'
+import IllustrationComponent from './illustration'
+import ParagraphComponent from './paragraph'
 import styles from './section.module.scss'
 import Sentences from './sentences'
 
@@ -19,7 +22,9 @@ export default class SectionComponent extends React.Component<Props> {
                 </h3>
                 {
                     model.parts.map((part, key) =>
-                        <Paragraph model={part} key={key}/>
+                        part instanceof Paragraph    ? <ParagraphComponent model={part} key={key}/> :
+                        part instanceof Illustration ? <IllustrationComponent model={part} key={key}/> :
+                        (() => { throw new Error })()
                     )
                 }
             </section>

@@ -1,4 +1,5 @@
 import Article from "../classes/article";
+import Illustration from "../classes/illustration";
 import Paragraph from "../classes/paragraph";
 import Section from "../classes/section";
 import Sentence from "../classes/sentence";
@@ -72,6 +73,42 @@ export default new Article({
                             ],
                         }),
                     ] }),
+                }),
+                new Illustration({
+                    title : new Sentences({ array : [
+                        new Sentence({
+                            phrases : [
+                                new TextPhrase({
+                                    text : 'Ілюстрація №1. ',
+                                }),
+                            ],
+                        }),
+                        new Sentence({
+                            phrases : [
+                                new TextPhrase({
+                                    text : 'Друге речення заголовку. ',
+                                }),
+                            ],
+                        }),
+                    ] }),
+                    description : new Paragraph({
+                        sentences : new Sentences({ array : [
+                            new Sentence({
+                                phrases : [
+                                    new TextPhrase({
+                                        text : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+                                    }),
+                                ],
+                            }),
+                            new Sentence({
+                                phrases : [
+                                    new TextPhrase({
+                                        text : 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
+                                    }),
+                                ],
+                            }),
+                        ] }),
+                    }),
                 }),
             ],
         }),

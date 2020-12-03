@@ -1,8 +1,9 @@
+import Illustration from "./illustration";
 import Paragraph from "./paragraph";
 import Sentences from "./sentences";
 
 type Title = Sentences
-type Part = Paragraph
+type Part = Paragraph | Illustration
 type Parts = Array<Part>
 
 export default class Section {
