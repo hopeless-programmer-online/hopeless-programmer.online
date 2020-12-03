@@ -1,7 +1,11 @@
 import React from 'react'
+import Article from '../classes/article'
 import styles from './article.module.scss'
+import Section from './section'
 
-export default class Article extends React.Component {
+type Props = { model : Article }
+
+export default class ArticleComponent extends React.Component<Props> {
     public render() {
         return (
             <article className={styles.article}>
@@ -10,15 +14,11 @@ export default class Article extends React.Component {
                         Назва статті.
                     </h2>
                 </header>
-                <section>
-                    <h3>Частина №1</h3>
-                    <p>
-                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </span>
-                        <span>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </span>
-                        <span>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </span>
-                        <span>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </span>
-                    </p>
-                </section>
+                {
+                    this.props.model.sections.map((section, key) =>
+                        <Section model={section} key={key}/>
+                    )
+                }
                 <footer>
                     <details>
                         <summary>Деталі</summary>
