@@ -1,6 +1,4 @@
-import Sentence from "./sentence";
-
-type Sentences = Array<Sentence>
+import Sentences from "./sentences";
 
 export default class Paragraph {
     readonly sentences : Sentences

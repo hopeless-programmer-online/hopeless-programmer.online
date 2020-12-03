@@ -2,14 +2,47 @@ import Article from "../classes/article";
 import Paragraph from "../classes/paragraph";
 import Section from "../classes/section";
 import Sentence from "../classes/sentence";
+import Sentences from "../classes/sentences";
 import TextPhrase from "../classes/text-phrase";
 
 export default new Article({
+    title : new Sentences({ array : [
+        new Sentence({
+            phrases : [
+                new TextPhrase({
+                    text : 'Назва статті. ',
+                }),
+            ],
+        }),
+        new Sentence({
+            phrases : [
+                new TextPhrase({
+                    text : 'Назва статті #2. ',
+                }),
+            ],
+        }),
+    ] }),
     sections : [
         new Section({
+            title : new Sentences({ array : [
+                new Sentence({
+                    phrases : [
+                        new TextPhrase({
+                            text : 'Частина №1. ',
+                        }),
+                    ],
+                }),
+                new Sentence({
+                    phrases : [
+                        new TextPhrase({
+                            text : 'Друге речення заголовку. ',
+                        }),
+                    ],
+                }),
+            ] }),
             parts : [
                 new Paragraph({
-                    sentences : [
+                    sentences : new Sentences({ array : [
                         new Sentence({
                             phrases : [
                                 new TextPhrase({
@@ -38,7 +71,7 @@ export default new Article({
                                 }),
                             ],
                         }),
-                    ],
+                    ] }),
                 }),
             ],
         }),

@@ -1,7 +1,7 @@
 import React from 'react'
 import Paragraph from '../classes/paragraph'
 import styles from './paragraph.module.scss'
-import SentenceComponent from './sentence'
+import SentencesComponent from './sentences'
 
 type Props = { model : Paragraph }
 
@@ -10,9 +10,7 @@ export default class ParagraphComponent extends React.Component<Props> {
         return (
             <p className={styles.paragraph}>
                 {
-                    this.props.model.sentences.map((sentence, key) =>
-                        <SentenceComponent model={sentence} key={key}/>
-                    )
+                    <SentencesComponent model={this.props.model.sentences}/>
                 }
             </p>
         )

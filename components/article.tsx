@@ -2,20 +2,24 @@ import React from 'react'
 import Article from '../classes/article'
 import styles from './article.module.scss'
 import Section from './section'
+import Sentences from './sentences'
 
 type Props = { model : Article }
 
 export default class ArticleComponent extends React.Component<Props> {
     public render() {
+        const { model } = this.props
         return (
             <article className={styles.article}>
                 <header>
                     <h2>
-                        Назва статті.
+                        {
+                            <Sentences model={model.title}/>
+                        }
                     </h2>
                 </header>
                 {
-                    this.props.model.sections.map((section, key) =>
+                    model.sections.map((section, key) =>
                         <Section model={section} key={key}/>
                     )
                 }
