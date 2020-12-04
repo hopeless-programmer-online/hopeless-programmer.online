@@ -1,9 +1,12 @@
 import Article from "../classes/article";
+import Code from "../classes/code";
 import Illustration from "../classes/illustration";
+import Lexemes from "../classes/lexemes";
 import Paragraph from "../classes/paragraph";
 import Section from "../classes/section";
 import Sentence from "../classes/sentence";
 import Sentences from "../classes/sentences";
+import TextLexeme from "../classes/text-lexeme";
 import TextPhrase from "../classes/text-phrase";
 
 export default new Article({
@@ -109,8 +112,29 @@ export default new Article({
                             }),
                         ] }),
                     }),
+                    target : new Code({
+                        lines : [
+                            new Lexemes({ array : [
+                                new TextLexeme({
+                                    text : 'line #1',
+                                }),
+                            ] }),
+                            new Lexemes({ array : [
+                                new TextLexeme({
+                                    text : 'line #2',
+                                }),
+                            ] }),
+                            new Lexemes({ array : [
+                                new TextLexeme({
+                                    text : 'line #3',
+                                }),
+                            ] }),
+                        ],
+                    }),
                 }),
             ],
         }),
     ],
 })
+
+
