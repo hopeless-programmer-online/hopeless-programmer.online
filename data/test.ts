@@ -1,5 +1,6 @@
 import Article from "../classes/article";
 import Code from "../classes/code";
+import CommentLexeme from "../classes/comment-lexeme";
 import Illustration from "../classes/illustration";
 import Lexemes from "../classes/lexemes";
 import Paragraph from "../classes/paragraph";
@@ -118,9 +119,15 @@ export default new Article({
                                 new TextLexeme({
                                     text : 'line #1',
                                 }),
+                                new TextLexeme({
+                                    text : 'line #1-2',
+                                }),
+                                new TextLexeme({
+                                    text : 'line #1-3',
+                                }),
                             ] }),
                             new Lexemes({ array : [
-                                new TextLexeme({
+                                new CommentLexeme({
                                     text : 'line #2',
                                 }),
                             ] }),

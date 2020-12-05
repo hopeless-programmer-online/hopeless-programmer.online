@@ -1,2 +1,25 @@
 .code {
+    width: min-content;
+    background-color: rgb(30, 30, 30);
+    color: rgb(220, 220, 220);
+    font-family: consolas;
+    padding: 8pt;
+    border-radius: 8pt;
+
+    display: grid;
+    grid-template-columns: [index] min-content [content] auto;
+    justify-content: center;
+
+    > span:nth-child(3n + 1) {
+        grid-column: index;
+        color: rgb(127, 127, 127);
+    }
+    > span:nth-child(3n + 2) {
+        grid-column: content;
+        white-space: nowrap;
+
+        .comment {
+            color: rgb(106, 153, 85);
+        }
+    }
 }
