@@ -6,10 +6,12 @@ type Props = { model : LinkPhrase }
 
 export default class LinkPhraseComponent extends React.Component<Props> {
     public render() {
+        const { model } = this.props
+
         return (
-            <a>
+            <a href={model.href}>
                 {
-                    <PhrasesComponent model={this.props.model.phrases}/>
+                    <PhrasesComponent model={model.phrases}/>
                 }
             </a>
         )
