@@ -1,8 +1,8 @@
 import React from 'react'
-import TextLexeme from '../classes/text-lexeme'
+import CommentLexeme from '../classes/comment-lexeme'
 import styles from './code.module.scss'
 
-type Props = { model : TextLexeme }
+type Props = { model : CommentLexeme }
 
 export default class CommentLexemeComponent extends React.Component<Props> {
     public render() {

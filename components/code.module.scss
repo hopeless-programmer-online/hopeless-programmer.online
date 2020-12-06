@@ -1,7 +1,7 @@
 .code {
     width: min-content;
     background-color: rgb(30, 30, 30);
-    color: rgb(220, 220, 220);
+    color: rgb(212, 212, 212);
     font-family: consolas;
     padding: 8pt;
     border-radius: 8pt;
@@ -11,15 +11,41 @@
     justify-content: center;
 
     > span:nth-child(3n + 1) {
+        padding-right: 4pt;
         grid-column: index;
-        color: rgb(127, 127, 127);
+        color: rgb(133, 133, 133);
     }
     > span:nth-child(3n + 2) {
         grid-column: content;
         white-space: nowrap;
 
+        .dot {
+            color: rgb(61, 62, 61);
+        }
         .comment {
             color: rgb(106, 153, 85);
+        }
+        .keyword {
+            color: rgb(86, 156, 214);
+
+            &[data-text=if] {
+                color: rgb(197, 134, 192);
+            }
+        }
+        .variable {
+            color: rgb(156, 220, 254);
+        }
+        .function {
+            color: rgb(220, 220, 170);
+        }
+        .macro {
+            color: rgb(197, 134, 192);
+        }
+        .class {
+            color: rgb(78, 201, 176);
+        }
+        .string {
+            color: rgb(206, 145, 120);
         }
     }
 }

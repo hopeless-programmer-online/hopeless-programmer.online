@@ -1,7 +1,9 @@
 import Article from "../classes/article";
 import Code from "../classes/code";
 import CommentLexeme from "../classes/comment-lexeme";
+import IdentifierLexeme from "../classes/identifier-lexeme";
 import Illustration from "../classes/illustration";
+import KeywordLexeme from "../classes/keyword-lexeme";
 import Lexemes from "../classes/lexemes";
 import Paragraph from "../classes/paragraph";
 import Section from "../classes/section";
@@ -116,14 +118,18 @@ export default new Article({
                     target : new Code({
                         lines : [
                             new Lexemes({ array : [
-                                new TextLexeme({
-                                    text : 'line #1',
+                                new KeywordLexeme({
+                                    text : 'if',
                                 }),
                                 new TextLexeme({
-                                    text : 'line #1-2',
+                                    text : ' (',
+                                }),
+                                new IdentifierLexeme({
+                                    text : 'x',
+                                    role : 'variable',
                                 }),
                                 new TextLexeme({
-                                    text : 'line #1-3',
+                                    text : ') {',
                                 }),
                             ] }),
                             new Lexemes({ array : [

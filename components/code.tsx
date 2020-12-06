@@ -5,6 +5,10 @@ import TextLexeme from '../classes/text-lexeme'
 import styles from './code.module.scss'
 import TextLexemeComponent from './text-lexeme'
 import CommentLexemeComponent from './comment-lexeme'
+import KeywordLexeme from '../classes/keyword-lexeme'
+import KeywordLexemeComponent from './keyword-lexeme'
+import IdentifierLexeme from '../classes/identifier-lexeme'
+import IdentifierLexemeComponent from './identifier-lexeme'
 
 type Props = { model : Code }
 
@@ -18,8 +22,10 @@ export default class CodeComponent extends React.Component<Props> {
                         <span key={`${key}-content`}>
                             {
                                 line.array.map((lexeme, key) =>
-                                    lexeme instanceof CommentLexeme ? <CommentLexemeComponent model={lexeme} key={`${key}`}/> :
-                                    lexeme instanceof TextLexeme    ? <TextLexemeComponent model={lexeme} key={`${key}`}/>    :
+                                    lexeme instanceof IdentifierLexeme ? <IdentifierLexemeComponent model={lexeme} key={`${key}`}/> :
+                                    lexeme instanceof KeywordLexeme    ? <KeywordLexemeComponent    model={lexeme} key={`${key}`}/> :
+                                    lexeme instanceof CommentLexeme    ? <CommentLexemeComponent    model={lexeme} key={`${key}`}/> :
+                                    lexeme instanceof TextLexeme       ? <TextLexemeComponent       model={lexeme} key={`${key}`}/> :
                                     (() => { throw new Error })()
                                 )
                             }

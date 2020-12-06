@@ -1,4 +1,4 @@
-type Text = string
+export type Text = string
 
 export default class TextLexeme {
     readonly text : Text
