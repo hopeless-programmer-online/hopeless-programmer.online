@@ -1,0 +1,16 @@
+// @todo: export default type
+export type CodeLanguage =
+    | 'C++'
+    | 'C'
+    | 'C#'
+    | 'JavaScript'
+    | 'TypeScript'
+    | 'Python'
+    | 'Lua'
+    | 'HTML'
+    | 'CSS'
+    | 'SCSS'
+    | 'SASS'
+    | 'PHP'
+    | 'LLVM'
+    | 'BASIC'

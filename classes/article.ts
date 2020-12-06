@@ -11,5 +11,7 @@ export default class Article {
     public constructor({ title, sections } : { title : Title, sections : Sections }) {
         this.title = title
         this.sections = sections
+
+        sections.forEach((section, id) => section.id = id + 1)
     }
 }

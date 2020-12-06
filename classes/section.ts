@@ -9,9 +9,21 @@ type Parts = Array<Part>
 export default class Section {
     readonly title : Title
     readonly parts : Parts
+    private  _id   : number | null = null
 
     public constructor({ title, parts } : { title : Title, parts : Parts }) {
         this.title = title
         this.parts = parts
+    }
+
+    public get id() : number {
+        if (this._id === null) throw new Error
+
+        return this._id
+    }
+    public set id(id : number) {
+        if (this._id !== null) throw new Error
+
+        this._id = id
     }
 }

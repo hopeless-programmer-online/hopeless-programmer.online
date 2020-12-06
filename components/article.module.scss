@@ -7,9 +7,17 @@
         "header"
         "main"
         "footer";
+    align-items: start;
 
     > header {
         grid-area: header;
+
+        > h2 {
+            > span {
+                display: block;
+                text-align: center;
+            }
+        }
     }
     > footer {
         grid-area: footer;

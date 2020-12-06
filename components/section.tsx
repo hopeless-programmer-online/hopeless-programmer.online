@@ -12,10 +12,12 @@ type Props = { model : Section }
 export default class SectionComponent extends React.Component<Props> {
     public render() {
         const { model } = this.props
+        const id = `s-${model.id}`
 
         return (
-            <section className={styles.section}>
+            <section id={id} className={styles.section}>
                 <h3>
+                    <a href={`#${id}`}>§</a>
                     {
                         <Sentences model={model.title}/>
                     }
