@@ -10,7 +10,7 @@ export default class SentenceComponent extends React.Component<Props> {
         return (
             <span className={styles.sentence}>
                 {
-                    this.props.model.phrases.map((phrase, key) =>
+                    this.props.model.phrases.array.map((phrase, key) =>
                         <TextPhraseComponent model={phrase} key={key}/>
                     )
                 }

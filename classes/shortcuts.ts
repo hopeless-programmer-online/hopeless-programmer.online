@@ -3,6 +3,7 @@ import { CodeLanguage } from "./code-language";
 import Illustration from "./illustration";
 import Lexemes from "./lexemes";
 import Paragraph from "./paragraph";
+import Phrases from "./phrases";
 import Sentence from "./sentence";
 import Sentences from "./sentences";
 import TextLexeme from "./text-lexeme";
@@ -11,7 +12,8 @@ import TextPhrase from "./text-phrase";
 type strings = Array<string>
 
 export function sentence(...somethings : strings) : Sentence {
-    const phrases = somethings.map(something => new TextPhrase({ text : something }))
+    const array = somethings.map(something => new TextPhrase({ text : something }))
+    const phrases = new Phrases({ array })
 
     return new Sentence({ phrases })
 }

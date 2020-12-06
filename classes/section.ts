@@ -26,4 +26,9 @@ export default class Section {
 
         this._id = id
     }
+    public get illustrations() {
+        return this.parts
+            .filter(part => part instanceof Illustration)
+            .map(part => part as Illustration)
+    }
 }

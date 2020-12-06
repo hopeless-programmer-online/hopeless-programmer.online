@@ -12,15 +12,17 @@ export default class IllustrationComponent extends React.Component<Props> {
     public render() {
         const { model } = this.props
         const { target } = model
+        const id = `i-${model.id}`
 
         return (
-            <figure className={styles.illustration}>
+            <figure id={id} className={styles.illustration}>
                 {
                     target instanceof Code ? <CodeComponent model={target}/> :
                     (() => { throw new Error })()
                 }
                 <figcaption>
                     <h4>
+                        <a href={`#${id}`}>§</a>
                         {
                             <Sentences model={model.title}/>
                         }
