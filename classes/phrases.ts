@@ -1,6 +1,4 @@
-import TextPhrase from "./text-phrase";
-
-type Phrase = TextPhrase
+import Phrase from "./phrase";
 
 export default class Phrases {
     readonly array : Array<Phrase>

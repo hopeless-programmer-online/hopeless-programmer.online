@@ -2,7 +2,9 @@ import Code from "./code";
 import { CodeLanguage } from "./code-language";
 import Illustration from "./illustration";
 import Lexemes from "./lexemes";
+import LinkPhrase, { Href } from "./link-phrase";
 import Paragraph from "./paragraph";
+import Phrase from "./phrase";
 import Phrases from "./phrases";
 import Sentence from "./sentence";
 import Sentences from "./sentences";
@@ -11,16 +13,22 @@ import TextPhrase from "./text-phrase";
 
 type strings = Array<string>
 
-export function sentence(...somethings : strings) : Sentence {
-    const array = somethings.map(something => new TextPhrase({ text : something }))
+export function sentence(...somethings : Array<string | Phrase>) : Sentence {
+    const array = somethings.map(something =>
+        something instanceof Phrase ? something :
+        new TextPhrase({ text : something })
+    )
     const phrases = new Phrases({ array })
 
     return new Sentence({ phrases })
 }
 export const sen = sentence
 
-export function paragraph(...somethings : strings) : Paragraph {
-    const array = somethings.map(something => sentence(something))
+export function paragraph(...somethings : Array<string | Sentence>) : Paragraph {
+    const array = somethings.map(something =>
+        something instanceof Sentence ? something :
+        sentence(something)
+    )
     const sentences = new Sentences({ array })
 
     return new Paragraph({ sentences })
@@ -39,4 +47,11 @@ export function illustration(title : string, description : string, target : Code
         description : p(description),
         target,
     })
+}
+
+export function link(href : Href, ...somethings : strings) {
+    const array = somethings.map(something => new TextPhrase({ text : something }))
+    const phrases = new Phrases({ array })
+
+    return new LinkPhrase({ href, phrases })
 }
