@@ -12,6 +12,7 @@ import FacebookBadge from './badges/facebook-badge'
 import TwitterBadge from './badges/twitter-badge'
 import InstagramBadge from './badges/instagram-badge'
 import TelegramBadge from './badges/telegram-badge'
+import TypescriptBadge from './badges/typescript-badge'
 
 export default class Footer extends React.Component {
     public render() {
@@ -48,6 +49,7 @@ export default class Footer extends React.Component {
                         <nav>
                             <ul>
                                 <li><NextJSBadge/></li>
+                                <li><TypescriptBadge/></li>
                                 <li><ReactBadge/></li>
                                 <li><HTML5Badge/></li>
                                 <li><CSS3Badge/></li>
