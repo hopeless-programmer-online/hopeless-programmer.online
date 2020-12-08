@@ -6,4 +6,8 @@ export default class Paragraph {
     public constructor({ sentences } : { sentences : Sentences }) {
         this.sentences = sentences
     }
+
+    public get notes() {
+        return this.sentences.notes
+    }
 }

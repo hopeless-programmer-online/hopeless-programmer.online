@@ -6,4 +6,8 @@ export default class Sentence {
     public constructor({ phrases } : { phrases : Phrases }) {
         this.phrases = phrases
     }
+
+    public get notes() {
+        return this.phrases.notes
+    }
 }

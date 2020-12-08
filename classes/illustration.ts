@@ -28,4 +28,7 @@ export default class Illustration {
 
         this._id = id
     }
+    public get notes() {
+        return this.title.notes.concat(this.description.notes)
+    }
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import Article from '../classes/article'
 import styles from './article.module.scss'
 import Section from './section'
+import SentencesComponent from './sentences'
 import Sentences from './sentences'
 
 type Props = { model : Article }
@@ -9,6 +10,8 @@ type Props = { model : Article }
 export default class ArticleComponent extends React.Component<Props> {
     public render() {
         const { model } = this.props
+        const notes = model.notes
+
         return (
             <article className={styles.article}>
                 <header>
@@ -24,6 +27,21 @@ export default class ArticleComponent extends React.Component<Props> {
                     )
                 }
                 <footer>
+                    {
+                        notes.length === 0 ||
+                        <ol>
+                            {
+                                notes.map(({ id, sentences }) =>
+                                    <li id={`n-${id}`} key={id}>
+                                        <a href={`#an-${id}`}>↑</a>
+                                        {
+                                            <SentencesComponent model={sentences}/>
+                                        }
+                                    </li>
+                                )
+                            }
+                        </ol>
+                    }
                     <details>
                         <summary>Деталі</summary>
                         <dl>
