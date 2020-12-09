@@ -1,4 +1,4 @@
-import { code, illustration, paragraph, sentence, link, section, article, note, list, ref, fig } from "../classes/shortcuts";
+import { code, illustration, paragraph, sentence, link, section, article, note, list, ref, fig, neg } from "../classes/shortcuts";
 
 const overload = 'https://uk.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%B2%D0%B0%D0%BD%D1%82%D0%B0%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F_%D1%84%D1%83%D0%BD%D0%BA%D1%86%D1%96%D1%97'
 const operator_overload = 'https://uk.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%B2%D0%B0%D0%BD%D1%82%D0%B0%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F_%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%96%D0%B2'
@@ -40,7 +40,7 @@ export default article([ sentence(`Думки вголос. `), sentence(`Пер
             `Існують мови програмування, які не підтримують перевантаження. Очевидних (особисто для мене) причин такої стратегії є декілька: `,
         ]),
         list(...[
-            sentence(`Мова сформувалась в часи, коли `, /*negation(`земля ще була пласкою`),*/ ` перевантаження ще не винайшли. `),
+            sentence(`Мова сформувалась в часи, коли `, neg(`земля ще була пласкою`), ` перевантаження ще не винайшли. `),
             sentence(`Мова не є статично-типізованою. `),
             sentence(`Автори мови вважають, що перевантаження ускладнює розуміння кінцевої програми. `),
         ]),

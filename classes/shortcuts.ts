@@ -6,6 +6,7 @@ import Illustration from "./illustration";
 import Lexemes from "./lexemes";
 import LinkPhrase, { Href } from "./link-phrase";
 import List from "./list";
+import NegationPhrase from "./negation-phrase";
 import NotePhrase from "./note-phrase";
 import Paragraph from "./paragraph";
 import Phrase from "./phrase";
@@ -146,6 +147,12 @@ export function fig(...somethings : Array<PhraseLike>) {
     const phrases = toPhrases(somethings)
 
     return new FigurativePhrase({ phrases })
+}
+
+export function neg(...somethings : Array<PhraseLike>) {
+    const phrases = toPhrases(somethings)
+
+    return new NegationPhrase({ phrases })
 }
 
 export function ref(target : ReferenceTarget) {
