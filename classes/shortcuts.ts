@@ -9,6 +9,7 @@ import NotePhrase from "./note-phrase";
 import Paragraph from "./paragraph";
 import Phrase from "./phrase";
 import Phrases from "./phrases";
+import ReferencePhrase, { Target as ReferenceTarget } from "./reference-phrase";
 import Section, { SectionPart, SectionParts } from "./section";
 import Sentence from "./sentence";
 import Sentences from "./sentences";
@@ -82,9 +83,8 @@ export function code(language : CodeLanguage, ...somethings : strings) {
     return new Code({ language, lines })
 }
 
-export function illustration(title : string, description : string, target : Code) {
+export function illustration(description : string, target : Code) {
     return new Illustration({
-        title : new Sentences({ array : [ sentence(title) ] }),
         description : p(description),
         target,
     })
@@ -139,4 +139,8 @@ export function list(...somethings : Array<SentencesLike>) : List {
     const elements = somethings.map(toSentences)
 
     return new List({ elements })
+}
+
+export function ref(target : ReferenceTarget) {
+    return new ReferencePhrase({ target })
 }

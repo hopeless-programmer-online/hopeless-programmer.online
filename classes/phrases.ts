@@ -5,7 +5,7 @@ import Phrase from "./phrase";
 export default class Phrases {
     readonly array : Array<Phrase>
 
-    public constructor({ array } : { array : Array<Phrase> }) {
+    public constructor({ array = [] } : { array : Array<Phrase> } = { array : [] }) {
         this.array = array
     }
 
@@ -15,5 +15,9 @@ export default class Phrases {
             phrase instanceof Link ? phrase.phrases.notes :
             []
         ), [])
+    }
+
+    public concat(other : Phrases) {
+        return new Phrases({ array : [ ...this.array, ...other.array ] })
     }
 }

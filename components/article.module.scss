@@ -1,17 +1,12 @@
 .article {
     height: 100%;
-    // grid
-    display: grid;
-    grid-template-rows: [header] max-content [main] auto [footer] max-content;
-    grid-template-areas:
-        "header"
-        "main"
-        "footer";
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
 
     > header {
-        grid-area: header;
-
         > h2 {
             > span {
                 display: block;
@@ -20,6 +15,11 @@
         }
     }
     > footer {
-        grid-area: footer;
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        align-items: stretch;
     }
 }
