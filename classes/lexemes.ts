@@ -1,7 +1,4 @@
-import CommentLexeme from "./comment-lexeme"
-import TextLexeme from "./text-lexeme"
-
-type Lexeme = TextLexeme | CommentLexeme
+import Lexeme from "./lexeme"
 
 export default class Lexemes {
     readonly array : Array<Lexeme>

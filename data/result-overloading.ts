@@ -1,4 +1,4 @@
-import { code, illustration, paragraph, sentence, link, section, article, note, list, ref, fig, neg } from "../classes/shortcuts";
+import { illustration, paragraph, sentence, link, section, article, note, list, ref, fig, neg, kw, cm, cpp, c, f, v, lt } from "../classes/shortcuts";
 
 const overload = 'https://uk.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%B2%D0%B0%D0%BD%D1%82%D0%B0%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F_%D1%84%D1%83%D0%BD%D0%BA%D1%86%D1%96%D1%97'
 const operator_overload = 'https://uk.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%B2%D0%B0%D0%BD%D1%82%D0%B0%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F_%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%96%D0%B2'
@@ -8,19 +8,33 @@ const note_1 = note(sentence(`Я буду використовувати тер�
 
 const code_1 = illustration(
     `Використання перевантажених за результатом функцій в представленні художника. `,
-    code(`C++`, ...[
-        'int   f() {',
-        '    return 1;',
-        '}',
-        'float f() {',
-        '    return 2.0;',
-        '}',
-        '',
-        'int   x = f();',
-        'float y = f();',
-        '',
-        'print(x); // 1',
-        'print(y); // 2',
+    // cpp(...[
+    //     [ `int   f() {` ],
+    //     [ `    `, kw(`return`), ` 1;` ],
+    //     [ `}` ],
+    //     [ `float f() {` ],
+    //     [ `    `, kw(`return`), ` 2.0;` ],
+    //     [ `}` ],
+    //     [ `` ],
+    //     [ `int   x = f();` ],
+    //     [ `float y = f();` ],
+    //     [ `` ],
+    //     [ `print(x); `, cm(`// 1`) ],
+    //     [ `print(y); `, cm(`// 2`) ],
+    // ]),
+    cpp(...[
+        [ c(`int`), `   `, f(`f`), `() {` ],
+        [ `    `, kw(`return`), ` `, lt(`1`), `;` ],
+        [ `}` ],
+        [ c(`float`), ` `, f(`f`), `() {` ],
+        [ `    `, kw(`return`), ` `, lt(`2.0`), `;` ],
+        [ `}` ],
+        [ `` ],
+        [ c(`int`), `   `, v(`x`), ` = `, f(`f`), `();` ],
+        [ c(`float`), ` `, v(`y`), ` = `, f(`f`), `();` ],
+        [ `` ],
+        [ f(`print`), `(`, v(`x`), `); `, cm(`// 1`) ],
+        [ f(`print`), `(`, v(`y`), `); `, cm(`// 2`) ],
     ]),
 )
 

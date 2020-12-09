@@ -1,11 +1,16 @@
 import Article from "./article";
 import Code from "./code";
 import { CodeLanguage } from "./code-language";
+import CommentLexeme from "./comment-lexeme";
 import FigurativePhrase from "./figurative-phrase";
+import IdentifierLexeme from "./identifier-lexeme";
 import Illustration from "./illustration";
+import KeywordLexeme from "./keyword-lexeme";
+import Lexeme from "./lexeme";
 import Lexemes from "./lexemes";
 import LinkPhrase, { Href } from "./link-phrase";
 import List from "./list";
+import LiteralLexeme, { Type as LiteralType } from "./literal-lexeme";
 import NegationPhrase from "./negation-phrase";
 import NotePhrase from "./note-phrase";
 import Paragraph from "./paragraph";
@@ -17,8 +22,6 @@ import Sentence from "./sentence";
 import Sentences from "./sentences";
 import TextLexeme from "./text-lexeme";
 import TextPhrase from "./text-phrase";
-
-type strings = Array<string>
 
 function error<T>(message : string = '') : T {
     throw new Error(message)
@@ -79,10 +82,31 @@ export function paragraph(...somethings : Array<SentenceLike>) : Paragraph {
 }
 export const p = paragraph
 
-export function code(language : CodeLanguage, ...somethings : strings) {
-    const lines = somethings.map(text => new Lexemes({ array : [ new TextLexeme({ text }) ] }))
+export type LexemeLike = Lexeme | string
+export function toLexeme(something : LexemeLike) {
+    return something instanceof Lexeme
+        ? something
+        : new TextLexeme({ text : something })
+}
+export type LexemesLike = LexemeLike | Array<LexemeLike>
+export function toLexemes(something : LexemesLike) : Lexemes {
+    const array = (
+        Array.isArray(something)
+            ? something
+            : [ something ]
+    ).map(toLexeme)
+
+    return new Lexemes({ array })
+}
+export function code(language : CodeLanguage, ...somethings : Array<LexemesLike>) {
+    const lines = somethings.map(toLexemes)
 
     return new Code({ language, lines })
+}
+export function cpp(...somethings : Array<LexemesLike>) {
+    const lines = somethings.map(toLexemes)
+
+    return new Code({ language : `C++`, lines })
 }
 
 export function illustration(description : string, target : Code) {
@@ -157,4 +181,42 @@ export function neg(...somethings : Array<PhraseLike>) {
 
 export function ref(target : ReferenceTarget) {
     return new ReferencePhrase({ target })
+}
+
+export function kw(text : string) {
+    return new KeywordLexeme({ text })
+}
+export function cm(text : string) {
+    return new CommentLexeme({ text })
+}
+export function c(text : string) {
+    return new IdentifierLexeme({ text, role : `class` })
+}
+export function f(text : string) {
+    return new IdentifierLexeme({ text, role : `function` })
+}
+export function v(text : string) {
+    return new IdentifierLexeme({ text, role : `variable` })
+}
+export function lt(text : string) {
+    let type = (() => {
+        try {
+            const parsed = JSON.parse(text)
+            const type = typeof parsed
+
+            switch (type) {
+                case 'boolean':
+                case 'number':
+                case 'string':
+                    return type
+            }
+        }
+        catch(error) {
+            // do nothing
+        }
+
+        return 'number'
+    })()
+
+    return new LiteralLexeme({ text, type })
 }

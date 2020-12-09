@@ -9,6 +9,8 @@ import KeywordLexeme from '../classes/keyword-lexeme'
 import KeywordLexemeComponent from './keyword-lexeme'
 import IdentifierLexeme from '../classes/identifier-lexeme'
 import IdentifierLexemeComponent from './identifier-lexeme'
+import LiteralLexeme from '../classes/literal-lexeme'
+import LiteralLexemeComponent from './literal-lexeme'
 
 type Props = { model : Code }
 
@@ -25,6 +27,7 @@ export default class CodeComponent extends React.Component<Props> {
                                     lexeme instanceof IdentifierLexeme ? <IdentifierLexemeComponent model={lexeme} key={`${key}`}/> :
                                     lexeme instanceof KeywordLexeme    ? <KeywordLexemeComponent    model={lexeme} key={`${key}`}/> :
                                     lexeme instanceof CommentLexeme    ? <CommentLexemeComponent    model={lexeme} key={`${key}`}/> :
+                                    lexeme instanceof LiteralLexeme    ? <LiteralLexemeComponent    model={lexeme} key={`${key}`}/> :
                                     lexeme instanceof TextLexeme       ? <TextLexemeComponent       model={lexeme} key={`${key}`}/> :
                                     (() => { throw new Error })()
                                 )
