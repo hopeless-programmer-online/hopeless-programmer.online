@@ -1,6 +1,6 @@
 import React from 'react'
 import LiteralLexeme from '../classes/literal-lexeme'
-import styles from './code.module.scss'
+import styles from './lexemes.module.scss'
 
 type Props = { model : LiteralLexeme }
 

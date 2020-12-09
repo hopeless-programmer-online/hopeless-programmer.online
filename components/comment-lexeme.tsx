@@ -1,6 +1,6 @@
 import React from 'react'
 import CommentLexeme from '../classes/comment-lexeme'
-import styles from './code.module.scss'
+import styles from './lexemes.module.scss'
 
 type Props = { model : CommentLexeme }
 

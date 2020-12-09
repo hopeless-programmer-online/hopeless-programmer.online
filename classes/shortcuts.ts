@@ -1,6 +1,7 @@
 import Article from "./article";
 import Code from "./code";
 import { CodeLanguage } from "./code-language";
+import CodePhrase from "./code-phrase";
 import CommentLexeme from "./comment-lexeme";
 import FigurativePhrase from "./figurative-phrase";
 import IdentifierLexeme from "./identifier-lexeme";
@@ -27,8 +28,15 @@ function error<T>(message : string = '') : T {
     throw new Error(message)
 }
 
-export type PhraseLike = Phrase | Illustration | string
+export type PhraseLike = Phrase | Code | Illustration | string
 export function toPhrase(something : PhraseLike) : Phrase {
+    if (something instanceof Code) {
+        return new CodePhrase({
+            language : something.language,
+            lexemes  : something.lines[0],
+        })
+    }
+
     return (
         something instanceof Phrase       ? something                            :
         something instanceof Illustration ? ref(something)                       :

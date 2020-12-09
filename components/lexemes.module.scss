@@ -1,0 +1,66 @@
+@use "./palette.module.scss";
+
+%lexemes {
+    white-space: pre;
+    color: palette.$color-regular;
+    font-family: consolas;
+
+    &::selection, *::selection {
+        background-color: palette.$color-select;
+    }
+
+    .dot {
+        color: palette.$color-dot;
+    }
+    .comment {
+        color: palette.$color-comment;
+    }
+    .keyword {
+        color: palette.$color-keyword;
+
+        &[data-text=if],
+        &[data-text=switch],
+        &[data-text=case],
+        &[data-text=yield],
+        &[data-text=return] {
+            color: palette.$color-macro;
+        }
+    }
+    .variable {
+        color: palette.$color-variable;
+    }
+    .function {
+        color: palette.$color-function;
+    }
+    .macro {
+        color: palette.$color-macro;
+    }
+    .class {
+        color: palette.$color-class;
+
+        &[data-text=void],
+        &[data-text=bool],
+        &[data-text=int],
+        &[data-text=float],
+        &[data-text=char]
+        {
+            color: palette.$color-keyword;
+        }
+    }
+    .boolean {
+        color: palette.$color-keyword;
+    }
+    .number {
+        color: palette.$color-number;
+    }
+    .string {
+        color: palette.$color-string;
+    }
+    .regex {
+        color: palette.$color-regex;
+    }
+}
+
+.lexemes {
+    @extend %lexemes;
+}

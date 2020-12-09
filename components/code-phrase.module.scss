@@ -1,0 +1,8 @@
+@use "./palette.module.scss";
+
+.code {
+    background-color: palette.$color-back;
+    padding-left: 2pt;
+    padding-right: 2pt;
+    border-radius: 4pt;
+}

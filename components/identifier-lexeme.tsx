@@ -1,6 +1,6 @@
 import React from 'react'
 import IdentifierLexeme from '../classes/identifier-lexeme'
-import styles from './code.module.scss'
+import styles from './lexemes.module.scss'
 
 type Props = { model : IdentifierLexeme }
 

@@ -1,3 +1,15 @@
 .illustration {
     width: min-content;
+    // padding: 8pt;
+    // border-radius: 16pt;
+    // border: 4pt solid crimson;
+    // box-shadow: 4pt 4pt 16pt rgb(0, 0, 0, 0.2);
+
+    > figcaption {
+        text-align: center;
+
+        > p > span {
+            text-align: center;
+        }
+    }
 }
