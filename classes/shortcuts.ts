@@ -27,11 +27,12 @@ function error<T>(message : string = '') : T {
     throw new Error(message)
 }
 
-export type PhraseLike = Phrase | string
+export type PhraseLike = Phrase | Illustration | string
 export function toPhrase(something : PhraseLike) : Phrase {
     return (
-        something instanceof Phrase   ? something                            :
-        typeof something === 'string' ? new TextPhrase({ text : something }) :
+        something instanceof Phrase       ? something                            :
+        something instanceof Illustration ? ref(something)                       :
+        typeof something === 'string'     ? new TextPhrase({ text : something }) :
         error<Phrase>(`Can't convert ${typeof something} ${something} to phrase.`)
     )
 }
@@ -109,9 +110,9 @@ export function cpp(...somethings : Array<LexemesLike>) {
     return new Code({ language : `C++`, lines })
 }
 
-export function illustration(description : string, target : Code) {
+export function illustration(description : ParagraphLike, target : Code) {
     return new Illustration({
-        description : p(description),
+        description : toParagraph(description),
         target,
     })
 }
