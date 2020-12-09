@@ -1,6 +1,6 @@
 import Phrase from "./phrase"
 
-type Text = string
+export type Text = string
 
 export default class TextPhrase extends Phrase {
     readonly text : Text

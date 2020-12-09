@@ -1,6 +1,7 @@
 import Article from "./article";
 import Code from "./code";
 import { CodeLanguage } from "./code-language";
+import FigurativePhrase from "./figurative-phrase";
 import Illustration from "./illustration";
 import Lexemes from "./lexemes";
 import LinkPhrase, { Href } from "./link-phrase";
@@ -139,6 +140,12 @@ export function list(...somethings : Array<SentencesLike>) : List {
     const elements = somethings.map(toSentences)
 
     return new List({ elements })
+}
+
+export function fig(...somethings : Array<PhraseLike>) {
+    const phrases = toPhrases(somethings)
+
+    return new FigurativePhrase({ phrases })
 }
 
 export function ref(target : ReferenceTarget) {
