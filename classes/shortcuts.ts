@@ -4,6 +4,7 @@ import { CodeLanguage } from "./code-language";
 import Illustration from "./illustration";
 import Lexemes from "./lexemes";
 import LinkPhrase, { Href } from "./link-phrase";
+import List from "./list";
 import NotePhrase from "./note-phrase";
 import Paragraph from "./paragraph";
 import Phrase from "./phrase";
@@ -95,18 +96,19 @@ export function note(sentencesLike : SentencesLike, ) : NotePhrase {
     return new NotePhrase({ sentences })
 }
 
-export function link(href : Href, ...somethings : strings) {
-    const array = somethings.map(something => new TextPhrase({ text : something }))
-    const phrases = new Phrases({ array })
+export function link(somethings : PhrasesLike, href : Href) {
+    const phrases = toPhrases(somethings)
 
     return new LinkPhrase({ href, phrases })
 }
 
-export type SectionPartLike = Illustration | ParagraphLike
+export type SectionPartLike = Illustration | List | ParagraphLike
 export function toSectionPart(something : SectionPartLike) : SectionPart {
-    return something instanceof Illustration
-        ? something
-        : toParagraph(something)
+    return (
+        something instanceof Illustration ? something :
+        something instanceof List         ? something :
+        toParagraph(something)
+    )
 }
 export type SectionPartsLike = SectionPartLike | Array<SectionPartLike>
 export function toSectionParts(somethings : SectionPartsLike) : SectionParts {
@@ -131,4 +133,10 @@ export function article(titleLike : SentenceLike, ...sections : Array<Section>) 
         title,
         sections,
     })
+}
+
+export function list(...somethings : Array<SentencesLike>) : List {
+    const elements = somethings.map(toSentences)
+
+    return new List({ elements })
 }

@@ -1,13 +1,13 @@
 import Illustration from "./illustration";
+import List from "./list";
 import Note from "./note-phrase";
 import Paragraph from "./paragraph";
 import Sentences from "./sentences";
 
-export type SectionPart = Paragraph | Illustration
+export type SectionPart = Paragraph | List | Illustration
 export type SectionParts = Array<SectionPart>
 
 type Title = Sentences
-type Part = SectionPart
 type Parts = SectionParts
 
 export default class Section {
