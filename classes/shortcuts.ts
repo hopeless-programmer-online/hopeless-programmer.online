@@ -3,6 +3,7 @@ import Code from "./code";
 import { CodeLanguage } from "./code-language";
 import CodePhrase from "./code-phrase";
 import CommentLexeme from "./comment-lexeme";
+import EmphasisPhrase from "./emphasis-phrase";
 import FigurativePhrase from "./figurative-phrase";
 import IdentifierLexeme from "./identifier-lexeme";
 import Illustration from "./illustration";
@@ -117,6 +118,11 @@ export function cpp(...somethings : Array<LexemesLike>) {
 
     return new Code({ language : `C++`, lines })
 }
+export function js(...somethings : Array<LexemesLike>) {
+    const lines = somethings.map(toLexemes)
+
+    return new Code({ language : `JavaScript`, lines })
+}
 
 export function illustration(description : ParagraphLike, target : Code) {
     return new Illustration({
@@ -180,6 +186,12 @@ export function fig(...somethings : Array<PhraseLike>) {
     const phrases = toPhrases(somethings)
 
     return new FigurativePhrase({ phrases })
+}
+
+export function emp(...somethings : Array<PhraseLike>) {
+    const phrases = toPhrases(somethings)
+
+    return new EmphasisPhrase({ phrases })
 }
 
 export function neg(...somethings : Array<PhraseLike>) {

@@ -1,5 +1,6 @@
 import React from 'react'
 import CodePhrase from '../classes/code-phrase'
+import EmphasisPhrase from '../classes/emphasis-phrase'
 import FigurativePhrase from '../classes/figurative-phrase'
 import LinkPhrase from '../classes/link-phrase'
 import NegationPhrase from '../classes/negation-phrase'
@@ -8,6 +9,7 @@ import Phrases from '../classes/phrases'
 import ReferencePhrase from '../classes/reference-phrase'
 import TextPhrase from '../classes/text-phrase'
 import CodePhraseComponent from './code-phrase'
+import EmphasisPhraseComponent from './emphasis-phrase'
 import FigurativePhraseComponent from './figurative-phrase'
 import LinkPhraseComponent from './link-phrase'
 import NegationPhraseComponent from './negation-phrase'
@@ -26,6 +28,7 @@ export default class PhrasesComponent extends React.Component<Props> {
                 phrase instanceof NotePhrase       ? <NotePhraseComponent       model={phrase} key={key}/> :
                 phrase instanceof ReferencePhrase  ? <ReferencePhraseComponent  model={phrase} key={key}/> :
                 phrase instanceof FigurativePhrase ? <FigurativePhraseComponent model={phrase} key={key}/> :
+                phrase instanceof EmphasisPhrase   ? <EmphasisPhraseComponent   model={phrase} key={key}/> :
                 phrase instanceof NegationPhrase   ? <NegationPhraseComponent   model={phrase} key={key}/> :
                 phrase instanceof CodePhrase       ? <CodePhraseComponent       model={phrase} key={key}/> :
                 (() => { throw new Error })()
