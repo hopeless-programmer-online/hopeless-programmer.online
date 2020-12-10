@@ -1,3 +1,5 @@
+@use "./typography.module.scss";
+
 .article {
     max-width: 8.5in;
     height: 100%;
@@ -10,6 +12,15 @@
         "header"
         "main"
         "footer";
+
+    @include typography.regular;
+
+    a {
+        @include typography.link;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        @include typography.strong;
+    }
 
     > header {
         grid-area: header;

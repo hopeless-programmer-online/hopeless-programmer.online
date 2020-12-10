@@ -12,6 +12,7 @@
     justify-content: center;
 
     > span:nth-child(3n + 1) {
+        font-family: consolas;
         padding-right: 4pt;
         grid-column: index;
         color: palette.$color-index;
