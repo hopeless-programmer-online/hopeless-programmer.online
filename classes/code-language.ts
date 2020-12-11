@@ -14,3 +14,4 @@ export type CodeLanguage =
     | 'PHP'
     | 'LLVM'
     | 'BASIC'
+    | 'PHP'

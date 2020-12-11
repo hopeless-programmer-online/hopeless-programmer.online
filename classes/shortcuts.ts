@@ -123,6 +123,11 @@ export function js(...somethings : Array<LexemesLike>) {
 
     return new Code({ language : `JavaScript`, lines })
 }
+export function cs(...somethings : Array<LexemesLike>) {
+    const lines = somethings.map(toLexemes)
+
+    return new Code({ language : `C#`, lines })
+}
 
 export function illustration(description : ParagraphLike, target : Code) {
     return new Illustration({
@@ -131,7 +136,7 @@ export function illustration(description : ParagraphLike, target : Code) {
     })
 }
 
-export function note(sentencesLike : SentencesLike, ) : NotePhrase {
+export function note(...sentencesLike : Array<SentenceLike>) : NotePhrase {
     const sentences = toSentences(sentencesLike)
 
     return new NotePhrase({ sentences })
