@@ -4,6 +4,7 @@ import Page from '../components/page'
 import overloading from '../data/result-overloading'
 import overlapping from '../data/unreversalbe-overlapping'
 import keywords from '../data/keywords'
+import segregation from '../data/segregation'
 
 export default class Index extends React.Component {
     public render() {
@@ -12,6 +13,7 @@ export default class Index extends React.Component {
                 <ArticleLink model={overloading} href='./articles/result-overloading'/>
                 <ArticleLink model={overlapping} href='./articles/unreversalbe-overlapping'/>
                 <ArticleLink model={keywords} href='./articles/keywords'/>
+                <ArticleLink model={segregation} href='./articles/segregation'/>
             </Page>
         )
     }
