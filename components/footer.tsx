@@ -15,6 +15,8 @@ import TelegramBadge from './badges/telegram-badge'
 import TypescriptBadge from './badges/typescript-badge'
 import NPMBadge from './badges/npm-badge'
 import NodeJSBadge from './badges/nodejs-badge'
+import AboutThisSiteBadge from './badges/about-this-site-badge'
+import AboutMeBadge from './badges/about-me-badge'
 
 export default class Footer extends React.Component {
     public render() {
@@ -39,8 +41,8 @@ export default class Footer extends React.Component {
                     <dd>
                         <nav>
                             <ul>
-                                <li><a href="">Про цей сайт</a></li>
-                                <li><a href="">Про автора</a></li>
+                                <li><AboutThisSiteBadge/></li>
+                                <li><AboutMeBadge/></li>
                             </ul>
                         </nav>
                     </dd>
