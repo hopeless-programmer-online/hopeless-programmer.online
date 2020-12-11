@@ -6,6 +6,7 @@ import styles from './typescript-badge.module.scss'
 export default class TypescriptBadge extends Badge {
     protected Icon = Icon
     protected Caption = Caption
+    protected href = 'https://en.wikipedia.org/wiki/TypeScript'
 }
 
 class Icon extends React.Component {
