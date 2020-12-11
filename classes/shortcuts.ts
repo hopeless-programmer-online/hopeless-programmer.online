@@ -128,6 +128,16 @@ export function cs(...somethings : Array<LexemesLike>) {
 
     return new Code({ language : `C#`, lines })
 }
+export function lua(...somethings : Array<LexemesLike>) {
+    const lines = somethings.map(toLexemes)
+
+    return new Code({ language : 'Lua', lines })
+}
+export function py(...somethings : Array<LexemesLike>) {
+    const lines = somethings.map(toLexemes)
+
+    return new Code({ language : 'Python', lines })
+}
 
 export function illustration(description : ParagraphLike, target : Code) {
     return new Illustration({
