@@ -18,9 +18,7 @@ class Icon extends React.Component {
 class Caption extends React.Component {
     public render() {
         return (
-            <a href=''>
-                GitHub
-            </a>
+            'GitHub'
         )
     }
 }

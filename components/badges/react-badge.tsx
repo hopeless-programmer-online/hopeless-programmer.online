@@ -6,6 +6,7 @@ import styles from './react-badge.module.scss'
 export default class ReactBadge extends Badge {
     protected Icon = Icon
     protected Caption = Caption
+    protected href = 'https://en.wikipedia.org/wiki/React_(web_framework)'
 }
 
 class Icon extends React.Component {
@@ -18,9 +19,7 @@ class Icon extends React.Component {
 class Caption extends React.Component {
     public render() {
         return (
-            <a href='https://en.wikipedia.org/wiki/React_(web_framework)'>
-                React
-            </a>
+            'React'
         )
     }
 }

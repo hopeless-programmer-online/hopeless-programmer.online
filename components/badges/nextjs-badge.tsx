@@ -3,9 +3,10 @@ import Badge from '../badge'
 import { NextDotJs } from '@icons-pack/react-simple-icons'
 import styles from './nextjs-badge.module.scss'
 
-export default class ReactBadge extends Badge {
+export default class NextJSBadge extends Badge {
     protected Icon = Icon
     protected Caption = Caption
+    protected href = 'https://en.wikipedia.org/wiki/Next.js'
 }
 
 class Icon extends React.Component {
@@ -18,9 +19,7 @@ class Icon extends React.Component {
 class Caption extends React.Component {
     public render() {
         return (
-            <a href='https://en.wikipedia.org/wiki/Next.js'>
-                Next.js
-            </a>
+            'Next.js'
         )
     }
 }

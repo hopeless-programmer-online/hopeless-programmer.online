@@ -5,7 +5,7 @@ import ParagraphComponent from './paragraph'
 import SentencesComponent from './sentences'
 import styles from './article-link.module.scss'
 
-type Props = { model : Model }
+type Props = { model : Model, href : string }
 
 export default class ArticleLink extends React.Component<Props> {
     public render() {
@@ -22,7 +22,7 @@ export default class ArticleLink extends React.Component<Props> {
                 </header>
                 <ParagraphComponent model={model.sections[0].parts[0] as Paragraph}/>
                 {/* todo: correct link */}
-                <a className={styles.link} href='./articles/result-overloading'>Читати</a>
+                <a className={styles.link} href={this.props.href}>Читати</a>
             </article>
         )
     }

@@ -1,26 +1,26 @@
 import React from 'react'
 import Badge from '../badge'
-import { Css3 } from '@icons-pack/react-simple-icons'
-import styles from './css3-badge.module.scss'
+import { Npm } from '@icons-pack/react-simple-icons'
+import styles from './npm-badge.module.scss'
 
-export default class CSS3Badge extends Badge {
+export default class NPMBadge extends Badge {
     protected Icon = Icon
     protected Caption = Caption
-    protected href = 'https://en.wikipedia.org/wiki/CSS#CSS_3'
+    protected href = 'https://en.wikipedia.org/wiki/Npm_(software)'
 }
 
 class Icon extends React.Component {
     public render() {
         return (
-            <Css3 className={styles.css3}/>
+            <Npm className={styles.npm}/>
         )
     }
 }
 class Caption extends React.Component {
     public render() {
         return (
-            <abbr title='Cascading Style Sheets'>
-                CSS3
+            <abbr title='Node Package Manager'>
+                NPM
             </abbr>
         )
     }

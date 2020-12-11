@@ -1,15 +1,15 @@
 import React from 'react'
 import ArticleLink from '../components/article-link'
 import Page from '../components/page'
-import overlapping from '../data/unreversalbe-overlapping'
 import overloading from '../data/result-overloading'
+import overlapping from '../data/unreversalbe-overlapping'
 
 export default class Index extends React.Component {
     public render() {
         return (
             <Page>
-                <ArticleLink model={overloading}/>
-                <ArticleLink model={overlapping}/>
+                <ArticleLink model={overloading} href='./articles/result-overloading'/>
+                <ArticleLink model={overlapping} href='./articles/unreversalbe-overlapping'/>
             </Page>
         )
     }

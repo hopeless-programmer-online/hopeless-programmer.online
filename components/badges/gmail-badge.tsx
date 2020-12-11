@@ -6,6 +6,7 @@ import styles from './gmail-badge.module.scss'
 export default class GMailBadge extends Badge {
     protected Icon = Icon
     protected Caption = Caption
+    protected href = 'mailto:me@hopeless-programmer.online'
 }
 
 class Icon extends React.Component {
@@ -18,9 +19,7 @@ class Icon extends React.Component {
 class Caption extends React.Component {
     public render() {
         return (
-            <a href='mailto:me@hopeless-programmer.online'>
-                Mail
-            </a>
+            'Mail'
         )
     }
 }
