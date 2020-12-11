@@ -1,0 +1,25 @@
+.article {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+
+    > p {
+        text-align: justify;
+    }
+    > .link {
+        align-self: flex-end;
+        margin: 4pt;
+        padding: 4pt;
+        background-color: whitesmoke;
+        border-radius: 8pt;
+        border-left: 4pt solid crimson;
+        box-shadow: 4pt 4pt 8pt rgba(0, 0, 0, 0.2);
+
+        &:hover {
+            background-color: crimson;
+            color: white;
+        }
+    }
+}
