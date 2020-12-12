@@ -8,18 +8,29 @@
     > p {
         text-align: justify;
     }
-    > .link {
-        align-self: flex-end;
-        margin: 4pt;
-        padding: 4pt;
-        background-color: whitesmoke;
-        border-radius: 8pt;
-        border-left: 4pt solid crimson;
-        box-shadow: 4pt 4pt 8pt rgba(0, 0, 0, 0.2);
+    > footer {
+        display: flex;
+        flex-direction: row-reverse;
+        flex-wrap: wrap;
 
-        &:hover {
-            background-color: crimson;
-            color: white;
+        > time {
+            order: 2;
+            flex-grow: 1;
+        }
+        > .link {
+            order: 1;
+            align-self: flex-end;
+            margin: 4pt;
+            padding: 4pt;
+            background-color: whitesmoke;
+            border-radius: 8pt;
+            border-left: 4pt solid crimson;
+            box-shadow: 4pt 4pt 8pt rgba(0, 0, 0, 0.2);
+
+            &:hover {
+                background-color: crimson;
+                color: white;
+            }
         }
     }
 }

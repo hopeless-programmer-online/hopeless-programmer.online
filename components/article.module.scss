@@ -31,5 +31,21 @@
         flex-wrap: nowrap;
         justify-content: flex-end;
         align-items: stretch;
+
+        > details {
+            > dl {
+                display: grid;
+                grid-template-columns: [category] min-content [definition] auto;
+
+                > dt {
+                    @include typography.strong;
+
+                    grid-column: category;
+                }
+                > dd {
+                    grid-column: definition;
+                }
+            }
+        }
     }
 }

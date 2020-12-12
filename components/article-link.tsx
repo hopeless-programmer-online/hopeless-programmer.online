@@ -4,6 +4,7 @@ import Paragraph from '../classes/paragraph'
 import ParagraphComponent from './paragraph'
 import SentencesComponent from './sentences'
 import styles from './article-link.module.scss'
+import YearMonthDate from './year-month-date'
 
 type Props = { model : Model, href : string }
 
@@ -21,8 +22,10 @@ export default class ArticleLink extends React.Component<Props> {
                     </h2>
                 </header>
                 <ParagraphComponent model={model.sections[0].parts[0] as Paragraph}/>
-                {/* todo: correct link */}
-                <a className={styles.link} href={this.props.href}>Читати</a>
+                <footer>
+                    <YearMonthDate model={model.details.created}/>
+                    <a className={styles.link} href={this.props.href}>Читати</a>
+                </footer>
             </article>
         )
     }

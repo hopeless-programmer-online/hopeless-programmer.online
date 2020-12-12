@@ -1,5 +1,6 @@
 import React from 'react'
 import Article from '../classes/article'
+import ArticleDetailsComponent from './article-details'
 import styles from './article.module.scss'
 import Section from './section'
 import SentencesComponent from './sentences'
@@ -42,25 +43,7 @@ export default class ArticleComponent extends React.Component<Props> {
                             }
                         </ol>
                     }
-                    <details>
-                        <summary>Деталі</summary>
-                        <dl>
-                            <dt>Дата</dt>
-                            <dd><time>2020/01/02</time></dd>
-                            <dt>Автор</dt>
-                            <dd>Безнадійний Програміст</dd>
-                            <dt>Переклад</dt>
-                            <dd>Безнадійний Програміст</dd>
-                            <dt>Редагування</dt>
-                            <dd>Безнадійний Програміст</dd>
-                        </dl>
-                        <h4>Історія правок</h4>
-                        <ol>
-                            <li>Правка</li>
-                            <li>Правка</li>
-                            <li>Правка</li>
-                        </ol>
-                    </details>
+                    <ArticleDetailsComponent model={model.details}/>
                 </footer>
             </article>
         )
