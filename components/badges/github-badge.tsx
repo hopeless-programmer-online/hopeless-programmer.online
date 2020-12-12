@@ -6,6 +6,7 @@ import styles from './github-badge.module.scss'
 export default class GithubBadge extends Badge {
     protected Icon = Icon
     protected Caption = Caption
+    protected href = 'https://github.com/hopeless-programmer-online'
 }
 
 class Icon extends React.Component {
