@@ -17,6 +17,8 @@ import NPMBadge from './badges/npm-badge'
 import NodeJSBadge from './badges/nodejs-badge'
 import AboutThisSiteBadge from './badges/about-this-site-badge'
 import AboutMeBadge from './badges/about-me-badge'
+import ToolsBadge from './badges/tools-badge'
+import VSCodeBadge from './badges/vscode-badge'
 
 export default class Footer extends React.Component {
     public render() {
@@ -43,6 +45,7 @@ export default class Footer extends React.Component {
                             <ul>
                                 <li><AboutThisSiteBadge/></li>
                                 <li><AboutMeBadge/></li>
+                                <li><ToolsBadge/></li>
                             </ul>
                         </nav>
                     </dd>
@@ -60,6 +63,7 @@ export default class Footer extends React.Component {
                                 <li><HTML5Badge/></li>
                                 <li><CSS3Badge/></li>
                                 <li><SASSBadge/></li>
+                                <li><VSCodeBadge/></li>
                             </ul>
                         </nav>
                     </dd>
