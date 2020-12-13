@@ -30,6 +30,9 @@ export default class Point2D {
 
         this.change.post()
     }
+    public get length() {
+        return Math.sqrt( this.square() )
+    }
 
     public set({ x, y } : { x : number, y : number }) {
         this._x = x
@@ -42,5 +45,22 @@ export default class Point2D {
         this._y += y
 
         this.change.post()
+    }
+    public plus(point : Point2D) {
+        return Point2D.From(this.x + point.x, this.y + point.y)
+    }
+    public minus(point : Point2D) {
+        return Point2D.From(this.x - point.x, this.y - point.y)
+    }
+    public dot(point : Point2D) {
+        return this.x * point.x + this.y * point.y
+    }
+    public multiply(source : number | Point2D) {
+        return typeof source === 'number'
+            ? Point2D.From(this.x * source, this.y * source)
+            : Point2D.From(this.x * source.x, this.y * source.y)
+    }
+    public square() {
+        return this.dot(this)
     }
 }

@@ -35,13 +35,20 @@ export default class Article {
         sections.forEach((section, id) => section.id = id + 1)
 
         let codeExamples = 0
+        let interactiveExamples = 0
 
         this.illustrations.forEach((illustration, id) => {
             if (illustration._title === null) {
-                if (illustration.target instanceof Code) {
+                const { target } = illustration
+                if (target instanceof Code) {
                     ++codeExamples
 
                     illustration._title = toSentences(`Приклад коду №${codeExamples}`)
+                }
+                if (target instanceof Function) {
+                    ++interactiveExamples
+
+                    illustration._title = toSentences(`Інтерактивний приклад №${interactiveExamples}`)
                 }
             }
 

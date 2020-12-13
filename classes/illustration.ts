@@ -2,9 +2,9 @@ import Code      from "./code";
 import Paragraph from "./paragraph";
 import Sentences from "./sentences";
 
-type Title       = Sentences
-type Description = Paragraph
-type Target      = Code
+type Title         = Sentences
+type Description   = Paragraph
+export type Target = Code | Function
 
 export default class Illustration {
     private  __title      : Title | null

@@ -5,6 +5,7 @@ import CircleComponent from '../components/circle'
 import Circle from '../classes/circle'
 import Line2DComponent from '../components/line-2d'
 import Line2D from '../classes/line-2d'
+import { MathComponent } from 'mathjax-react'
 
 type Props = {}
 type State = {}
@@ -22,7 +23,8 @@ export default class Index extends React.Component {
 
         return (
             <Page>
-                <svg
+                <MathComponent tex={String.raw`\int_0^1 x^2\ dx`}/>
+                {/* <svg
                     // width='100'
                     // height='100'
                     viewBox='0 0 100 100'
@@ -30,7 +32,7 @@ export default class Index extends React.Component {
                 >
                     <Line2DComponent model={l}/>
                     <CircleComponent model={n} movable={false}/>
-                </svg>
+                </svg> */}
             </Page>
         )
     }

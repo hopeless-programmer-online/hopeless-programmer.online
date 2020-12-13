@@ -38,4 +38,13 @@ export default class Circle extends Point2D {
 
         this.change.post()
     }
+
+    public clone() {
+        return new Circle({
+            x : this.x,
+            y : this.y,
+            r : this.r,
+            fill : this.fill,
+        })
+    }
 }

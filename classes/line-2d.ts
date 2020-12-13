@@ -14,17 +14,20 @@ export default class Line2D {
     private _b : Circle
     private _stroke : string
     private _strokeWidth : number
+    private _strokeDasharray : string
 
     public constructor({
         a,
         b,
         stroke = 'white',
         strokeWidth = 1,
+        strokeDasharray = '',
     } : {
         a? : Circle,
         b? : Circle,
         stroke? : string,
         strokeWidth? : number,
+        strokeDasharray? : string,
     } = {
     }) {
         // create new a & b for each instance of the line
@@ -36,6 +39,7 @@ export default class Line2D {
         this._b = b
         this._stroke = stroke
         this._strokeWidth = strokeWidth
+        this._strokeDasharray = strokeDasharray
 
         a.change.attach(this.handlePointChange)
         b.change.attach(this.handlePointChange)
@@ -76,5 +80,23 @@ export default class Line2D {
         this._strokeWidth = strokeWidth
 
         this.change.post()
+    }
+    public get strokeDasharray() {
+        return this._strokeDasharray
+    }
+    public set strokeDasharray(strokeDasharray : string) {
+        this._strokeDasharray = strokeDasharray
+
+        this.change.post()
+    }
+
+    public clone() {
+        return new Line2D({
+            a : this.a.clone(),
+            b : this.b.clone(),
+            stroke : this.stroke,
+            strokeWidth : this.strokeWidth,
+            strokeDasharray : this.strokeDasharray,
+        })
     }
 }

@@ -12,12 +12,18 @@ export default class IllustrationComponent extends React.Component<Props> {
     public render() {
         const { model } = this.props
         const { target } = model
+        // alias to create component
         const id = `i-${model.id}`
 
         return (
             <figure id={id} className={styles.illustration}>
                 {
                     target instanceof Code ? <CodeComponent model={target}/> :
+                    target instanceof Function && target.prototype instanceof React.Component ? (() => {
+                        const Target = target
+
+                        return <Target/>
+                    })() :
                     (() => { throw new Error })()
                 }
                 <figcaption>

@@ -6,7 +6,7 @@ import CommentLexeme from "./comment-lexeme";
 import EmphasisPhrase from "./emphasis-phrase";
 import FigurativePhrase from "./figurative-phrase";
 import IdentifierLexeme from "./identifier-lexeme";
-import Illustration from "./illustration";
+import Illustration, { Target as IllustrationTarget } from "./illustration";
 import KeywordLexeme from "./keyword-lexeme";
 import Lexeme from "./lexeme";
 import Lexemes from "./lexemes";
@@ -139,7 +139,7 @@ export function py(...somethings : Array<LexemesLike>) {
     return new Code({ language : 'Python', lines })
 }
 
-export function illustration(description : ParagraphLike, target : Code) {
+export function illustration(description : ParagraphLike, target : IllustrationTarget) {
     return new Illustration({
         description : toParagraph(description),
         target,
