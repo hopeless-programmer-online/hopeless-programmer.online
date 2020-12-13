@@ -46,9 +46,9 @@ export default class VectorProjector extends React.Component<Props> {
                         backgroundColor : 'rgb(30, 30, 30)',
                     }}
                 >
-                    <ProjectedLine l={l} n={n}/>
                     <Line2DComponent model={l}/>
                     <CircleComponent model={n}/>
+                    <ProjectedLine l={l} n={n}/>
                 </svg>
             </figure>
         )
@@ -57,23 +57,35 @@ export default class VectorProjector extends React.Component<Props> {
 
 class ProjectedLine extends React.Component<Props> {
     private m : Circle
+    private k : Line2D
 
     public constructor(props : Props) {
         super(props)
 
         this.m = new Circle({ r : 1, fill : 'rgb(86, 156, 214)' })
+        this.k = new Line2D({
+            a : this.props.n,
+            b : this.m,
+            stroke : 'rgb(212, 212, 212)',
+            strokeWidth : 0.5,
+            strokeDasharray : '1 1'
+        })
 
-        this.m.set(this.proj())
+        this.update()
     }
 
     private update = () => {
-        this.m.set(this.proj())
-    }
-
-    private proj() {
         const { l, n } = this.props
 
-        return l.a.plus( proj( n.minus(l.a), l.b.minus(l.a) ) )
+        const n1 = l.a.plus( proj( n.minus(l.a), l.b.minus(l.a) ) )
+
+        this.m.set(n1)
+
+        const t = projT( n.minus(l.a), l.b.minus(l.a) )
+
+        this.k.stroke = (t < 0 || t > 1)
+            ? 'red'
+            : 'rgb(212, 212, 212)'
     }
 
     public componentDidMount() {
@@ -86,20 +98,15 @@ class ProjectedLine extends React.Component<Props> {
     }
 
     public render() {
-        const k = new Line2D({
-            a : this.props.n,
-            b : this.m,
-            stroke : 'rgb(212, 212, 212)',
-            strokeWidth : 0.5,
-            strokeDasharray : '1 1'
-        })
-
         return (
-            <Line2DComponent model={k} movableB={false}/>
+            <Line2DComponent model={this.k} movableB={false}/>
         )
     }
 }
 
+function projT(a : Point2D, b : Point2D) {
+    return a.dot(b) / b.square()
+}
 function proj(a : Point2D, b : Point2D) {
-    return b.multiply( a.dot(b) / b.square() )
+    return b.multiply( projT(a, b) )
 }
