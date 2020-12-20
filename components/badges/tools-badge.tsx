@@ -12,7 +12,7 @@ export default class ToolsBadge extends Badge {
 class Icon extends React.Component {
     public render() {
         return (
-            <FaTools className={styles.person}/>
+            <FaTools className={styles.tools}/>
         )
     }
 }
