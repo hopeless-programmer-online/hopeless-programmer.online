@@ -23,4 +23,9 @@
             }
         }
     }
+    > .tex {
+        display: inline-block;
+        min-width: max-content;
+        margin: 8pt;
+    }
 }

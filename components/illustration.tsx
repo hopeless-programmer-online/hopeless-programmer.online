@@ -1,10 +1,12 @@
 import React from 'react'
 import Code from '../classes/code'
 import Illustration from '../classes/illustration'
+import TeXPhrase from '../classes/tex-phrase'
 import CodeComponent from './code'
 import styles from './illustration.module.scss'
 import ParagraphComponent from './paragraph'
 import Sentences from './sentences'
+import TeXPhraseComponent from './tex-phrase'
 
 type Props = { model : Illustration }
 
@@ -19,6 +21,7 @@ export default class IllustrationComponent extends React.Component<Props> {
             <figure id={id} className={styles.illustration}>
                 {
                     target instanceof Code ? <CodeComponent model={target}/> :
+                    target instanceof TeXPhrase ? <TeXPhraseComponent model={target}/> :
                     target instanceof Function && target.prototype instanceof React.Component ? (() => {
                         const Target = target
 

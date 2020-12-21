@@ -6,6 +6,7 @@ import Section from "./section";
 import Sentences from "./sentences";
 import { toSentences } from "./shortcuts";
 import persons from '../data/persons'
+import TeXPhrase from "./tex-phrase";
 
 type Title = Sentences
 type Sections = Array<Section>
@@ -36,19 +37,32 @@ export default class Article {
 
         let codeExamples = 0
         let interactiveExamples = 0
+        let texExamples = 0
+        let examples = 0
 
         this.illustrations.forEach((illustration, id) => {
             if (illustration._title === null) {
                 const { target } = illustration
+
                 if (target instanceof Code) {
                     ++codeExamples
 
                     illustration._title = toSentences(`Приклад коду №${codeExamples}`)
                 }
-                if (target instanceof Function) {
+                else if (target instanceof TeXPhrase) {
+                    ++texExamples
+
+                    illustration._title = toSentences(`Рівняння №${texExamples}`)
+                }
+                else if (target instanceof Function) {
                     ++interactiveExamples
 
                     illustration._title = toSentences(`Інтерактивний приклад №${interactiveExamples}`)
+                }
+                else {
+                    ++examples
+
+                    illustration._title = toSentences(`Приклад №${examples}`)
                 }
             }
 

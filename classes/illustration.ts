@@ -1,10 +1,11 @@
 import Code      from "./code";
 import Paragraph from "./paragraph";
 import Sentences from "./sentences";
+import TeXPhrase from "./tex-phrase";
 
 type Title         = Sentences
 type Description   = Paragraph
-export type Target = Code | Function
+export type Target = Code | TeXPhrase | Function
 
 export default class Illustration {
     private  __title      : Title | null

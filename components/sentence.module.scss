@@ -1,2 +1,16 @@
 .sentence {
+    border-radius: 4pt;
+
+    &:hover {
+        background-color: change-color($color: whitesmoke, $alpha : 1);
+    }
+
+    .tex {
+        color: white;
+        background-color: crimson;
+        border-radius: 4pt;
+        display: inline-block;
+        padding-left: 4pt;
+        padding-right: 4pt;
+    }
 }
