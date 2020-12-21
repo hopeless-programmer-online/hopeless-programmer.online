@@ -146,16 +146,19 @@ function intersection({ l, m } : { l : LineData, m : LineData }) : IntersectionR
         mDir  : null,
     }
 
+    // @todo: replace with intersection with boundaries
+    const distance = 10
+
     if (t < 0 || t > 1) {
         data.tHit = false
         data.lDir = {
             a : {
-                x : l.a.x + (l.b.x - l.a.x) * -100,
-                y : l.a.y + (l.b.y - l.a.y) * -100,
+                x : l.a.x + (l.b.x - l.a.x) * -distance,
+                y : l.a.y + (l.b.y - l.a.y) * -distance,
             },
             b : {
-                x : l.a.x + (l.b.x - l.a.x) * 100,
-                y : l.a.y + (l.b.y - l.a.y) * 100,
+                x : l.a.x + (l.b.x - l.a.x) * distance,
+                y : l.a.y + (l.b.y - l.a.y) * distance,
             },
         }
 
@@ -177,12 +180,12 @@ function intersection({ l, m } : { l : LineData, m : LineData }) : IntersectionR
         data.qHit = false
         data.mDir = {
             a : {
-                x : m.a.x + (m.b.x - m.a.x) * -100,
-                y : m.a.y + (m.b.y - m.a.y) * -100,
+                x : m.a.x + (m.b.x - m.a.x) * -distance,
+                y : m.a.y + (m.b.y - m.a.y) * -distance,
             },
             b : {
-                x : m.a.x + (m.b.x - m.a.x) * 100,
-                y : m.a.y + (m.b.y - m.a.y) * 100,
+                x : m.a.x + (m.b.x - m.a.x) * distance,
+                y : m.a.y + (m.b.y - m.a.y) * distance,
             },
         }
 
@@ -312,131 +315,3 @@ export default class Intersection extends React.Component<Props, State> {
         )
     }
 }
-
-// class Intersection2 extends React.Component {
-//     private ab = new Line2D({
-//         a : new Circle({ x : 10, y : 80 }),
-//         b : new Circle({ x : 90, y : 40 }),
-//         // strokeWidth : 0.5,
-//         // strokeDasharray : '2 1',
-//     })
-//     private uv = new Line2D({
-//         a : new Circle({ x : 20, y : 20 }),
-//         b : new Circle({ x : 70, y : 90 }),
-//         // strokeWidth : 0.5,
-//         // strokeDasharray : '2 1',
-//     })
-//     private intersection = new Circle({ fill : 'blue' })
-
-//     private update = () => {
-//         const { ab, uv } = this
-
-//         const a = ab.b.x - ab.a.x
-//         const b = uv.b.x - uv.a.x
-//         const c = ab.b.y - ab.a.y
-//         const d = uv.b.y - uv.a.y
-//         const det = a*d - b*c
-
-//         if (det === 0) {
-//             return
-//         }
-
-//         const cx = uv.a.x - ab.a.x
-//         const cy = uv.a.y - ab.a.y
-//         const t = (d * cx - b * cy) / det
-
-//         this.intersection.set({
-//             x : ab.a.x + (ab.b.x - ab.a.x) * t,
-//             y : ab.a.y + (ab.b.y - ab.a.y) * t,
-//         })
-//     }
-
-//     public componentDidMount() {
-//         this.ab.change.attach(this.update)
-//         this.uv.change.attach(this.update)
-//     }
-//     public componentWillUnmount() {
-//         this.ab.change.detach(this.update)
-//         this.uv.change.detach(this.update)
-//     }
-//     public render() {
-//         return (
-//             <figure>
-//                 <figcaption>
-//                     <TeX math={String.raw`
-//                         \begin{cases}
-//                             \vec{x} &= \vec{a} + t(\vec{b} - \vec{a})
-//                             \\
-//                             \vec{y} &= \vec{u} + q(\vec{v} - \vec{u})
-//                         \end{cases}
-//                         \Rightarrow
-//                         \begin{cases}
-//                             \vec{d} &= \vec{b} - \vec{a}
-//                             \\
-//                             \vec{w} &= \vec{u} - \vec{v}
-//                             \\
-//                             \vec{x} &= \vec{a} + t\vec{d}
-//                             \\
-//                             \vec{y} &= \vec{u} + q\vec{w}
-//                         \end{cases}
-//                     `}/>
-//                     <br/>
-//                     <TeX math={String.raw`
-//                         \begin{cases}
-//                             \vec{x} &= \vec{y}
-//                             \\
-//                             \vec{a} + t\vec{d} &= \vec{u} + q\vec{w}
-//                         \end{cases}
-//                         \Rightarrow
-//                         t\vec{d} - q\vec{w} = \vec{u} - \vec{a}
-//                         \Rightarrow
-//                         \begin{pmatrix}
-//                             \vec{d} & \vec{w}
-//                         \end{pmatrix}
-//                         \begin{pmatrix}
-//                             t
-//                             \\
-//                             -q
-//                         \end{pmatrix}
-//                         =
-//                         \vec{u} - \vec{a}
-//                     `}/>
-//                     <br/>
-//                     <TeX math={String.raw`
-//                         \begin{cases}
-//                             A &= \begin{pmatrix}
-//                                 \vec{d} & \vec{w}
-//                             \end{pmatrix}
-//                             \\
-//                             c &= \vec{u} - \vec{a}
-//                             \\
-//                             Ac &= \begin{pmatrix}
-//                                 t
-//                                 \\
-//                                 -q
-//                             \end{pmatrix}
-//                             \\
-//                             \begin{pmatrix}
-//                                 t
-//                                 \\
-//                                 -q
-//                             \end{pmatrix} &= A^{-1}c
-//                         \end{cases}
-//                     `}/>
-//                 </figcaption>
-//                 <svg
-//                     viewBox='0 0 100 100'
-//                     style={{
-//                         width : '400pt',
-//                         backgroundColor : 'rgb(30, 30, 30)',
-//                         borderRadius : '8pt',
-//                     }}
-//                 >
-//                     <Line2DComponent model={this.ab}/>
-//                     <Line2DComponent model={this.uv}/>
-//                     <CircleComponent model={this.intersection} movable={false}/>
-//                 </svg>
-//             </figure>
-//         )
-//     }
-// }

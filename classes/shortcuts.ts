@@ -24,6 +24,7 @@ import Sentence from "./sentence";
 import Sentences from "./sentences";
 import TextLexeme from "./text-lexeme";
 import TextPhrase from "./text-phrase";
+import TeXPhrase from "./tex-phrase";
 
 function error<T>(message : string = '') : T {
     throw new Error(message)
@@ -213,6 +214,10 @@ export function neg(...somethings : Array<PhraseLike>) {
     const phrases = toPhrases(somethings)
 
     return new NegationPhrase({ phrases })
+}
+
+export function tex(source : string) {
+    return new TeXPhrase({ source })
 }
 
 export function ref(target : ReferenceTarget) {
