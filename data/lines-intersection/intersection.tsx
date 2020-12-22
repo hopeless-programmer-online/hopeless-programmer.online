@@ -1,10 +1,4 @@
-import 'katex/dist/katex.min.css';
-import TeX from '@matejmazur/react-katex'
 import React from 'react'
-// import Circle from '../../classes/circle'
-// import Line2D from '../../classes/line-2d'
-// import CircleComponent from '../../components/circle'
-// import Line2DComponent from '../../components/line-2d'
 import styles from './intersection.module.scss'
 
 type PointData = { x : number, y : number }
@@ -251,67 +245,47 @@ export default class Intersection extends React.Component<Props, State> {
         const [ hit, { x, tHit, lMiss, lDir, qHit, mMiss, mDir } ] = intersection({ l, m })
 
         return (
-            <figure>
-                <figcaption>
-                    <TeX math={String.raw`
-                        \begin{cases}
-                            \vec{x} &= \vec{a} + t(\vec{b} - \vec{a})
-                            \\
-                            \vec{y} &= \vec{u} + q(\vec{v} - \vec{u})
-                            \\
-                            \begin{pmatrix}
-                                t
-                                \\
-                                -q
-                            \end{pmatrix} &=
-                            \begin{pmatrix}
-                                \vec{b} - \vec{a} & \vec{v} - \vec{u}
-                            \end{pmatrix}^{-1} (\vec{u} - \vec{a})
-                        \end{cases}
-                    `}/>
-                </figcaption>
-                <svg
-                    viewBox='0 0 100 100'
-                    className={styles.svg}
-                >
-                    { !qHit && <Line model={mDir} style={styles.direction}/> }
-                    { !qHit && <Line model={mMiss} style={styles.miss}/> }
-                    { !tHit && <Line model={lDir} style={styles.direction}/> }
-                    { !tHit && <Line model={lMiss} style={styles.miss}/> }
-                    <Line model={l}/>
-                    <Line model={m}/>
-                    <text
-                        x={l.a.x}
-                        y={l.a.y}
-                        className={styles.text}
-                    >a</text>
-                    <text
-                        x={l.b.x}
-                        y={l.b.y}
-                        className={styles.text}
-                    >b</text>
-                    <text
-                        x={m.a.x}
-                        y={m.a.y}
-                        className={styles.text}
-                    >u</text>
-                    <text
-                        x={m.b.x}
-                        y={m.b.y}
-                        className={styles.text}
-                    >v</text>
-                    <text
-                        x={x.x}
-                        y={x.y}
-                        className={styles.text}
-                    >x</text>
-                    { hit && <Point model={x} movable={false} style={styles.intersection}/> }
-                    <Point model={l.a} onMove={this.updateLA}/>
-                    <Point model={l.b} onMove={this.updateLB}/>
-                    <Point model={m.a} onMove={this.updateMA}/>
-                    <Point model={m.b} onMove={this.updateMB}/>
-                </svg>
-            </figure>
+            <svg
+                viewBox='0 0 100 100'
+                className={styles.svg}
+            >
+                { !qHit && <Line model={mDir} style={styles.direction}/> }
+                { !qHit && <Line model={mMiss} style={styles.miss}/> }
+                { !tHit && <Line model={lDir} style={styles.direction}/> }
+                { !tHit && <Line model={lMiss} style={styles.miss}/> }
+                <Line model={l}/>
+                <Line model={m}/>
+                <text
+                    x={l.a.x}
+                    y={l.a.y}
+                    className={styles.text}
+                >a</text>
+                <text
+                    x={l.b.x}
+                    y={l.b.y}
+                    className={styles.text}
+                >b</text>
+                <text
+                    x={m.a.x}
+                    y={m.a.y}
+                    className={styles.text}
+                >u</text>
+                <text
+                    x={m.b.x}
+                    y={m.b.y}
+                    className={styles.text}
+                >v</text>
+                <text
+                    x={x.x}
+                    y={x.y}
+                    className={styles.text}
+                >x</text>
+                { hit && <Point model={x} movable={false} style={styles.intersection}/> }
+                <Point model={l.a} onMove={this.updateLA}/>
+                <Point model={l.b} onMove={this.updateLB}/>
+                <Point model={m.a} onMove={this.updateMA}/>
+                <Point model={m.b} onMove={this.updateMB}/>
+            </svg>
         )
     }
 }
