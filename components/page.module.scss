@@ -1,12 +1,12 @@
 @use "./typography.module.scss";
 
 .article {
-    max-width: 8.5in;
+    max-width: min(8.5in, 100%);
     height: 100%;
     margin-left: auto;
     margin-right: auto;
     // grid
-    display: grid;
+    // display: grid;
     grid-template-rows: [header] max-content [main] auto [footer] max-content;
     grid-template-areas:
         "header"
@@ -23,14 +23,17 @@
     }
 
     > header {
+        // max-width: min(8.5in, 100%);
         grid-area: header;
     }
     > main {
+        // max-width: min(8.5in, 100%);
         grid-area: main;
         align-self: stretch;
         padding: 4pt;
     }
     > footer {
+        // max-width: min(8.5in, 100%);
         grid-area: footer;
     }
 }

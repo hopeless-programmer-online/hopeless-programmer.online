@@ -1,31 +1,50 @@
-.illustration {
-    width: min-content;
-    max-width: 100%;
-    padding: 4pt;
-    border-radius: 16pt;
-    border-left: 4pt solid crimson;
-    box-shadow: 4pt 4pt 8pt rgb(0, 0, 0, 0.2);
+.container {
+    overflow-y: hidden;
+    overflow-x: auto;
 
-    > figcaption {
-        text-align: center;
+    >span {
+        // width: min-content;
+        display: inline-block;
+        border: 16pt solid transparent;
 
-        > h4 {
-            margin-top: 4pt;
-            margin-bottom: 4pt;
-        }
-        > p {
-            font-size: smaller;
-            margin-top: 4pt;
-            margin-bottom: 4pt;
+        > figure {
+            width: min-content;
+            // max-width: 100%;
+            margin: 0;
+            padding: 4pt;
+            border-radius: 16pt;
+            border-left: 4pt solid crimson;
+            box-shadow: 4pt 4pt 8pt rgb(0, 0, 0, 0.2);
+            // overflow-x: scroll;
 
-            > span {
+            // &::-webkit-scrollbar-thumb {
+            //     color: red;
+            //     background-color: red;
+            //     fill: red;
+            // }
+
+            > figcaption {
                 text-align: center;
+
+                > h4 {
+                    margin-top: 4pt;
+                    margin-bottom: 4pt;
+                }
+                > p {
+                    font-size: smaller;
+                    margin-top: 4pt;
+                    margin-bottom: 4pt;
+
+                    > span {
+                        text-align: center;
+                    }
+                }
+            }
+            > .tex {
+                display: inline-block;
+                min-width: max-content;
+                margin: 8pt;
             }
         }
-    }
-    > .tex {
-        display: inline-block;
-        min-width: max-content;
-        margin: 8pt;
     }
 }

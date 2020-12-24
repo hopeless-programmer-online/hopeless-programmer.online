@@ -36,11 +36,9 @@ export default class Footer extends React.Component {
                     <br/>
                     за авторством <a href='mailto:me@hopeless-programmer.online'>hopeless programmer</a>
                 </address>
-                <dl>
-                    <dt>
+                <ul>
+                    <li>
                         <h3>Ресурс</h3>
-                    </dt>
-                    <dd>
                         <nav>
                             <ul>
                                 <li><AboutThisSiteBadge/></li>
@@ -48,11 +46,9 @@ export default class Footer extends React.Component {
                                 <li><ToolsBadge/></li>
                             </ul>
                         </nav>
-                    </dd>
-                    <dt>
+                    </li>
+                    <li>
                         <h3>Технології</h3>
-                    </dt>
-                    <dd>
                         <nav>
                             <ul>
                                 <li><NextJSBadge/></li>
@@ -66,11 +62,9 @@ export default class Footer extends React.Component {
                                 <li><VSCodeBadge/></li>
                             </ul>
                         </nav>
-                    </dd>
-                    <dt>
+                    </li>
+                    <li>
                         <h3>Контакти</h3>
-                    </dt>
-                    <dd>
                         <nav>
                             <ul>
                                 <li><GMailBadge/></li>
@@ -81,8 +75,8 @@ export default class Footer extends React.Component {
                                 <li><TelegramBadge/></li>
                             </ul>
                         </nav>
-                    </dd>
-                </dl>
+                    </li>
+                </ul>
             </footer>
         )
     }

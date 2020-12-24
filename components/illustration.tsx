@@ -18,29 +18,33 @@ export default class IllustrationComponent extends React.Component<Props> {
         const id = `i-${model.id}`
 
         return (
-            <figure id={id} className={styles.illustration}>
-                {
-                    target instanceof Code ? <CodeComponent model={target}/> :
-                    target instanceof TeXPhrase ? <TeXPhraseComponent model={target}/> :
-                    target instanceof Function && target.prototype instanceof React.Component ? (() => {
-                        const Target = target
-
-                        return <Target/>
-                    })() :
-                    (() => { throw new Error })()
-                }
-                <figcaption>
-                    <h4>
-                        <a href={`#${id}`}>§</a>
+            <span className={styles.container}>
+                <span>
+                    <figure id={id}>
                         {
-                            <Sentences model={model.title}/>
+                            target instanceof Code ? <CodeComponent model={target}/> :
+                            target instanceof TeXPhrase ? <TeXPhraseComponent model={target}/> :
+                            target instanceof Function && target.prototype instanceof React.Component ? (() => {
+                                const Target = target
+
+                                return <Target/>
+                            })() :
+                            (() => { throw new Error })()
                         }
-                    </h4>
-                    {
-                        <ParagraphComponent model={model.description}/>
-                    }
-                </figcaption>
-            </figure>
+                        <figcaption>
+                            <h4>
+                                <a href={`#${id}`}>§</a>
+                                {
+                                    <Sentences model={model.title}/>
+                                }
+                            </h4>
+                            {
+                                <ParagraphComponent model={model.description}/>
+                            }
+                        </figcaption>
+                    </figure>
+                </span>
+            </span>
         )
     }
 }
