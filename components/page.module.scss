@@ -6,12 +6,11 @@
     margin-left: auto;
     margin-right: auto;
     // grid
-    // display: grid;
-    grid-template-rows: [header] max-content [main] auto [footer] max-content;
-    grid-template-areas:
-        "header"
-        "main"
-        "footer";
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
 
     @include typography.regular;
 
@@ -23,17 +22,14 @@
     }
 
     > header {
-        // max-width: min(8.5in, 100%);
+        flex-grow: 0;
         grid-area: header;
     }
     > main {
-        // max-width: min(8.5in, 100%);
-        grid-area: main;
-        align-self: stretch;
+        flex-grow: 1;
         padding: 4pt;
     }
     > footer {
-        // max-width: min(8.5in, 100%);
-        grid-area: footer;
+        flex-grow: 0;
     }
 }
