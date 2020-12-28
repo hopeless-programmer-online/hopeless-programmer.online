@@ -200,16 +200,4 @@ export default article(`Знаходження точки перетину пр�
         ]),
         illustration(sentence(`Обчислення точки перетину `, x, ` для прямих `, ab, ` та `, uv, `. `), Intersection),
     ]),
-    section(``, ...[
-        paragraph(...[
-            sentence(``),
-            sentence(``),
-            sentence(``),
-        ]),
-        paragraph(...[
-            sentence(``),
-            sentence(``),
-            sentence(``),
-        ]),
-    ]),
 ])
