@@ -1,20 +1,24 @@
 import React from 'react'
-import { article, illustration, paragraph, section, sentence, } from "../classes/shortcuts";
-import VectorProjector from '../components/vector-projector';
+import { article, illustration, paragraph, section, sentence, tex, } from "../classes/shortcuts";
 
-class X extends React.Component {
-    public render() {
-        return (
-            <VectorProjector/>
-        )
-    }
-}
+const r = String.raw
 
 export default article(`Векторна проекція. `, ...[
     section(``, ...[
         paragraph(...[
             sentence(``),
         ]),
-        illustration('lol kek', X),
+        illustration(``, tex(r`
+            \vec{a'} = \cos( \widehat{ \vec{a} \vec{b} } ) \frac{ |\vec{a}| }{ |\vec{b}| } \vec{b}
+        `)),
+        illustration(``, tex(r`
+            \vec{a'} = \frac{ (\vec{a},\vec{b}) }{ |\vec{a}| |\vec{b}| } \frac{ |\vec{a}| }{ |\vec{b}| } \vec{b}
+        `)),
+        illustration(``, tex(r`
+            \vec{a'} = \frac{ (\vec{a},\vec{b}) }{ (\vec{b},\vec{b}) } \vec{b}
+        `)),
+        illustration(``, tex(r`
+            \vec{a'} = \frac{ (\vec{a},\vec{b}) }{ \vec{b}^2 } \vec{b}
+        `)),
     ]),
 ])
