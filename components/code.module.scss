@@ -1,29 +1,48 @@
 @use "./palette.module.scss";
 @use "./lexemes.module.scss";
 
-.code {
+article.code {
     background-color: palette.$color-back;
     padding: 8pt;
     border-radius: 8pt;
 
-    display: grid;
-    grid-template-columns: [index] min-content [content] auto;
-    justify-content: center;
+    > header > figure {
+        margin: 0;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: flex-start;
 
-    > span:nth-child(3n + 1) {
-        font-family: consolas;
-        padding-right: 4pt;
-        grid-column: index;
-        color: palette.$color-index;
-        // disable text selection
-        -webkit-user-select : none; // Chrome all / Safari all
-        -moz-user-select    : none; // Firefox all
-        -ms-user-select     : none; // IE 10+
-        user-select         : none; // Likely future
+        > figcaption {
+            font-family: consolas;
+            color: palette.$color-regular;
+        }
+        > span {
+            background-size: 18pt;
+            width: 18pt;
+            height: 18pt;
+        }
     }
-    > span:nth-child(3n + 2) {
-        grid-column: content;
+    > code {
+        display: grid;
+        grid-template-columns: [index] min-content [content] auto;
+        justify-content: center;
 
-        @extend %lexemes;
+        > span:nth-child(3n + 1) {
+            font-family: consolas;
+            padding-right: 4pt;
+            grid-column: index;
+            color: palette.$color-index;
+            // disable text selection
+            -webkit-user-select : none; // Chrome all / Safari all
+            -moz-user-select    : none; // Firefox all
+            -ms-user-select     : none; // IE 10+
+            user-select         : none; // Likely future
+        }
+        > span:nth-child(3n + 2) {
+            grid-column: content;
+
+            @extend %lexemes;
+        }
     }
 }
