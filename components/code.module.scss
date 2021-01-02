@@ -16,6 +16,10 @@ article.code {
         > figcaption {
             font-family: consolas;
             color: palette.$color-regular;
+
+            &::selection {
+                background-color: palette.$color-select;
+            }
         }
         > span {
             background-size: 18pt;
