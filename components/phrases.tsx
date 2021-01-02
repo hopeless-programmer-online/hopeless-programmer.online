@@ -18,6 +18,8 @@ import ReferencePhraseComponent from './reference-phrase'
 import TextPhraseComponent from './text-phrase'
 import TeXPhrase from '../classes/tex-phrase'
 import TeXPhraseComponent from './tex-phrase'
+import ReactPhrase from '../classes/react-phrase'
+import ReactPhraseComponent from './react-phrase'
 
 type Props = { model : Phrases }
 
@@ -34,6 +36,7 @@ export default class PhrasesComponent extends React.Component<Props> {
                 phrase instanceof NegationPhrase   ? <NegationPhraseComponent   model={phrase} key={key}/> :
                 phrase instanceof CodePhrase       ? <CodePhraseComponent       model={phrase} key={key}/> :
                 phrase instanceof TeXPhrase        ? <TeXPhraseComponent        model={phrase} key={key}/> :
+                phrase instanceof ReactPhrase      ? <ReactPhraseComponent      model={phrase} key={key}/> :
                 (() => { throw new Error })()
             )
         )

@@ -25,12 +25,14 @@ import Sentences from "./sentences";
 import TextLexeme from "./text-lexeme";
 import TextPhrase from "./text-phrase";
 import TeXPhrase from "./tex-phrase";
+import { ComponentType } from "react";
+import ReactPhrase from "./react-phrase";
 
 function error<T>(message : string = '') : T {
     throw new Error(message)
 }
 
-export type PhraseLike = Phrase | Code | Illustration | string
+export type PhraseLike = Phrase | Code | Illustration | string | ComponentType
 export function toPhrase(something : PhraseLike) : Phrase {
     if (something instanceof Code) {
         return new CodePhrase({
@@ -40,9 +42,10 @@ export function toPhrase(something : PhraseLike) : Phrase {
     }
 
     return (
-        something instanceof Phrase       ? something                            :
-        something instanceof Illustration ? ref(something)                       :
-        typeof something === 'string'     ? new TextPhrase({ text : something }) :
+        something instanceof Phrase       ? something                               :
+        something instanceof Illustration ? ref(something)                          :
+        typeof something === 'string'     ? new TextPhrase({ text : something })    :
+        something instanceof Function     ? new ReactPhrase({ target : something }) :
         error<Phrase>(`Can't convert ${typeof something} ${something} to phrase.`)
     )
 }
