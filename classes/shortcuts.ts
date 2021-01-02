@@ -27,6 +27,8 @@ import TextPhrase from "./text-phrase";
 import TeXPhrase from "./tex-phrase";
 import { ComponentType } from "react";
 import ReactPhrase from "./react-phrase";
+import Person from "./person";
+import Quote from "./quote";
 
 function error<T>(message : string = '') : T {
     throw new Error(message)
@@ -96,6 +98,12 @@ export function paragraph(...somethings : Array<SentenceLike>) : Paragraph {
 }
 export const p = paragraph
 
+export function quote(author : Person, ...somethings : Array<SentenceLike>) : Paragraph {
+    const sentences = toSentences(somethings)
+
+    return new Quote({ author, sentences })
+}
+
 export type LexemeLike = Lexeme | string
 export function toLexeme(something : LexemeLike) {
     return something instanceof Lexeme
@@ -162,11 +170,12 @@ export function link(somethings : PhrasesLike, href : Href) {
     return new LinkPhrase({ href, phrases })
 }
 
-export type SectionPartLike = Illustration | List | ParagraphLike
+export type SectionPartLike = Illustration | List | ParagraphLike | Quote
 export function toSectionPart(something : SectionPartLike) : SectionPart {
     return (
         something instanceof Illustration ? something :
         something instanceof List         ? something :
+        something instanceof Quote        ? something :
         toParagraph(something)
     )
 }

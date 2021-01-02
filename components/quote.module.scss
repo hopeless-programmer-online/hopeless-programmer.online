@@ -1,0 +1,24 @@
+.quote {
+    width: 100%;
+    font-style: italic;
+    background-color: whitesmoke;
+    border-radius: 16pt;
+    box-shadow: 4pt 4pt 16pt rgba(0, 0, 0, 0.2);
+    padding: 16pt;
+
+    > blockquote {
+        text-align: center;
+        font-size: larger;
+        color: crimson;
+
+        &::before {
+            content: "«";
+        }
+        &::after {
+            content: "»";
+        }
+    }
+    > figcaption {
+        text-align: right;
+    }
+}

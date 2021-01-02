@@ -2,9 +2,10 @@ import Illustration from "./illustration";
 import List from "./list";
 import Note from "./note-phrase";
 import Paragraph from "./paragraph";
+import Quote from "./quote";
 import Sentences from "./sentences";
 
-export type SectionPart = Paragraph | List | Illustration
+export type SectionPart = Paragraph | List | Illustration | Quote
 export type SectionParts = Array<SectionPart>
 
 type Title = Sentences
