@@ -135,6 +135,11 @@ export function js(...somethings : Array<LexemesLike>) {
 
     return new Code({ language : `JavaScript`, lines })
 }
+export function jsx(...somethings : Array<LexemesLike>) {
+    const lines = somethings.map(toLexemes)
+
+    return new Code({ language : `JavaScriptXML`, lines })
+}
 export function cs(...somethings : Array<LexemesLike>) {
     const lines = somethings.map(toLexemes)
 

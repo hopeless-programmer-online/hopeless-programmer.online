@@ -5,6 +5,9 @@
         background-color: change-color($color: whitesmoke, $alpha : 1);
     }
 
+    .code {
+        word-break: break-all;
+    }
     .tex {
         color: white;
         background-color: crimson;
