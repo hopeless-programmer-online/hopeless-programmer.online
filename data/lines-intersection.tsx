@@ -115,10 +115,13 @@ const system_8 = illustration(
     ),
     tex(r`
         t = \frac{1}{\vec{d}_x \vec{w}_y - \vec{w}_x \vec{d}_y}
-        \begin{pmatrix}
-            \vec{w}_y & -\vec{w}_x
-        \end{pmatrix}
-        (\vec{u} - \vec{a})
+        (
+            \begin{pmatrix}
+                \vec{w}_y & -\vec{w}_x
+            \end{pmatrix}
+            ,
+            \vec{u} - \vec{a}
+        )
     `)
 )
 
