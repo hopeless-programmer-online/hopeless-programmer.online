@@ -1,8 +1,5 @@
 import React from 'react'
-import Person from '../classes/person'
 import { article, c, cm, code, cs, emp, f, fig, illustration, js, jsx, kw, link, lt, neg, paragraph, quote, section, sentence, v } from '../classes/shortcuts'
-import Article from '../components/article'
-import Page from '../components/page'
 
 const esoteric = 'https://uk.wikipedia.org/wiki/%D0%95%D0%B7%D0%BE%D1%82%D0%B5%D1%80%D0%B8%D1%87%D0%BD%D1%96_%D0%BC%D0%BE%D0%B2%D0%B8_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F'
 
@@ -59,8 +56,20 @@ const example_jsdoc = illustration('', js(...[
     [ '    ', kw('return'), ' ', v('a'), ' + ', v('b'), ';' ],
     [ '}' ],
 ]))
+const example_assert = illustration('', js(...[
+    [ '', kw('function'), ' ', f('add_numbers'), '(', v('a'), ', ', v('b'), ') {' ],
+    [ '    ', f('assert'), '(', kw('typeof'), ' ', v('a'), ' === ', lt('"number"'), ');' ],
+    [ '    ', f('assert'), '(', kw('typeof'), ' ', v('b'), ' === ', lt('"number"'), ');' ],
+    [ '    ' ],
+    [ '    ', kw('return'), ' ', v('a'), ' + ', v('b'), ';' ],
+    [ '}' ],
+    [ '' ],
+    [ '', kw('let'), ' ', v('x'), ' = ', f('add_numbers'), '(', lt('1'), ', ', lt('2'), ');' ],
+    [ '' ],
+    [ '', f('assert'), '(', kw('typeof'), ' ', v('x'), ' === ', lt('"number"'), ');' ],
+]))
 
-const model = article(sentence('Мова програмування ', l0, '. '), ...[
+export default  article(sentence('Мова програмування ', l0, '. '), ...[
     section(sentence('Що таке ', l0, '? '), ...[
         paragraph(...[
             sentence(l0, ' - це мініатюрна мова програмування. '),
@@ -123,14 +132,16 @@ const model = article(sentence('Мова програмування ', l0, '. ')
             sentence('Можна піти й протилежним шляхом і спробувати збагатити мову новими формами запису. '),
             sentence('Зовсім не обов\'язково аби ці форми виходили за межі самої мови. '),
             sentence('Наприклад, ми можемо спробувати додати в динамічно типізовану мову деяку форму статичної типізації, записуючи обмеження що накладаються на типи в спеціально форматованих коментарях (див. ', example_jsdoc, '). '),
-            sentence(' '),
-            sentence(''),
+            sentence('Хоча ці коментарі не мають значення для JavaScript, з їх допомогою можна перетворити код і додати в нього автоматичні перевірки (див. ', example_assert, ') або навіть проводити статичний аналіз. '),
+            sentence('Чи можна вважати, що такий код є написаним на JavaScript? '),
         ]),
         example_jsdoc,
-        // С# linq
-        // JS XML
-        // JS async/await
-        // JS + JSDoc
+        example_assert,
+        paragraph(...[
+            sentence(''),
+            sentence(''),
+            sentence(''),
+        ]),
     ]),
     section('', ...[
         paragraph(...[
@@ -138,13 +149,3 @@ const model = article(sentence('Мова програмування ', l0, '. ')
         ]),
     ]),
 ])
-
-export default class L0 extends React.Component {
-    public render() {
-        return (
-            <Page>
-                <Article model={model}/>
-            </Page>
-        )
-    }
-}
