@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './badge.module.scss'
 
-export default abstract class HTML5Badge extends React.Component {
+export default abstract class Badge extends React.Component {
     protected abstract get Icon() : React.ComponentType
     protected abstract get Caption() : React.ComponentType
     protected href : string = ''
