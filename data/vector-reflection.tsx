@@ -2,7 +2,7 @@ import { article, illustration, paragraph, section, sentence, tex, } from "../cl
 
 const r = String.raw
 
-export default article(`Векторна проекція. `, ...[
+export default article(`Віддзеркалення вектора. `, ...[
     section(``, ...[
         paragraph(...[
             sentence(``),

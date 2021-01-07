@@ -4,7 +4,7 @@ import { article, emp, fig, illustration, note, p, paragraph, section, sentence,
 
 const r = String.raw
 
-export default article(``, ...[
+export default article(`Знаходження точки перетину рухомої сфери та прямої. `, ...[
     section(``, ...[
         paragraph(...[
             sentence(``),
