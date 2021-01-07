@@ -19,6 +19,7 @@ import AboutThisSiteBadge from './badges/about-this-site-badge'
 import AboutMeBadge from './badges/about-me-badge'
 import ToolsBadge from './badges/tools-badge'
 import VSCodeBadge from './badges/vscode-badge'
+import WIPBadge from './badges/wip-badge'
 
 export default class Footer extends React.Component {
     public render() {
@@ -44,6 +45,7 @@ export default class Footer extends React.Component {
                                 <li><AboutThisSiteBadge/></li>
                                 <li><AboutMeBadge/></li>
                                 <li><ToolsBadge/></li>
+                                <li><WIPBadge/></li>
                             </ul>
                         </nav>
                     </li>
