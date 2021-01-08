@@ -1,4 +1,5 @@
 import { article, emp, fig, illustration, note, p, paragraph, section, sentence, tex, } from "../classes/shortcuts";
+import Caster from "./sphere-point-cast/caster";
 
 const r = String.raw
 
@@ -6,6 +7,7 @@ export default article('Знаходження точки перетину ру�
     section('', ...[
         paragraph(...[
         ]),
+        illustration(``, Caster),
         illustration('', tex(r`
             \begin{cases}
                 \vec{x} &= \vec{a} + t(\vec{b} - \vec{a})
