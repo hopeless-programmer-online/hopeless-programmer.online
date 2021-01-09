@@ -19,6 +19,10 @@
         color: palette.$color-keyword;
 
         &[data-text=if],
+        &[data-text=for],
+        &[data-text=while],
+        &[data-text=continue],
+        &[data-text=break],
         &[data-text=switch],
         &[data-text=case],
         &[data-text=yield],
