@@ -107,11 +107,10 @@ class Line extends React.Component<{ model : LineData, style : string }> {
     }
 }
 
-type IntersectionResult = [ false, {} ] | [ true,
+type IntersectionResult = false |
     { x : PointData } // &
     // ({ tHit : true, lMiss : null, lDir : null } | { tHit : false, lMiss : LineData, lDir : LineData }) &
     // ({ qHit : true, mMiss : null, mDir : null } | { qHit : false, mMiss : LineData, mDir : LineData })
-]
 
 function cast({ l, m, r } : { l : LineData, m : LineData, r : number }) : IntersectionResult {
     const a = l.a
@@ -137,11 +136,11 @@ function cast({ l, m, r } : { l : LineData, m : LineData, r : number }) : Inters
     const r2 = r*r
     const C = M2 - r2
 
-    if (A === 0) return [ false, {} ]
+    if (A === 0) return false
 
     const D = B*B - 4*A*C
 
-    if (D < 0) return [ false, {} ]
+    if (D < 0) return false
 
     const t1 = ( -B + Math.sqrt( D ) ) / (2*A)
     const t2 = ( -B - Math.sqrt( D ) ) / (2*A)
@@ -149,12 +148,12 @@ function cast({ l, m, r } : { l : LineData, m : LineData, r : number }) : Inters
 
     // console.log(A, B, C, B*B, B*B - 4*A*C)
 
-    return [ true, {
+    return {
         x : {
             x : a.x + d.x * t,
             y : a.y + d.y * t,
-        },
-    } ]
+        }
+    }
 }
 
 type Props = {}
@@ -201,7 +200,7 @@ export default class Caster extends React.Component<Props, State> {
         const { l, m } = this.state
         const r = 5
         // const [ hit, { x, tHit, lMiss, lDir, qHit, mMiss, mDir } ] = intersection({ l, m })
-        const [ hit, { x } ] = cast({ l, m, r })
+        const hit = cast({ l, m, r })
 
         return (
             <svg
@@ -243,8 +242,8 @@ export default class Caster extends React.Component<Props, State> {
                     // hit && <Point model={x} movable={false} style={styles.intersection}/>
                     hit &&
                     <circle
-                        cx={x.x}
-                        cy={x.y}
+                        cx={hit.x.x}
+                        cy={hit.x.y}
                         r={r - 0.5}
                         style={{
                             // stroke : 'rgb(212, 212, 212)',

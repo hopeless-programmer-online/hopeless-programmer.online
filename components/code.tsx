@@ -10,31 +10,31 @@ export default class CodeComponent extends React.Component<Props> {
     public render() {
         const { language } = this.props.model
 
-        const [ Icon, theme, ext ] =
-            language === 'C++'           ? [ icons.Cpp,        'extension/.c++',  'cpp'  ] :
-            language === 'C'             ? [ icons.C,          'extension/.c',    'c'    ] :
-            language === 'C#'            ? [ icons.CSharp,     'extension/.cs',   'cs'   ] :
-            language === 'BASIC'         ? [ icons.Default,    'default',         'txt'  ] :
-            language === 'CSS'           ? [ icons.CSS,        'extension/.css',  'css'  ] :
-            language === 'HTML'          ? [ icons.HTML,       'extension/.html', 'html' ] :
-            language === 'JavaScript'    ? [ icons.JavaScript, 'extension/.js',   'js'   ] :
-            language === 'JavaScriptXML' ? [ icons.React,      'extension/.jsx',  'jsx'  ] :
-            language === 'LLVM'          ? [ icons.Default,    'default',         'llvm' ] :
-            language === 'Lua'           ? [ icons.Lua,        'extension/.lua',  'lua'  ] :
-            language === 'PHP'           ? [ icons.PHP,        'extension/.php',  'php'  ] :
-            language === 'Python'        ? [ icons.Python,     'extension/.py',   'py'   ] :
-            language === 'SASS'          ? [ icons.SASS,       'extension/.sass', 'sass' ] :
-            language === 'SCSS'          ? [ icons.SASS,       'extension/.scss', 'scss' ] :
-            language === 'TypeScript'    ? [ icons.TypeScript, 'extension/.ts',   'ts'   ] :
-            language === 'TypeScriptXML' ? [ icons.React,      'extension/.tsx',  'tsx'  ] :
-            [ icons.Default, 'default', 'txt' ]
+        const [ icon, ext ] =
+            language === 'C++'           ? [ <icons.Cpp        theme='extension/.c++'  render="maskImage"/>, 'cpp'  ] :
+            language === 'C'             ? [ <icons.C          theme='extension/.c'    render="maskImage"/>, 'c'    ] :
+            language === 'C#'            ? [ <icons.CSharp     theme='extension/.cs'   render="maskImage"/>, 'cs'   ] :
+            language === 'BASIC'         ? [ <icons.Default    theme='default'         render="maskImage"/>, 'txt'  ] :
+            language === 'CSS'           ? [ <icons.CSS        theme='extension/.css'  render="maskImage"/>, 'css'  ] :
+            language === 'HTML'          ? [ <icons.HTML       theme='extension/.html' render="maskImage"/>, 'html' ] :
+            language === 'JavaScript'    ? [ <icons.JavaScript theme='extension/.js'   render="maskImage"/>, 'js'   ] :
+            language === 'JavaScriptXML' ? [ <icons.React      theme='extension/.jsx'  render="maskImage"/>, 'jsx'  ] :
+            language === 'LLVM'          ? [ <icons.Default    theme='default'         render="maskImage"/>, 'llvm' ] :
+            language === 'Lua'           ? [ <icons.Lua        theme='extension/.lua'  render="maskImage"/>, 'lua'  ] :
+            language === 'PHP'           ? [ <icons.PHP        theme='extension/.php'  render="maskImage"/>, 'php'  ] :
+            language === 'Python'        ? [ <icons.Python     theme='extension/.py'   render="maskImage"/>, 'py'   ] :
+            language === 'SASS'          ? [ <icons.SASS       theme='extension/.sass' render="maskImage"/>, 'sass' ] :
+            language === 'SCSS'          ? [ <icons.SASS       theme='extension/.scss' render="maskImage"/>, 'scss' ] :
+            language === 'TypeScript'    ? [ <icons.TypeScript theme='extension/.ts'   render="maskImage"/>, 'ts'   ] :
+            language === 'TypeScriptXML' ? [ <icons.React      theme='extension/.tsx'  render="maskImage"/>, 'tsx'  ] :
+                                           [ <icons.Default    theme='default'         render="maskImage"/>, 'txt'  ]
 
         return (
             <article className={styles.code}>
                 <header>
                     <figure>
-                        <Icon theme={theme} render="maskImage"/>
                         <figcaption>
+                            {icon}
                             example.{ext}
                         </figcaption>
                     </figure>
