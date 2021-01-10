@@ -3,6 +3,7 @@ import ArticleLink from '../components/article-link'
 import Page from '../components/page'
 import overloading from '../data/result-overloading'
 import overlapping from '../data/unreversalbe-overlapping'
+import virtualOverlapping from '../data/virtual-overlapping'
 import keywords from '../data/keywords'
 import segregation from '../data/segregation'
 import symmetry from '../data/symmetry'
@@ -16,6 +17,7 @@ export default class Index extends React.Component {
                 <ArticleLink model={keywords} href='./articles/keywords'/>
                 <ArticleLink model={segregation} href='./articles/segregation'/>
                 <ArticleLink model={symmetry} href='./articles/symmetry'/>
+                <ArticleLink model={virtualOverlapping} href='./articles/virtual-overlapping'/>
             </Page>
         )
     }
