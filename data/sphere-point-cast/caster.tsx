@@ -7,21 +7,7 @@ import styles from './caster.module.scss'
 import Line2DComponent from '../../components/line-2d'
 import Text2DComponent from '../../components/text'
 
-// class Intersection extends React.Component<{ r : number }> {
-//     public static defaultProps = {
-//         r : 5,
-//     }
-
-//     public render() {
-//         return (
-//             <></>
-//         )
-//     }
-// }
-
 function cast({ l, m, r } : { l : LineData, m : PointData, r : number }) : false | { x : PointData }  {
-    // todo: classes
-
     const a = l.a
     const b = l.b
     const d = { x : b.x - a.x, y : b.y - a.y }
@@ -40,8 +26,6 @@ function cast({ l, m, r } : { l : LineData, m : PointData, r : number }) : false
     const t1 = ( -B + Math.sqrt( D ) ) / (2*A)
     const t2 = ( -B - Math.sqrt( D ) ) / (2*A)
     const t = Math.min(t1, t2)
-
-    // console.log(A, B, C, B*B, B*B - 4*A*C)
 
     return {
         x : {
@@ -123,9 +107,9 @@ export default class Caster extends React.Component<{ a : PointData, b : PointDa
                         r={r}
                     />
                 }
-                <Circle2DComponent className={styles.circle} model={a} />
-                <Circle2DComponent className={styles.circle} model={b} />
-                <Circle2DComponent className={styles.circle} model={m} />
+                <Circle2DComponent className={styles.circle} model={a}/>
+                <Circle2DComponent className={styles.circle} model={b}/>
+                <Circle2DComponent className={styles.circle} model={m}/>
             </svg>
         )
     }
