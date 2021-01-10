@@ -59,9 +59,6 @@ export default class Circle2D {
     public get p() {
         return this._position
     }
-    public set p(p : PositionData) {
-        this._position.set(p)
-    }
     public get x() {
         return this.position.x
     }

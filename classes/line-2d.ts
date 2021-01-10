@@ -13,8 +13,8 @@ export default class Line2D {
         a,
         b,
     } : {
-        a? : Circle,
-        b? : Circle,
+        a? : Circle | PointData,
+        b? : Circle | PointData,
     } = {
     }) {
         // create new a & b for each instance of the line
@@ -22,11 +22,11 @@ export default class Line2D {
         if (!a) a = new Circle
         if (!b) b = new Circle
 
-        this._a = a
-        this._b = b
+        this._a = a instanceof Circle ? a : new Circle(a)
+        this._b = b instanceof Circle ? b : new Circle(b)
 
-        a.change.attach(this.handlePointChange)
-        b.change.attach(this.handlePointChange)
+        this._a.change.attach(this.handlePointChange)
+        this._b.change.attach(this.handlePointChange)
     }
 
     private handlePointChange = () => {

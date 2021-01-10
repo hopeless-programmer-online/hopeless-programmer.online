@@ -1,290 +1,273 @@
 import React from 'react'
+import { Data as PointData } from '../../classes/vector-2d'
+import Circle2D from '../../classes/circle-2d'
+import Line2D, { Data as LineData } from '../../classes/line-2d'
+import Circle2DComponent from '../../components/circle-2d'
+import Line2DComponent from '../../components/line-2d'
+import Text2DComponent from '../../components/text'
 import styles from './intersection.module.scss'
 
-type PointData = { x : number, y : number }
-type LineData = { a : PointData, b : PointData }
-type OnPointMove = ((point : PointData) => void) | null
-
-type PointProps = {
-    model   : PointData,
-    movable : boolean,
-    onMove  : OnPointMove,
-    style   : string,
+type Intersection = {
+    x : PointData,
+    t : number,
+    q : number,
 }
 
-class Point extends React.Component<PointProps> {
-    public static defaultProps = {
-        movable : true,
-        onMove  : null,
-        style   : styles.circle
-    }
-
-    private onDown = (pointer : React.PointerEvent) => {
-        if (!this.props.movable) return
-
-        const notify = this.props.onMove
-
-        if (!notify) return
-
-        const aspect = (() => {
-            let svg = pointer.currentTarget.parentElement;
-
-            while (svg && svg.tagName !== 'svg') svg = svg.parentElement
-
-            if (!(svg instanceof SVGSVGElement)) return { x : 1, y : 1 }
-
-            const { viewBox } = svg
-            const rect = svg.getBoundingClientRect()
-
-            return {
-                x : viewBox.baseVal.width / rect.width,
-                y : viewBox.baseVal.height / rect.height,
-            }
-        })()
-
-        const base = {
-            clientX : pointer.clientX,
-            clientY : pointer.clientY,
-        }
-
-        const update = (pointer : PointerEvent) => {
-            const { model } = this.props
-            const x = model.x + (pointer.clientX - base.clientX) * aspect.x
-            const y = model.y + (pointer.clientY - base.clientY) * aspect.y
-
-            // console.log(x, y)
-
-            notify({ x, y })
-
-            base.clientX = pointer.clientX
-            base.clientY = pointer.clientY
-        }
-        const onUp = (pointer : PointerEvent) => {
-            update(pointer)
-
-            window.removeEventListener('pointermove', onMove)
-            window.removeEventListener('pointerup', onUp)
-            }
-        const onMove = (pointer : PointerEvent) => {
-            update(pointer)
-        }
-
-        window.addEventListener('pointermove', onMove)
-        window.addEventListener('pointerup', onUp)
-    }
-
-    public render() {
-        const { model, style } = this.props
-
-        return (
-            <circle
-                cx={model.x}
-                cy={model.y}
-                r={2}
-                className={style}
-                onPointerDown={this.onDown}
-            />
-        )
-    }
-}
-class Line extends React.Component<{ model : LineData, style : string }> {
-    public static defaultProps = {
-        style : styles.line
-    }
-
-    public render() {
-        const { a, b } = this.props.model
-        return (
-            <line
-                x1={a.x}
-                y1={a.y}
-                x2={b.x}
-                y2={b.y}
-                z={0}
-                className={this.props.style}
-            />
-        )
-    }
-}
-
-type IntersectionResult = [ false ] | [ true,
-    { x : PointData } &
-    ({ tHit : true, lMiss : null, lDir : null } | { tHit : false, lMiss : LineData, lDir : LineData }) &
-    ({ qHit : true, mMiss : null, mDir : null } | { qHit : false, mMiss : LineData, mDir : LineData })
-]
-
-function intersection({ l, m } : { l : LineData, m : LineData }) : IntersectionResult {
+function intersection({ l, m } : { l : LineData, m : LineData }) : false | Intersection {
     const a = l.b.x - l.a.x
     const b = m.b.x - m.a.x
     const c = l.b.y - l.a.y
     const d = m.b.y - m.a.y
     const det = a*d - b*c
 
-    if (det === 0) return [ false ]
+    if (det === 0) return false
 
     const cx = m.a.x - l.a.x
     const cy = m.a.y - l.a.y
     const t = (d * cx - b * cy) / det
     const q = -(a * cy - c * cx) / det
 
-    const data = {
+    return {
         x : {
             x : l.a.x + (l.b.x - l.a.x) * t,
             y : l.a.y + (l.b.y - l.a.y) * t,
         },
-        tHit  : true,
-        lMiss : null,
-        lDir  : null,
-        qHit  : true,
-        mMiss : null,
-        mDir  : null,
+        t,
+        q,
     }
-
-    // @todo: replace with intersection with boundaries
-    const distance = 10
-
-    if (t < 0 || t > 1) {
-        data.tHit = false
-        data.lDir = {
-            a : {
-                x : l.a.x + (l.b.x - l.a.x) * -distance,
-                y : l.a.y + (l.b.y - l.a.y) * -distance,
-            },
-            b : {
-                x : l.a.x + (l.b.x - l.a.x) * distance,
-                y : l.a.y + (l.b.y - l.a.y) * distance,
-            },
-        }
-
-        if (t < 0) {
-            data.lMiss = {
-                a : data.x,
-                b : l.a,
-            }
-        }
-        else {
-            data.lMiss = {
-                a : l.b,
-                b : data.x,
-            }
-        }
-    }
-
-    if (q < 0 || q > 1) {
-        data.qHit = false
-        data.mDir = {
-            a : {
-                x : m.a.x + (m.b.x - m.a.x) * -distance,
-                y : m.a.y + (m.b.y - m.a.y) * -distance,
-            },
-            b : {
-                x : m.a.x + (m.b.x - m.a.x) * distance,
-                y : m.a.y + (m.b.y - m.a.y) * distance,
-            },
-        }
-
-        if (q < 0) {
-            data.mMiss = {
-                a : data.x,
-                b : m.a,
-            }
-        }
-        else {
-            data.mMiss = {
-                a : m.b,
-                b : data.x,
-            }
-        }
-    }
-
-    return [ true, data ]
 }
 
-type Props = {}
-type State = { l : LineData, m : LineData }
+type Props = { l : LineData, m : LineData }
+type State = null | { t : number, q : number }
 
-export default class Intersection extends React.Component<Props, State> {
-    public constructor(props : Props) {
+export default class Caster extends React.Component<Props, State> {
+    public static defaultProps = {
+        l : {
+            a : { x : 10, y : 80 },
+            b : { x : 90, y : 40 },
+        },
+        m : {
+            a : { x : 20, y : 20 },
+            b : { x : 70, y : 90 },
+        },
+    }
+
+    private l : Line2D
+    private m : Line2D
+
+    public constructor(props : Props = Caster.defaultProps) {
         super(props)
 
-        this.state = {
-            l : {
-                a : { x : 10, y : 80 },
-                b : { x : 90, y : 40 },
-            },
-            m : {
-                a : { x : 20, y : 20 },
-                b : { x : 70, y : 90 },
-            },
+        const { l, m } = props
+
+        this.l = new Line2D({ a : new Circle2D({ p : l.a, r : 2 }), b : new Circle2D({ p : l.b, r : 2 }) })
+        this.m = new Line2D({ a : new Circle2D({ p : m.a, r : 2 }), b : new Circle2D({ p : m.b, r : 2 }) })
+        this.state = this.modelState
+    }
+
+    private get modelState() {
+        const { l, m } = this
+
+        const hit = intersection({ l, m })
+
+        if (!hit) return null
+
+        const { t, q } = hit
+
+        return { t, q }
+    }
+    private get crossing() {
+        const hit = this.state
+
+        if (hit === null) return
+
+        const { t } = hit
+        const { l } = this
+
+        const x = l.a.x + t * (l.b.x - l.a.x)
+        const y = l.a.y + t * (l.b.y - l.a.y)
+
+        return (
+            <>
+                <text
+                    x={x}
+                    y={y}
+                    className={styles.text}
+                >x</text>
+                <circle
+                    cx={x}
+                    cy={y}
+                    r={2}
+                    className={styles.intersection}
+                />
+            </>
+        )
+    }
+    private *directions() {
+        const hit = this.state
+
+        if (hit === null) return
+
+        const { t, q } = hit
+        const { l, m } = this
+
+        const x = l.a.x + t * (l.b.x - l.a.x)
+        const y = l.a.y + t * (l.b.y - l.a.y)
+
+        if (t < 0 || t > 1) {
+            const L = [
+                intersection({ l, m : { a : { x : 0,   y : 0   }, b : { x : 100, y : 0   } } }),
+                intersection({ l, m : { a : { x : 100, y : 0   }, b : { x : 100, y : 100 } } }),
+                intersection({ l, m : { a : { x : 100, y : 100 }, b : { x : 0,   y : 100 } } }),
+                intersection({ l, m : { a : { x : 0,   y : 100 }, b : { x : 0,   y : 0   } } }),
+            ]
+            .filter(hit => hit !== null)
+            .map(hit => hit as Intersection)
+
+            if (L.length > 0) {
+
+                const minL = L.sort((a, b) => a.t - b.t)[0].x
+                const maxL = L.sort((a, b) => b.t - a.t)[0].x
+
+                yield (
+                    <line
+                        key='l-direction'
+                        x1={minL.x}
+                        y1={minL.y}
+                        x2={maxL.x}
+                        y2={maxL.y}
+                        className={styles.direction}
+                    />
+                )
+            }
+
+            if (t < 0) {
+                yield (
+                    <line
+                        key='l-miss'
+                        x1={x}
+                        y1={y}
+                        x2={l.a.x}
+                        y2={l.a.y}
+                        className={styles.miss}
+                    />
+                )
+            }
+            else {
+                yield (
+                    <line
+                        key='l-miss'
+                        x1={l.b.x}
+                        y1={l.b.y}
+                        x2={x}
+                        y2={y}
+                        className={styles.miss}
+                    />
+                )
+            }
+        }
+        if (q < 0 || q > 1) {
+            const M = [
+                intersection({ m, l : { a : { x : 0,   y : 0   }, b : { x : 100, y : 0   } } }),
+                intersection({ m, l : { a : { x : 100, y : 0   }, b : { x : 100, y : 100 } } }),
+                intersection({ m, l : { a : { x : 100, y : 100 }, b : { x : 0,   y : 100 } } }),
+                intersection({ m, l : { a : { x : 0,   y : 100 }, b : { x : 0,   y : 0   } } }),
+            ]
+            .filter(hit => hit !== null)
+            .map(hit => hit as Intersection)
+
+            if (M.length > 0) {
+
+                const minM = M.sort((a, b) => a.t - b.t)[0].x
+                const maxM = M.sort((a, b) => b.t - a.t)[0].x
+
+                yield (
+                    <line
+                        key='m-direction'
+                        x1={minM.x}
+                        y1={minM.y}
+                        x2={maxM.x}
+                        y2={maxM.y}
+                        className={styles.direction}
+                    />
+                )
+            }
+
+            if (q < 0) {
+                yield (
+                    <line
+                        key='m-miss'
+                        x1={x}
+                        y1={y}
+                        x2={m.a.x}
+                        y2={m.a.y}
+                        className={styles.miss}
+                    />
+                )
+            }
+            else {
+                yield (
+                    <line
+                        key='m-miss'
+                        x1={m.b.x}
+                        y1={m.b.y}
+                        x2={x}
+                        y2={y}
+                        className={styles.miss}
+                    />
+                )
+            }
         }
     }
 
-    private updateLA = (a : PointData) => {
-        const { b } = this.state.l
-
-        this.setState({ l : { a, b } })
-    }
-    private updateLB = (b : PointData) => {
-        const { a } = this.state.l
-
-        this.setState({ l : { a, b } })
-    }
-    private updateMA = (a : PointData) => {
-        const { b } = this.state.m
-
-        this.setState({ m : { a, b } })
-    }
-    private updateMB = (b : PointData) => {
-        const { a } = this.state.m
-
-        this.setState({ m : { a, b } })
+    update = () => {
+        this.setState(this.modelState)
     }
 
+    public componentDidMount() {
+        const { l, m, update } = this
+
+        l.change.attach(update)
+        m.change.attach(update)
+    }
+    public componentWillUnmount() {
+        const { l, m, update } = this
+
+        l.change.detach(update)
+        m.change.detach(update)
+    }
     public render() {
-        const { l, m } = this.state
-        const [ hit, { x, tHit, lMiss, lDir, qHit, mMiss, mDir } ] = intersection({ l, m })
+        const { l, m } = this
 
         return (
             <svg
                 viewBox='0 0 100 100'
                 className={styles.svg}
             >
-                { !qHit && <Line model={mDir} style={styles.direction}/> }
-                { !qHit && <Line model={mMiss} style={styles.miss}/> }
-                { !tHit && <Line model={lDir} style={styles.direction}/> }
-                { !tHit && <Line model={lMiss} style={styles.miss}/> }
-                <Line model={l}/>
-                <Line model={m}/>
-                <text
-                    x={l.a.x}
-                    y={l.a.y}
+                {[ ...this.directions() ]}
+                <Line2DComponent className={styles.line} model={l}/>
+                <Line2DComponent className={styles.line} model={m}/>
+                <Text2DComponent
+                    model={l.a.p}
                     className={styles.text}
-                >a</text>
-                <text
-                    x={l.b.x}
-                    y={l.b.y}
+                >a</Text2DComponent>
+                <Text2DComponent
+                    model={l.b.p}
                     className={styles.text}
-                >b</text>
-                <text
-                    x={m.a.x}
-                    y={m.a.y}
+                >b</Text2DComponent>
+                <Text2DComponent
+                    model={m.a.p}
                     className={styles.text}
-                >u</text>
-                <text
-                    x={m.b.x}
-                    y={m.b.y}
+                >u</Text2DComponent>
+                <Text2DComponent
+                    model={m.b.p}
                     className={styles.text}
-                >v</text>
-                <text
-                    x={x.x}
-                    y={x.y}
-                    className={styles.text}
-                >x</text>
-                { hit && <Point model={x} movable={false} style={styles.intersection}/> }
-                <Point model={l.a} onMove={this.updateLA}/>
-                <Point model={l.b} onMove={this.updateLB}/>
-                <Point model={m.a} onMove={this.updateMA}/>
-                <Point model={m.b} onMove={this.updateMB}/>
+                >v</Text2DComponent>
+                {this.crossing}
+                <Circle2DComponent className={styles.circle} model={l.a}/>
+                <Circle2DComponent className={styles.circle} model={l.b}/>
+                <Circle2DComponent className={styles.circle} model={m.a}/>
+                <Circle2DComponent className={styles.circle} model={m.b}/>
             </svg>
         )
     }
