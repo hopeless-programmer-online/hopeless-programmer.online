@@ -1,19 +1,17 @@
 import React from "react"
-import Model from "../classes/line-2d"
+import Model from "../classes/react-vector-2d"
 
 type Props =
     & {
         model : Model,
     }
-    & React.HTMLAttributes<SVGLineElement>
+    & React.HTMLAttributes<SVGTextElement>
 type State = {
-    x1 : number,
-    y1 : number,
-    x2 : number,
-    y2 : number,
+    x : number,
+    y : number,
 }
 
-export default class Line2DComponent extends React.Component<Props, State> {
+export default class Text2DComponent extends React.Component<Props, State> {
     public static defaultProps = {
         model : new Model
     }
@@ -29,14 +27,9 @@ export default class Line2DComponent extends React.Component<Props, State> {
     }
 
     private get modelState() {
-        const { a, b } = this.props.model
+        const { x, y } = this.props.model
 
-        return {
-            x1 : a.x,
-            y1 : a.y,
-            x2 : b.x,
-            y2 : b.y,
-        }
+        return { x, y }
     }
 
     public componentDidMount() {
@@ -46,20 +39,20 @@ export default class Line2DComponent extends React.Component<Props, State> {
         this.props.model.change.detach(this.handleChange)
     }
     public render() {
-        const s = this.state
+        const { x, y } = this.state
         const props = { ...this.props }
 
         delete props.model
 
         return (
             <>
-                <line
-                    x1={s.x1}
-                    y1={s.y1}
-                    x2={s.x2}
-                    y2={s.y2}
+                <text
+                    x={x}
+                    y={y}
                     {...props}
-                />
+                >
+                    {this.props.children}
+                </text>
             </>
         )
     }

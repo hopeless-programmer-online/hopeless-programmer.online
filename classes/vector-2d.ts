@@ -1,3 +1,5 @@
+export type Data = { x : number, y : number }
+
 export default class Vector2D {
     private _x : number
     private _y : number
@@ -39,17 +41,17 @@ export default class Vector2D {
         return this.div(this.length)
     }
 
-    public set(other : number | Vector2D) {
+    public set(other : number | Data) {
         if (typeof other === 'number') {
             this._x = other
             this._y = other
         }
         else {
-            this._x = other._x
-            this._y = other._y
+            this._x = other.x
+            this._y = other.y
         }
     }
-    public add(other : number | Vector2D) {
+    public add(other : number | Data) {
         return typeof other === 'number'
             ? new Vector2D({
                 x : this.x + other,
@@ -60,7 +62,7 @@ export default class Vector2D {
                 y : this.y + other.y,
             })
     }
-    public sub(other : number | Vector2D) {
+    public sub(other : number | Data) {
         return typeof other === 'number'
             ? new Vector2D({
                 x : this.x - other,
@@ -71,7 +73,7 @@ export default class Vector2D {
                 y : this.y - other.y,
             })
     }
-    public mul(other : number | Vector2D) {
+    public mul(other : number | Data) {
         return typeof other === 'number'
             ? new Vector2D({
                 x : this.x * other,
@@ -82,7 +84,7 @@ export default class Vector2D {
                 y : this.y * other.y,
             })
     }
-    public div(other : number | Vector2D) {
+    public div(other : number | Data) {
         return typeof other === 'number'
             ? new Vector2D({
                 x : this.x / other,
@@ -93,7 +95,7 @@ export default class Vector2D {
                 y : this.y / other.y,
             })
     }
-    public dot(other : Vector2D) {
+    public dot(other : Data) {
         return this.x * other.x + this.y * other.y
     }
     public normalize() {
@@ -101,5 +103,8 @@ export default class Vector2D {
 
         this._x /= l
         this._y /= l
+    }
+    public clone() {
+        return new Vector2D(this)
     }
 }

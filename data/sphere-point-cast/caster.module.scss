@@ -7,7 +7,7 @@
         stroke       : rgb(212, 212, 212);
         stroke-width : 1;
     }
-    > .circle {
+    > circle.circle {
         fill         : crimson;
         stroke       : rgb(212, 212, 212);
         stroke-width : 0.5;
@@ -17,10 +17,11 @@
             stroke : crimson;
         }
     }
-    > .intersection {
-        fill         : rgb(86, 156, 214);
-        stroke       : rgb(212, 212, 212);
-        stroke-width : 0.5;
+    > circle.intersection {
+        fill             : transparent;
+        stroke           : crimson;
+        stroke-width     : 0.5;
+        stroke-dasharray : 2 1;
     }
     > .miss {
         stroke       : crimson;

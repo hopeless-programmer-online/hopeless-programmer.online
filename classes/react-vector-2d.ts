@@ -1,5 +1,5 @@
 import { VoidSyncEvent } from 'ts-events'
-import Vector2D from './vector-2d'
+import Vector2D, { Data } from './vector-2d'
 
 export default class ReactVector2D extends Vector2D {
     public readonly change = new VoidSyncEvent
@@ -21,7 +21,7 @@ export default class ReactVector2D extends Vector2D {
         this.change.post()
     }
 
-    public set(other : number | Vector2D) {
+    public set(other : number | Data) {
         super.set(other)
 
         this.change.post()

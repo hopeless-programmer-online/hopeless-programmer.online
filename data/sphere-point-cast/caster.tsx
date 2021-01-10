@@ -1,118 +1,27 @@
 import React from 'react'
+import { Data as PointData } from '../../classes/vector-2d'
+import Circle2D from '../../classes/circle-2d'
+import Circle2DComponent from '../../components/circle-2d'
+import Line2D, { Data as LineData } from '../../classes/line-2d'
 import styles from './caster.module.scss'
+import Line2DComponent from '../../components/line-2d'
+import Text2DComponent from '../../components/text'
 
-type PointData = { x : number, y : number }
-type LineData = { a : PointData, b : PointData }
-type OnPointMove = ((point : PointData) => void) | null
+// class Intersection extends React.Component<{ r : number }> {
+//     public static defaultProps = {
+//         r : 5,
+//     }
 
-type PointProps = {
-    model   : PointData,
-    movable : boolean,
-    onMove  : OnPointMove,
-    style   : string,
-}
+//     public render() {
+//         return (
+//             <></>
+//         )
+//     }
+// }
 
-class Point extends React.Component<PointProps> {
-    public static defaultProps = {
-        movable : true,
-        onMove  : null,
-        style   : styles.circle
-    }
+function cast({ l, m, r } : { l : LineData, m : PointData, r : number }) : false | { x : PointData }  {
+    // todo: classes
 
-    private onDown = (pointer : React.PointerEvent) => {
-        if (!this.props.movable) return
-
-        const notify = this.props.onMove
-
-        if (!notify) return
-
-        const aspect = (() => {
-            let svg = pointer.currentTarget.parentElement;
-
-            while (svg && svg.tagName !== 'svg') svg = svg.parentElement
-
-            if (!(svg instanceof SVGSVGElement)) return { x : 1, y : 1 }
-
-            const { viewBox } = svg
-            const rect = svg.getBoundingClientRect()
-
-            return {
-                x : viewBox.baseVal.width / rect.width,
-                y : viewBox.baseVal.height / rect.height,
-            }
-        })()
-
-        const base = {
-            clientX : pointer.clientX,
-            clientY : pointer.clientY,
-        }
-
-        const update = (pointer : PointerEvent) => {
-            const { model } = this.props
-            const x = model.x + (pointer.clientX - base.clientX) * aspect.x
-            const y = model.y + (pointer.clientY - base.clientY) * aspect.y
-
-            // console.log(x, y)
-
-            notify({ x, y })
-
-            base.clientX = pointer.clientX
-            base.clientY = pointer.clientY
-        }
-        const onUp = (pointer : PointerEvent) => {
-            update(pointer)
-
-            window.removeEventListener('pointermove', onMove)
-            window.removeEventListener('pointerup', onUp)
-            }
-        const onMove = (pointer : PointerEvent) => {
-            update(pointer)
-        }
-
-        window.addEventListener('pointermove', onMove)
-        window.addEventListener('pointerup', onUp)
-    }
-
-    public render() {
-        const { model, style } = this.props
-
-        return (
-            <circle
-                cx={model.x}
-                cy={model.y}
-                r={2}
-                className={style}
-                onPointerDown={this.onDown}
-            />
-        )
-    }
-}
-class Line extends React.Component<{ model : LineData, style : string }> {
-    public static defaultProps = {
-        style : styles.line
-    }
-
-    public render() {
-        const { a, b } = this.props.model
-        return (
-            <line
-                x1={a.x}
-                y1={a.y}
-                x2={b.x}
-                y2={b.y}
-                z={0}
-                className={this.props.style}
-            />
-        )
-    }
-}
-
-type IntersectionResult = false |
-    { x : PointData } // &
-    // ({ tHit : true, lMiss : null, lDir : null } | { tHit : false, lMiss : LineData, lDir : LineData }) &
-    // ({ qHit : true, mMiss : null, mDir : null } | { qHit : false, mMiss : LineData, mDir : LineData })
-
-function cast({ l, m, r } : { l : LineData, m : PointData, r : number }) : IntersectionResult {
     const a = l.a
     const b = l.b
     const d = { x : b.x - a.x, y : b.y - a.y }
@@ -142,81 +51,81 @@ function cast({ l, m, r } : { l : LineData, m : PointData, r : number }) : Inter
     }
 }
 
-type Props = {}
-type State = { l : LineData, m : PointData }
+export default class Caster extends React.Component<{ a : PointData, b : PointData, m : PointData, r : number }, { x : null | PointData }> {
+    public static defaultProps = {
+        a : { x : 10, y : 10 },
+        b : { x : 90, y : 90 },
+        m : { x : 48, y : 52 },
+        r : 10,
+    }
 
-export default class Caster extends React.Component<Props, State> {
-    public constructor(props : Props) {
+    private l : Line2D
+    private m : Circle2D
+
+    public constructor(props = Caster.defaultProps) {
         super(props)
 
-        this.state = {
-            l : {
-                a : { x : 10, y : 80 },
-                b : { x : 90, y : 40 },
-            },
-            m : { x : 20, y : 20 },
-        }
+        const { a, b, m } = props
+
+        this.l = new Line2D({
+            a : new Circle2D({ p : a, r : 2 }),
+            b : new Circle2D({ p : b, r : 2 }),
+        })
+        this.m = new Circle2D({ p : m, r : 2 })
+        this.state = this.modelState
     }
 
-    private updateLA = (a : PointData) => {
-        const { b } = this.state.l
-
-        this.setState({ l : { a, b } })
-    }
-    private updateLB = (b : PointData) => {
-        const { a } = this.state.l
-
-        this.setState({ l : { a, b } })
-    }
-    private updateM = (m : PointData) => {
-        this.setState({ m })
-    }
-
-    public render() {
-        const { l, m } = this.state
-        const r = 5
+    private get modelState() {
+        const { l, m } = this
+        const { r } = this.props
         const hit = cast({ l, m, r })
+
+        return { x : hit ? hit.x : null }
+    }
+
+    private update = () => {
+        this.setState(this.modelState)
+    }
+
+    public componentDidMount() {
+        const { l, m, update } = this
+
+        l.change.attach(update)
+        m.change.attach(update)
+    }
+    public componentWillUnmount() {
+        const { l, m, update } = this
+
+        l.change.detach(update)
+        m.change.detach(update)
+    }
+    public render() {
+        const { l, m } = this
+        const { a, b } = l
+        const { r } = this.props
+        const { x } = this.state
 
         return (
             <svg
                 viewBox='0 0 100 100'
                 className={styles.svg}
             >
-                <Line model={l}/>
-                <text
-                    x={l.a.x}
-                    y={l.a.y}
-                    className={styles.text}
-                >a</text>
-                <text
-                    x={l.b.x}
-                    y={l.b.y}
-                    className={styles.text}
-                >b</text>
-                <text
-                    x={m.x}
-                    y={m.y}
-                    className={styles.text}
-                >y</text>
+                <Line2DComponent className={styles.line} model={l}/>
+                <Text2DComponent className={styles.text} model={a.position}>a</Text2DComponent>
+                <Text2DComponent className={styles.text} model={b.position}>b</Text2DComponent>
+                <Text2DComponent className={styles.text} model={m.position}>y</Text2DComponent>
                 {
-                    // hit && <Point model={x} movable={false} style={styles.intersection}/>
-                    hit &&
+                    x &&
                     <circle
-                        cx={hit.x.x}
-                        cy={hit.x.y}
-                        r={r - 0.5}
-                        style={{
-                            // stroke : 'rgb(212, 212, 212)',
-                            stroke : 'crimson',
-                            strokeDasharray : '2 1',
-                            strokeWidth : 0.5,
-                            fill : 'transparent',
-                        }}
+                        className={styles.intersection}
+                        cx={x.x}
+                        cy={x.y}
+                        r={r}
                     />
                 }
-                <Point model={l.a} onMove={this.updateLA}/>
-                <Point model={l.b} onMove={this.updateLB}/>
-                <Point model={m} onMove={this.updateM}/>
+                <Circle2DComponent className={styles.circle} model={a} />
+                <Circle2DComponent className={styles.circle} model={b} />
+                <Circle2DComponent className={styles.circle} model={m} />
             </svg>
         )
     }

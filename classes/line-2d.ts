@@ -1,33 +1,20 @@
 import { VoidSyncEvent } from "ts-events";
-import Circle from "./circle";
+import { Data as PointData } from './vector-2d'
+import Circle from './circle-2d';
+
+export type Data = { a : PointData, b : PointData }
 
 export default class Line2D {
-    public static From(x1 : number, y1 : number, x2 : number, y2 : number) {
-        return new Line2D({
-            a : new Circle({ x : x1, y : y1 }),
-            b : new Circle({ x : x2, y : y2 }),
-        })
-    }
-
     readonly change = new VoidSyncEvent
     private _a : Circle
     private _b : Circle
-    private _stroke : string
-    private _strokeWidth : number
-    private _strokeDasharray : string
 
     public constructor({
         a,
         b,
-        stroke = 'white',
-        strokeWidth = 1,
-        strokeDasharray = '',
     } : {
         a? : Circle,
         b? : Circle,
-        stroke? : string,
-        strokeWidth? : number,
-        strokeDasharray? : string,
     } = {
     }) {
         // create new a & b for each instance of the line
@@ -37,9 +24,6 @@ export default class Line2D {
 
         this._a = a
         this._b = b
-        this._stroke = stroke
-        this._strokeWidth = strokeWidth
-        this._strokeDasharray = strokeDasharray
 
         a.change.attach(this.handlePointChange)
         b.change.attach(this.handlePointChange)
@@ -52,51 +36,7 @@ export default class Line2D {
     public get a() {
         return this._a
     }
-    public set a(a : Circle) {
-        this._a = a
-
-        this.change.post()
-    }
     public get b() {
         return this._b
-    }
-    public set b(b : Circle) {
-        this._b = b
-
-        this.change.post()
-    }
-    public get stroke() {
-        return this._stroke
-    }
-    public set stroke(stroke : string) {
-        this._stroke = stroke
-
-        this.change.post()
-    }
-    public get strokeWidth() {
-        return this._strokeWidth
-    }
-    public set strokeWidth(strokeWidth : number) {
-        this._strokeWidth = strokeWidth
-
-        this.change.post()
-    }
-    public get strokeDasharray() {
-        return this._strokeDasharray
-    }
-    public set strokeDasharray(strokeDasharray : string) {
-        this._strokeDasharray = strokeDasharray
-
-        this.change.post()
-    }
-
-    public clone() {
-        return new Line2D({
-            a : this.a.clone(),
-            b : this.b.clone(),
-            stroke : this.stroke,
-            strokeWidth : this.strokeWidth,
-            strokeDasharray : this.strokeDasharray,
-        })
     }
 }
