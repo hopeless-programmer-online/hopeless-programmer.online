@@ -256,6 +256,9 @@ export function f(text : string) {
 export function v(text : string) {
     return new IdentifierLexeme({ text, role : `variable` })
 }
+export function ns(text : string) {
+    return new IdentifierLexeme({ text, role : 'namespace' })
+}
 export function lt(text : string) {
     let type = (() => {
         try {

@@ -31,6 +31,9 @@
             color: palette.$color-macro;
         }
     }
+    .namespace {
+        color: palette.$color-class;
+    }
     .variable {
         color: palette.$color-variable;
     }
