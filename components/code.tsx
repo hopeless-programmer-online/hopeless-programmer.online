@@ -33,8 +33,8 @@ export default class CodeComponent extends React.Component<Props> {
             <article className={styles.code}>
                 <header>
                     <figure>
+                        {icon}
                         <figcaption>
-                            {icon}
                             example.{ext}
                         </figcaption>
                     </figure>
