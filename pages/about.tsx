@@ -54,7 +54,7 @@ const model = article('Про це місце...', ...[
 export default class About extends React.Component {
     public render() {
         return (
-            <Page>
+            <Page title='Про цей сайт'>
                 <Article model={model}/>
             </Page>
         )

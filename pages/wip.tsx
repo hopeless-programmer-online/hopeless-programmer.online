@@ -13,7 +13,7 @@ import cg2 from '../data/cg-2'
 export default class WIP extends React.Component {
     public render() {
         return (
-            <Page>
+            <Page title='В розробці'>
                 <ArticleLink model={projection} href='./articles/vector-projection'/>
                 <ArticleLink model={reflection} href='./articles/vector-reflection'/>
                 <ArticleLink model={intersection} href='./articles/lines-intersection'/>

@@ -6,7 +6,7 @@ import model from '../../data/unreversalbe-overlapping'
 export default class UnreversalbeOverlapping extends React.Component {
     public render() {
         return (
-            <Page>
+            <Page title='Думки вголос. Незворотне перекриття ідентифікаторів.'>
                 <Article model={model}/>
             </Page>
         )

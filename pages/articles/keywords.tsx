@@ -6,7 +6,7 @@ import model from '../../data/keywords'
 export default class Keywords extends React.Component {
     public render() {
         return (
-            <Page>
+            <Page title='Думки вголос. Зарезервовані слова.'>
                 <Article model={model}/>
             </Page>
         )

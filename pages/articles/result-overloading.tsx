@@ -6,7 +6,7 @@ import model from '../../data/result-overloading'
 export default class ResultOverloading extends React.Component {
     public render() {
         return (
-            <Page>
+            <Page title='Думки вголос. Перевантаження за результатом.'>
                 <Article model={model}/>
             </Page>
         )

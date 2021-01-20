@@ -6,7 +6,7 @@ import model from '../../data/symmetry'
 export default class Symmetry extends React.Component {
     public render() {
         return (
-            <Page>
+            <Page title='Думки вголос. Асиметрія аргументів та результатів функції.'>
                 <Article model={model}/>
             </Page>
         )
