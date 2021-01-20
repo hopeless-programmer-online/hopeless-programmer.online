@@ -155,6 +155,11 @@ export function py(...somethings : Array<LexemesLike>) {
 
     return new Code({ language : 'Python', lines })
 }
+export function l0(...somethings : Array<LexemesLike>) {
+    const lines = somethings.map(toLexemes)
+
+    return new Code({ language : 'L0', lines })
+}
 
 export function illustration(description : ParagraphLike, target : IllustrationTarget) {
     return new Illustration({
