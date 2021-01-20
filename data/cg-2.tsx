@@ -95,7 +95,7 @@ class ScreenResolutions extends React.Component {
     }
 }
 
-export default article([ `Програмування комп'ютерної графіки. `, `Екран, пікселі та колір. ` ], ...[
+export default article([ `Програмування комп'ютерної графіки. `, `Екран, пікселі та колір. ` ], {}, ...[
     section(`Екран. `, ...[
         paragraph(...[
             sentence(`Після того як зображення побудоване настає час вивести його на екран. `),

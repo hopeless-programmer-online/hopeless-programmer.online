@@ -3,7 +3,7 @@ import Caster from "./sphere-point-cast/caster";
 
 const r = String.raw
 
-export default article('Знаходження точки перетину рухомої сфери з точкою. ', ...[
+export default article('Знаходження точки перетину рухомої сфери з точкою. ', {}, ...[
     section('', ...[
         paragraph(...[
         ]),

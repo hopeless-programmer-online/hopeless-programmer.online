@@ -4,7 +4,7 @@ import Projector from './vector-projection/projector';
 
 const r = String.raw
 
-export default article(`Векторна проекція. `, ...[
+export default article(`Векторна проекція. `, {}, ...[
     section(``, ...[
         paragraph(...[
             sentence(``),

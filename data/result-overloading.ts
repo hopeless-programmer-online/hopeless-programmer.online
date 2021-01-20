@@ -93,7 +93,7 @@ const using_namespace = cpp( kw(`using`), ` `, kw(`namespace`) );
 const auto = cpp(kw(`auto`));
 const static_cast = cpp(kw(`static_cast`));
 
-export default article([ sentence(`Думки вголос. `), sentence(`Перевантаження за результатом. `), ], ...[
+export default article([ sentence(`Думки вголос. `), sentence(`Перевантаження за результатом. `), ], { created : new Date('2019-01-22') }, ...[
     section([], ...[
         paragraph(...[
             sentence(`Деякі зі статично-типізованих мов програмування підтримують механізм `, link(`перевантаження функцій`, overload), note_1, `. `),

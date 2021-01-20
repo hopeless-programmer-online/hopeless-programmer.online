@@ -191,7 +191,7 @@ const code_13 = illustration(
     ]),
 )
 
-export default article([ `Думки вголос. `, `Незворотне перекриття ідентифікаторів. ` ], ...[
+export default article([ `Думки вголос. `, `Незворотне перекриття ідентифікаторів. ` ], { created : new Date('2019-02-07') }, ...[
     section(``, ...[
         paragraph(...[
             sentence(`Явище `, fig(`перекриття`), note_1, ` (`, fig(`overlapping`), `) ідентифікаторів відоме ще з часів перших мов програмування. `),

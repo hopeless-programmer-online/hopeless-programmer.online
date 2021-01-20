@@ -190,7 +190,7 @@ const note_self = note(
     sentence('Тому мені здалось, що в середовищі з явною передачею ', js(kw('return')), ' вони не будуть відчувати якогось особливого дискомфорту. '),
 )
 
-export default  article(sentence('Мова програмування ', L0, '. '), ...[
+export default  article(sentence('Мова програмування ', L0, '. '), {}, ...[
     section(sentence('Що таке ', L0, '? '), ...[
         paragraph(...[
             sentence(L0, ' - це мініатюрна мова програмування. '),

@@ -29,6 +29,8 @@ import { ComponentType } from "react";
 import ReactPhrase from "./react-phrase";
 import Person from "./person";
 import Quote from "./quote";
+import ArticleDetails from "./article-details";
+import persons from "../data/persons";
 
 function error<T>(message : string = '') : T {
     throw new Error(message)
@@ -205,10 +207,14 @@ export function section(titleLike : SentencesLike, ...something : Array<SectionP
     return new Section({ title, parts })
 }
 
-export function article(titleLike : SentenceLike, ...sections : Array<Section>) {
+export function article(titleLike : SentenceLike, { created } : { created? : Date }, ...sections : Array<Section>) {
     const title = toSentences(titleLike)
 
     return new Article({
+        details : new ArticleDetails({
+            created,
+            author : persons.hopeless,
+        }),
         title,
         sections,
     })
