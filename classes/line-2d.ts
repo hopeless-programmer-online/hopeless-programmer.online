@@ -39,4 +39,8 @@ export default class Line2D {
     public get b() {
         return this._b
     }
+
+    public clone() {
+        return new Line2D({ a : this.a.clone(), b : this.b.clone() })
+    }
 }

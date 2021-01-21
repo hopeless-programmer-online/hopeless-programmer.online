@@ -3,7 +3,7 @@ import Page from '../components/page'
 import Article from '../components/article'
 import { article, emp, paragraph, section, sentence } from '../classes/shortcuts'
 
-const model = article('Про це місце...', ...[
+const model = article('Про це місце...', {}, ...[
     section('Навіщо потрібен цей сайт?', ...[
         paragraph(...[
             'Цей маленький сайт є місцем, де я зберігаю свої ідеї, проекти, а також матеріали якими я хочу поділитись зі світом. ',

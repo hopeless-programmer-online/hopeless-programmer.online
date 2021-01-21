@@ -85,4 +85,8 @@ export default class Circle2D {
     public set r(r : Radius) {
         this.radius = r
     }
+
+    public clone() {
+        return new Circle2D(this)
+    }
 }
