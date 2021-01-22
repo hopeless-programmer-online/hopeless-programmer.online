@@ -10,6 +10,7 @@ import TeXPhrase from "./tex-phrase";
 
 type Title = Sentences
 type Sections = Array<Section>
+type Notes = Array<Note>
 
 export default class Article {
     readonly title : Title
@@ -72,7 +73,15 @@ export default class Article {
     }
 
     public get notes() {
-        return this.sections.reduce<Array<Note>>((notes, section) => notes.concat(section.notes), [])
+        const notes = this.sections.reduce<Notes>((notes, section) => notes.concat(section.notes), [])
+
+        const nested = [
+            ...notes,
+            ...notes.reduce<Notes>((notes, note) => notes.concat(note.sentences.notes), [])
+        ]
+        const unique = nested.reduce<Notes>((notes, note) => notes.indexOf(note) === -1 ? notes.concat(note) : notes, [])
+
+        return unique
     }
     public get illustrations() {
         return this.sections.reduce<Array<Illustration>>((illustrations, section) => illustrations.concat(section.illustrations), [])
