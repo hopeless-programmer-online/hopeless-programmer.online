@@ -9,6 +9,7 @@ import lineCast from '../data/sphere-line-cast'
 import l0 from '../data/l0'
 import cg1 from '../data/cg-1'
 import cg2 from '../data/cg-2'
+import cg3 from '../data/cg-3'
 
 export default class WIP extends React.Component {
     public render() {
@@ -22,6 +23,7 @@ export default class WIP extends React.Component {
                 <ArticleLink model={l0} href='./articles/l0'/>
                 <ArticleLink model={cg1} href='./articles/cg-1'/>
                 <ArticleLink model={cg2} href='./articles/cg-2'/>
+                <ArticleLink model={cg3} href='./articles/cg-3'/>
             </Page>
         )
     }
