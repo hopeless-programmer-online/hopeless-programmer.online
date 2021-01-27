@@ -1,6 +1,10 @@
 export type Data = { x : number, y : number }
 
 export default class Vector2D {
+    public static From(x : number, y : number) {
+        return new Vector2D({ x, y })
+    }
+
     private _x : number
     private _y : number
 
@@ -103,6 +107,9 @@ export default class Vector2D {
 
         this._x /= l
         this._y /= l
+    }
+    public distance(other : Data) {
+        return this.sub(other).length
     }
     public clone() {
         return new Vector2D(this)
