@@ -2,6 +2,7 @@ import React from 'react'
 import radians from '../../classes/radians'
 import styles from './cosine-law.module.scss'
 import intersection from '../../classes/intersection-2d'
+import { BoxGeometry, Camera as ThreeCamera, Color, Mesh, MeshStandardMaterial, PerspectiveCamera, Scene as ThreeScene, WebGLRenderer } from 'three'
 
 const { sin, cos, tan } = Math
 
@@ -11,6 +12,8 @@ type State = { a : number, rotate : boolean }
 export default class CosineLaw extends React.Component<Props, State> {
     private time = new Date
     private cancel : number | null = null
+    private scene1 : Scene | null = null
+    private scene2 : Scene | null = null
     private update = () => {
         const time = new Date
         const d = (time.valueOf() - this.time.valueOf()) / 1000
@@ -21,6 +24,22 @@ export default class CosineLaw extends React.Component<Props, State> {
 
         if (rotate) a += radians(60) * d
 
+        const { scene1, scene2 } = this
+
+        if (scene1) {
+            scene1.plane.rotation.y = -a
+            scene1.renderer.render(scene1.scene, scene1.camera)
+        }
+        if (scene2) {
+            scene2.camera.position.set(
+                -sin(a)*40,
+                0,
+                -cos(a)*40,
+            )
+            scene2.camera.rotation.y = radians(180) + a
+            scene2.renderer.render(scene2.scene, scene2.camera)
+        }
+
         this.setState({ a })
 
         this.cancel = requestAnimationFrame(this.update)
@@ -29,6 +48,12 @@ export default class CosineLaw extends React.Component<Props, State> {
         const rotate = event.target.checked
 
         this.setState({ rotate })
+    }
+    private handleCanvas1 = (canvas : HTMLCanvasElement) => {
+        this.scene1 = new Scene(canvas)
+    }
+    private handleCanvas2 = (canvas : HTMLCanvasElement) => {
+        this.scene2 = new Scene(canvas)
     }
 
     public state = { a : radians(15), rotate : true }
@@ -50,10 +75,6 @@ export default class CosineLaw extends React.Component<Props, State> {
             y : 50,
             s : 20,
         }
-        const c = {
-            d : 40,
-            f : radians(45),
-        }
 
         return (
             <figure className={styles.container}>
@@ -62,14 +83,14 @@ export default class CosineLaw extends React.Component<Props, State> {
                         <Plane {...{ ...p, a }}/>
                         <Camera {...{ x : 50, y : 90, f : radians(45), p : { ...p, a } }}/>
                     </svg>
-                    <canvas/>
+                    <canvas ref={this.handleCanvas1}/>
                 </figure>
                 <figure>
                     <svg viewBox='0 0 100 100'>
                         <Plane {...{ ...p }}/>
                         <Camera {...{ x : 50 - sin(-a)*40, y : 50 + cos(-a)*40, a : -a, f : radians(45), p : { ...p, a : 0 } }}/>
                     </svg>
-                    <canvas/>
+                    <canvas ref={this.handleCanvas2}/>
                 </figure>
                 <figcaption>
                     <label>
@@ -79,6 +100,40 @@ export default class CosineLaw extends React.Component<Props, State> {
                 </figcaption>
             </figure>
         )
+    }
+}
+
+class Scene {
+    public readonly renderer : WebGLRenderer
+    public readonly scene : ThreeScene
+    public readonly plane : Mesh
+    public readonly camera : ThreeCamera
+
+    public constructor(canvas : HTMLCanvasElement) {
+        const renderer = new WebGLRenderer({ canvas, antialias : true })
+        const { width, height } = canvas.getBoundingClientRect()
+
+        renderer.setSize(width, height)
+
+        const scene = new ThreeScene
+
+        scene.background = new Color('rgb(30, 30, 30)')
+
+        const plane = new Mesh(
+            new BoxGeometry(20, 20, 1),
+            new MeshStandardMaterial({ color : 'white', emissive : 'white', emissiveIntensity : 1 }),
+        )
+
+        scene.add(plane)
+
+        const camera = new PerspectiveCamera(45, 1, 0.1, 100)
+
+        camera.position.set(0, 0, 40)
+
+        this.renderer = renderer
+        this.scene = scene
+        this.plane = plane
+        this.camera = camera
     }
 }
 
