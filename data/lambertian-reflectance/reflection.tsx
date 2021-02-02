@@ -6,14 +6,14 @@ import radians from '../../classes/radians'
 import reflect2D from '../../classes/reflect-2d'
 import Vector2D, { Data } from '../../classes/vector-2d'
 import Circle2DComponent from '../../components/circle-2d'
-import styles from './diffusion.module.scss'
+import styles from './reflection.module.scss'
 
 const { sin, cos } = Math
 
 type Props = { x : Data }
 type State = { x : Data }
 
-export default class Diffusion extends React.Component<Props, State> {
+export default class Reflection extends React.Component<Props, State> {
     public static defaultProps = {
         x : { x : -30, y : -40 },
     }
@@ -39,22 +39,7 @@ export default class Diffusion extends React.Component<Props, State> {
         const { x } = this
         const l = new Line2D({ a : x, b : Vector2D.From(0, 30) })
         const r = reflect2D(l.d, { x : 0, y : 1 })
-
-        const m = []
-
-        for (let i = 0; i < 7; ++i) {
-            const t = i / 6
-            const a = radians(10 + 160 * t)
-
-            m.push(
-                <Arrow key={i} l={5} model={
-                    new Line2D({
-                        a : l.b.p.add({ x : -cos(a) * 25, y : -sin(a) * 25 }),
-                        b : l.b.p.add({ x : -cos(a) * 45, y : -sin(a) * 45 }),
-                    })
-                }/>
-            )
-        }
+        const m = new Line2D({ a : l.b, b : r.add(l.b) })
 
         return (
             <figure className={styles.container}>
@@ -82,7 +67,7 @@ export default class Diffusion extends React.Component<Props, State> {
                     <rect x={-50} y={30} width={100} height={20} fill={`url(#${stripes})`}/>
                     <line x1={-50} y1={30} x2={50} y2={30}/>
                     <Arrow model={l}/>
-                    {m}
+                    <Arrow model={m}/>
                     <Circle2DComponent model={this.x}/>
                 </svg>
             </figure>
@@ -90,14 +75,10 @@ export default class Diffusion extends React.Component<Props, State> {
     }
 }
 
-class Arrow extends React.Component<{ model : Line2D, l : number }> {
-    public static defaultProps = {
-        l : 15,
-    }
-
+class Arrow extends React.Component<{ model : Line2D }> {
     public render() {
-        const { model, l } = this.props
-        const { a, b, angle } = model
+        const { a, b, angle } = this.props.model
+        const l = 15
         const q = radians(30)
 
         return <>
