@@ -21,11 +21,12 @@ export default class MicroSurface extends React.Component<Props, State> {
         for (let i = 0; i < count; ++i) {
             const t = i / (count - 1)
 
-            points.push(Vector2D.From(t*100, 80 - Math.random() * 6))
+            points.push(Vector2D.From(t*100, 80 - Math.random() * 10))
         }
 
         const lines = []
         const arrows = []
+        const dir = Vector2D.From(1, 2).normalized
 
         for (let i = 0; i < points.length - 1; ++i) {
             const a = points[i]
@@ -41,12 +42,22 @@ export default class MicroSurface extends React.Component<Props, State> {
 
             const c = Vector2D.From(a.x, a.y).add(b).div(2)
             const d = Vector2D.From(b.x, b.y).sub(a)
+            const n = Vector2D.From(-d.y, d.x).normalized
+            const r = reflect2D(dir, n)
 
             arrows.push(
                 <Arrow l={3} model={new Line2D({
+                    a : c.sub(dir.mul(15)),
+                    b : c,
+                })}/>,
+                <Arrow l={3} model={new Line2D({
                     a : c,
-                    b : c.add(Vector2D.From(-d.y, d.x).normalized.mul(-15)),
-                })}/>
+                    b : c.add(r.mul(15)),
+                })}/>,
+                // <Arrow l={3} model={new Line2D({
+                //     a : c,
+                //     b : c.add(n.mul(-15)),
+                // })}/>,
             )
         }
 
@@ -81,8 +92,8 @@ export default class MicroSurface extends React.Component<Props, State> {
                         `}/>
                     </pattern>
                     <path d={path} fill={`url(#${stripes})`}/>
-                    {arrows}
                     {lines}
+                    {arrows}
                 </svg>
             </figure>
         )

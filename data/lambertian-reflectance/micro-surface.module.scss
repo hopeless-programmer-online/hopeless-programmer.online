@@ -1,7 +1,7 @@
 figure.container {
     > svg {
-        width: 300px;
-        height: 300px;
+        width: 500px;
+        height: 500px;
         background-color: rgb(30, 30, 30);
 
         > pattern {
@@ -11,7 +11,7 @@ figure.container {
         }
         > line {
             stroke: rgb(212, 212, 212);
-            stroke-width: 1px;
+            stroke-width: 0.5px;
             stroke-linecap: round;
         }
         > line.arrow {
