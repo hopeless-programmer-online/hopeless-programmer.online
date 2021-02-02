@@ -7,8 +7,11 @@ export default article(`Віддзеркалення вектора. `, {}, ...[
         paragraph(...[
             sentence(``),
         ]),
+        // illustration(``, tex(r`
+        //     \vec{a'} = 2 proj(\vec{a},\vec{b}) - \vec{a} = 2\vec{b}\frac{(\vec{a},\vec{b})}{\vec{b}^2} - \vec{a}
+        // `)),
         illustration(``, tex(r`
-            \vec{a'} = 2 proj(\vec{a},\vec{b}) - \vec{a} = 2\vec{b}\frac{(\vec{a},\vec{b})}{\vec{b}^2} - \vec{a}
+            \vec{a'}_{\vec{b}} = \vec{a} - 2\vec{b}\frac{(\vec{a},\vec{b})}{\vec{b}^2}
         `)),
     ]),
 ])
