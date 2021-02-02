@@ -5,6 +5,13 @@ import Circle from './circle-2d';
 export type Data = { a : PointData, b : PointData }
 
 export default class Line2D {
+    public static From(x1 : number, y1 : number, x2 : number, y2 : number) {
+        return new Line2D({
+            a : { x : x1, y : y1 },
+            b : { x : x2, y : y2 },
+        })
+    }
+
     readonly change = new VoidSyncEvent
     private _a : Circle
     private _b : Circle
@@ -38,6 +45,14 @@ export default class Line2D {
     }
     public get b() {
         return this._b
+    }
+    public get d() {
+        return this.b.p.sub(this.a)
+    }
+    public get angle() {
+        const { d } = this
+
+        return Math.atan2(d.x, d.y)
     }
 
     public clone() {

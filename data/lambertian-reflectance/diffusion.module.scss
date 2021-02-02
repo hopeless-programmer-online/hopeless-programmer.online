@@ -1,0 +1,41 @@
+figure.container {
+    > svg {
+        width: 300px;
+        height: 300px;
+        background-color: rgb(30, 30, 30);
+
+        > pattern {
+            > path {
+                fill: rgb(212, 212, 212);
+            }
+        }
+        > rect {
+            // fill: repeating-linear-gradient(
+            //     45deg,
+            //     #606dbc,
+            //     #606dbc 10px,
+            //     #465298 10px,
+            //     #465298 20px
+            // );
+        }
+        > line {
+            stroke: rgb(212, 212, 212);
+            stroke-width: 2px;
+            stroke-linecap: round;
+        }
+        > line.arrow {
+            stroke: crimson;
+        }
+        > circle {
+            fill: transparent;
+            stroke-width: 1px;
+            stroke-dasharray: 2 1;
+            stroke: crimson;
+
+            &:hover {
+                cursor: pointer;
+                stroke-dasharray: none;
+            }
+        }
+    }
+}

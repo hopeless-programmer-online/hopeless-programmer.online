@@ -1,5 +1,6 @@
 import { illustration, paragraph, sentence, link, section, article, note, list, ref, fig, neg, kw, cm, cpp, c, f, v, lt, js, emp, code, cs } from "../classes/shortcuts"
 import CosineLaw from "./lambertian-reflectance/cosine-law"
+import Diffusion from "./lambertian-reflectance/diffusion"
 import DirectAndReflectedLight from "./lambertian-reflectance/direct-and-reflected-light"
 
 const model = `https://uk.wikipedia.org/wiki/%D0%9B%D0%B0%D0%BC%D0%B1%D0%B5%D1%80%D1%82%D0%BE%D0%B2%D0%B5_%D0%B2%D1%96%D0%B4%D0%B1%D0%B8%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F`
@@ -28,19 +29,23 @@ export default article([ `Модель освітлення Ламберта.` ]
             sentence(`Вона описує взаємодію шорстких поверхонь зі світлом: скільки світла і в якому напрямку такі поверхні відбивають. `),
             sentence(`Ця модель найточніше підходить для матеріалів, що добре розсіюють світло і яскравість яких не залежить від нахилу відносно спостерігача. `),
             sentence(`Зокрема, ними є папір, гіпс, необроблене дерево та `, link(`спектралон`, spectralon), `. `),
+            sentence(`Не зважаючи на те що модель Ламберта була сформована ${age} років тому, вона й досі знаходить своє застосування в областях комп'ютерної графіки та комп'ютерного зору. `),
+            sentence(``),
         ]),
         paragraph(...[
             sentence(`В основі моделі Ламберта лежать дві прості ідеї: розсіювання світла та залежність його інтенсивності від кута падіння. `),
             sentence(`На противагу дзеркальній моделі, за якої світловий потік відбивається під тим же кутом, під яким і падає, модель Ламберта передбачає ідеальне розсіювання. `),
-            sentence(`Весь світловий потік що потрапляє на поверхню рівномірно розсіюється у всіх можливих напрямках, тому з будь якої точки огляду поверхня буде виглядати однаково. `),
+            sentence(`Весь світловий потік що потрапляє на поверхню рівномірно розсіюється у всіх можливих напрямках. `),
+            sentence(`Тому з будь якої точки огляду поверхня буде виглядати однаково, на відміну від того ж дзеркала, зображення на якому буде змінюватись разом з ракурсом. `),
         ]),
+        illustration('', Diffusion),
         paragraph(...[
             sentence(`Друга ідея полягає в тому, що зі збільшенням кута між світлом та поверхнею зменшується його інтенсивність. `),
             sentence(``),
             sentence(``),
             sentence(``),
         ]),
-        illustration('', CosineLaw),
+        // illustration('', CosineLaw),
         paragraph(...[
             sentence(``),
             sentence(``),
