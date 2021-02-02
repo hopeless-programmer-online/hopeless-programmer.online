@@ -2,6 +2,7 @@ import { illustration, paragraph, sentence, link, section, article, note, list, 
 import CosineLaw from "./lambertian-reflectance/cosine-law"
 import ReflectionDiffusion from "./lambertian-reflectance/reflection-diffusion"
 import DirectAndReflectedLight from "./lambertian-reflectance/direct-and-reflected-light"
+import MicroSurface from "./lambertian-reflectance/micro-surface"
 
 const r = String.raw
 const model = `https://uk.wikipedia.org/wiki/%D0%9B%D0%B0%D0%BC%D0%B1%D0%B5%D1%80%D1%82%D0%BE%D0%B2%D0%B5_%D0%B2%D1%96%D0%B4%D0%B1%D0%B8%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F`
@@ -57,6 +58,7 @@ export default article([ `Модель освітлення Ламберта.` ]
             sentence(`Кожна така грань може відбивати світло як дзеркало, але за рахунок рівномірного розподілу світловий потік врешті буде розсіяний у всіх напрямках. `),
         ]),
         // додати ілюстрацію розсіювання мікрогранями
+        illustration(``, MicroSurface),
         paragraph(...[
             sentence(`Модель відбиття Ламберта не передбачає ні падіння світла з-під поверхні, ні його відбиття під поверхню. `),
             sentence(`Таким чином, множина всіх можливих напрямків обмежується одиничною півсферою `, Om, ` над поверхнею і її площею, яка становить `, tex(r`2\pi`), ` `, link(`стерадіан`, steradian), ` (далі ср). `),
@@ -72,7 +74,7 @@ export default article([ `Модель освітлення Ламберта.` ]
             sentence(``),
             sentence(``),
         ]),
-        illustration('', CosineLaw),
+        // illustration('', CosineLaw),
         paragraph(...[
             sentence(``),
             sentence(``),
