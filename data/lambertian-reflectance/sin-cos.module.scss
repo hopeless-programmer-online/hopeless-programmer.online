@@ -1,0 +1,113 @@
+figure.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    margin: 0;
+
+    > svg {
+        margin: 2pt;
+        width: 500px;
+        height: 500px;
+        background-color: rgb(30, 30, 30);
+
+        > circle.grid {
+            fill: transparent;
+            stroke-width: 0.5px;
+            stroke-linecap: round;
+            stroke: crimson;
+            stroke-dasharray: 3 2;
+        }
+        > line.grid {
+            stroke-width: 0.5px;
+            stroke-linecap: round;
+            stroke: crimson;
+            stroke-dasharray: 3 2;
+        }
+        > line.arrow {
+            stroke-width: 0.5px;
+            stroke-linecap: round;
+            stroke: crimson;
+        }
+        > line.one {
+            stroke-width: 0.5px;
+            stroke-linecap: round;
+            stroke: rgb(133, 133, 133);
+            stroke-dasharray: 2 1;
+        }
+        > text.x {
+            font-size: 5pt;
+            fill: rgb(212, 212, 212);
+            text-anchor: end;
+            dominant-baseline: text-before-edge;
+        }
+        > text.x1 {
+            font-size: 5pt;
+            fill: rgb(133, 133, 133);
+            text-anchor: start;
+            dominant-baseline: text-before-edge;
+        }
+        > text.y {
+            font-size: 5pt;
+            fill: rgb(212, 212, 212);
+            text-anchor: start;
+            dominant-baseline: text-before-edge;
+        }
+        > text.y1 {
+            font-size: 5pt;
+            fill: rgb(133, 133, 133);
+            text-anchor: start;
+            dominant-baseline: text-after-edge;
+        }
+        > text.coordinates {
+            font-size: 4pt;
+            fill: white;
+            stroke-width: 0.1px;
+            stroke: rgb(30, 30, 30);
+            text-anchor: start;
+            dominant-baseline: middle;
+        }
+        > line.plane {
+            stroke-width: 2px;
+            stroke-linecap: round;
+            stroke: rgb(212, 212, 212);
+        }
+        > line.projection {
+            stroke-width: 0.5px;
+            stroke-linecap: round;
+            stroke: rgb(212, 212, 212);
+            stroke-dasharray: 3 2;
+        }
+        > path {
+            fill: transparent;
+            stroke-width: 1px;
+            stroke-linecap: round;
+            stroke: rgb(212, 212, 212);
+            stroke-dasharray: 3 2;
+        }
+        > text.angle {
+            font-size: 4pt;
+            fill: white;
+            stroke-width: 0.1px;
+            stroke: rgb(30, 30, 30);
+            text-anchor: middle;
+            dominant-baseline: middle;
+        }
+        > text.sin {
+            font-size: 4pt;
+            fill: white;
+            stroke-width: 0.1px;
+            stroke: rgb(30, 30, 30);
+            text-anchor: middle;
+            dominant-baseline: text-after-edge;
+        }
+        > text.cos {
+            font-size: 4pt;
+            fill: white;
+            stroke-width: 0.1px;
+            stroke: rgb(30, 30, 30);
+            text-anchor: start;
+            dominant-baseline: middle;
+        }
+    }
+}

@@ -4,6 +4,7 @@ import ReflectionDiffusion from "./lambertian-reflectance/reflection-diffusion"
 import DirectAndReflectedLight from "./lambertian-reflectance/direct-and-reflected-light"
 import MicroSurface from "./lambertian-reflectance/micro-surface"
 import Hemisphere from "./lambertian-reflectance/hemisphere"
+import SinCos from "./lambertian-reflectance/sin-cos"
 
 const r = String.raw
 const model = `https://uk.wikipedia.org/wiki/%D0%9B%D0%B0%D0%BC%D0%B1%D0%B5%D1%80%D1%82%D0%BE%D0%B2%D0%B5_%D0%B2%D1%96%D0%B4%D0%B1%D0%B8%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F`
@@ -31,7 +32,14 @@ const om_ = tex(r`\vec{\omega}`)
 const n = tex(r`\vec{n}`)
 
 const reflection_diffusion = illustration('', ReflectionDiffusion)
-const cosine_law = illustration('', CosineLaw)
+const cosine_law = illustration(
+    paragraph(...[
+        sentence(`Візуалізація повороту площини в полі зору камери, та повороту самої камери відносно площини. `),
+        sentence(`В обох випадках площина буде мати однаковий вигляд і розмір на екрані, який буде залежати лише від кута між векторами: напрямком на камеру `, tex(r`\vec{v}`), ` та напрямком поверхні `, tex(r`\vec{n}`), `. `),
+    ]),
+    CosineLaw,
+)
+const sinCos = illustration('', SinCos)
 
 export default article([ `Модель освітлення Ламберта.` ], {}, ...[
     section(`Що таке модель відбиття Ламберта? `, ...[
@@ -92,14 +100,17 @@ export default article([ `Модель освітлення Ламберта.` ]
         ]),
         paragraph(...[
             sentence(`Важливо розуміти яким чином в рівнянні з'являється косинус кута. `),
-            sentence(`При зміні нахилу поверхні відносно спостерігача насправді не важливо хто обертається: поверхня чи спостерігач навколо неї (див. `, /* cosine_law, */ `). `),
+            sentence(`При зміні нахилу поверхні відносно спостерігача насправді не важливо хто обертається: поверхня чи спостерігач навколо неї (див. `, cosine_law, `). `),
             sentence(`Відповідно, достатньо знайти формулу яка б описувала площину що обертається в полі зору камери. `),
-            sentence(`Оскільки при повороті відстані між вершинами об'єкту не змінюються ми можемо описати краї площини як протилежні точки на одиничному колі. `),
-            sentence(`Самі ж точки на колі описуються синусом і косинусом кута а вибір між ними залежить від того відносно чого ми вимірюємо кути. `),
-            sentence(`Ми використовуватимемо косинус тому, що для нульового кута він буде давати максимальне значення - одиницю, а для кута 90° - нуль. `),
         ]),
         cosine_law,
+        paragraph(...[
+            sentence(`Оскільки при повороті відстані між вершинами об'єкту не змінюються ми можемо описати краї площини як протилежні точки на одиничному колі (див. `, sinCos, `). `),
+            sentence(`Самі ж точки на колі описуються синусом і косинусом кута а вибір між ними залежить від того як і відносно чого ми вимірюємо кути: одним словом, від погодження системи координат. `),
+            sentence(`Ми використовуватимемо косинус тому, що для нульового кута він буде давати максимальне значення - одиницю, а для кута 90° - нуль. `),
+        ]),
         // @todo: sin/cos
+        sinCos,
         paragraph(...[
             sentence(``),
             sentence(``),
