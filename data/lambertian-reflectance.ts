@@ -1,5 +1,5 @@
 import { illustration, paragraph, sentence, link, section, article, note, list, ref, fig, neg, kw, cm, cpp, c, f, v, lt, js, emp, code, cs, tex } from "../classes/shortcuts"
-import CosineLaw from "./lambertian-reflectance/cosine-law"
+import Rotation from "./lambertian-reflectance/rotation"
 import ReflectionDiffusion from "./lambertian-reflectance/reflection-diffusion"
 import DirectAndReflectedLight from "./lambertian-reflectance/direct-and-reflected-light"
 import MicroSurface from "./lambertian-reflectance/micro-surface"
@@ -38,7 +38,7 @@ const cosine_law = illustration(
         sentence(`Візуалізація повороту площини в полі зору камери, та повороту самої камери відносно площини. `),
         sentence(`В обох випадках площина буде мати однаковий вигляд і розмір на екрані, який буде залежати лише від кута між векторами: напрямком на камеру `, tex(r`\vec{v}`), ` та напрямком поверхні `, tex(r`\vec{n}`), `. `),
     ]),
-    CosineLaw,
+    Rotation,
 )
 const sinCos = illustration('', SinCos)
 
@@ -67,7 +67,8 @@ export default article([ `Модель освітлення Ламберта.` ]
         paragraph(...[
             sentence(`Такий характер розсіювання світла можна пояснити формою поверхні на мікроскопічному рівні. `),
             sentence(`Деякі більш пізні моделі, такі як модель `, link(`Орена-Наяра`, oren_nayar), ` або `, link(`Кука-Торенса`, cook_torrance), ` інтерпретують макроскопічну поверхню як набір мікроскопічних граней (див. `, microSurface, `). `),
-            sentence(`Кожна така грань може мати власну орієнтацію і вносити свій вклад в освітлення навіть залишаючись невидимою для неозброєного ока. `),
+            sentence(`Тобто навіть якщо поверхня здається нам рівною на одному масштабі, вона може містити безліч нерівностей при його збільшенні. `),
+            sentence(`Важливо, що кожна така грань може мати власну орієнтацію і вносити свій вклад в освітлення навіть залишаючись невидимою для неозброєного ока. `),
             sentence(`Можна вважати, що у випадку моделі Ламберта грані орієнтовані випадковим чином, причому їх напрямки розподілені рівномірно. `),
             sentence(`Кожна така грань може відбивати світло як дзеркало, але за рахунок рівномірного розподілу світловий потік врешті буде розсіяний у всіх напрямках. `),
         ]),

@@ -1,6 +1,6 @@
 import React from 'react'
 import radians from '../../classes/radians'
-import styles from './cosine-law.module.scss'
+import styles from './rotation.module.scss'
 import intersection from '../../classes/intersection-2d'
 import { BoxGeometry, Camera as ThreeCamera, Color, Mesh, MeshStandardMaterial, PerspectiveCamera, Scene as ThreeScene, WebGLRenderer } from 'three'
 
@@ -9,7 +9,7 @@ const { sin, cos, PI } = Math
 type Props = {}
 type State = { a : number, rotate : boolean }
 
-export default class CosineLaw extends React.Component<Props, State> {
+export default class Rotation extends React.Component<Props, State> {
     private time = new Date
     private cancel : number | null = null
     private scene1 : Scene | null = null
