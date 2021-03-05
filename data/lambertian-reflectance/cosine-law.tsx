@@ -4,7 +4,7 @@ import styles from './cosine-law.module.scss'
 import intersection from '../../classes/intersection-2d'
 import { BoxGeometry, Camera as ThreeCamera, Color, Mesh, MeshStandardMaterial, PerspectiveCamera, Scene as ThreeScene, WebGLRenderer } from 'three'
 
-const { sin, cos, tan } = Math
+const { sin, cos, PI } = Math
 
 type Props = {}
 type State = { a : number, rotate : boolean }
@@ -50,9 +50,15 @@ export default class CosineLaw extends React.Component<Props, State> {
         this.setState({ rotate })
     }
     private handleCanvas1 = (canvas : HTMLCanvasElement) => {
+        // workaround for next.js hot update
+        if (!canvas) return
+
         this.scene1 = new Scene(canvas)
     }
     private handleCanvas2 = (canvas : HTMLCanvasElement) => {
+        // workaround for next.js hot update
+        if (!canvas) return
+
         this.scene2 = new Scene(canvas)
     }
 
@@ -141,11 +147,37 @@ type PlaneProps = { x : number, y : number, a? : number, s : number }
 type CameraProps = { x : number, y : number, a? : number, f : number, p : PlaneProps }
 
 function Plane({ x, y, a = 0, s } : PlaneProps) {
+    const s2 = s/2
+    const b = a + PI/2
+    const n = 20
+    const c1 = b + PI + PI/4
+    const c2 = b + PI - PI/4
+    const d = n/4
+
     return (
-        <line className={styles.plane}
-            x1={x - cos(a) * s/2} y1={y - sin(a) * s/2}
-            x2={x + cos(a) * s/2} y2={y + sin(a) * s/2}
-        />
+        <>
+            <line className={styles.plane}
+                x1={x - cos(a) * s2} y1={y - sin(a) * s2}
+                x2={x + cos(a) * s2} y2={y + sin(a) * s2}
+            />
+            <line className={styles.normal}
+                x1={x}              y1={y}
+                x2={x + cos(b) * n} y2={y + sin(b) * n}
+            />
+            <line className={styles.normal}
+                x1={x + cos(b) * n}               y1={y + sin(b) * n}
+                x2={x + cos(b) * n + cos(c1) * d} y2={y + sin(b) * n + sin(c1) * d}
+            />
+            <line className={styles.normal}
+                x1={x + cos(b) * n}               y1={y + sin(b) * n}
+                x2={x + cos(b) * n + cos(c2) * d} y2={y + sin(b) * n + sin(c2) * d}
+            />
+            <text
+                x={x + cos(b) * n * 1.5} y={y + sin(b) * n * 1.5}
+            >
+                n
+            </text>
+        </>
     )
 }
 function Camera({ x, y, a = 0, f, p } : CameraProps) {
@@ -185,6 +217,12 @@ function Camera({ x, y, a = 0, f, p } : CameraProps) {
         intersection({ l : { a : { x, y }, b : rtd }, m : { a : { x : 0,   y : 100 }, b : { x : 0,   y : 0   } } }),
     ].reduce((a, x) => x && x.t > 0 && (!a || x.t < a.t) ? x : a, false)
 
+    const b = a + PI/2
+    const v = 20
+    const c1 = b + PI + PI/4
+    const c2 = b + PI - PI/4
+    const d = v/4
+
     return <>
         { lx && lx.t > 0 &&
             <line className={styles.view}
@@ -210,5 +248,22 @@ function Camera({ x, y, a = 0, f, p } : CameraProps) {
                 x2={rtx.x.x} y2={rtx.x.y}
             />
         }
+        <line className={styles.light}
+            x1={50}              y1={50}
+            x2={50 + cos(b) * v} y2={50 + sin(b) * v}
+        />
+        <line className={styles.light}
+            x1={50 + cos(b) * v}               y1={50 + sin(b) * v}
+            x2={50 + cos(b) * v + cos(c1) * d} y2={50 + sin(b) * v + sin(c1) * d}
+        />
+        <line className={styles.light}
+            x1={50 + cos(b) * v}               y1={50 + sin(b) * v}
+            x2={50 + cos(b) * v + cos(c2) * d} y2={50 + sin(b) * v + sin(c2) * d}
+        />
+        <text
+            x={50 + cos(b) * v * 1.5} y={50 + sin(b) * v * 1.5}
+        >
+            v
+        </text>
     </>
 }
