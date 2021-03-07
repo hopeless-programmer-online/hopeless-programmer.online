@@ -5,7 +5,7 @@ import intersection2D from '../../classes/intersection-2d'
 import radians from '../../classes/radians'
 import styles from './cosine-law.module.scss'
 
-const { abs, sin, cos, PI } = Math
+const { abs, sin, cos, atan2, PI } = Math
 
 type Props = {}
 type State = { a : number }
@@ -24,9 +24,31 @@ export default class CosineLaw extends React.Component<Props, State> {
 
         a += radians(60) * d
 
-        this.setState({ a })
+        // this.setState({ a })
 
         this.cancel = requestAnimationFrame(this.update)
+    }
+    private down = (event : React.MouseEvent<SVGSVGElement>) => {
+        // console.log(event.currentTarget)
+
+        const { left, top, width, height } = event.currentTarget.getBoundingClientRect()
+
+        const move = (event : MouseEvent) => {
+            const x = (event.clientX - left) / width
+            const y = (event.clientY - top) / height
+            const a = atan2(x - 0.5, 0.8 - y)
+
+            // console.log(degrees(a))
+
+            this.setState({ a })
+        }
+        const up = () => {
+            window.removeEventListener('mousemove', move)
+            window.removeEventListener('mouseup', up)
+        }
+
+        window.addEventListener('mousemove', move)
+        window.addEventListener('mouseup', up)
     }
 
     public state : State = { a : radians(30) }
@@ -121,7 +143,7 @@ export default class CosineLaw extends React.Component<Props, State> {
 
         return (
             <figure className={styles.container}>
-                <svg viewBox='0 0 100 100'>
+                <svg viewBox='0 0 100 100' onMouseDown={this.down}>
                     <pattern id={id} x="0" y="0" width="10" height="20" patternUnits="userSpaceOnUse">
                         <path d={`
                             M 9 0
@@ -287,7 +309,7 @@ export default class CosineLaw extends React.Component<Props, State> {
                                     L ${+cw2 - d} ${-d}
                                 `
                                 : `
-                                    ${0} ${-cw2/d}
+                                    ${0} ${-cw2}
                                 `
                             }
                             L ${+cw2} ${0}
@@ -300,7 +322,7 @@ export default class CosineLaw extends React.Component<Props, State> {
                                     L ${-cw2 + d} ${+d}
                                 `
                                 : `
-                                    ${0} ${+cw2/d}
+                                    ${0} ${+cw2}
                                 `
                             }
                             Z
