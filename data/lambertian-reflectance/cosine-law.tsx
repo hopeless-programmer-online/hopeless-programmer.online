@@ -33,6 +33,14 @@ export default class CosineLaw extends React.Component<Props, State> {
 
         const { left, top, width, height } = event.currentTarget.getBoundingClientRect()
 
+        const x = (event.clientX - left) / width
+        const y = (event.clientY - top) / height
+        const a = atan2(x - 0.5, 0.8 - y)
+
+        // console.log(degrees(a))
+
+        this.setState({ a })
+
         const move = (event : MouseEvent) => {
             const x = (event.clientX - left) / width
             const y = (event.clientY - top) / height
@@ -51,7 +59,7 @@ export default class CosineLaw extends React.Component<Props, State> {
         window.addEventListener('mouseup', up)
     }
 
-    public state : State = { a : radians(30) }
+    public state : State = { a : radians(60) }
 
     public componentDidMount() {
         this.cancel = requestAnimationFrame(this.update)
