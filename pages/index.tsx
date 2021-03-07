@@ -8,6 +8,7 @@ import keywords from '../data/keywords'
 import segregation from '../data/segregation'
 import symmetry from '../data/symmetry'
 import visitor from '../data/visitor'
+import linesIntersection from '../data/lines-intersection'
 
 export default class Index extends React.Component {
     public render() {
@@ -20,6 +21,7 @@ export default class Index extends React.Component {
                 <ArticleLink model={symmetry} href='./articles/symmetry'/>
                 <ArticleLink model={visitor} href='./articles/visitor'/>
                 <ArticleLink model={virtualOverlapping} href='./articles/virtual-overlapping'/>
+                <ArticleLink model={linesIntersection} href='./articles/lines-intersection'/>
             </Page>
         )
     }
