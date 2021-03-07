@@ -5,6 +5,7 @@ import DirectAndReflectedLight from "./lambertian-reflectance/direct-and-reflect
 import MicroSurface from "./lambertian-reflectance/micro-surface"
 import Hemisphere from "./lambertian-reflectance/hemisphere"
 import SinCos from "./lambertian-reflectance/sin-cos"
+import CosineLaw from "./lambertian-reflectance/cosine-law"
 
 const r = String.raw
 const model = `https://uk.wikipedia.org/wiki/%D0%9B%D0%B0%D0%BC%D0%B1%D0%B5%D1%80%D1%82%D0%BE%D0%B2%D0%B5_%D0%B2%D1%96%D0%B4%D0%B1%D0%B8%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F`
@@ -101,6 +102,7 @@ export default article([ `Модель освітлення Ламберта.` ]
             sentence(`Таким чином, хоч спостерігач зможе охопити поглядом більшу територію, частка яку займає конкретна поверхня на загальній площі буде зменшуватись. `),
         ]),
         // @todo: додати ілюстрацію з косинусом
+        illustration('', CosineLaw),
         paragraph(...[
             sentence(`Видима кількість поверхні пропорційна косинусу кута між напрямком погляду та перпендикуляром до цієї поверхні - нормаллю. `),
             sentence(`Якщо напрямок під яким спостерігають поверхню позначити `, om_, ` а нормаль `, n, `, то спостережувана площа буде пропорційна до `, tex(r`cos(\widehat{\vec{\omega} \vec{n}})`), `, де `, tex(r`\widehat{\vec{\omega} \vec{n}}`), ` це кут між вказаними векторами. `),

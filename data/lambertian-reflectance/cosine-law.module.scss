@@ -1,0 +1,60 @@
+figure.container {
+    > svg {
+        width: 300px;
+        height: 300px;
+        background-color: rgb(30, 30, 30);
+
+        > pattern {
+            > path {
+                fill: white;
+            }
+        }
+        > rect.back {
+            fill: rgb(61, 62, 61);
+        }
+        > line.origin {
+            stroke: rgb(61, 62, 61);
+            stroke-width: 0.5px;
+            stroke-dasharray: 3 2;
+        }
+        > rect.front {
+            fill: rgb(212, 212, 212);
+        }
+        > line.back {
+            stroke: rgb(61, 62, 61);
+            stroke-width: 1px;
+        }
+        > line.front {
+            stroke: rgb(212, 212, 212);
+            stroke-width: 1px;
+        }
+        > line.ray {
+            stroke: crimson;
+            stroke-width: 1px;
+        }
+        > line.projection {
+            stroke: crimson;
+            stroke-width: 0.5px;
+            stroke-dasharray: 3 2;
+        }
+        > path.projection {
+            fill: transparent;
+            stroke: crimson;
+            stroke-width: 0.5px;
+            stroke-dasharray: 3 2;
+        }
+        > path.area {
+            fill: adjust-color($color: crimson, $alpha: -0.8);
+            stroke: none;
+        }
+        > path.white {
+            fill: rgb(212, 212, 212);
+            stroke: none;
+        }
+        > line.area {
+            stroke: crimson;
+            stroke-width: 1px;
+            stroke-linecap: round;
+        }
+    }
+}
