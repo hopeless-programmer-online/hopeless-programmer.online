@@ -1,7 +1,7 @@
 import React from 'react'
 import radians from '../../classes/radians'
 import styles from './bunny.module.scss'
-import { BoxGeometry, Camera as ThreeCamera, Color, Mesh, MeshStandardMaterial, PerspectiveCamera, PointLight, Scene as ThreeScene, WebGLRenderer } from 'three'
+import { BoxGeometry, Camera as ThreeCamera, Color, Mesh, MeshStandardMaterial, PerspectiveCamera, PointLight, Scene as ThreeScene, ShaderMaterial, WebGLRenderer } from 'three'
 
 type Props = {}
 type State = {}
@@ -22,7 +22,7 @@ export default class Bunny extends React.Component<Props, State> {
 
         const scene = new ThreeScene
 
-        scene.background = new Color('rgb(30, 30, 30)')
+        scene.background = new Color('rgb(0, 0, 0)')
 
         const geometry = await loader.loadAsync('/bunny.ply')
 
@@ -31,7 +31,29 @@ export default class Bunny extends React.Component<Props, State> {
 
         const object = new Mesh(
             geometry,
-            new MeshStandardMaterial({ color : 'white' }),
+            // new MeshStandardMaterial({ color : 'white' }),
+            new ShaderMaterial({
+                vertexShader : `
+                    varying vec3 fNormal;
+
+                    void main() {
+                        fNormal = mat3(modelMatrix) * normal;
+
+                        gl_Position = projectionMatrix * (modelViewMatrix * vec4(position, 1));
+                    }
+                `,
+                fragmentShader : `
+                    varying vec3 fNormal;
+
+                    void main() {
+                        vec3 light = normalize(vec3(30, 50, 20));
+                        vec3 normal = normalize(fNormal);
+                        float i = clamp( dot(normal, light), 0.0, 1.0);
+
+                        gl_FragColor = vec4(vec3(i), 1);
+                    }
+                `,
+            })
         )
 
         object.scale.set(150, 150, 150)
@@ -74,7 +96,9 @@ export default class Bunny extends React.Component<Props, State> {
     }
     public render() {
         return (
-            <canvas className={styles.frame} ref={this.handleCanvas}/>
+            <figure>
+                <canvas className={styles.frame} ref={this.handleCanvas}/>
+            </figure>
         )
     }
 }
