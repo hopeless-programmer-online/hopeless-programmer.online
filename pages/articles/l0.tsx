@@ -6,7 +6,7 @@ import model from '../../data/l0'
 export default class L0 extends React.Component {
     public render() {
         return (
-            <Page>
+            <Page title='Мова програмування L^0'>
                 <Article model={model}/>
             </Page>
         )
