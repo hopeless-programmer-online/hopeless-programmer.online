@@ -297,3 +297,6 @@ export function lt(text : string) {
 
     return new LiteralLexeme({ text, type })
 }
+export function lts(text : string) {
+    return new LiteralLexeme({ text, type : 'string' })
+}
