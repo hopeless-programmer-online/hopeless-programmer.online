@@ -23,7 +23,7 @@ export default class IllustrationComponent extends React.Component<Props> {
                     <figure id={id}>
                         {
                             target instanceof Code ? <CodeComponent model={target}/> :
-                            target instanceof TeXPhrase ? <TeXPhraseComponent model={target}/> :
+                            target instanceof TeXPhrase ? <TeXPhraseComponent model={target} block/> :
                             target instanceof Function && target.prototype instanceof React.Component ? (() => {
                                 const Target = target
 
