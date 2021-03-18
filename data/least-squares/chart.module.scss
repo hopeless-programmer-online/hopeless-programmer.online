@@ -1,0 +1,20 @@
+svg.chart {
+    width: 400px;
+    height: 400px;
+    background-color: rgb(30, 30, 30);
+    border-radius: 8pt;
+
+    > line.axis {
+        stroke: crimson;
+        stroke-width: 0.5px;
+    }
+    > line.line {
+        stroke: white;
+        stroke-width: 1px;
+        stroke-linecap: round;
+    }
+    > circle {
+        fill: crimson;
+        stroke: transparent;
+    }
+}

@@ -12,6 +12,7 @@ import cg3 from '../data/cg-3'
 import stereo from '../data/photometric-stereo'
 import lambert from '../data/lambertian-reflectance'
 import trilateration from '../data/trilateration'
+import leastSquares from '../data/least-squares'
 
 export default class WIP extends React.Component {
     public render() {
@@ -28,6 +29,7 @@ export default class WIP extends React.Component {
                 <ArticleLink model={stereo} href='./articles/photometric-stereo'/>
                 <ArticleLink model={lambert} href='./articles/lambertian-reflectance'/>
                 <ArticleLink model={trilateration} href='./articles/trilateration'/>
+                <ArticleLink model={leastSquares} href='./articles/least-squares'/>
             </Page>
         )
     }
