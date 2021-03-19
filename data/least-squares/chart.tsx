@@ -1,11 +1,11 @@
 import React from 'react'
-import { matrix, inv, multiply as mul } from 'mathjs'
+import { matrix, inv, multiply as mul, transpose } from 'mathjs'
 import styles from './chart.module.scss'
 
 export default class Chart extends React.Component {
     private points = Array.from(Array(100).keys()).map(i => ({
         x : i / 100 * 100,
-        y : i / 100 * 100 + (Math.random() * 2 - 1) * 15,
+        y : 20 + i / 100 * 60 + (Math.random() * 2 - 1) * 15,
     }))
 
     public render() {
@@ -58,8 +58,8 @@ export default class Chart extends React.Component {
                 }
                 <line
                     className={styles.line}
-                    x1={0}   y1={100 - (a + b * 0)}
-                    x2={100} y2={100 - (a + b * 100)}
+                    x1={0}   y1={100 - (a * 0 + b)}
+                    x2={100} y2={100 - (a * 100 + b)}
                 />
             </svg>
         )
@@ -82,14 +82,10 @@ function leastSquares(points : Array<{ x : number, y : number }>) {
         ],
     ])
     const c = matrix([
-        [
-            // \sum y_i x_i
-            points.reduce((a, { x, y }) => a + y*x, 0),
-        ],
-        [
-            // \sum x_i
-            points.reduce((a, { y }) => a + y, 0),
-        ],
+        // \sum y_i x_i
+        points.reduce((a, { x, y }) => a + y*x, 0),
+        // \sum x_i
+        points.reduce((a, { y }) => a + y, 0),
     ])
 
     const [ a, b ] = mul(inv(A), c).toArray() as number[]
