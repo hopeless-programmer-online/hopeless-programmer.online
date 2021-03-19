@@ -1,5 +1,7 @@
 import React from 'react'
-import { illustration, paragraph, sentence, link, section, article, note, list, ref, fig, neg, kw, cm, cpp, c, f, v, lt, js, emp, code, cs } from "../classes/shortcuts";
+import { illustration, paragraph, sentence, link, section, article, note, list, ref, fig, neg, kw, cm, cpp, c, f, v, lt, js, emp, code, cs, tex } from "../classes/shortcuts";
+
+const r = String.raw
 
 const stereo = `https://en.wikipedia.org/wiki/Photometric_stereo`
 
@@ -41,6 +43,108 @@ export default article([ `Відновлення властивостей пов
             sentence(``),
             sentence(``),
         ]),
+    ]),
+    section(`Метод найменших квадратів. `, ...[
+        illustration(``, tex(r`
+            E(\vec{x}) = \sum_{n=0}^{N} (i_n - \vec{l_n} \cdot \vec{x})^2
+        `)),
+        illustration(``, tex(r`
+            \begin{matrix}
+                \dfrac{\partial E}{\partial \vec{x}_1} &= -2 \displaystyle \sum_{n=0}^{N} (i_n - \vec{l_n} \cdot \vec{x}) \vec{l_n}_1
+                \\
+                \dfrac{\partial E}{\partial \vec{x}_2} &= -2 \displaystyle \sum_{n=0}^{N} (i_n - \vec{l_n} \cdot \vec{x}) \vec{l_n}_2
+                \\
+                \dfrac{\partial E}{\partial \vec{x}_3} &= -2 \displaystyle \sum_{n=0}^{N} (i_n - \vec{l_n} \cdot \vec{x}) \vec{l_n}_3
+            \end{matrix}
+        `)),
+        illustration(``, tex(r`
+            \begin{matrix}
+                \dfrac{\partial E}{\partial \vec{x}_1} = 0 \implies
+                    \vec{x}_1 \displaystyle \sum_{n=0}^{N} \vec{l_n}^2_1
+                    +
+                    \vec{x}_2 \displaystyle \sum_{n=0}^{N} \vec{l_n}_1 \vec{l_n}_2
+                    +
+                    \vec{x}_3 \displaystyle \sum_{n=0}^{N} \vec{l_n}_1 \vec{l_n}_3
+                    =
+                    \displaystyle \sum_{n=0}^{N} i_n \vec{l_n}_1
+                \\
+                \dfrac{\partial E}{\partial \vec{x}_2} = 0 \implies
+                    \vec{x}_1 \displaystyle \sum_{n=0}^{N} \vec{l_n}_1 \vec{l_n}_2
+                    +
+                    \vec{x}_2 \displaystyle \sum_{n=0}^{N} \vec{l_n}_2^2
+                    +
+                    \vec{x}_3 \displaystyle \sum_{n=0}^{N} \vec{l_n}_2 \vec{l_n}_3
+                    =
+                    \displaystyle \sum_{n=0}^{N} i_n \vec{l_n}_2
+                \\
+                \dfrac{\partial E}{\partial \vec{x}_3} = 0 \implies
+                    \vec{x}_1 \displaystyle \sum_{n=0}^{N} \vec{l_n}_1 \vec{l_n}_3
+                    +
+                    \vec{x}_2 \displaystyle \sum_{n=0}^{N} \vec{l_n}_2 \vec{l_n}_3
+                    +
+                    \vec{x}_3 \displaystyle \sum_{n=0}^{N} \vec{l_n}_3^2
+                    =
+                    \displaystyle \sum_{n=0}^{N} i_n \vec{l_n}_3
+            \end{matrix}
+        `)),
+        illustration(``, tex(r`
+            \begin{pmatrix}
+                \displaystyle \sum_{n=0}^{N} \vec{l_n}^2_1
+                &&
+                \displaystyle \sum_{n=0}^{N} \vec{l_n}_1 \vec{l_n}_2
+                &&
+                \displaystyle \sum_{n=0}^{N} \vec{l_n}_1 \vec{l_n}_3
+                \\
+                \displaystyle \sum_{n=0}^{N} \vec{l_n}_1 \vec{l_n}_2
+                &&
+                \displaystyle \sum_{n=0}^{N} \vec{l_n}_2^2
+                &&
+                \displaystyle \sum_{n=0}^{N} \vec{l_n}_2 \vec{l_n}_3
+                \\
+                \displaystyle \sum_{n=0}^{N} \vec{l_n}_1 \vec{l_n}_3
+                &&
+                \displaystyle \sum_{n=0}^{N} \vec{l_n}_2 \vec{l_n}_3
+                &&
+                \displaystyle \sum_{n=0}^{N} \vec{l_n}_3^2
+            \end{pmatrix}
+            \vec{x} =
+            \begin{pmatrix}
+                \displaystyle \sum_{n=0}^{N} i_n \vec{l_n}_1
+                \\
+                \displaystyle \sum_{n=0}^{N} i_n \vec{l_n}_2
+                \\
+                \displaystyle \sum_{n=0}^{N} i_n \vec{l_n}_3
+            \end{pmatrix}
+        `)),
+        illustration(``, tex(r`
+            \begin{cases}
+                L =
+                \begin{pmatrix}
+                    \vec{l_1}
+                    \\
+                    \vec{l_2}
+                    \\
+                    ...
+                    \\
+                    \vec{l_N}
+                \end{pmatrix}
+                \\
+                i =
+                \begin{pmatrix}
+                    i_1
+                    \\
+                    i_2
+                    \\
+                    ...
+                    \\
+                    i_N
+                \end{pmatrix}
+                \\
+                ( L \times L^{T} ) \vec{x} = L^{T} i
+            \end{cases}
+        `)),
+        illustration(``, tex(r`
+        `)),
     ]),
     section(``, ...[
         paragraph(...[
