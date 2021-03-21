@@ -1,8 +1,10 @@
 import React from 'react'
 import Code from '../classes/code'
+import CodeComparison from '../classes/code-comparison'
 import Illustration from '../classes/illustration'
 import TeXPhrase from '../classes/tex-phrase'
 import CodeComponent from './code'
+import CodeComparisonComponent from './code-comparison'
 import styles from './illustration.module.scss'
 import ParagraphComponent from './paragraph'
 import Sentences from './sentences'
@@ -23,6 +25,7 @@ export default class IllustrationComponent extends React.Component<Props> {
                     <figure id={id}>
                         {
                             target instanceof Code ? <CodeComponent model={target}/> :
+                            target instanceof CodeComparison ? <CodeComparisonComponent model={target}/> :
                             target instanceof TeXPhrase ? <TeXPhraseComponent model={target} block/> :
                             target instanceof Function && target.prototype instanceof React.Component ? (() => {
                                 const Target = target

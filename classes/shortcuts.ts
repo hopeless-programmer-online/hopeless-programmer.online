@@ -31,6 +31,7 @@ import Person from "./person";
 import Quote from "./quote";
 import ArticleDetails from "./article-details";
 import persons from "../data/persons";
+import CodeComparison from "./code-comparison";
 
 function error<T>(message : string = '') : T {
     throw new Error(message)
@@ -121,6 +122,9 @@ export function toLexemes(something : LexemesLike) : Lexemes {
     ).map(toLexeme)
 
     return new Lexemes({ array })
+}
+export function comparison(left : Code, right : Code) {
+    return new CodeComparison({ left, right })
 }
 export function code(language : CodeLanguage, ...somethings : Array<LexemesLike>) {
     const lines = somethings.map(toLexemes)

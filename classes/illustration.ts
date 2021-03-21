@@ -1,11 +1,12 @@
 import Code      from "./code";
+import CodeComparison from "./code-comparison";
 import Paragraph from "./paragraph";
 import Sentences from "./sentences";
 import TeXPhrase from "./tex-phrase";
 
 type Title         = Sentences
 type Description   = Paragraph
-export type Target = Code | TeXPhrase | Function
+export type Target = Code | TeXPhrase | Function | CodeComparison
 
 export default class Illustration {
     private  __title      : Title | null

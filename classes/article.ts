@@ -7,6 +7,7 @@ import Sentences from "./sentences";
 import { toSentences } from "./shortcuts";
 import persons from '../data/persons'
 import TeXPhrase from "./tex-phrase";
+import CodeComparison from "./code-comparison";
 
 type Title = Sentences
 type Sections = Array<Section>
@@ -45,7 +46,7 @@ export default class Article {
             if (illustration._title === null) {
                 const { target } = illustration
 
-                if (target instanceof Code) {
+                if (target instanceof Code || target instanceof CodeComparison) {
                     ++codeExamples
 
                     illustration._title = toSentences(`Приклад коду №${codeExamples}`)
