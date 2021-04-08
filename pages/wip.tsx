@@ -14,6 +14,7 @@ import lambert from '../data/lambertian-reflectance'
 import trilateration from '../data/trilateration'
 import leastSquares from '../data/least-squares'
 import nonlinearStereo from '../data/nonlinear-photometric-stereo'
+import singleton from '../data/singleton'
 
 export default class WIP extends React.Component {
     public render() {
@@ -32,6 +33,7 @@ export default class WIP extends React.Component {
                 <ArticleLink model={trilateration} href='./articles/trilateration'/>
                 <ArticleLink model={leastSquares} href='./articles/least-squares'/>
                 <ArticleLink model={nonlinearStereo} href='./articles/nonlinear-photometric-stereo'/>
+                <ArticleLink model={singleton} href='./articles/singleton'/>
             </Page>
         )
     }
