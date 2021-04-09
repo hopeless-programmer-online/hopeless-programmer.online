@@ -2,7 +2,7 @@ import { illustration, paragraph, sentence, link, section, article, note, list, 
 
 const r = String.raw
 
-export default article([], {}, ...[
+export default article([ `Знаходження точки за набором відстаней до неї. `, `Трилатерація. ` ], {}, ...[
     section(``, ...[
         paragraph(...[
             sentence(``),
