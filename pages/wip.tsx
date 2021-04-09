@@ -3,6 +3,7 @@ import ArticleLink from '../components/article-link'
 import Page from '../components/page'
 import projection from '../data/vector-projection'
 import reflection from '../data/vector-reflection'
+import linePlane from '../data/line-plane-cast'
 import pointCast from '../data/sphere-point-cast'
 import lineCast from '../data/sphere-line-cast'
 import planeCast from '../data/sphere-plane-cast'
@@ -23,6 +24,7 @@ export default class WIP extends React.Component {
             <Page title='В розробці'>
                 <ArticleLink model={projection} href='./articles/vector-projection'/>
                 <ArticleLink model={reflection} href='./articles/vector-reflection'/>
+                <ArticleLink model={linePlane} href='./articles/line-plane-cast'/>
                 <ArticleLink model={pointCast} href='./articles/sphere-point-cast'/>
                 <ArticleLink model={lineCast} href='./articles/sphere-line-cast'/>
                 <ArticleLink model={planeCast} href='./articles/sphere-plane-cast'/>
