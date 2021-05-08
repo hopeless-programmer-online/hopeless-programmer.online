@@ -66,13 +66,24 @@ export default article('Нелінійне фотометричне стерео
         `)),
         illustration('', tex(r`
             \begin{cases}
-                A &= c^{\frac{2}{3}} \vec{b}^2
+                u &= c^{\frac{2}{3}} \vec{b}^2
                 \\
-                B &= 2 c^{\frac{2}{3}} (\vec{a} \cdot \vec{b})
+                v &= 2 c^{\frac{2}{3}} (\vec{a} \cdot \vec{b})
                 \\
-                C &= c^{\frac{2}{3}} \vec{a}^2
+                w &= c^{\frac{2}{3}} \vec{a}^2
                 \\
-                (\vec{a} + x\vec{b}) \cdot \vec{y} &= \sqrt{ A x^2 + B x + C }^3
+                \vec{a} \cdot \vec{y} + x \vec{b} \cdot \vec{y} &= \sqrt{ u x^2 + v x + w }^3
+            \end{cases}
+        `)),
+        illustration('', tex(r`
+            \begin{cases}
+                u_j &= c_j^{\frac{2}{3}} \vec{b}^2
+                \\
+                v_j &= 2 c_j^{\frac{2}{3}} (\vec{a_j} \cdot \vec{b})
+                \\
+                w_j &= c^{\frac{2}{3}} \vec{a_j}^2
+                \\
+                \vec{a_j} \cdot \vec{y} + x \vec{b} \cdot \vec{y} &= ( u_j x^2 + v_j x + w_j )^\frac{3}{2}
             \end{cases}
         `)),
         illustration('', Viewer),

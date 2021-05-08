@@ -1,4 +1,10 @@
-canvas.test {
-    width: 500px;
-    height: 500px;
+article.viewer {
+    > canvas {
+        width: 500px;
+        height: 500px;
+    }
+    > .line {
+        fill: transparent;
+        stroke: crimson;
+    }
 }
