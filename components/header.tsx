@@ -1,5 +1,5 @@
 import React from 'react'
-import { cpp, kw, p } from '../classes/shortcuts'
+import { cpp, js, kw, p, sen } from '../classes/shortcuts'
 import styles from './header.module.scss'
 import ParagraphComponent from './paragraph'
 
@@ -15,10 +15,25 @@ export default class Header extends React.Component {
                         <h1 className={styles.h1}>
                             Безнадійний Програміст
                         </h1>
-                        <ParagraphComponent model={p('Коли не можеш оголосити змінну ', cpp(kw('case')), ', тому що це службове слово.')}/>
+                        {captions[ floor(random() * captions.length) ]}
                     </figcaption>
                 </figure>
             </header>
         )
     }
 }
+
+const { floor, random } = Math
+
+const captions = [
+    ...[
+        ...[ 'auto', 'break', 'case', 'catch', 'char', 'class', 'const', 'continue', 'default', 'delete', 'double', 'else', 'explicit', 'new', 'public', 'return', 'this', 'virtual', 'template', 'while' ].map(keyword =>
+            cpp(kw(keyword))
+        ),
+        ...[ 'var', 'break', 'case', 'catch', 'class', 'const', 'continue', 'default', 'else', 'new', 'public', 'return', 'this', 'while', 'interface', 'abstract' ].map(keyword =>
+            js(kw(keyword))
+        ),
+    ].map(keyword =>
+        <ParagraphComponent model={p(sen('Коли не можеш оголосити змінну ', keyword, ', тому що це службове слово.'))}/>
+    ),
+]
