@@ -1,0 +1,11 @@
+article.comparison {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+
+    > section {
+        margin: 4pt;
+    }
+}

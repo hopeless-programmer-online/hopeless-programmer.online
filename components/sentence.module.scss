@@ -1,0 +1,16 @@
+@use "./tex-phrase.module.scss";
+
+.sentence {
+    border-radius: 4pt;
+
+    &:hover {
+        background-color: change-color($color: whitesmoke, $alpha : 1);
+    }
+
+    .code {
+        word-break: break-all;
+    }
+    .tex {
+        @include tex-phrase.tex;
+    }
+}

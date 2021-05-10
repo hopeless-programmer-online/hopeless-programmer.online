@@ -1,0 +1,43 @@
+.svg {
+    width            : 400pt;
+    background-color : rgb(30, 30, 30);
+    border-radius    : 16pt;
+
+    > .line {
+        stroke       : rgb(212, 212, 212);
+        stroke-width : 1;
+    }
+    > .circle {
+        fill         : crimson;
+        stroke       : rgb(212, 212, 212);
+        stroke-width : 0.5;
+        cursor       : pointer;
+
+        &:hover {
+            stroke : crimson;
+        }
+    }
+    > .intersection {
+        fill         : rgb(86, 156, 214);
+        stroke       : rgb(212, 212, 212);
+        stroke-width : 0.5;
+    }
+    > .miss {
+        stroke       : crimson;
+        stroke-width : 1;
+        stroke-dasharray: 2 1;
+    }
+    > .direction {
+        stroke       : rgba(crimson, 0.4);
+        stroke-width : 0.5;
+        stroke-dasharray: 2 2;
+    }
+    > .text {
+        font-size         : 6pt;
+        fill              : rgb(212, 212, 212);
+        stroke            : rgb(30, 30, 30);
+        stroke-width      : 0.1;
+        text-anchor       : start;
+        dominant-baseline : text-before-edge;
+    }
+}

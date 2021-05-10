@@ -1,0 +1,32 @@
+figure.container {
+    > svg {
+        width: 500px;
+        height: 500px;
+        background-color: rgb(30, 30, 30);
+
+        > pattern {
+            > path {
+                fill: rgb(212, 212, 212);
+            }
+        }
+        > line {
+            stroke: rgb(212, 212, 212);
+            stroke-width: 0.5px;
+            stroke-linecap: round;
+        }
+        > line.arrow {
+            stroke: crimson;
+        }
+        > circle {
+            fill: transparent;
+            stroke-width: 1px;
+            stroke-dasharray: 2 1;
+            stroke: crimson;
+
+            &:hover {
+                cursor: pointer;
+                stroke-dasharray: none;
+            }
+        }
+    }
+}

@@ -1,0 +1,51 @@
+@use "./typography.module.scss";
+
+.article {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    @include typography.regular;
+
+    a {
+        @include typography.link;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        @include typography.strong;
+    }
+
+    > header {
+        > h2 {
+            > span {
+                display: block;
+                text-align: center;
+            }
+        }
+    }
+    > footer {
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        align-items: stretch;
+
+        > details {
+            > dl {
+                display: grid;
+                grid-template-columns: [category] min-content [definition] auto;
+
+                > dt {
+                    @include typography.strong;
+
+                    grid-column: category;
+                }
+                > dd {
+                    grid-column: definition;
+                }
+            }
+        }
+    }
+}
