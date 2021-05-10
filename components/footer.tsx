@@ -43,8 +43,8 @@ export default class Footer extends React.Component {
                         <nav>
                             <ul>
                                 <li><AboutThisSiteBadge/></li>
-                                <li><AboutMeBadge/></li>
-                                <li><ToolsBadge/></li>
+                                {/* <li><AboutMeBadge/></li> */}
+                                {/* <li><ToolsBadge/></li> */}
                                 <li><WIPBadge/></li>
                             </ul>
                         </nav>
@@ -71,10 +71,10 @@ export default class Footer extends React.Component {
                             <ul>
                                 <li><GMailBadge/></li>
                                 <li><GithubBadge/></li>
-                                <li><FacebookBadge/></li>
+                                {/* <li><FacebookBadge/></li>
                                 <li><TwitterBadge/></li>
                                 <li><InstagramBadge/></li>
-                                <li><TelegramBadge/></li>
+                                <li><TelegramBadge/></li> */}
                             </ul>
                         </nav>
                     </li>
