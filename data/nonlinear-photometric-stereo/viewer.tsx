@@ -141,7 +141,8 @@ export default class Test extends React.Component<Props, State> {
                 }
                 <XYPlot
                     width={width}
-                    height={height}>
+                    height={height}
+                >
                     <VerticalGridLines/>
                     <HorizontalGridLines/>
                     <XAxis/>
@@ -155,9 +156,10 @@ export default class Test extends React.Component<Props, State> {
                                 stroke : ([ 'crimson', 'royalblue', 'tomato', 'gold' ])[i],
                             }}
                             data={points}
+                            // data={points.map(({ x, y }) => ({ x, y : y / x }))}
                         />)
                     }
-                    {
+                    {/* {
                         charts.slice(1).map(({ points, a }, i) => <LineSeries
                             key={i}
                             className={styles.line}
@@ -168,7 +170,27 @@ export default class Test extends React.Component<Props, State> {
                             }}
                             data={points.map(({ x, y }, j) => ({ x, y : (y - charts[i].points[j].y) / len( sub(a, charts[i].a) ) }))}
                         />)
-                    }
+                    } */}
+                    {/* {
+                        charts.slice(2).map(({ points, a }, i) => <LineSeries
+                            key={i}
+                            className={styles.line}
+                            style={{
+                                fill : 'transparent',
+                                stroke : 'violet',
+                                strokeDasharray : '2 2',
+                            }}
+                            data={points.map(({ x, y }, j) => ({ x, y : y - charts[i].points[j].y - charts[i + 1].points[j].y }))}
+                        />)
+                    } */}
+                    <LineSeries
+                        style={{
+                            fill : 'transparent',
+                            stroke : 'gray',
+                            strokeDasharray : '4 4',
+                        }}
+                        data={[ { x : min, y : 0 }, { x : max, y : 0 } ]}
+                    />
                     <LineSeries
                         style={{
                             fill : 'transparent',

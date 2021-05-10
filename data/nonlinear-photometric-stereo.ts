@@ -14,13 +14,13 @@ export default article('Нелінійне фотометричне стерео
                 \\
                 (
                     \dfrac
-                    { \vec{l} - \vec{p} }
-                    { | \vec{l} - \vec{p} | }
+                    { \vec{l_j} - \vec{p} }
+                    { | \vec{l_j} - \vec{p} | }
                     \cdot \vec{n}
                 )
                 \dfrac
                 { 1 }
-                { | \vec{l} - \vec{p} |^2 }
+                { | \vec{l_j} - \vec{p} |^2 }
                 &= i
             \end{cases}
         `)),
@@ -29,14 +29,14 @@ export default article('Нелінійне фотометричне стерео
                 \vec{p} &= \vec{o} + t\vec{d}
                 \\
                 \dfrac
-                { \vec{l} - \vec{p} }
-                { | \vec{l} - \vec{p} |^3 }
+                { \vec{l_j} - \vec{p} }
+                { | \vec{l_j} - \vec{p} |^3 }
                 \cdot \vec{n} &= i
             \end{cases}
         `)),
         illustration('', tex(r`
             \begin{cases}
-                \vec{a} &= \vec{l} + \vec{o}
+                \vec{a_j} &= \vec{l_j} - \vec{o}
                 \\
                 \vec{b} &= -\vec{d}
                 \\
@@ -47,43 +47,49 @@ export default article('Нелінійне фотометричне стерео
                 \vec{y} = \vec{n}
                 \\
                 \dfrac
-                { \vec{a} + x\vec{b} }
-                { | \vec{a} + x\vec{b} |^3 }
+                { \vec{a_j} + x\vec{b} }
+                { | \vec{a_j} + x\vec{b} |^3 }
                 \cdot \vec{y} &= c
             \end{cases}
         `)),
         illustration('', tex(r`
-            (\vec{a} + x\vec{b}) \cdot \vec{y} = c | \vec{a_i} + x\vec{b} |^3
+            (\vec{a_j} + x\vec{b}) \cdot \vec{y} = c | \vec{a_j} + x\vec{b} |^3
         `)),
         illustration('', tex(r`
-            (\vec{a} + x\vec{b}) \cdot \vec{y} = c \sqrt{ (\vec{a} + x\vec{b})^2 }^3
+            (\vec{a_j} + x\vec{b}) \cdot \vec{y} = c \sqrt{ (\vec{a_j} + x\vec{b})^2 }^3
         `)),
         illustration('', tex(r`
-            (\vec{a} + x\vec{b}) \cdot \vec{y} = c \sqrt{ \vec{a}^2 + x^2\vec{b}^2 + 2x (\vec{a} \cdot \vec{b}) }^3
+            (\vec{a_j} + x\vec{b}) \cdot \vec{y} = c \sqrt{ \vec{a_j}^2 + x^2\vec{b}^2 + 2x (\vec{a_j} \cdot \vec{b}) }^3
         `)),
         illustration('', tex(r`
-            (\vec{a} + x\vec{b}) \cdot \vec{y} = \sqrt{ c^{\frac{2}{3}} \vec{b}^2 x^2 + 2 c^{\frac{2}{3}} (\vec{a} \cdot \vec{b}) x + c^{\frac{2}{3}} \vec{a}^2 }^3
-        `)),
-        illustration('', tex(r`
-            \begin{cases}
-                u &= c^{\frac{2}{3}} \vec{b}^2
-                \\
-                v &= 2 c^{\frac{2}{3}} (\vec{a} \cdot \vec{b})
-                \\
-                w &= c^{\frac{2}{3}} \vec{a}^2
-                \\
-                \vec{a} \cdot \vec{y} + x \vec{b} \cdot \vec{y} &= \sqrt{ u x^2 + v x + w }^3
-            \end{cases}
+            (\vec{a_j} + x\vec{b}) \cdot \vec{y} = \sqrt{ c^{\frac{2}{3}} \vec{b}^2 x^2 + 2 c^{\frac{2}{3}} (\vec{a_j} \cdot \vec{b}) x + c^{\frac{2}{3}} \vec{a_j}^2 }^3
         `)),
         illustration('', tex(r`
             \begin{cases}
-                u_j &= c_j^{\frac{2}{3}} \vec{b}^2
+                u_j &= c^{\frac{2}{3}} \vec{b}^2
                 \\
-                v_j &= 2 c_j^{\frac{2}{3}} (\vec{a_j} \cdot \vec{b})
+                v_j &= 2 c^{\frac{2}{3}} (\vec{a_j} \cdot \vec{b})
                 \\
                 w_j &= c^{\frac{2}{3}} \vec{a_j}^2
                 \\
-                \vec{a_j} \cdot \vec{y} + x \vec{b} \cdot \vec{y} &= ( u_j x^2 + v_j x + w_j )^\frac{3}{2}
+                (\vec{a_j} + x \vec{b}) \cdot \vec{y} &= \sqrt{ u_j x^2 + v_j x + w_j }^3
+            \end{cases}
+        `)),
+        illustration('', tex(r`
+            (\vec{a_j} + x \vec{b}) \cdot \vec{y} = ( u_j x^2 + v_j x + w_j )^\frac{3}{2}
+        `)),
+        illustration('', tex(r`
+            \vec{a_j} \cdot \vec{y} - \vec{a_{j + 1}} \cdot \vec{y} + \bcancel{ x \vec{b} \cdot \vec{y} - x \vec{b} \cdot \vec{y} } = ( u_j x^2 + v_j x + w_j )^\frac{3}{2} - ( u_{j + 1} x^2 + v_{j + 1} x + w_{j + 1} )^\frac{3}{2}
+        `)),
+        illustration('', tex(r`
+            \begin{cases}
+                \vec{m_j} &= \vec{a_j} - \vec{a_{j + 1}}
+                \\
+                f_j(x) &= ( u_j x^2 + v_j x + w_j )^\frac{3}{2}
+                \\
+                g_j(x) &= f_j(x) - f_{j + 1}(x)
+                \\
+                \vec{m_j} \cdot \vec{y} &= g_j(x)
             \end{cases}
         `)),
         illustration('', Viewer),
