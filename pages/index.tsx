@@ -1,6 +1,4 @@
 import React from 'react'
-import pg from 'pg'
-import sql from 'sql-template-tag'
 import ArticleLink from '../components/article-link'
 import Page from '../components/page'
 import overloading from '../data/result-overloading'
