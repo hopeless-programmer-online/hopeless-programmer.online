@@ -1,7 +1,7 @@
 import { Client } from 'pg'
 
 const connectionString = process.env.DATABASE_URL
-const client = new Client({ connectionString })
+const client = new Client({ connectionString, ssl : { rejectUnauthorized: false } })
 
 let connected = false
 
