@@ -2,6 +2,12 @@ import React from 'react'
 import Page from '../components/page'
 import Article from '../components/article'
 import { article, emp, paragraph, section, sentence } from '../classes/shortcuts'
+import queryCounter from '../components/query-counter'
+import { Http2ServerRequest } from 'http2'
+
+type Props = {
+    counter : number,
+}
 
 const model = article('Про це місце...', {}, ...[
     section('Навіщо потрібен цей сайт?', ...[
@@ -51,12 +57,16 @@ const model = article('Про це місце...', {}, ...[
     ),
 ])
 
-export default class About extends React.Component {
+export default class About extends React.Component<Props> {
     public render() {
         return (
-            <Page title='Про цей сайт'>
+            <Page title='Про цей сайт' counter={this.props.counter}>
                 <Article model={model}/>
             </Page>
         )
     }
+}
+
+export async function getServerSideProps({ req } : { req : Http2ServerRequest }) : Promise<{ props : Props }> {
+    return { props : { counter : await queryCounter(req) } }
 }

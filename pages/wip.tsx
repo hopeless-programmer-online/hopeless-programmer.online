@@ -18,11 +18,17 @@ import leastSquares from '../data/least-squares'
 import nonlinearStereo from '../data/nonlinear-photometric-stereo'
 import singleton from '../data/singleton'
 import cosineLaw from '../data/cosine-law'
+import { Http2ServerRequest } from 'http2'
+import queryCounter from '../components/query-counter'
 
-export default class WIP extends React.Component {
+type Props = {
+    counter : number,
+}
+
+export default class WIP extends React.Component<Props> {
     public render() {
         return (
-            <Page title='В розробці'>
+            <Page title='В розробці' counter={this.props.counter}>
                 <ArticleLink model={projection} href='./articles/vector-projection'/>
                 <ArticleLink model={reflection} href='./articles/vector-reflection'/>
                 <ArticleLink model={linePlane} href='./articles/line-plane-cast'/>
@@ -43,4 +49,8 @@ export default class WIP extends React.Component {
             </Page>
         )
     }
+}
+
+export async function getServerSideProps({ req } : { req : Http2ServerRequest }) : Promise<{ props : Props }> {
+    return { props : { counter : await queryCounter(req) } }
 }

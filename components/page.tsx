@@ -4,12 +4,20 @@ import styles from './page.module.scss'
 import Header from './header'
 import Footer from './footer'
 
-export type Props = { title? : string }
+export type Props = {
+    title? : string,
+    counter? : number | null,
+}
 
 export default class Page extends React.Component<Props> {
+    public static defaultProps : Props = {
+        title : '',
+        counter : null,
+    }
+
     public render() {
         const { props } = this
-        const { title, children } = props
+        const { title, counter, children } = props
 
         return (
             <>
@@ -36,7 +44,7 @@ export default class Page extends React.Component<Props> {
                     <main>
                         { children }
                     </main>
-                    <Footer/>
+                    <Footer counter={counter}/>
                 </article>
             </>
         )

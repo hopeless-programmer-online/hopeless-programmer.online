@@ -20,9 +20,19 @@ import AboutMeBadge from './badges/about-me-badge'
 import ToolsBadge from './badges/tools-badge'
 import VSCodeBadge from './badges/vscode-badge'
 import WIPBadge from './badges/wip-badge'
+import Counter from './counter'
 
-export default class Footer extends React.Component {
+export type Props = {
+    counter? : number | null,
+}
+
+export default class Footer extends React.Component<Props> {
+    public static defaultProps : Props = {
+        counter : null,
+    }
+
     public render() {
+        const { counter } = this.props
         const begin = new Date('2021-01-01T00:00:00.000Z')
         const end   = new Date('2021-01-01T00:00:00.000Z') // @todo replace with current time
 
@@ -79,6 +89,10 @@ export default class Footer extends React.Component {
                         </nav>
                     </li>
                 </ul>
+                {
+                    counter !== null &&
+                    <Counter value={counter}/>
+                }
             </footer>
         )
     }
