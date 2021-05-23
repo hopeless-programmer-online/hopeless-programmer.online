@@ -2,13 +2,23 @@ import React from 'react'
 import Article from '../../components/article'
 import Page from '../../components/page'
 import model from '../../data/irreversible-overlapping'
+import { Http2ServerRequest } from 'http2'
+import queryCounter from '../../components/query-counter'
 
-export default class IrreversibleOverlapping extends React.Component {
+type Props = {
+    counter : number,
+}
+
+export default class IrreversibleOverlapping extends React.Component<Props> {
     public render() {
         return (
-            <Page title='Думки вголос. Незворотне перекриття ідентифікаторів.'>
+            <Page title='Думки вголос. Незворотне перекриття ідентифікаторів.' counter={this.props.counter}>
                 <Article model={model}/>
             </Page>
         )
     }
+}
+
+export async function getServerSideProps({ req } : { req : Http2ServerRequest }) : Promise<{ props : Props }> {
+    return { props : { counter : await queryCounter(req) } }
 }
