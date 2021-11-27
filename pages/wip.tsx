@@ -18,6 +18,7 @@ import leastSquares from '../data/least-squares'
 import nonlinearStereo from '../data/nonlinear-photometric-stereo'
 import singleton from '../data/singleton'
 import cosineLaw from '../data/cosine-law'
+import comments from '../data/comments'
 import { Http2ServerRequest } from 'http2'
 import queryCounter from '../components/query-counter'
 
@@ -46,6 +47,7 @@ export default class WIP extends React.Component<Props> {
                 <ArticleLink model={nonlinearStereo} href='./articles/nonlinear-photometric-stereo'/>
                 <ArticleLink model={singleton} href='./articles/singleton'/>
                 <ArticleLink model={cosineLaw} href='./articles/cosine-law'/>
+                <ArticleLink model={comments} href='./articles/comments'/>
             </Page>
         )
     }
