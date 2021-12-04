@@ -18,3 +18,4 @@ export type CodeLanguage =
     | 'BASIC'
     | 'PHP'
     | 'L0'
+    | 'Haskell'
