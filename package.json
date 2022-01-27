@@ -36,7 +36,7 @@
     "react-vis": "^1.11.7",
     "sass": "^1.29.0",
     "seti-icons-react": "^0.2.0",
-    "three": "^0.125.2",
+    "three": "^0.137.0",
     "ts-events": "^3.4.0",
     "ts-glm": "github:hopeless-programmer-online/ts-glm",
     "typescript": "^4.1.3"
