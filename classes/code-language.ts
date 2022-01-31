@@ -21,3 +21,4 @@ export type CodeLanguage =
     | 'PHP'
     | 'L0'
     | 'Haskell'
+    | 'Kotlin'

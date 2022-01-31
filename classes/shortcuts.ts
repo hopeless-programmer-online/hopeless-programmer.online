@@ -301,6 +301,9 @@ export function lt(text : string) {
 
     return new LiteralLexeme({ text, type })
 }
+export function rg(text : string) {
+    return new LiteralLexeme({ text, type : `regex` })
+}
 export function lts(text : string) {
     return new LiteralLexeme({ text, type : 'string' })
 }
