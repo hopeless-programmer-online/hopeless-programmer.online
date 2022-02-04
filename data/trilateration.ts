@@ -1,4 +1,5 @@
 import { illustration, paragraph, sentence, link, section, article, note, list, ref, fig, neg, kw, cm, cpp, c, f, v, lt, js, emp, code, cs, tex } from "../classes/shortcuts";
+import Trilaterator from "./trilateration/trilateration";
 
 const r = String.raw
 
@@ -19,6 +20,7 @@ export default article([ `Знаходження точки за набором 
             sentence(`Знаючи відстань до двох веж ми отримаємо два кола і оскільки абонент повинен одночасно перебувати на обох, його єдиними можливими координатами будуть дві точки перетину цих кіл. `),
             sentence(`Додавання третього кола виключить одну з цих точок, остаточно викривши розташування абонента. `),
         ]),
+        illustration(paragraph(`Розрахунок розташування точки за набором відстаней до орієнтирів. `), Trilaterator),
     ]),
     section(``, ...[
         paragraph(...[
