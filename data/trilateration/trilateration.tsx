@@ -1,6 +1,7 @@
 import React from 'react'
+import { inv as inv_, mat2, mul, vec2, Vector2, Vector2Like } from 'ts-glm'
+import { matrix, multiply, inv } from 'mathjs'
 import styles from './trilateration.module.scss'
-import { inv, mat2, mul, vec2, Vector2, Vector2Like } from 'ts-glm'
 
 type Props = {}
 type State = {
@@ -11,6 +12,23 @@ type State = {
     r1 : number
     r2 : number
     r3 : number
+}
+
+type Point = { x : number, y : number }
+
+function trilaterate(p1 : Point, p2 : Point, p3 : Point, r1 : number, r2 : number, r3 : number) {
+    const A = matrix([
+        [ 2 * (p2.x - p1.x), 2 * (p2.y - p1.y) ],
+        [ 2 * (p3.x - p2.x), 2 * (p3.y - p2.y) ],
+    ])
+    const b = matrix([
+        [ r1**2 - r2**2 - (p1.x**2 + p1.y**2) + (p2.x**2 + p2.y**2) ],
+        [ r2**2 - r3**2 - (p2.x**2 + p2.y**2) + (p3.x**2 + p3.y**2) ],
+    ])
+
+    const [ x, y ] = multiply(inv(A), b).toArray() as number[]
+
+    return { x, y }
 }
 
 export default class Trilaterator extends React.Component<Props, State> {
@@ -29,15 +47,17 @@ export default class Trilaterator extends React.Component<Props, State> {
     public render() {
         const { p, p1, p2, p3, r1, r2, r3 } = this.state
 
-        const A = mat2.transpose(mat2(
-            ...p2.sub(p1).mul(2).toArray(),
-            ...p3.sub(p2).mul(2).toArray(),
-        ))
-        const b = vec2(
-            r1**2 - r2**2 - p1.sqr + p2.sqr,
-            r2**2 - r3**2 - p2.sqr + p3.sqr,
-        )
-        const { x, y } = mul(inv(A), b)
+        // const A = mat2.transpose(mat2(
+        //     ...p2.sub(p1).mul(2).toArray(),
+        //     ...p3.sub(p2).mul(2).toArray(),
+        // ))
+        // const b = vec2(
+        //     r1**2 - r2**2 - p1.sqr + p2.sqr,
+        //     r2**2 - r3**2 - p2.sqr + p3.sqr,
+        // )
+        // const { x, y } = mul(inv_(A), b)
+
+        const { x, y } = trilaterate(p1, p2, p3, r1, r2, r3)
 
         return (
             <svg
