@@ -28,11 +28,13 @@
         stroke-width : 0.5;
         stroke-dasharray: 2 2;
     }
-    // > .intersection {
-    //     fill         : rgb(86, 156, 214);
-    //     stroke       : rgb(212, 212, 212);
-    //     stroke-width : 0.5;
-    // }
+    > .transparent {
+        fill: transparent;
+
+        &:hover {
+            fill: adjust-color($color: crimson, $alpha: -0.8);
+        }
+    }
     > .radius {
         fill         : none;
         stroke       : crimson;
