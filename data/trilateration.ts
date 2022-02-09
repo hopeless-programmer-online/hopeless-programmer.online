@@ -1,4 +1,4 @@
-import { illustration, paragraph, sentence, link, section, article, note, list, ref, fig, neg, kw, cm, cpp, c, f, v, lt, js, emp, code, cs, tex, ts } from "../classes/shortcuts";
+import { illustration, paragraph, sentence, link, section, article, note, list, ref, fig, neg, kw, cm, cpp, c, f, v, lt, js, emp, code, cs, tex, ts, lts } from "../classes/shortcuts";
 import Trilaterator from "./trilateration/trilateration";
 
 const ls = `https://uk.wikipedia.org/wiki/%D0%A1%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%B0_%D0%BB%D1%96%D0%BD%D1%96%D0%B9%D0%BD%D0%B8%D1%85_%D0%B0%D0%BB%D0%B3%D0%B5%D0%B1%D1%80%D0%B0%D1%97%D1%87%D0%BD%D0%B8%D1%85_%D1%80%D1%96%D0%B2%D0%BD%D1%8F%D0%BD%D1%8C`
@@ -157,27 +157,29 @@ const system_15 = illustration('', tex(r`
     \end{cases}
 `))
 
+const example_1 = illustration(paragraph(`Розрахунок розташування точки за набором відстаней до орієнтирів. `), Trilaterator)
+
 const code_1 = illustration(``, ts(...[
-    [ `import { matrix, multiply, inv } from 'mathjs'` ],
+    [ kw(`import`), ` { `, v(`matrix`), `, `, v(`multiply`), `, `, v(`inv`), ` } `, kw(`from`), ` `, lts(`'mathjs'`), `` ],
     [ `` ],
-    [ `type Point = { x : number, y : number }` ],
+    [ kw(`type`), ` `, c(`Point`), ` = { `, v(`x`), ` : `, c(`number`), `, `, v(`y`), ` : `, c(`number`), ` }` ],
     [ `` ],
-    [ `function trilaterate(` ],
-    [ `    p1 : Point, p2 : Point, p3 : Point,` ],
-    [ `    r1 : number, r2 : number, r3 : number,` ],
+    [ kw(`function`), ` `, f(`trilaterate`), `(` ],
+    [ `    `, v(`p1`), ` : `, c(`Point`), `, `, v(`p2`), ` : `, c(`Point`), `, `, v(`p3`), ` : `, c(`Point`), `,` ],
+    [ `    `, v(`r1`), ` : `, c(`number`), `, `, v(`r2`), ` : `, c(`number`), `, `, v(`r3`), ` : `, c(`number`), `,` ],
     [ `) {` ],
-    [ `    const A = matrix([` ],
-    [ `        [ 2 * (p2.x - p1.x), 2 * (p2.y - p1.y) ],` ],
-    [ `        [ 2 * (p3.x - p2.x), 2 * (p3.y - p2.y) ],` ],
+    [ `    `, kw(`const`), ` `, v(`A`), ` = `, f(`matrix`), `([` ],
+    [ `        [ `, lt(`2`), ` * (`, v(`p2`), `.`, v(`x`), ` - `, v(`p1`), `.`, v(`x`), `), `, lt(`2`), ` * (`, v(`p2`), `.`, v(`y`), ` - `, v(`p1`), `.`, v(`y`), `) ],` ],
+    [ `        [ `, lt(`2`), ` * (`, v(`p3`), `.`, v(`x`), ` - `, v(`p2`), `.`, v(`x`), `), `, lt(`2`), ` * (`, v(`p3`), `.`, v(`y`), ` - `, v(`p2`), `.`, v(`y`), `) ],` ],
     [ `    ])` ],
-    [ `    const b = matrix([` ],
-    [ `        [ r1**2 - r2**2 - (p1.x**2 + p1.y**2) + (p2.x**2 + p2.y**2) ],` ],
-    [ `        [ r2**2 - r3**2 - (p2.x**2 + p2.y**2) + (p3.x**2 + p3.y**2) ],` ],
+    [ `    `, kw(`const`), ` `, v(`b`), ` = `, f(`matrix`), `([` ],
+    [ `        [ `, v(`r1`), `**`, lt(`2`), ` - `, v(`r2`), `**`, lt(`2`), ` - (`, v(`p1`), `.`, v(`x`), `**`, lt(`2`), ` + `, v(`p1`), `.`, v(`y`), `**`, lt(`2`), `) + (`, v(`p2`), `.`, v(`x`), `**`, lt(`2`), ` + `, v(`p2`), `.`, v(`y`), `**`, lt(`2`), `) ],` ],
+    [ `        [ `, v(`r2`), `**`, lt(`2`), ` - `, v(`r3`), `**`, lt(`2`), ` - (`, v(`p2`), `.`, v(`x`), `**`, lt(`2`), ` + `, v(`p2`), `.`, v(`y`), `**`, lt(`2`), `) + (`, v(`p3`), `.`, v(`x`), `**`, lt(`2`), ` + `, v(`p3`), `.`, v(`y`), `**`, lt(`2`), `) ],` ],
     [ `    ])` ],
     [ `` ],
-    [ `    const [ x, y ] = multiply(inv(A), b).toArray() as number[]` ],
+    [ `    `, kw(`const`), ` [ `, v(`x`), `, `, v(`y`), ` ] = `, f(`multiply`), `(`, f(`inv`), `(`, v(`A`), `), `, v(`b`), `).`, f(`toArray`), `() `, kw(`as`), ` `, c(`number`), `[]` ],
     [ `` ],
-    [ `    return { x, y }` ],
+    [ `    `, kw(`return`), ` { `, v(`x`), `, `, v(`y`), ` }` ],
     [ `}` ],
 ]))
 
@@ -252,10 +254,18 @@ export default article([ `Знаходження точки за набором 
     ]),
     section(`Практичне застосування. `, ...[
         paragraph(...[
-            sentence(``),
+            sentence(`Аби не витрачати час на реалізацію обертання матриці та множення на вектор ми скористаємось бібліотекою `, ts(lts(`mathjs`)), `. `),
+            sentence(`У підсумку матимемо функцію `, ts(f(`trilaterate`)), ` (див. `, code_1, `) яка залежить від трьох точок `, ts(v(`p1`)), `, `, ts(v(`p2`)), ` та `, ts(v(`p3`)), ` і відстаней `, ts(v(`r1`)), `, `, ts(v(`r2`)), ` та `, ts(v(`r3`)), ` відповідно. `),
+            sentence(`Ця функція і повертатиме координати шуканої точки за набором орієнтирів і відстаней до них (див. `, example_1, `). `),
         ]),
         code_1,
-        illustration(paragraph(`Розрахунок розташування точки за набором відстаней до орієнтирів. `), Trilaterator),
+        example_1,
+        paragraph(...[
+            sentence(`Важливо, що такий підхід не обмежений для двовимірного випадку і може бути розширений на будь яку кількість вимірів. `),
+            sentence(`Щоправда, виходячи з потреби знаходити обернену матрицю з кожним новим виміром нам знадобиться додатковий орієнтир. `),
+            sentence(`Так, наприклад, для тривимірного випадку нам знадобляться чотири точки орієнтири, які дадуть чотири рівняння (див. `, system_14, `). `),
+            sentence(`Розв'язавши їх таким же методом отримаємо матрицю `, tex(r`3x3`), ` і відповідний вектор (див. `, system_15, `) через які можна знайти координати шуканої `, p, `. `),
+        ]),
         system_14,
         system_15,
     ]),
