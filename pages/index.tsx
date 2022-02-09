@@ -10,6 +10,7 @@ import symmetry from '../data/symmetry'
 import visitor from '../data/visitor'
 import linesIntersection from '../data/lines-intersection'
 import comments from '../data/comments'
+import trilateration from '../data/trilateration'
 import { Http2ServerRequest } from 'http2'
 import queryCounter from '../components/query-counter'
 
@@ -21,6 +22,7 @@ export default class Index extends React.Component<Props> {
     public render() {
         return (
             <Page counter={this.props.counter}>
+                <ArticleLink model={trilateration} href='./articles/trilateration'/>
                 <ArticleLink model={comments} href='./articles/comments'/>
                 <ArticleLink model={linesIntersection} href='./articles/lines-intersection'/>
                 <ArticleLink model={virtualOverlapping} href='./articles/virtual-overlapping'/>
