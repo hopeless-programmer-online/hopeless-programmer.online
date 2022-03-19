@@ -31,6 +31,7 @@ export default class CodeComponent extends React.Component<Props> {
             language === 'TypeScriptXML' ? [ <icons.React      theme='extension/.tsx'  render="maskImage"/>, 'tsx'  ] :
             language === 'Haskell'       ? [ <icons.Haskell    theme='extension/.hs'   render="maskImage"/>, 'hs'   ] :
             language === 'Kotlin'        ? [ <icons.Java       theme='extension/.java' render="maskImage"/>, 'kt'   ] :
+            language === 'Assembler'     ? [ <icons.ASM        theme='extension/.asm'  render="maskImage"/>, 'asm'  ] :
             language === 'L0'            ? [ <L0/>,                                                          'l0'   ] :
                                            [ <icons.Default    theme='default'         render="maskImage"/>, 'txt'  ]
 

@@ -22,3 +22,4 @@ export type CodeLanguage =
     | 'L0'
     | 'Haskell'
     | 'Kotlin'
+    | 'Assembler'
