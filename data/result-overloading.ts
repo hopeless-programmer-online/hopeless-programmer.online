@@ -61,8 +61,8 @@ const code_4 = illustration(
 const code_5 = illustration(
     sentence(`Явне приведення перевантаженої функції до певної сигнатури. `),
     cpp(...[
-        [ c(`void`), ` `, f(`f`), `();` ],
-        [ c(`void`), ` `, f(`f`), `();` ],
+        [ c(`void`), ` `, f(`f`), `(`, c(`int`), `);` ],
+        [ c(`void`), ` `, f(`f`), `(`, c(`float`), `);` ],
         [ `` ],
         [ kw(`auto`), ` `, v(`g`), ` = f;                              `, cm(`// неоднозначність`) ],
         [ kw(`auto`), ` `, v(`h`), ` = `, kw(`static_cast`), `<`, c(`void`), `(*)(`, c(`float`), `)>(`, f(`f`), `); `, cm(`// вирішення`) ],
